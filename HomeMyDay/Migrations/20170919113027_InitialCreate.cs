@@ -23,7 +23,7 @@ namespace HomeMyDay.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Holidays",
+                name: "Bookings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -35,9 +35,9 @@ namespace HomeMyDay.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Holidays", x => x.Id);
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Holidays_Accommodations_AccommodationId",
+                        name: "FK_Bookings_Accommodations_AccommodationId",
                         column: x => x.AccommodationId,
                         principalTable: "Accommodations",
                         principalColumn: "Id",
@@ -45,15 +45,15 @@ namespace HomeMyDay.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Holidays_AccommodationId",
-                table: "Holidays",
+                name: "IX_Bookings_AccommodationId",
+                table: "Bookings",
                 column: "AccommodationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Holidays");
+                name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "Accommodations");
