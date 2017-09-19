@@ -7,6 +7,9 @@ namespace HomeMyDay.Models
 {
     public class Accommodation
     {
+		/// <summary>
+		/// The name of the accommodation.
+		/// </summary>
 		public string Name { get; set; }
     }
 }
