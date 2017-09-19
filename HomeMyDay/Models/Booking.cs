@@ -34,11 +34,5 @@ namespace HomeMyDay.Models
 		/// The amount of people who are traveling.
 		/// </summary>
 		public int NrPersons { get; set; }
-
-        // Optional: The continent from the world map
-        public string Continent { get; set; }
-
-        // The country where the customer is staying
-        public string Country { get; set; }
     }
 }
