@@ -5,6 +5,6 @@ namespace HomeMyDay.ViewModels
 {
     public class RecommendedHolidaysViewModel
     {
-		public IEnumerable<Holiday> Holidays { get; set; }
+		public IEnumerable<Booking> Holidays { get; set; }
     }
 }
