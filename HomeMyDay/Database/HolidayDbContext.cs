@@ -19,9 +19,9 @@ namespace HomeMyDay.Database
 		}
 
 		/// <summary>
-		/// The Holidays that have been saved.
+		/// The Bookings that have been saved.
 		/// </summary>
-		public DbSet<Holiday> Holidays { get; set; }
+		public DbSet<Booking> Bookings { get; set; }
 		
 		/// <summary>
 		/// The Accommodations that have been saved.
