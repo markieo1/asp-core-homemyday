@@ -18,9 +18,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyLocation()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IBookingRepository repository = new EFBookingRepository(context);
+			IHolidayRepository repository = new EFHolidayRepository(context);
 
 			Assert.Throws<ArgumentNullException>(() => repository.Search("", DateTime.Now, DateTime.Now, 1));
 		}
@@ -29,9 +29,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyArrivalDate()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IBookingRepository repository = new EFBookingRepository(context);
+			IHolidayRepository repository = new EFHolidayRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", new DateTime(), DateTime.Now, 1));
 		}
@@ -40,9 +40,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyLeaveDate()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IBookingRepository repository = new EFBookingRepository(context);
+			IHolidayRepository repository = new EFHolidayRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", DateTime.Now, new DateTime(), 1));
 		}
@@ -51,9 +51,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyGuests()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IBookingRepository repository = new EFBookingRepository(context);
+			IHolidayRepository repository = new EFHolidayRepository(context);
 
 			Assert.Throws<ArgumentNullException>(() => repository.Search("Amsterdam", DateTime.Now, DateTime.Now, 0));
 		}
@@ -62,9 +62,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchReturnAfterDeparture()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IBookingRepository repository = new EFBookingRepository(context);
+			IHolidayRepository repository = new EFHolidayRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 11), 4));
 		}
@@ -73,7 +73,7 @@ namespace HomeMyDay.Tests
 		public void TestSearchDepartureAndReturnExistingBooking()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
 			context.Bookings.Add(new Booking()
@@ -89,9 +89,9 @@ namespace HomeMyDay.Tests
 
 			context.SaveChanges();
 
-			IBookingRepository repository = new EFBookingRepository(context);
+			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
+			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.NotEmpty(searchResults);
 
@@ -101,6 +101,69 @@ namespace HomeMyDay.Tests
 			Assert.True(firstResult.ReturnDate == new DateTime(2017, 10, 22));
 			Assert.True(firstResult.NrPersons == 4);
 			Assert.True(firstResult.Accommodation.Name == "Amsterdam");
+		}
+
+		[Fact]
+		public void TestSearchDepartureAndReturnNoBooking()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+
+			context.Bookings.Add(new Booking()
+			{
+				DepartureDate = new DateTime(2017, 10, 12),
+				ReturnDate = new DateTime(2017, 10, 22),
+				NrPersons = 4,
+				Accommodation = new Models.Accommodation()
+				{
+					Name = "Amsterdam"
+				}
+			});
+
+			context.SaveChanges();
+
+			IHolidayRepository repository = new EFHolidayRepository(context);
+
+			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
+			Assert.Empty(searchResults);
+		}
+
+		[Fact]
+		public void TestSearchDepartureAndReturnMulitpleExistingBooking()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+
+			context.Bookings.AddRange(new Booking()
+			{
+				DepartureDate = new DateTime(2017, 10, 12),
+				ReturnDate = new DateTime(2017, 10, 22),
+				NrPersons = 4,
+				Accommodation = new Models.Accommodation()
+				{
+					Name = "Amsterdam"
+				}
+			}, new Booking()
+			{
+				DepartureDate = new DateTime(2017, 10, 19),
+				ReturnDate = new DateTime(2017, 10, 22),
+				NrPersons = 5,
+				Accommodation = new Models.Accommodation()
+				{
+					Name = "Amsterdam"
+				}
+			});
+
+			context.SaveChanges();
+
+			IHolidayRepository repository = new EFHolidayRepository(context);
+
+			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 22), 4);
+
+			Assert.NotEmpty(searchResults);
+			Assert.True(searchResults.Count() == 2);
 		}
 	}
 }

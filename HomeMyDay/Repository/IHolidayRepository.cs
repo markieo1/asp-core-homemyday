@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace HomeMyDay.Repository
 {
 	/// <summary>
-	/// Repository inteface to load all the bookings
+	/// Repository inteface to load all the holidays
 	/// </summary>
-	public interface IBookingRepository
+	public interface IHolidayRepository
 	{
 		/// <summary>
-		/// Searches possible bookings for the specified parameters.
+		/// Searches possible holidays for the specified parameters.
 		/// </summary>
 		/// <param name="location">The location.</param>
 		/// <param name="departure">The departure date.</param>

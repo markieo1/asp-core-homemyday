@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Repository.Implementation
 {
-	public class EFBookingRepository : IBookingRepository
+	public class EFHolidayRepository : IHolidayRepository
 	{
 		private readonly HolidayDbContext _context;
 
-		public EFBookingRepository(HolidayDbContext context)
+		public EFHolidayRepository(HolidayDbContext context)
 		{
 			_context = context;
 		}
@@ -38,17 +38,16 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentNullException(nameof(amountOfGuests));
 			}
 
-			if (returnDate <= departure)
+			if (returnDate.Date <= departure.Date)
 			{
 				throw new ArgumentOutOfRangeException(nameof(returnDate));
 			}
 
-			var selectQuery = from holiday in _context.Bookings
-							  where holiday.Accommodation.Name == location
-							  && holiday.NrPersons == amountOfGuests
-							  && (departure.Date >= holiday.DepartureDate && departure.Date <= holiday.ReturnDate)
-							  && (returnDate.Date <= holiday.ReturnDate)
-							  select holiday;
+			var selectQuery = from booking in _context.Bookings
+							  where booking.Accommodation.Name == location
+							  && amountOfGuests <= booking.NrPersons
+							  && (booking.DepartureDate >= departure.Date && booking.ReturnDate <= returnDate.Date)
+							  select booking;
 
 			return selectQuery;
 		}
