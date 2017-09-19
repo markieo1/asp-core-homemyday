@@ -12,8 +12,22 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Hoe werkt het</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">FAQ</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Index">Review</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>                          
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Overig<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Verassingsreizen</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Nieuwsbrief</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Vacatures</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">Pers</a></li>
+                    </ul>
+                </li>
+
+
+
                 @*@if (User.Identity.IsAuthenticated)
                 {*@
                     @*<li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>*@
