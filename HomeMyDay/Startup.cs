@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HomeMyDay.Database;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +19,14 @@ namespace HomeMyDay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			//Add entity framework.
+			services.AddDbContext<HolidayDbContext>(options => {
+
+				//This connection string can be changed in appsettings.json.
+				options.UseSqlServer(Configuration.GetConnectionString("HolidayConnection"));
+
+			});
+
             services.AddMvc();
         }
 
