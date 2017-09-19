@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Repository.Implementation
 {
-	public class EFHolidayRepository : IHolidayRepository
+	public class EFBookingRepository : IBookingRepository
 	{
 		private readonly HolidayDbContext _context;
 
-		public EFHolidayRepository(HolidayDbContext context)
+		public EFBookingRepository(HolidayDbContext context)
 		{
 			_context = context;
 		}
 
-		public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
+		public IEnumerable<Booking> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
 			if (string.IsNullOrWhiteSpace(location))
 			{
@@ -43,7 +43,7 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentOutOfRangeException(nameof(returnDate));
 			}
 
-			var selectQuery = from holiday in _context.Holidays
+			var selectQuery = from holiday in _context.Bookings
 							  where holiday.Accommodation.Name == location
 							  && holiday.NrPersons == amountOfGuests
 							  && (departure.Date >= holiday.DepartureDate && departure.Date <= holiday.ReturnDate)

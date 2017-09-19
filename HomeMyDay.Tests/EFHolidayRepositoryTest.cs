@@ -12,15 +12,15 @@ using Xunit;
 
 namespace HomeMyDay.Tests
 {
-	public class EFHolidayRepositoryTest
+	public class EFBookingRepositoryTest
 	{
 		[Fact]
 		public void TestSearchEmptyLocation()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("HolidayDatabase");
+			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IBookingRepository repository = new EFBookingRepository(context);
 
 			Assert.Throws<ArgumentNullException>(() => repository.Search("", DateTime.Now, DateTime.Now, 1));
 		}
@@ -29,9 +29,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyArrivalDate()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("HolidayDatabase");
+			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IBookingRepository repository = new EFBookingRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", new DateTime(), DateTime.Now, 1));
 		}
@@ -40,9 +40,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyLeaveDate()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("HolidayDatabase");
+			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IBookingRepository repository = new EFBookingRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", DateTime.Now, new DateTime(), 1));
 		}
@@ -51,9 +51,9 @@ namespace HomeMyDay.Tests
 		public void TestSearchEmptyGuests()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("HolidayDatabase");
+			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IBookingRepository repository = new EFBookingRepository(context);
 
 			Assert.Throws<ArgumentNullException>(() => repository.Search("Amsterdam", DateTime.Now, DateTime.Now, 0));
 		}
@@ -62,21 +62,21 @@ namespace HomeMyDay.Tests
 		public void TestSearchReturnAfterDeparture()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("HolidayDatabase");
+			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IBookingRepository repository = new EFBookingRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 11), 4));
 		}
 
 		[Fact]
-		public void TestSearchDepartureAndReturnExistingHoliday()
+		public void TestSearchDepartureAndReturnExistingBooking()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-			optionsBuilder.UseInMemoryDatabase("HolidayDatabase");
+			optionsBuilder.UseInMemoryDatabase("BookingDatabase");
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Bookings.Add(new Booking()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -89,13 +89,13 @@ namespace HomeMyDay.Tests
 
 			context.SaveChanges();
 
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IBookingRepository repository = new EFBookingRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
+			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
 
 			Assert.NotEmpty(searchResults);
 
-			Holiday firstResult = searchResults.First();
+			Booking firstResult = searchResults.First();
 			Assert.NotNull(firstResult);
 			Assert.True(firstResult.DepartureDate == new DateTime(2017, 10, 12));
 			Assert.True(firstResult.ReturnDate == new DateTime(2017, 10, 22));
