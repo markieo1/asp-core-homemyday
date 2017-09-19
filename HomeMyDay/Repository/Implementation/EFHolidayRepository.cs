@@ -43,8 +43,10 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentOutOfRangeException(nameof(returnDate));
 			}
 
+			string searchLocation = location.Trim();
+
 			var selectQuery = from booking in _context.Bookings
-							  where booking.Accommodation.Name == location
+							  where booking.Accommodation.Name == searchLocation
 							  && amountOfGuests <= booking.NrPersons
 							  && (booking.DepartureDate >= departure.Date && booking.ReturnDate <= returnDate.Date)
 							  select booking;
