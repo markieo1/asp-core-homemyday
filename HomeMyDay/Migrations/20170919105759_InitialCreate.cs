@@ -13,41 +13,41 @@ namespace HomeMyDay.Migrations
                 name: "Accommodations",
                 columns: table => new
                 {
-                    AccommodationID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accommodations", x => x.AccommodationID);
+                    table.PrimaryKey("PK_Accommodations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Holidays",
                 columns: table => new
                 {
-                    HolidayID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AccommodationID = table.Column<int>(type: "int", nullable: true),
+                    AccommodationId = table.Column<int>(type: "int", nullable: true),
                     DepartureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NrPersons = table.Column<int>(type: "int", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Holidays", x => x.HolidayID);
+                    table.PrimaryKey("PK_Holidays", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Holidays_Accommodations_AccommodationID",
-                        column: x => x.AccommodationID,
+                        name: "FK_Holidays_Accommodations_AccommodationId",
+                        column: x => x.AccommodationId,
                         principalTable: "Accommodations",
-                        principalColumn: "AccommodationID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Holidays_AccommodationID",
+                name: "IX_Holidays_AccommodationId",
                 table: "Holidays",
-                column: "AccommodationID");
+                column: "AccommodationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
