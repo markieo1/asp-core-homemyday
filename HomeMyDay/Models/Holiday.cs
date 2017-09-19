@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Models.Domain
+namespace HomeMyDay.Models
 {
     public class Holiday
     {
@@ -12,7 +12,7 @@ namespace HomeMyDay.Models.Domain
         /// Key for the Database 
         /// </summary>
         [Key]
-        public int HolidayId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// The destination where the customer is going
