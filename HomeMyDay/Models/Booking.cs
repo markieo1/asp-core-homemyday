@@ -34,5 +34,5 @@ namespace HomeMyDay.Models
 		/// The amount of people who are traveling.
 		/// </summary>
 		public int NrPersons { get; set; }
-	}
+    }
 }
