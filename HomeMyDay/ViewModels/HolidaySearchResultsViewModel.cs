@@ -17,15 +17,5 @@ namespace HomeMyDay.ViewModels
 		/// The holidays that should appear in the search results.
 		/// </summary>
 		public IEnumerable<Holiday> Holidays { get; set; }
-
-		/// <summary>
-		/// The amount of pages that should be presented to the user.
-		/// </summary>
-		public int Pages { get; set; }
-
-		/// <summary>
-		/// The current page that the user is on.
-		/// </summary>
-		public int CurrentPage { get; set; }
     }
 }
