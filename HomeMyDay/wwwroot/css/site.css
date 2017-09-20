@@ -54,3 +54,7 @@ footer a {
     border-right: 1px solid #f8f8f8;
     margin-left: 37px;
 }
+.holiday-feature {
+    width: 100%;
+    max-width: 100%;
+}
