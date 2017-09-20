@@ -1,5 +1,5 @@
 ﻿img.logo {
-    width: 40%;
+    width: 20%;
 }
 
 footer {
@@ -53,4 +53,21 @@ footer a {
 .border-right {
     border-right: 1px solid #f8f8f8;
     margin-left: 37px;
+}
+
+.navbar-inverse {
+    opacity: 0.7;
+    border-color: unset;
+}
+
+.navbar-collapse.collapse {
+    float: right;
+}
+
+.navbar-collapse.collapse > ul > li > a {
+    color: #fff;
+}
+
+.navbar-collapse.collapse > ul > li > a:hover, a:active{
+    font-weight: bold;
 }
