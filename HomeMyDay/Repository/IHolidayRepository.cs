@@ -19,6 +19,6 @@ namespace HomeMyDay.Repository
 		/// <param name="returnDate">The return date.</param>
 		/// <param name="amountOfGuests">The amount of guests.</param>
 		/// <returns>IEnumerable containing all search results</returns>
-		IEnumerable<Booking> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests);
+		IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests);
 	}
 }
