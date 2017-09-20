@@ -53,5 +53,13 @@ namespace HomeMyDay.Repository.Implementation
 
 			return selectQuery;
 		}
+
+		public IEnumerable<Accommodation> GetAccommodations()
+		{
+			var selectQuery = from accommodation in _context.Accommodations
+							  select accommodation;
+
+			return selectQuery;
+		}
 	}
 }
