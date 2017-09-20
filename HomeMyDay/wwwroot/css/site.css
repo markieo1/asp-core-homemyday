@@ -63,29 +63,23 @@ footer a {
 }
 
     .line-left::before {
-        display: block;
-        width: 25px;
-        height: 25px;
-        content: "";
-        background: url("../images/Icon/Flat.png") no-repeat 0 0;
-        background-size: 100%;
+        font-family: FontAwesome;
+        content: "\f1ad";
         float: left;
         position: relative;
         right: 35px;
-        bottom: 5px;
+        bottom: 7px;
+        font-size: 20px;
     }
 
     .line-left::after {
-        display: block;
-        width: 25px;
-        height: 25px;
-        content: "";
-        background: url("../images/Icon/Traveller.png") no-repeat 0 0;
-        background-size: 100%;
+        font-family: FontAwesome;
+        content: "\f2be";
         float: right;
         position: relative;
-        left: 35px;
-        bottom: 5px;
+        left: 30px;
+        bottom: 7px;
+        font-size: 20px;
     }
 
 
@@ -98,16 +92,13 @@ footer a {
 }
 
     .line-right::after {
-        display: block;
-        width: 25px;
-        height: 25px;
-        content: "";
-        background: url("../images/Icon/Search.png") no-repeat 0 0;
-        background-size: 100%;
+        font-family: FontAwesome;
+        content: "\f002";
         float: right;
         position: relative;
         left: 35px;
-        bottom: 5px;
+        bottom: 7px;
+        font-size: 20px;
     }
 
 .line-middle {
