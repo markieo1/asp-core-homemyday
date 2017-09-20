@@ -71,3 +71,8 @@ footer a {
 .navbar-collapse.collapse > ul > li > a:hover, a:active{
     font-weight: bold;
 }
+
+.holiday-feature {
+    width: 100%;
+    max-width: 100%;
+}
