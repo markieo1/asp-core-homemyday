@@ -15,9 +15,9 @@ namespace HomeMyDay.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// The destination where the customer is going
+        /// The Accommodation that the customer will stay in.
         /// </summary>
-        public string Destination { get; set; }
+        public Accommodation Accommodation { get; set; }
 
         /// <summary>
         /// The category is for multiple choices like: houses, experiences, places
@@ -32,15 +32,15 @@ namespace HomeMyDay.Models
         /// <summary>
         /// Optional: The amount of rooms available during the holiday
         /// </summary>
-        public int Room { get; set; }
+        public int? Room { get; set; }
 
         /// <summary>
         /// Optional: The amount of beds available in total of all the rooms
         /// </summary>
-        public int Bed { get; set; }
+        public int? Bed { get; set; }
 
         /// <summary>
-        /// The price for the holiday
+        /// The price for the accommodation.
         /// </summary>
         public decimal Price { get; set; }
     }

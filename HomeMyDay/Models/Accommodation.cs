@@ -20,6 +20,11 @@ namespace HomeMyDay.Models
 		/// </summary>
 		public string Name { get; set; }
 
+		/// <summary>
+		/// The maximum number of people that this accommodation supports.
+		/// </summary>
+		public int MaxPersons { get; set; }
+
         /// <summary>
         /// Optional: The continent from the world map
         /// </summary>
