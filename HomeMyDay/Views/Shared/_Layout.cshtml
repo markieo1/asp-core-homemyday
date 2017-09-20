@@ -6,11 +6,9 @@
 <body>
     @Html.Partial("../Partials/Navigation")
 
-    @Html.Partial("../Partials/HomeVideo")
-
-    @Html.Partial("../Partials/HomeIntroVideo")
-
-    @RenderBody()
+    <div class="container bottom-buffer">
+        @RenderBody()
+    </div>
 
     @Html.Partial("../Partials/Footer")
 

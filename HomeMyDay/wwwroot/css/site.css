@@ -2,59 +2,36 @@
     width: 40%;
 }
 
-footer {
+.footer {
     background-color: #808080;
-    float: left;
-    width: 100%;
-    padding: 70px;
-    position: fixed;
-    bottom: 0;
 }
 
-footer h2, a, span {
-    color: #ffffff;
-    width: 100%;
-    float: left;
-    display: block;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
+    .footer h2, a, address {
+        color: #ffffff;
+        display: block;
+    }
 
-footer h2 {
-    text-decoration: underline;
-}
+    .footer h2 {
+        text-decoration: underline;
+    }
 
-i.fa {
-    float: left;
-    margin-top: 4px;
-    margin-right: 10px;
-}
-
-.footer-block {
-    float: left;
-    width: 100%;
-    position: relative;
-    display: block;
-    padding: 0px 20px;
-}
-
-.footer-block a {
-    width: auto;
-}
-
-footer a {
-    cursor: pointer;
-}
-
-.p-l-20 {
-    padding-left:20px;
-}
+    .footer .footer-block {
+        float: left;
+        width: 100%;
+        position: relative;
+        display: block;
+        padding: 0px 20px;
+    }
 
 .border-right {
     border-right: 1px solid #f8f8f8;
-    margin-left: 37px;
 }
-.holiday-feature {
-    width: 100%;
-    max-width: 100%;
+
+.bottom-buffer {
+    padding-bottom: 15px;
+}
+
+.row.equal {
+    display: flex;
+    flex-wrap: wrap;
 }
