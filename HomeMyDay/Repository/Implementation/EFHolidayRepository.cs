@@ -16,7 +16,7 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public IEnumerable<Booking> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
+		public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
 			if (string.IsNullOrWhiteSpace(location))
 			{
@@ -45,11 +45,11 @@ namespace HomeMyDay.Repository.Implementation
 
 			string searchLocation = location.Trim();
 
-			var selectQuery = from booking in _context.Bookings
-							  where booking.Accommodation.Name == searchLocation
-							  && amountOfGuests <= booking.NrPersons
-							  && (booking.DepartureDate >= departure.Date && booking.ReturnDate <= returnDate.Date)
-							  select booking;
+			var selectQuery = from holiday in _context.Holidays
+							  where holiday.Accommodation.Name == searchLocation
+							  && (holiday.Beds != null && amountOfGuests <= holiday.Beds)
+							  && (holiday.DepartureDate >= departure.Date && holiday.ReturnDate <= returnDate.Date)
+							  select holiday;
 
 			return selectQuery;
 		}

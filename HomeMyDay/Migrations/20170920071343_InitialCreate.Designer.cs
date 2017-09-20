@@ -11,9 +11,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170920071343_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,17 +66,13 @@ namespace HomeMyDay.Migrations
 
                     b.Property<int?>("AccommodationId");
 
-                    b.Property<int?>("Beds");
+                    b.Property<int?>("Bed");
 
                     b.Property<string>("Category");
-
-                    b.Property<DateTime>("DepartureDate");
 
                     b.Property<decimal>("Price");
 
                     b.Property<bool>("Recommended");
-
-                    b.Property<DateTime>("ReturnDate");
 
                     b.Property<int?>("Room");
 

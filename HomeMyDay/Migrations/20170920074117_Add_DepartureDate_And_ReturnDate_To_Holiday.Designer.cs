@@ -11,8 +11,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170919113027_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20170920074117_Add_DepartureDate_And_ReturnDate_To_Holiday")]
+    partial class Add_DepartureDate_And_ReturnDate_To_Holiday
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,12 @@ namespace HomeMyDay.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Continent");
+
+                    b.Property<string>("Country");
+
+                    b.Property<int>("MaxPersons");
 
                     b.Property<string>("Name");
 
@@ -53,7 +59,42 @@ namespace HomeMyDay.Migrations
                     b.ToTable("Bookings");
                 });
 
+            modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AccommodationId");
+
+                    b.Property<int?>("Beds");
+
+                    b.Property<string>("Category");
+
+                    b.Property<DateTime>("DepartureDate");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<bool>("Recommended");
+
+                    b.Property<DateTime>("ReturnDate");
+
+                    b.Property<int?>("Room");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.ToTable("Holidays");
+                });
+
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
+                {
+                    b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
+                        .WithMany()
+                        .HasForeignKey("AccommodationId");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
