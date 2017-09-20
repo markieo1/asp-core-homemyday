@@ -15,14 +15,6 @@
         text-decoration: underline;
     }
 
-    .footer .footer-block {
-        float: left;
-        width: 100%;
-        position: relative;
-        display: block;
-        padding: 0px 20px;
-    }
-
 .border-right {
     border-right: 1px solid #f8f8f8;
 }
