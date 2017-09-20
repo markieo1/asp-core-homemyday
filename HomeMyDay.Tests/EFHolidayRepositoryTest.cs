@@ -80,10 +80,10 @@ namespace HomeMyDay.Tests
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -99,7 +99,7 @@ namespace HomeMyDay.Tests
 			Assert.NotNull(firstResult);
 			Assert.True(firstResult.DepartureDate == new DateTime(2017, 10, 12));
 			Assert.True(firstResult.ReturnDate == new DateTime(2017, 10, 22));
-			Assert.True(firstResult.Beds == 4);
+			Assert.True(firstResult.Accommodation.MaxPersons == 4);
 			Assert.True(firstResult.Accommodation.Name == "Amsterdam");
 		}
 
@@ -114,10 +114,10 @@ namespace HomeMyDay.Tests
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -140,19 +140,19 @@ namespace HomeMyDay.Tests
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			}, new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 19),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 5,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 5
 				}
 			});
 
@@ -177,10 +177,10 @@ namespace HomeMyDay.Tests
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -204,10 +204,10 @@ namespace HomeMyDay.Tests
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -231,10 +231,10 @@ namespace HomeMyDay.Tests
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				Beds = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 

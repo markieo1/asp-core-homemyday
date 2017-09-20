@@ -1,4 +1,6 @@
 ﻿using HomeMyDay.Database;
+using HomeMyDay.Repository;
+using HomeMyDay.Repository.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,8 @@ namespace HomeMyDay
 				options.UseSqlServer(Configuration.GetConnectionString("HolidayConnection"));
 
 			});
+
+			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
 
             services.AddMvc();
         }

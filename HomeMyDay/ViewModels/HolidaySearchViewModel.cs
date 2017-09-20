@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Models;
 
 namespace HomeMyDay.ViewModels
 {
     public class HolidaySearchViewModel
     {
 		/// <summary>
-		/// The holidays that should appear in the search results.
+		/// The location to search for.
 		/// </summary>
-		public IEnumerable<Holiday> Holidays { get; set; }
+		public string Location { get; set; }
 
 		/// <summary>
-		/// The amount of pages that should be presented to the user.
+		/// The starting date of the search range.
 		/// </summary>
-		public int Pages { get; set; }
+		public DateTime StartDate { get; set; }
 
 		/// <summary>
-		/// The current page that the user is on.
+		/// The end date of the search range.
 		/// </summary>
-		public int CurrentPage { get; set; }
+		public DateTime EndDate { get; set; }
+
+		/// <summary>
+		/// The amount of people that the Accommodation should support.
+		/// </summary>
+		public int Persons { get; set; }
     }
 }

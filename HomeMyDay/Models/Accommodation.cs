@@ -16,9 +16,14 @@ namespace HomeMyDay.Models
 		public int Id { get; set; }
 
 		/// <summary>
-		/// The name of the accommodation.
+		/// The user-friendly name of the accommodation.
 		/// </summary>
 		public string Name { get; set; }
+		
+		/// <summary>
+		/// The user-friendly description of the accommodation.
+		/// </summary>
+		public string Description { get; set; }
 
 		/// <summary>
 		/// The maximum number of people that this accommodation supports.
@@ -34,5 +39,20 @@ namespace HomeMyDay.Models
         /// The country where the customer is staying
         /// </summary>
         public string Country { get; set; }
-    }
+
+		/// <summary>
+		/// The location string. Usually the city name.
+		/// </summary>
+		public string Location { get; set; }
+
+		/// <summary>
+		/// Optional: The amount of rooms available during the holiday
+		/// </summary>
+		public int? Rooms { get; set; }
+
+		/// <summary>
+		/// Optional: The amount of beds available in total of all the rooms
+		/// </summary>
+		public int? Beds { get; set; }
+	}
 }
