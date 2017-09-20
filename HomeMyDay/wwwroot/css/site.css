@@ -27,3 +27,24 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.navbar-inverse {
+    opacity: 0.7;
+    border-color: unset;
+}
+
+.navbar-collapse.collapse {
+    float: right;
+}
+
+.navbar-collapse.collapse > ul > li > a {
+    color: #fff;
+}
+
+.navbar-collapse.collapse > ul > li > a:hover, a:active {
+    font-weight: bold;
+}
+
+.active {
+    font-weight: bold;
+}
