@@ -29,6 +29,8 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("Country");
 
+                    b.Property<int>("MaxPersons");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");

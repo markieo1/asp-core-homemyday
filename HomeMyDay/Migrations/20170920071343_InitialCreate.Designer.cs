@@ -11,7 +11,7 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170920070631_InitialCreate")]
+    [Migration("20170920071343_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,8 @@ namespace HomeMyDay.Migrations
                     b.Property<string>("Continent");
 
                     b.Property<string>("Country");
+
+                    b.Property<int>("MaxPersons");
 
                     b.Property<string>("Name");
 
