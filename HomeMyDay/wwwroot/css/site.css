@@ -7,7 +7,7 @@ footer {
     float: left;
     width: 100%;
     padding: 70px;
-    position: fixed;
+    /*position: fixed;*/
     bottom: 0;
 }
 
@@ -53,4 +53,84 @@ footer a {
 .border-right {
     border-right: 1px solid #f8f8f8;
     margin-left: 37px;
+}
+
+.line-left {
+    display: inline-block;
+    width: 30%;
+    height: 10px;
+    background-color: #333;
+    margin: 0 0.5%;
+}
+
+    .line-left::before {
+        display: block;
+        width: 25px;
+        height: 25px;
+        content: "";
+        background: url("../images/Icon/Flat.png") no-repeat 0 0;
+        background-size: 100%;
+        float: left;
+        position: relative;
+        right: 35px;
+        bottom: 5px;
+    }
+
+    .line-left::after {
+        display: block;
+        width: 25px;
+        height: 25px;
+        content: "";
+        background: url("../images/Icon/Traveller.png") no-repeat 0 0;
+        background-size: 100%;
+        float: right;
+        position: relative;
+        left: 35px;
+        bottom: 5px;
+    }
+
+
+.line-right {
+    display: inline-block;
+    width: 30%;
+    height: 10px;
+    background-color: #333;
+    margin: 0 0.5%;
+}
+
+    .line-right::after {
+        display: block;
+        width: 25px;
+        height: 25px;
+        content: "";
+        background: url("../images/Icon/Search.png") no-repeat 0 0;
+        background-size: 100%;
+        float: right;
+        position: relative;
+        left: 35px;
+        bottom: 5px;
+    }
+
+.line-middle {
+    display: inline-block;
+    width: 10px;
+    height: 120px;
+    background-color: #333;
+    margin: 2% 0.5%;
+}
+
+.container-fluid {
+    display: inline-block;
+    margin: auto;
+}
+
+.wrapper {
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.container-about{
+    padding-top:110px;
 }
