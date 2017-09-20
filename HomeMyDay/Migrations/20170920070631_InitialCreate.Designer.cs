@@ -11,7 +11,7 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170919113027_InitialCreate")]
+    [Migration("20170920070631_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,10 @@ namespace HomeMyDay.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Continent");
+
+                    b.Property<string>("Country");
 
                     b.Property<string>("Name");
 
@@ -53,7 +57,38 @@ namespace HomeMyDay.Migrations
                     b.ToTable("Bookings");
                 });
 
+            modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("AccommodationId");
+
+                    b.Property<int?>("Bed");
+
+                    b.Property<string>("Category");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<bool>("Recommended");
+
+                    b.Property<int?>("Room");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
+
+                    b.ToTable("Holidays");
+                });
+
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
+                {
+                    b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
+                        .WithMany()
+                        .HasForeignKey("AccommodationId");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
