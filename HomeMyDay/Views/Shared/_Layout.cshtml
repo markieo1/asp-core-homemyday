@@ -22,12 +22,12 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>*@
 
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery-2.1.4.min.js"></script>
+        <script src="~/lib/foundation/dist/js/foundation.min.js"></script>
         <script>
             $(document).foundation();
         </script>
-        <script type="text/javascript" src="https://intercom.zurb.com/scripts/zcom.js"></script>
+        <script type="text/javascript" src="~/lib/foundation/dist/js/zcom.js"></script>
     </environment>
     <environment exclude="Development">
         @*<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -44,12 +44,12 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>*@
 
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery-2.1.4.min.js"></script>
+        <script src="~/lib/foundation/dist/js/foundation.min.js"></script>
         <script>
             $(document).foundation();
         </script>
-        <script type="text/javascript" src="https://intercom.zurb.com/scripts/zcom.js"></script>
+        <script type="text/javascript" src="~/lib/foundation/dist/js/zcom.js"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)
