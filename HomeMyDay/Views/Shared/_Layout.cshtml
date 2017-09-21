@@ -2,6 +2,7 @@
 <html>
 <head>
     @Html.Partial("../Partials/Header")
+    @RenderSection("Head", required: false)
 </head>
 <body class="p-t-51" data-spy="scroll" data-target="#navbar-navigation">
     @Html.Partial("../Partials/Navigation")
