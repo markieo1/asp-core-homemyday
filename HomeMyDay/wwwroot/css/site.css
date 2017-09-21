@@ -4,11 +4,21 @@
 
 .footer {
     background-color: #808080;
+    float: left;
+    width: 100%;
+    padding: 70px;
 }
 
-    .footer h2, a, address {
+footer > .container > div > h2,
+footer > .container > div > a, 
+footer > .container > div > div > span,
+footer > .container > div > div > div > span {
         color: #ffffff;
+        width: 100%;
+        float: left;
         display: block;
+        margin-bottom: 10px;
+        text-transform: uppercase;
     }
 
     .footer h2 {

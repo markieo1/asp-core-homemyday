@@ -1,8 +1,10 @@
 ﻿using HomeMyDay.Database;
+using HomeMyDay.Identity;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +31,37 @@ namespace HomeMyDay
 
 			});
 
-			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
+            services.AddDbContext<AppIdentityDbContext>(options =>
+            {
+                //This connection string can be changed in appsettings.json.
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
+            });
 
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/Account/Login"; // If the LoginPath is not set here, ASP.NET Core will default to /Account/Login
+                options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout               
+                options.SlidingExpiration = true;
+            });
+
+            services.AddTransient<IUserRepository, EFUserRepository>();
             services.AddMvc();
         }
 
@@ -48,6 +79,7 @@ namespace HomeMyDay
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
