@@ -1,3 +1,11 @@
-﻿@model IEnumerable<Accommodation>
+﻿@model HolidaySearchViewModel
 
-Test
+<form class="form-inline" asp-controller="Search" asp-action="Register" method="post">
+    <div class="form-group col-md-4">
+        <label class="sr-only" asp-for="Accommodation">Waar wilt u naar toe?</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+            <input asp-for="Accommodation" class="form-control" placeholder="Waar wilt u naartoe?" />
+        </div>
+    </div>
+</form>

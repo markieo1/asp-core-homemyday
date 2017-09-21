@@ -1,5 +1,6 @@
 ﻿using HomeMyDay.Models;
 using HomeMyDay.Repository;
+using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,12 @@ namespace HomeMyDay.Components
 		{
 			IEnumerable<Accommodation> accommodations = _holidayRepository.GetAccommodations();
 
-			return View(accommodations);
+			HolidaySearchViewModel viewModel = new HolidaySearchViewModel
+			{
+				Accommodations = accommodations
+			};
+
+			return View(viewModel);
 		}
 	}
 }
