@@ -8,8 +8,8 @@ using HomeMyDay.Repository;
 
 namespace HomeMyDay.Controllers
 {
-    public class SearchController : Controller
-    {
+	public class SearchController : Controller
+	{
 		private IHolidayRepository holidayRepo;
 
 		public SearchController(IHolidayRepository repo)
@@ -29,5 +29,5 @@ namespace HomeMyDay.Controllers
 
 			return View("Results", searchResultsModel);
 		}
-    }
+	}
 }
