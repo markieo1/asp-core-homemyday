@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-inverse navbar-fixed-top">
+﻿<nav id="navbar-navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -10,34 +10,37 @@
             <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img class="logo" alt="Logo" src="~/images/logo/logo.png" /></a>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#index">Home</a></li>
-                <li><a href="#howitworks">Hoe werkt het</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#review">Review</a></li>
-                <li><a href="#contact">Contact</a></li>                          
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Overig<span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#supriseholiday">Verassingsreizen</a></li>
-                        <li><a href="#newsletter">Nieuwsbrief</a></li>
-                        <li><a href="#jobs">Vacatures</a></li>
-                        <li><a href="#press">Pers</a></li>
-                    </ul>
-                </li>
+                <ul class="nav navbar-nav">
+                    <li><a href="#index">Home</a></li>
+                    <li><a href="#howitworks">Hoe werkt het</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#review">Review</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Overig
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#supriseholiday">Verassingsreizen</a></li>
+                            <li><a href="#newsletter">Nieuwsbrief</a></li>
+                            <li><a href="#jobs">Vacatures</a></li>
+                            <li><a href="#press">Pers</a></li>
+                        </ul>
+                    </li>
+      
 
 
+                    @*@if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
 
-                @*@if (User.Identity.IsAuthenticated)
-                {
-                    <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
-
-                }
-                else
-                {
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
-                }*@
-            </ul>
+            }
+            else
+            {
+                <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+            }*@
+                </ul>
+            </div>
         </div>
-    </div>
 </nav>
