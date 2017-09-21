@@ -23,13 +23,14 @@ namespace HomeMyDay
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			//Add entity framework.
-			services.AddDbContext<HolidayDbContext>(options => {
+            //Add entity framework.
+            services.AddDbContext<HolidayDbContext>(options =>
+            {
 
-				//This connection string can be changed in appsettings.json.
-				options.UseSqlServer(Configuration.GetConnectionString("HolidayConnection"));
+                //This connection string can be changed in appsettings.json.
+                options.UseSqlServer(Configuration.GetConnectionString("HolidayConnection"));
 
-			});
+            });
 
             services.AddDbContext<AppIdentityDbContext>(options =>
             {
@@ -37,7 +38,13 @@ namespace HomeMyDay
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            {
+                //Require confirmed email to login
+                config.SignIn.RequireConfirmedEmail = true;
+            })
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
