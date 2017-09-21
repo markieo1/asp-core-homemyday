@@ -61,3 +61,13 @@ nav .navbar-brand {
 .p-t-51 {
     padding-top: 51px;
 }
+
+.hyperlink {
+    display: unset;
+}
+
+.hyperlink-color {
+    color: #337ab7;
+}
+
+
