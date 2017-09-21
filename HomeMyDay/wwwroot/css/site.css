@@ -1,95 +1,63 @@
-﻿img.logo {
-    width: 40%;
-}
-
-footer {
-    background-color: #808080;
-    float: left;
-    width: 100%;
-    padding: 70px;
-    bottom: 0;
-}
-
-footer h2, a, span {
-    color: #ffffff;
-    width: 100%;
-    float: left;
-    display: block;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-footer h2 {
-    text-decoration: underline;
-}
-
-i.fa {
-    float: left;
-    margin-top: 4px;
-    margin-right: 10px;
-}
-
-.footer-block {
-    float: left;
-    width: 100%;
-    position: relative;
-    display: block;
-    padding: 0px 20px;
-}
-
-.footer-block a {
+﻿nav .navbar-brand > img {
+    height: 100%;
     width: auto;
 }
 
-footer a {
-    cursor: pointer;
+nav .navbar-brand {
+    margin-left: 15px !important;
+    padding: 0px;
 }
 
-.p-l-20 {
-    padding-left:20px;
+.footer {
+    background-color: #808080;
 }
+
+    .footer h2, a, address {
+        color: #ffffff;
+        display: block;
+    }
+
+    .footer h2 {
+        text-decoration: underline;
+    }
 
 .border-right {
     border-right: 1px solid #f8f8f8;
-    margin-left: 37px;
 }
 
-.line-left {
-    display: inline-block;
-    width: 30%;
-    height: 10px;
-    background-color: #333;
-    margin: 0 0.5%;
+.bottom-buffer {
+    padding-bottom: 15px;
 }
 
-
-.line-right {
-    display: inline-block;
-    width: 30%;
-    height: 10px;
-    background-color: #333;
+.row.equal {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.line-middle {
-    display: inline-block;
-    width: 10px;
-    height: 120px;
-    background-color: #333;
-    margin: 2% 1.5% 3% -3%;
+.navbar-inverse {
+    opacity: 1;
+    border-color: unset;
 }
 
-.container-fluid {
-    display: inline-block;
-    margin: auto;
+.navbar-collapse.collapse {
+    float: right;
 }
 
-.wrapper {
-    text-align: center;
-    width: 100%;
-    padding: 20px;
-    margin: 0 auto;
+    .navbar-collapse.collapse > ul > li > a {
+        color: #f8f8f8;
+    }
+
+        .navbar-collapse.collapse > ul > li > a:hover, a:active {
+            font-weight: bold;
+        }
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a {
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
 }
 
-#about-icon{
-    float:none;
+.p-t-51 {
+    padding-top: 51px;
 }

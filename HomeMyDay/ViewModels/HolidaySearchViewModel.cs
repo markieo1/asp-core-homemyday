@@ -1,26 +1,51 @@
-﻿using System;
+﻿using HomeMyDay.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Models;
 
 namespace HomeMyDay.ViewModels
 {
-    public class HolidaySearchViewModel
-    {
+	public class HolidaySearchViewModel
+	{
 		/// <summary>
-		/// The holidays that should appear in the search results.
+		/// Gets or sets the available accommodations.
 		/// </summary>
-		public IEnumerable<Holiday> Holidays { get; set; }
+		/// <value>
+		/// The accommodations.
+		/// </value>
+		[BindNever]
+		public IEnumerable<Accommodation> Accommodations { get; set; }
 
 		/// <summary>
-		/// The amount of pages that should be presented to the user.
+		/// The location to search for.
 		/// </summary>
-		public int Pages { get; set; }
+		[Required]
+		public string Location { get; set; }
 
 		/// <summary>
-		/// The current page that the user is on.
+		/// The starting date of the search range.
 		/// </summary>
-		public int CurrentPage { get; set; }
-    }
+		[Required]
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "dd/MM/yyyy")]
+		public DateTime StartDate { get; set; }
+
+		/// <summary>
+		/// The end date of the search range.
+		/// </summary>
+		[Required]
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "dd/MM/yyyy")]
+		public DateTime EndDate { get; set; }
+
+		/// <summary>
+		/// The amount of people that the Accommodation should support.
+		/// </summary>
+		[Required]
+		public int Persons { get; set; }
+	}
 }
