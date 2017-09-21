@@ -24,10 +24,14 @@ namespace HomeMyDay.Models
 		/// </summary>
 		public string Category { get; set; }
 
-        // The string image from the database to the correct folder
+        /// <summary>
+        /// The Image string from the database to find the correct image folder
+        /// </summary>
         public string Image { get; set; }
 
-        // The description from the holiday item
+        /// <summary>
+        /// A specific text to introduce each Holiday Item
+        /// </summary>
         public string Description { get; set; }
 
 		/// <summary>

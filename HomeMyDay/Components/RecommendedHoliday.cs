@@ -19,9 +19,7 @@ namespace HomeMyDay.Components
 
         public IViewComponentResult Invoke()
         {
-            IEnumerable<Holiday> model = repository.Holidays;
-
-            model = model.Where(m => m.Recommended == true);
+            IEnumerable<Holiday> model = repository.Holidays.Where(m => m.Recommended == true);
 
             return View("FeaturedHoliday", model);
         }

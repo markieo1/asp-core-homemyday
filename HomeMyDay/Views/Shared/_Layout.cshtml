@@ -4,8 +4,11 @@
     @Html.Partial("../Partials/Header")
 </head>
 <body>
+    @Html.Partial("../Partials/Navigation")
 
     @RenderBody()
+
+    @Html.Partial("../Partials/Footer")
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

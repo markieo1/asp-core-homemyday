@@ -49,7 +49,7 @@ namespace HomeMyDay.Repository.Implementation
 
 			var selectQuery = from holiday in _context.Holidays
 							  where holiday.Accommodation.Name == searchLocation
-							  && (holiday.Beds != null && amountOfGuests <= holiday.Beds)
+							  && (amountOfGuests <= holiday.Accommodation.MaxPersons)
 							  && (holiday.DepartureDate >= departure.Date && holiday.ReturnDate <= returnDate.Date)
 							  select holiday;
 
