@@ -30,7 +30,7 @@ namespace HomeMyDay.Components
 					return new SelectListItem()
 					{
 						Text = acco.Location,
-						Value = acco.Id.ToString()
+						Value = acco.Location
 					};
 				})
 			};

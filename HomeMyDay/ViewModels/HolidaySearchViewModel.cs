@@ -30,12 +30,16 @@ namespace HomeMyDay.ViewModels
 		/// The starting date of the search range.
 		/// </summary>
 		[Required]
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "dd/MM/yyyy")]
 		public DateTime StartDate { get; set; }
 
 		/// <summary>
 		/// The end date of the search range.
 		/// </summary>
 		[Required]
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString = "dd/MM/yyyy")]
 		public DateTime EndDate { get; set; }
 
 		/// <summary>

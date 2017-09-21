@@ -1,47 +1,44 @@
 ﻿@model HolidaySearchViewModel
 
-<form class="searchForm" asp-controller="Search" asp-action="Results" method="post">
-    <div class="col-md-3">
-        <div class="form-group">
-            <label class="sr-only" asp-for="Location">Waar wilt u naar toe?</label>
-            <select asp-for="Location" asp-items="Model.Accommodations" class="form-control">
-                <option hidden>Waar wilt u naartoe?</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            <div class="input-group date">
-                <label class="sr-only" asp-for="StartDate">Van?</label>
-                <input asp-for="StartDate" class="form-control" type="text" placeholder="Van?" value="" />
-                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="searchForm" asp-controller="Search" asp-action="Results" method="post">
+            <div class="col-md-4">
+                <label class="sr-only" asp-for="Location">Waar wilt u naar toe?</label>
+                <select asp-for="Location" asp-items="Model.Accommodations" class="form-control" required>
+                    <option hidden value="">Waar wilt u naartoe?</option>
+                </select>
             </div>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            <div class="input-group date">
-                <label class="sr-only" asp-for="EndDate">Tot?</label>
-                <input asp-for="EndDate" class="form-control" type="text" placeholder="Tot?" value="" />
-                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            <div class="departure-date-picker">
+                <div class="col-md-2">
+                    <div class="input-group date">
+                        <label class="sr-only" asp-for="StartDate">Van?</label>
+                        <input asp-for="StartDate" class="form-control" type="text" placeholder="Van?" value="" required />
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group date">
+                        <label class="sr-only" asp-for="EndDate">Tot?</label>
+                        <input asp-for="EndDate" class="form-control" type="text" placeholder="Tot?" value="" required />
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-2">
-        <div class="form-group">
-            <div class="input-group">
-                <label class="sr-only" asp-for="Persons">Aantal personen?</label>
-                <input asp-for="Persons" class="form-control" placeholder="Aantal personen?" min="0" />
-                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <label class="sr-only" asp-for="Persons">Personen?</label>
+                    <input asp-for="Persons" class="form-control" placeholder="Personen?" min="1" value="" required />
+                    <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                </div>
             </div>
-        </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Zoeken
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            Zoeken
-        </button>
-    </div>
-</form>
-
+</div>
 <script src="~/js/search.js"></script>
