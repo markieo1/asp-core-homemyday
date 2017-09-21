@@ -14,7 +14,26 @@ namespace HomeMyDay.Tests
 {
 	public class EFHolidayRepositoryTest
 	{
-		[Fact]
+        [Fact]
+        public void TestEmptyList()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+            IHolidayRepository repository = new EFHolidayRepository(context);
+
+            Assert.Empty(repository.Holidays);
+        }
+
+        [Fact]
+        public void TestFilledList()
+        {
+            IHolidayRepository repository = new FakeHolidayRepository();
+
+            Assert.Empty(repository.Holidays);
+        }
+
+        [Fact]
 		public void TestSearchEmptyLocation()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();

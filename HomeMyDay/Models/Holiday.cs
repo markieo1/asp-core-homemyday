@@ -24,6 +24,12 @@ namespace HomeMyDay.Models
 		/// </summary>
 		public string Category { get; set; }
 
+        // The string image from the database to the correct folder
+        public string Image { get; set; }
+
+        // The description from the holiday item
+        public string Description { get; set; }
+
 		/// <summary>
 		/// Recommended can be set true or false to see if a holiday is recommended for the user
 		/// </summary>

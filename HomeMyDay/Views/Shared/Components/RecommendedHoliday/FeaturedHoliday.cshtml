@@ -1,0 +1,16 @@
+﻿@model IEnumerable<HomeMyDay.Models.Holiday>
+
+<div class="container holiday-feature">
+    <!-- Example row of columns -->
+    <div class="col-lg-12">
+        <div class="row">
+            @foreach (var m in Model)
+            {
+                <div class="col-md-3">
+                    <img src="@m.Image" class="img-thumbnail">
+                    <p style="border:solid;border-width:thin">@m.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

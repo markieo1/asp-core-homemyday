@@ -16,7 +16,9 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
+        public IEnumerable<Holiday> Holidays => _context.Holidays;
+
+        public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
 			if (string.IsNullOrWhiteSpace(location))
 			{
