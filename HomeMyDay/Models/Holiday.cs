@@ -36,16 +36,6 @@ namespace HomeMyDay.Models
 		public bool Recommended { get; set; }
 
 		/// <summary>
-		/// Optional: The amount of rooms available during the holiday
-		/// </summary>
-		public int? Room { get; set; }
-
-		/// <summary>
-		/// Optional: The amount of beds available in total of all the rooms
-		/// </summary>
-		public int? Beds { get; set; }
-
-		/// <summary>
 		/// The price for the accommodation.
 		/// </summary>
 		public decimal Price { get; set; }

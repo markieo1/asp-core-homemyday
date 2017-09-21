@@ -1,5 +1,4 @@
-﻿using HomeMyDay.Components;
-using HomeMyDay.Database;
+﻿using HomeMyDay.Database;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using Microsoft.AspNetCore.Builder;
@@ -28,9 +27,10 @@ namespace HomeMyDay
 				//This connection string can be changed in appsettings.json.
 				options.UseSqlServer(Configuration.GetConnectionString("HolidayConnection"));
 
-
 			});
-            services.AddTransient<IHolidayRepository, EFHolidayRepository>();
+
+			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
+
             services.AddMvc();
         }
 
