@@ -62,51 +62,20 @@ footer a {
     margin: 0 0.5%;
 }
 
-    .line-left::before {
-        font-family: FontAwesome;
-        content: "\f1ad";
-        float: left;
-        position: relative;
-        right: 35px;
-        bottom: 7px;
-        font-size: 20px;
-    }
-
-    .line-left::after {
-        font-family: FontAwesome;
-        content: "\f2be";
-        float: right;
-        position: relative;
-        left: 30px;
-        bottom: 7px;
-        font-size: 20px;
-    }
-
 
 .line-right {
     display: inline-block;
     width: 30%;
     height: 10px;
     background-color: #333;
-    margin: 0 0.5%;
 }
-
-    .line-right::after {
-        font-family: FontAwesome;
-        content: "\f002";
-        float: right;
-        position: relative;
-        left: 35px;
-        bottom: 7px;
-        font-size: 20px;
-    }
 
 .line-middle {
     display: inline-block;
     width: 10px;
     height: 120px;
     background-color: #333;
-    margin: 2% 0.5%;
+    margin: 2% 1.5% 3% -3%;
 }
 
 .container-fluid {
@@ -119,4 +88,8 @@ footer a {
     width: 100%;
     padding: 20px;
     margin: 0 auto;
+}
+
+#about-icon{
+    float:none;
 }
