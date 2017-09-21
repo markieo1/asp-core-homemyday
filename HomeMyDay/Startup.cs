@@ -2,6 +2,8 @@
 using HomeMyDay.Identity;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
+using HomeMyDay.Services;
+using HomeMyDay.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -69,6 +71,7 @@ namespace HomeMyDay
             });
 
             services.AddTransient<IUserRepository, EFUserRepository>();
+            services.AddTransient<IEmailServices, EmailServices>();
             services.AddMvc();
         }
 

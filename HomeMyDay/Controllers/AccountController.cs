@@ -37,6 +37,19 @@ namespace HomeMyDay.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                // Require the user to have a confirmed email before they can log on.
+                var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                if (user != null)
+                {
+                    if (!await _userManager.IsEmailConfirmedAsync(user))
+                    {
+                        ModelState.AddModelError(string.Empty,
+                                      "You must have a confirmed email to log in.");
+                        return View(loginModel);
+                    }
+                }
+
                 if ((await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false)).Succeeded)
                 {
                     return Redirect(loginModel?.ReturnUrl ?? "/home");
@@ -73,16 +86,49 @@ namespace HomeMyDay.Controllers
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
                 {
+                    //Generate EmailConfirmationToken
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account",
                         new { userid = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
 
+                    //await _emailSender.SendEmailAsync(registerModel.Email, "Confirm your account",
+                    //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+
+                    //This log the user automatic in
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
+                AddErrors(result);
             }
-            return View();
+            return View(registerModel);
+        }
+
+        // GET: /Account/ConfirmEmail
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+
+        //Display error
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
     }
 }
