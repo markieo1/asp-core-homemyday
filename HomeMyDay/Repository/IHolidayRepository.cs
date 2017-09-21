@@ -31,6 +31,6 @@ namespace HomeMyDay.Repository
 		/// Gets the available locations for holidays.
 		/// </summary>
 		/// <returns>IEnumerable containing all locations for holidays</returns>
-		IEnumerable<Accommodation> GetAccommodations();
+		IEnumerable<Accommodation> Accommodations { get; }
 	}
 }

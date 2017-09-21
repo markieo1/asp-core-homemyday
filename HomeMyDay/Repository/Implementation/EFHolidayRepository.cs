@@ -16,13 +16,9 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public IEnumerable<Holiday> Holidays
-		{
-			get
-			{
-				return _context.Holidays;
-			}
-		}
+		public IEnumerable<Holiday> Holidays => _context.Holidays;
+
+		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
 		public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
@@ -58,14 +54,6 @@ namespace HomeMyDay.Repository.Implementation
 							  && (amountOfGuests <= holiday.Accommodation.MaxPersons)
 							  && (holiday.DepartureDate >= departure.Date && holiday.ReturnDate <= returnDate.Date)
 							  select holiday;
-
-			return selectQuery;
-		}
-
-		public IEnumerable<Accommodation> GetAccommodations()
-		{
-			var selectQuery = from accommodation in _context.Accommodations
-							  select accommodation;
 
 			return selectQuery;
 		}

@@ -21,7 +21,7 @@ namespace HomeMyDay.Components
 
 		public IViewComponentResult Invoke()
 		{
-			IEnumerable<Accommodation> accommodations = _holidayRepository.GetAccommodations();
+			IEnumerable<Accommodation> accommodations = _holidayRepository.Accommodations;
 
 			HolidaySearchViewModel viewModel = new HolidaySearchViewModel
 			{
