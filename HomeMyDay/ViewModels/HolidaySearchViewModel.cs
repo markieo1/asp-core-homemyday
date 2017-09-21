@@ -18,7 +18,7 @@ namespace HomeMyDay.ViewModels
 		/// The accommodations.
 		/// </value>
 		[BindNever]
-		public IEnumerable<SelectListItem> Accommodations { get; set; }
+		public IEnumerable<Accommodation> Accommodations { get; set; }
 
 		/// <summary>
 		/// The location to search for.

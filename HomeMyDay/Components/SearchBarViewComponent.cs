@@ -25,14 +25,7 @@ namespace HomeMyDay.Components
 
 			HolidaySearchViewModel viewModel = new HolidaySearchViewModel
 			{
-				Accommodations = accommodations.Select(acco =>
-				{
-					return new SelectListItem()
-					{
-						Text = acco.Location,
-						Value = acco.Location
-					};
-				})
+				Accommodations = accommodations
 			};
 
 			return View(viewModel);
