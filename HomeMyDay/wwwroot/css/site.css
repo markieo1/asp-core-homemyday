@@ -61,3 +61,8 @@ nav .navbar-brand {
 .p-t-51 {
     padding-top: 51px;
 }
+
+.container-about {
+    margin: 0 auto;
+    width: 50%;
+}
