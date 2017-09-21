@@ -1,0 +1,18 @@
+﻿@import 'colors';
+
+.footer {
+    background-color: $footer-background-color;
+}
+
+.footer h2, a, address {
+    color: $text-color;
+    display: block;
+}
+
+.footer h2 {
+    text-decoration: underline;
+}
+
+.footer .border {
+    border-right: $footer-border-right;
+}
