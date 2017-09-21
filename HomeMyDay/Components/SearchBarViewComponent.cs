@@ -2,6 +2,7 @@
 using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,14 @@ namespace HomeMyDay.Components
 
 			HolidaySearchViewModel viewModel = new HolidaySearchViewModel
 			{
-				Accommodations = accommodations
+				Accommodations = accommodations.Select(acco =>
+				{
+					return new SelectListItem()
+					{
+						Text = acco.Location,
+						Value = acco.Id.ToString()
+					};
+				})
 			};
 
 			return View(viewModel);
