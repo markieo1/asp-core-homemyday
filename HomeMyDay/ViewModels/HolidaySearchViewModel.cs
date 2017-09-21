@@ -1,55 +1,30 @@
-﻿using HomeMyDay.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HomeMyDay.ViewModels
 {
-	public class HolidaySearchViewModel
-	{
+    public class HolidaySearchViewModel
+    {
 		/// <summary>
-		/// The accommodations that are available
+		/// The location to search for.
 		/// </summary>
-		[BindNever]
-		public IEnumerable<Accommodation> Accommodations { get; set; }
+		public string Location { get; set; }
 
 		/// <summary>
-		/// Gets or sets the selected accommodation.
+		/// The starting date of the search range.
 		/// </summary>
-		/// <value>
-		/// The accommodation.
-		/// </value>
-		[Required]
-		public Accommodation Accommodation { get; set; }
+		public DateTime StartDate { get; set; }
 
 		/// <summary>
-		/// Gets or sets the departure date.
+		/// The end date of the search range.
 		/// </summary>
-		/// <value>
-		/// The departure date.
-		/// </value>
-		[Required]
-		public DateTime DepartureDate { get; set; }
+		public DateTime EndDate { get; set; }
 
 		/// <summary>
-		/// Gets or sets the return date.
+		/// The amount of people that the Accommodation should support.
 		/// </summary>
-		/// <value>
-		/// The return date.
-		/// </value>
-		[Required]
-		public DateTime ReturnDate { get; set; }
-
-		/// <summary>
-		/// Gets or sets the amount of guests.
-		/// </summary>
-		/// <value>
-		/// The amount of guests.
-		/// </value>
-		[Required]
-		public int AmountOfGuests { get; set; }
-	}
+		public int Persons { get; set; }
+    }
 }

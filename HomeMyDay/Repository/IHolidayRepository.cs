@@ -12,6 +12,12 @@ namespace HomeMyDay.Repository
 	public interface IHolidayRepository
 	{
 		/// <summary>
+		/// Get all holidays from the repository.
+		/// </summary>
+		/// <returns>IEnumerable containing all Holidays.</returns>
+		IEnumerable<Holiday> Holidays { get; }
+
+		/// <summary>
 		/// Searches possible holidays for the specified parameters.
 		/// </summary>
 		/// <param name="location">The location.</param>
