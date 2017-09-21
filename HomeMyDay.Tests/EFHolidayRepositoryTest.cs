@@ -12,7 +12,7 @@ using Xunit;
 
 namespace HomeMyDay.Tests
 {
-	public class EFBookingRepositoryTest
+	public class EFHolidayRepositoryTest
 	{
 		[Fact]
 		public void TestSearchEmptyLocation()
@@ -70,20 +70,20 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestSearchDepartureAndArrivalReturnExistingBooking()
+		public void TestSearchDepartureAndArrivalReturnExistingHoliday()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Bookings.Add(new Booking()
+			context.Holidays.Add(new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -91,33 +91,33 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.NotEmpty(searchResults);
 
-			Booking firstResult = searchResults.FirstOrDefault();
+			Holiday firstResult = searchResults.FirstOrDefault();
 			Assert.NotNull(firstResult);
 			Assert.True(firstResult.DepartureDate == new DateTime(2017, 10, 12));
 			Assert.True(firstResult.ReturnDate == new DateTime(2017, 10, 22));
-			Assert.True(firstResult.NrPersons == 4);
+			Assert.True(firstResult.Accommodation.MaxPersons == 4);
 			Assert.True(firstResult.Accommodation.Name == "Amsterdam");
 		}
 
 		[Fact]
-		public void TestSearchDepartureAndArrivalReturnNoBooking()
+		public void TestSearchDepartureAndArrivalReturnNoHoliday()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Bookings.Add(new Booking()
+			context.Holidays.Add(new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -125,34 +125,34 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
+			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
 			Assert.Empty(searchResults);
 		}
 
 		[Fact]
-		public void TestSearchDepartureAndArrivalReturnMulitpleExistingBooking()
+		public void TestSearchDepartureAndArrivalReturnMulitpleExistingHoliday()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Bookings.AddRange(new Booking()
+			context.Holidays.AddRange(new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
-			}, new Booking()
+			}, new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 19),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 5,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 5
 				}
 			});
 
@@ -160,7 +160,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 22), 4);
+			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 22), 4);
 
 			Assert.NotEmpty(searchResults);
 			Assert.True(searchResults.Count() == 2);
@@ -173,14 +173,14 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Bookings.Add(new Booking()
+			context.Holidays.Add(new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -188,26 +188,26 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 9);
+			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 9);
 
 			Assert.Empty(searchResults);
 		}
 
 		[Fact]
-		public void TestSearchNotExistingLocationReturnNoBooking()
+		public void TestSearchNotExistingLocationReturnNoHoliday()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Bookings.Add(new Booking()
+			context.Holidays.Add(new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -215,26 +215,26 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("Rotterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+			IEnumerable<Holiday> searchResults = repository.Search("Rotterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.Empty(searchResults);
 		}
 
 		[Fact]
-		public void TestSearchLocationSpacesReturnBooking()
+		public void TestSearchLocationSpacesReturnHoliday()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Bookings.Add(new Booking()
+			context.Holidays.Add(new Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
-				NrPersons = 4,
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam"
+					Name = "Amsterdam",
+					MaxPersons = 4
 				}
 			});
 
@@ -242,7 +242,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Booking> searchResults = repository.Search("   Amsterdam   ", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+			IEnumerable<Holiday> searchResults = repository.Search("   Amsterdam   ", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.NotEmpty(searchResults);
 		}
