@@ -17,7 +17,11 @@ namespace HomeMyDay.Repository
 		/// <returns>IEnumerable containing all Holidays.</returns>
 		IEnumerable<Holiday> Holidays { get; }
 
-        IEnumerable<Holiday> GetRecommendedHolidays(IEnumerable<Holiday> holidays);
+        /// <summary>
+        /// Get all recommended holidays from repository
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Holiday> GetRecommendedHolidays();
 
         /// <summary>
         /// Searches possible holidays for the specified parameters.

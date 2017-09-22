@@ -19,7 +19,7 @@ namespace HomeMyDay.Components
 
         public IViewComponentResult Invoke()
         {
-            var model = repository.GetRecommendedHolidays(repository.Holidays);
+            var model = repository.GetRecommendedHolidays();
 
             return View(model);
         }

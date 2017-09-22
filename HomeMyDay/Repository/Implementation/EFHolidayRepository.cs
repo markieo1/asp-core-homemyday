@@ -20,9 +20,9 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
-        public IEnumerable<Holiday> GetRecommendedHolidays(IEnumerable<Holiday> holidays)
+        public IEnumerable<Holiday> GetRecommendedHolidays()
         {
-            return holidays.Where(m => m.Recommended == true);
+            return Holidays.Where(m => m.Recommended == true);
         }
 
         public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
