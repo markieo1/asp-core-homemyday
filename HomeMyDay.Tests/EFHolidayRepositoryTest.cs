@@ -35,10 +35,10 @@ namespace HomeMyDay.Tests
             HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
             context.Holidays.AddRange(
-                new Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = true },
-                new Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = true }
+                new Models.Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = true },
+                new Models.Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = true }
             );
             context.SaveChanges();
 
@@ -55,18 +55,18 @@ namespace HomeMyDay.Tests
             HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
             context.Holidays.AddRange(
-                new Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = true },
-                new Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = true }
+                new Models.Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = true },
+                new Models.Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = true }
             );
             context.SaveChanges();
 
             IHolidayRepository repository = new EFHolidayRepository(context);
 
-            RecommendedHolidayViewComponent component = new RecommendedHolidayViewComponent(repository);
+            Components.RecommendedHolidayViewComponent component = new Components.RecommendedHolidayViewComponent(repository);
 
-            IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
+            IEnumerable<Models.Holiday> holiday = ((IEnumerable<Models.Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
             Assert.True(holiday.Count() == 2);
         }
@@ -79,18 +79,18 @@ namespace HomeMyDay.Tests
             HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
             context.Holidays.AddRange(
-                new Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
-                new Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = false }
+                new Models.Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Models.Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = false }
             );
             context.SaveChanges();
 
             IHolidayRepository repository = new EFHolidayRepository(context);
 
-            RecommendedHolidayViewComponent component = new RecommendedHolidayViewComponent(repository);
+            Components.RecommendedHolidayViewComponent component = new Components.RecommendedHolidayViewComponent(repository);
 
-            IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
+            IEnumerable<Models.Holiday> holiday = ((IEnumerable<Models.Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
             Assert.Empty(holiday);
         }
@@ -157,7 +157,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Holidays.Add(new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -172,11 +172,11 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+            IEnumerable<Models.Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.NotEmpty(searchResults);
 
-			Holiday firstResult = searchResults.FirstOrDefault();
+            Models.Holiday firstResult = searchResults.FirstOrDefault();
 			Assert.NotNull(firstResult);
 			Assert.True(firstResult.DepartureDate == new DateTime(2017, 10, 12));
 			Assert.True(firstResult.ReturnDate == new DateTime(2017, 10, 22));
@@ -191,7 +191,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Holidays.Add(new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -206,7 +206,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
+            IEnumerable<Models.Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 13), new DateTime(2017, 10, 19), 4);
 			Assert.Empty(searchResults);
 		}
 
@@ -217,7 +217,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.AddRange(new Holiday()
+			context.Holidays.AddRange(new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -226,7 +226,7 @@ namespace HomeMyDay.Tests
 					Name = "Amsterdam",
 					MaxPersons = 4
 				}
-			}, new Holiday()
+			}, new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 19),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -241,7 +241,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 22), 4);
+            IEnumerable<Models.Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 22), 4);
 
 			Assert.NotEmpty(searchResults);
 			Assert.True(searchResults.Count() == 2);
@@ -254,7 +254,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Holidays.Add(new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -269,7 +269,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 9);
+            IEnumerable<Models.Holiday> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 9);
 
 			Assert.Empty(searchResults);
 		}
@@ -281,7 +281,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Holidays.Add(new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -296,7 +296,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("Rotterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+            IEnumerable<Models.Holiday> searchResults = repository.Search("Rotterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.Empty(searchResults);
 		}
@@ -308,7 +308,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Holidays.Add(new Models.Holiday()
 			{
 				DepartureDate = new DateTime(2017, 10, 12),
 				ReturnDate = new DateTime(2017, 10, 22),
@@ -323,7 +323,7 @@ namespace HomeMyDay.Tests
 
 			IHolidayRepository repository = new EFHolidayRepository(context);
 
-			IEnumerable<Holiday> searchResults = repository.Search("   Amsterdam   ", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+            IEnumerable<Models.Holiday> searchResults = repository.Search("   Amsterdam   ", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
 
 			Assert.NotEmpty(searchResults);
 		}
