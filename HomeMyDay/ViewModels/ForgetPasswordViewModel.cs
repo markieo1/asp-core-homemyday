@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HomeMyDay.ViewModels
+﻿namespace HomeMyDay.ViewModels
 {
-    public class ForgetPasswordViewModel
+	public class ForgetPasswordViewModel
     {
-        public string Email { get; set; }
+		/// <summary>
+		/// The email of the user
+		/// </summary>
+		public string Email { get; set; }
     }
 }
