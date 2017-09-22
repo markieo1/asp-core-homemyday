@@ -16,7 +16,7 @@ namespace HomeMyDay.Tests
 	public class SearchBarViewComponentTest
 	{
 		[Fact]
-		public void TestEmptySearchArrangements()
+		public void TestEmptySearchAccommodations()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -32,7 +32,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestFilledSearchArrangements()
+		public void TestFilledSearchAccommodations()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
