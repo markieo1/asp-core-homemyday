@@ -1,0 +1,14 @@
+﻿<script>
+    $(document).ready(function() {
+        var url = '@Url.Action("Index", "Home")';
+        setTimeout(function() {
+                window.location = url;
+            },
+            5000);
+    });
+</script>
+
+<div>
+    <h1>U bent succesvol uitgelogd.</h1>
+    Over enkele seconde keert u terug naar de hoofdpagina. Zo niet? Klik <a asp-controller="Home" asp-action="Index">Hier</a>
+</div>
