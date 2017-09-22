@@ -59,8 +59,7 @@ namespace HomeMyDay
                 options.LogoutPath = "/Account/Logout"; // If the LogoutPath is not set here, ASP.NET Core will default to /Account/Logout               
                 options.SlidingExpiration = true;
             });
-
-            services.AddTransient<IUserRepository, EFUserRepository>();
+			
             services.AddTransient<IHolidayRepository, EFHolidayRepository>();
             services.AddMvc();
         }
