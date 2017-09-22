@@ -102,7 +102,6 @@ namespace HomeMyDay.Controllers
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
-                AddErrors(result);
             }
             return View();
         }
@@ -123,15 +122,6 @@ namespace HomeMyDay.Controllers
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
-
-        //Display error
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
         }
     }
 }

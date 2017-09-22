@@ -70,7 +70,18 @@ namespace HomeMyDay
                 options.SlidingExpiration = true;
             });
 
-            services.AddTransient<IUserRepository, EFUserRepository>();
+			//Mail Services setting
+			services.Configure<AuthMailServices>(options=>
+			{
+				options.UserName = "kenwai2010@gmail.com";
+				options.PassWord = "qfevaksissurlgvt";
+				options.SmtpServer = "smtp.gmail.com";
+				options.SmtpPort = 465;
+				options.SmtpMailFromName = "HomeMyWay";
+				options.SmtpMailFromEmail = "kenwai2010@gmail.com";
+			});
+
+			services.AddTransient<IUserRepository, EFUserRepository>();
             services.AddTransient<IEmailServices, EmailServices>();
             services.AddMvc();
         }
