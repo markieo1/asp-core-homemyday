@@ -6,8 +6,8 @@ using HomeMyDay.Models;
 
 namespace HomeMyDay.ViewModels
 {
-    public class HolidaySearchResultsViewModel
-    {
+	public class HolidaySearchResultsViewModel
+	{
 		/// <summary>
 		/// The original search parameters that the user entered.
 		/// </summary>
@@ -17,5 +17,5 @@ namespace HomeMyDay.ViewModels
 		/// The holidays that should appear in the search results.
 		/// </summary>
 		public IEnumerable<Holiday> Holidays { get; set; }
-    }
+	}
 }
