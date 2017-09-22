@@ -2,9 +2,6 @@
 
 @Html.Partial("../Partials/HomeVideo")
 
-@Html.Partial("../Partials/HomeIntroVideo")
-
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
         <h1>Hello, world!</h1>
@@ -13,7 +10,7 @@
     </div>
 </div>
 
-@await Component.InvokeAsync("SearchBar")   
+@await Component.InvokeAsync("SearchBar")
 
 @await Component.InvokeAsync("RecommendedHoliday")
 
