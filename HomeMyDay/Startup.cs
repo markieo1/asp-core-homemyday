@@ -70,11 +70,6 @@ namespace HomeMyDay
                 options.SlidingExpiration = true;
             });
 
-            services.Configure<AuthMessageSenderOption>(option=>
-            {
-                
-            });
-
             services.AddTransient<IUserRepository, EFUserRepository>();
             services.AddTransient<IEmailServices, EmailServices>();
             services.AddMvc();
