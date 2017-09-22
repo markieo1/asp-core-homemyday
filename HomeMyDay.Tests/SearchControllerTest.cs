@@ -4,6 +4,7 @@ using HomeMyDay.Models;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using HomeMyDay.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,13 +34,14 @@ namespace HomeMyDay.Tests
 				Persons = 4
 			};
 
-			HolidaySearchResultsViewModel results = target.Results(searchModel).Model as HolidaySearchResultsViewModel;
+			ViewResult result = target.Results(searchModel);
+			HolidaySearchResultsViewModel model = result.Model as HolidaySearchResultsViewModel;
 
-			Assert.NotNull(results);
-			Assert.NotNull(results.Holidays);
-			Assert.Empty(results.Holidays);
-			Assert.NotNull(results.Search);
-			Assert.Equal(searchModel, results.Search);
+			Assert.NotNull(model);
+			Assert.NotNull(model.Search);
+			Assert.Equal(0, model.Holidays.Count());
+			Assert.Equal(searchModel, model.Search);
+			Assert.Equal("NoResults", result.ViewName);
 		}
 
 		[Fact]
@@ -74,14 +76,16 @@ namespace HomeMyDay.Tests
 				Persons = 4
 			};
 
-			HolidaySearchResultsViewModel results = target.Results(searchModel).Model as HolidaySearchResultsViewModel;
+			ViewResult result = target.Results(searchModel);
+			HolidaySearchResultsViewModel resultsModel = result.Model as HolidaySearchResultsViewModel;
 
-			Assert.NotNull(results);
-			Assert.NotNull(results.Holidays);
-			Assert.NotEmpty(results.Holidays);
-			Assert.True(results.Holidays.Count() == 1);
-			Assert.NotNull(results.Search);
-			Assert.Equal(searchModel, results.Search);
+			Assert.NotNull(resultsModel);
+			Assert.NotNull(resultsModel.Holidays);
+			Assert.NotEmpty(resultsModel.Holidays);
+			Assert.True(resultsModel.Holidays.Count() == 1);
+			Assert.NotNull(resultsModel.Search);
+			Assert.Equal(searchModel, resultsModel.Search);
+			Assert.Equal("Results", result.ViewName);
 		}
 	}
 }

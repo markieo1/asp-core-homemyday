@@ -33,7 +33,7 @@ namespace HomeMyDay.Controllers
 			}
 			else
 			{
-				return View("NoResults");
+				return View("NoResults", searchResultsModel);
 			}
 		}
 	}
