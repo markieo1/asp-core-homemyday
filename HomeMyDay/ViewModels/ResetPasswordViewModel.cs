@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace HomeMyDay.ViewModels
@@ -15,15 +14,15 @@ namespace HomeMyDay.ViewModels
 		/// <summary>
 		/// Gets or sets the new password of the user.
 		/// </summary>
-		[DisplayName("Nieuw wachtwoord")]
-		[Required(ErrorMessage = "Vul een nieuw wachtwoord in.")]
+		[Required]
+		[DataType(DataType.Password)]
 		public string NewPassword { get; set; }
 
 		/// <summary>
 		/// Gets or sets the new password confirmation of the user.
 		/// </summary>
-		[DisplayName("Herhaal nieuw wachtwoord")]
-		[Required(ErrorMessage = "Het wachtwoord komt niet overeen met het nieuwe wachtwoord.")]
+		[Required]
+		[DataType(DataType.Password)]
 		public string NewPasswordConfirmation { get; set; }
     }
 }
