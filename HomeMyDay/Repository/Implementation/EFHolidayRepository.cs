@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -54,8 +55,8 @@ namespace HomeMyDay.Repository.Implementation
 
 			string searchLocation = location.Trim();
 
-			var selectQuery = from holiday in _context.Holidays
-							  where holiday.Accommodation.Name == searchLocation
+			var selectQuery = from holiday in _context.Holidays.Include(nameof(Holiday.Accommodation))
+							  where holiday.Accommodation.Location == searchLocation
 							  && (amountOfGuests <= holiday.Accommodation.MaxPersons)
 							  && (holiday.DepartureDate >= departure.Date && holiday.ReturnDate <= returnDate.Date)
 							  select holiday;
