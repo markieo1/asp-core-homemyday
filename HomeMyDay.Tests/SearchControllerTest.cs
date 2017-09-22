@@ -55,7 +55,7 @@ namespace HomeMyDay.Tests
 				ReturnDate = new DateTime(2017, 10, 22),
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam",
+					Location = "Amsterdam",
 					MaxPersons = 4
 				}
 			});

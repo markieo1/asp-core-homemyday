@@ -82,7 +82,7 @@ namespace HomeMyDay.Tests
 				ReturnDate = new DateTime(2017, 10, 22),
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam",
+					Location = "Amsterdam",
 					MaxPersons = 4
 				}
 			});
@@ -100,7 +100,7 @@ namespace HomeMyDay.Tests
 			Assert.True(firstResult.DepartureDate == new DateTime(2017, 10, 12));
 			Assert.True(firstResult.ReturnDate == new DateTime(2017, 10, 22));
 			Assert.True(firstResult.Accommodation.MaxPersons == 4);
-			Assert.True(firstResult.Accommodation.Name == "Amsterdam");
+			Assert.True(firstResult.Accommodation.Location == "Amsterdam");
 		}
 
 		[Fact]
@@ -142,7 +142,7 @@ namespace HomeMyDay.Tests
 				ReturnDate = new DateTime(2017, 10, 22),
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam",
+					Location = "Amsterdam",
 					MaxPersons = 4
 				}
 			}, new Holiday()
@@ -151,7 +151,7 @@ namespace HomeMyDay.Tests
 				ReturnDate = new DateTime(2017, 10, 22),
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam",
+					Location = "Amsterdam",
 					MaxPersons = 5
 				}
 			});
@@ -233,7 +233,7 @@ namespace HomeMyDay.Tests
 				ReturnDate = new DateTime(2017, 10, 22),
 				Accommodation = new Models.Accommodation()
 				{
-					Name = "Amsterdam",
+					Location = "Amsterdam",
 					MaxPersons = 4
 				}
 			});
