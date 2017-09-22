@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using HomeMyDay.ViewModels;
 using HomeMyDay.Repository;
 using HomeMyDay.Identity;
+using HomeMyDay.Services;
 
 namespace HomeMyDay.Controllers
 {
@@ -13,12 +14,14 @@ namespace HomeMyDay.Controllers
         private SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
         private IUserRepository _IUserRepository;
+        private IEmailServices _emailServices;
 
-        public AccountController(IUserRepository repo, UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
+        public AccountController(IUserRepository repo,IEmailServices emailServices , UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
         {
             _IUserRepository = repo;
             _signInManager = signInMgr;
             _userManager = userMgr;
+            _emailServices = emailServices;
         }
 
         [AllowAnonymous]
@@ -92,8 +95,8 @@ namespace HomeMyDay.Controllers
                         new { userid = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
 
-                    //await _emailSender.SendEmailAsync(registerModel.Email, "Confirm your account",
-                    //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    await _emailServices.SendEmailAsync(registerModel.Email, "Confirm your account",
+                        "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
 
                     //This log the user automatic in
                     //await _signInManager.SignInAsync(user, isPersistent: false);
