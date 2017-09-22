@@ -24,7 +24,7 @@ namespace HomeMyDay.Tests
             HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
             IHolidayRepository repository = new EFHolidayRepository(context);
 
-            Assert.True(repository.Holidays.Count() == 0);
+            Assert.Empty(repository.Holidays);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace HomeMyDay.Tests
 
             IHolidayRepository repository = new EFHolidayRepository(context);
 
-            RecommendedHoliday component = new RecommendedHoliday(repository);
+            RecommendedHolidayViewComponent component = new RecommendedHolidayViewComponent(repository);
 
             IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
@@ -88,11 +88,11 @@ namespace HomeMyDay.Tests
 
             IHolidayRepository repository = new EFHolidayRepository(context);
 
-            RecommendedHoliday component = new RecommendedHoliday(repository);
+            RecommendedHolidayViewComponent component = new RecommendedHolidayViewComponent(repository);
 
             IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
-            Assert.True(holiday.Count() == 0);
+            Assert.Empty(holiday);
         }
 
         [Fact]

@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Components
 {
-    public class RecommendedHoliday : ViewComponent
+    public class RecommendedHolidayViewComponent : ViewComponent
     {
         private IHolidayRepository repository;
 
-        public RecommendedHoliday(IHolidayRepository repository)
+        public RecommendedHolidayViewComponent(IHolidayRepository repository)
         {
             this.repository = repository;
         }
 
         public IViewComponentResult Invoke()
         {
-            IEnumerable<Holiday> model = repository.Holidays.Where(m => m.Recommended == true);
+            var model = repository.GetRecommendedHolidays(repository.Holidays);
 
             return View(model);
         }

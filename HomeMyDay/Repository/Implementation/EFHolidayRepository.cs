@@ -20,7 +20,12 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
-		public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
+        public IEnumerable<Holiday> GetRecommendedHolidays(IEnumerable<Holiday> holidays)
+        {
+            return holidays.Where(m => m.Recommended == true);
+        }
+
+        public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
 			if (string.IsNullOrWhiteSpace(location))
 			{
