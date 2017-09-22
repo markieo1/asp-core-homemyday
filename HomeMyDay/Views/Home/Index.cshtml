@@ -1,21 +1,14 @@
-﻿
-
-@Html.Partial("../Partials/HomeVideo")
-
-<div class="jumbotron">
-    <div class="container">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-    </div>
+﻿<div class="row">
+    @Html.Partial("../Partials/HomeVideo")
 </div>
-
-@await Component.InvokeAsync("SearchBar")
-
-@await Component.InvokeAsync("RecommendedHoliday")
-
-<div id="howitworks">
-    HOWITWORKS
+<div class="row">
+    @await Component.InvokeAsync("SearchBar")
+</div>
+<div class="row">
+    @await Component.InvokeAsync("RecommendedHoliday")
+</div>
+<div class="row" id="howitworks">
+    <h1>Hoe het werkt</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -36,8 +29,8 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-<div id="faq">
-    FAQ
+<div class="row" id="faq">
+    <h1>FAQ</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -58,9 +51,11 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-@Html.Partial("../Partials/HomeIntroVideo")
-<div id="review">
-    REVIEW
+<div class="row">
+    @Html.Partial("../Partials/HomeIntroVideo")
+</div>
+<div class="row" id="review">
+    <h1>Review</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -81,8 +76,8 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-<div id="contact">
-    CONTACT
+<div class="row" id="contact">
+    <h1>Contact</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -103,8 +98,8 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-<div id="supriseholiday">
-    SUPRISEHOLIDAY
+<div class="row" id="supriseholiday">
+    <h1>Suprise Holiday</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -125,8 +120,8 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-<div id="newsletter">
-    NEWSLETTER
+<div class="row" id="newsletter">
+    <h1>Newsletter</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -147,8 +142,8 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-<div id="jobs">
-    JOBS
+<div class="row" id="jobs">
+    <h1>Jobs</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
@@ -169,8 +164,8 @@
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
 
 </div>
-<div id="press">
-    PRESS
+<div class="row" id="press">
+    <h1>Press</h1>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet augue suscipit, molestie metus sit amet, euismod tortor. Nunc vel blandit enim. Sed ullamcorper mi id ipsum condimentum ultricies. Aliquam a rutrum libero, in pharetra eros. Sed elementum ultricies felis, in tempor nunc euismod convallis. Sed id dolor sit amet massa faucibus volutpat. Aliquam consequat posuere mi, ut tristique eros. Quisque tempor varius massa vel condimentum. Cras ac tellus interdum, imperdiet nisi quis, blandit sem.
 
     Ut in fermentum quam. In faucibus lacus a magna dapibus, a fringilla turpis congue. Nullam porttitor venenatis tortor at posuere. Sed semper eget dolor eu auctor. Sed nec magna porttitor, sagittis tellus et, lacinia mauris. Curabitur a dui non lorem egestas scelerisque. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse auctor, ipsum et gravida finibus, enim enim facilisis magna, vitae maximus lectus urna in quam. Integer aliquam, dolor nec tincidunt elementum, enim leo vestibulum est, in dapibus odio magna eget mauris. Curabitur rutrum mollis felis, eget bibendum leo. Etiam tempus risus id lectus molestie, eget dictum ex sodales. Aliquam suscipit, augue sed eleifend luctus, nisi ex scelerisque felis, at suscipit magna nisl ut sapien.
