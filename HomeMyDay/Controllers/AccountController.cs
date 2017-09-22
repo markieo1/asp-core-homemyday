@@ -49,7 +49,7 @@ namespace HomeMyDay.Controllers
         }
 
         [AllowAnonymous]
-        public ViewResult Register(string returnUrl)
+        public ViewResult Register(string returnUrl = "/")
         {
             return View(new RegisterViewModel
             {
