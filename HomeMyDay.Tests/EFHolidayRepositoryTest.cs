@@ -24,7 +24,27 @@ namespace HomeMyDay.Tests
             HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
             IHolidayRepository repository = new EFHolidayRepository(context);
 
-            Assert.Empty(repository.Holidays);
+            Assert.True(repository.Holidays.Count() == 0);
+        }
+
+        [Fact]
+        public void TestHolidaysFilledRepository()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+
+            context.Holidays.AddRange(
+                new Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = true },
+                new Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = true }
+            );
+            context.SaveChanges();
+
+            IHolidayRepository repository = new EFHolidayRepository(context);
+
+            Assert.True(repository.Holidays.Count() == 4);
         }
 
         [Fact]
@@ -48,10 +68,31 @@ namespace HomeMyDay.Tests
 
             IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
-            foreach (var h in holiday)
-            {
-                Assert.True(h.Recommended == true);
-            }
+            Assert.True(holiday.Count() == 2);
+        }
+
+        [Fact]
+        public void TestHolidaysFalseRecommended()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+
+            context.Holidays.AddRange(
+                new Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = false }
+            );
+            context.SaveChanges();
+
+            IHolidayRepository repository = new EFHolidayRepository(context);
+
+            RecommendedHoliday component = new RecommendedHoliday(repository);
+
+            IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
+
+            Assert.True(holiday.Count() == 0);
         }
 
         [Fact]
