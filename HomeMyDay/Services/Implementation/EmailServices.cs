@@ -35,7 +35,7 @@ namespace HomeMyDay.Services.Implementation
 
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                client.Authenticate("kenwai2010", "1245780lolo");
+                client.Authenticate("kenwai2010@gmail.com", "1245780lolo");
 
                 await client.SendAsync(this.message);
                 await client.DisconnectAsync(true);

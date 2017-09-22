@@ -95,7 +95,7 @@ namespace HomeMyDay.Controllers
                         new { userid = user.Id, code = code },
                         protocol: HttpContext.Request.Scheme);
 
-                    await _emailServices.SendEmailAsync(registerModel.Email, "Confirm your account",
+                    await _emailServices.SendEmailAsync(user.Email, "Confirm your account",
                         "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
 
                     //This log the user automatic in
@@ -104,7 +104,7 @@ namespace HomeMyDay.Controllers
                 }
                 AddErrors(result);
             }
-            return View(registerModel);
+            return View();
         }
 
         // GET: /Account/ConfirmEmail
