@@ -20,7 +20,6 @@ namespace HomeMyDay.ViewModels
 		/// <summary>
 		/// The return URL.
 		/// </summary>
-		public string ReturnUrl = "/";
-
+		public string ReturnUrl { get; set; }
     }
 }
