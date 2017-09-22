@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using HomeMyDay.ViewModels;
-using HomeMyDay.Repository;
-using HomeMyDay.Identity;
 
 namespace HomeMyDay.Controllers
 {
@@ -12,11 +10,9 @@ namespace HomeMyDay.Controllers
     {
         private SignInManager<IdentityUser> _signInManager;
         private UserManager<IdentityUser> _userManager;
-        private IUserRepository _IUserRepository;
 
-        public AccountController(IUserRepository repo, UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
+        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
         {
-            _IUserRepository = repo;
             _signInManager = signInMgr;
             _userManager = userMgr;
         }
