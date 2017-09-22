@@ -1,5 +1,6 @@
 ﻿@import 'footer';
 @import 'navbar';
+@import 'colors';
 
 .bottom-buffer {
     padding-bottom: 15px;
@@ -25,4 +26,25 @@
 
 .container-about {
     padding-bottom: 30px;
+}
+
+#the-process {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+
+    > div {
+        width: 10%;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    > div.line{
+        width: 100%;
+        flex-shrink: 1;
+        margin: 2px;
+        border: 2px solid $theprocess-line-color;
+        border-radius: 2px;
+    }
 }
