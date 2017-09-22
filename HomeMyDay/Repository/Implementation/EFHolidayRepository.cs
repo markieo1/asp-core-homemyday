@@ -50,7 +50,7 @@ namespace HomeMyDay.Repository.Implementation
 
 			string searchLocation = location.Trim();
 
-			var selectQuery = from holiday in _context.Holidays.Include("Accommodation")
+			var selectQuery = from holiday in _context.Holidays.Include(nameof(Holiday.Accommodation))
 							  where holiday.Accommodation.Location == searchLocation
 							  && (amountOfGuests <= holiday.Accommodation.MaxPersons)
 							  && (holiday.DepartureDate >= departure.Date && holiday.ReturnDate <= returnDate.Date)
