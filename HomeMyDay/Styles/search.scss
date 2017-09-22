@@ -1,0 +1,38 @@
+#search-results {
+
+    .search-result {
+        display: flex;
+        justify-content: space-between;
+
+        .accommodation-preview, .accommodation-info {
+            width: 50%;
+            border: solid grey 3px;
+            border-collapse: collapse;
+            position: relative;
+        }
+
+        .accommodation-preview > .accommodation-image-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            h2 {
+                margin-top: 0;
+            }
+        }
+
+        .accommodation-info {
+            border-left: none;
+            text-align: center;
+
+            .price {
+                font-weight: bold;
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+        }
+    }
+}
