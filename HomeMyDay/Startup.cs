@@ -63,6 +63,7 @@ namespace HomeMyDay
             });
 
             services.AddTransient<IUserRepository, EFUserRepository>();
+            services.AddTransient<IHolidayRepository, EFHolidayRepository>();
             services.AddMvc();
         }
 
@@ -80,6 +81,7 @@ namespace HomeMyDay
 			}
 
             app.UseStaticFiles();
+            app.UseAuthentication();
 
 			app.UseMvc(routes =>
 			{
