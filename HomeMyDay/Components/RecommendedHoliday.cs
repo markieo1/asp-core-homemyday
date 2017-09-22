@@ -21,7 +21,7 @@ namespace HomeMyDay.Components
         {
             IEnumerable<Holiday> model = repository.Holidays.Where(m => m.Recommended == true);
 
-            return View("FeaturedHoliday", model);
+            return View(model);
         }
     }
 }

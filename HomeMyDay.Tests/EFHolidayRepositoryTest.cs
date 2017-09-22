@@ -1,7 +1,9 @@
-﻿using HomeMyDay.Database;
+﻿using HomeMyDay.Components;
+using HomeMyDay.Database;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -15,7 +17,7 @@ namespace HomeMyDay.Tests
 	public class EFHolidayRepositoryTest
 	{
         [Fact]
-        public void TestEmptyList()
+        public void TestHolidaysEmptyRepository()
         {
             var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
             optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -26,11 +28,30 @@ namespace HomeMyDay.Tests
         }
 
         [Fact]
-        public void TestFilledList()
+        public void TestHolidaysTrueRecommended()
         {
-            IHolidayRepository repository = new FakeHolidayRepository();
+            var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+            optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+            HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-            Assert.Empty(repository.Holidays);
+            context.Holidays.AddRange(
+                new Holiday() { Image = "/images/holiday/image-1.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-2.jpg", Description = "Dit is een omschrijving", Recommended = true },
+                new Holiday() { Image = "/images/holiday/image-3.jpg", Description = "Dit is een omschrijving", Recommended = false },
+                new Holiday() { Image = "/images/holiday/image-4.jpg", Description = "Dit is een omschrijving", Recommended = true }
+            );
+            context.SaveChanges();
+
+            IHolidayRepository repository = new EFHolidayRepository(context);
+
+            RecommendedHoliday component = new RecommendedHoliday(repository);
+
+            IEnumerable<Holiday> holiday = ((IEnumerable<Holiday>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
+
+            foreach (var h in holiday)
+            {
+                Assert.True(h.Recommended == true);
+            }
         }
 
         [Fact]
