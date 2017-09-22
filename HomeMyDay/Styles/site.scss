@@ -1,0 +1,15 @@
+﻿@import 'footer';
+@import 'navbar';
+
+.bottom-buffer {
+    padding-bottom: 15px;
+}
+
+.row.equal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.p-t-51 {
+    padding-top: 51px;
+}
