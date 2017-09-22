@@ -42,14 +42,14 @@ namespace HomeMyDay.Controllers
             {
 
                 // Require the user to have a confirmed email before they can log on.
-                var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                var user = await _userManager.FindByNameAsync(loginModel.Username);
                 if (user != null)
                 {
                     if (!await _userManager.IsEmailConfirmedAsync(user))
                     {
                         ModelState.AddModelError(string.Empty,
                                       "You must have a confirmed email to log in.");
-                        return View(loginModel);
+                        return View();
                     }
                 }
 
@@ -96,7 +96,7 @@ namespace HomeMyDay.Controllers
                         protocol: HttpContext.Request.Scheme);
 
                     await _emailServices.SendEmailAsync(user.Email, "Confirm your account",
-                        "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                        "Please confirm your account by clicking this link:"  + callbackUrl);
 
                     //This log the user automatic in
                     //await _signInManager.SignInAsync(user, isPersistent: false);

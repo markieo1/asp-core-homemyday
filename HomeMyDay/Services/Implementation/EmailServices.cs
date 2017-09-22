@@ -1,4 +1,5 @@
 ﻿using MailKit.Net.Smtp;
+using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
@@ -29,13 +30,13 @@ namespace HomeMyDay.Services.Implementation
 
             using (var client = new SmtpClient())
             {
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                await client.ConnectAsync("smtp.gmail.com", 465, true);
+				await client.ConnectAsync("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
 
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                client.Authenticate("kenwai2010@gmail.com", "1245780lolo");
+                client.Authenticate("kenwai2010@gmail.com", "qfevaksissurlgvt");
 
                 await client.SendAsync(this.message);
                 await client.DisconnectAsync(true);
