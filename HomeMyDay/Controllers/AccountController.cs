@@ -42,10 +42,10 @@ namespace HomeMyDay.Controllers
             return View(loginModel);
         }
 
-        public async Task<RedirectResult> Logout(string returnUrl = "/")
+        public async Task<ViewResult> Logout(string returnUrl = "/")
         {
             await _signInManager.SignOutAsync();
-            return Redirect(returnUrl);
+            return View();
         }
 
         [AllowAnonymous]
