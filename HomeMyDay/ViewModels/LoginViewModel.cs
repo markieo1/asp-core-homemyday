@@ -17,9 +17,9 @@ namespace HomeMyDay.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-		/// <summary>
-		/// The return URL.
-		/// </summary>
-		public string ReturnUrl { get; set; }
+	    /// <summary>
+	    /// The return URL.
+	    /// </summary>
+	    public string ReturnUrl { get; set; } = "/";
     }
 }

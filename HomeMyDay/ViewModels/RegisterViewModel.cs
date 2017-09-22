@@ -14,6 +14,7 @@ namespace HomeMyDay.ViewModels
 		/// The password of the user.
 		/// </summary>
 		[Required]
+		[DataType(DataType.Password)]
         public string Password { get; set; }
 
 		/// <summary>

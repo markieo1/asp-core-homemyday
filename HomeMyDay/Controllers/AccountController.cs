@@ -18,7 +18,7 @@ namespace HomeMyDay.Controllers
         }
 
         [AllowAnonymous]
-        public ViewResult Login(string returnUrl)
+        public ViewResult Login(string returnUrl = "/")
         {
             return View(new LoginViewModel
             {
