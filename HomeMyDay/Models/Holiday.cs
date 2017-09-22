@@ -24,20 +24,20 @@ namespace HomeMyDay.Models
 		/// </summary>
 		public string Category { get; set; }
 
+        /// <summary>
+        /// The Image string from the database to find the correct image folder
+        /// </summary>
+        public string Image { get; set; }
+
+        /// <summary>
+        /// A specific text to introduce each Holiday Item
+        /// </summary>
+        public string Description { get; set; }
+
 		/// <summary>
 		/// Recommended can be set true or false to see if a holiday is recommended for the user
 		/// </summary>
 		public bool Recommended { get; set; }
-
-		/// <summary>
-		/// Optional: The amount of rooms available during the holiday
-		/// </summary>
-		public int? Room { get; set; }
-
-		/// <summary>
-		/// Optional: The amount of beds available in total of all the rooms
-		/// </summary>
-		public int? Beds { get; set; }
 
 		/// <summary>
 		/// The price for the accommodation.

@@ -25,13 +25,21 @@ namespace HomeMyDay.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("Beds");
+
                     b.Property<string>("Continent");
 
                     b.Property<string>("Country");
 
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Location");
+
                     b.Property<int>("MaxPersons");
 
                     b.Property<string>("Name");
+
+                    b.Property<int?>("Rooms");
 
                     b.HasKey("Id");
 
@@ -65,19 +73,19 @@ namespace HomeMyDay.Migrations
 
                     b.Property<int?>("AccommodationId");
 
-                    b.Property<int?>("Beds");
-
                     b.Property<string>("Category");
 
                     b.Property<DateTime>("DepartureDate");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
 
                     b.Property<decimal>("Price");
 
                     b.Property<bool>("Recommended");
 
                     b.Property<DateTime>("ReturnDate");
-
-                    b.Property<int?>("Room");
 
                     b.HasKey("Id");
 

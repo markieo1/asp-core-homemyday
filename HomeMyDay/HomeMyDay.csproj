@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Shared\Components\SearchBar\" />
+    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\logo\" />
   </ItemGroup>
 

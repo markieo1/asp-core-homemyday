@@ -1,0 +1,43 @@
+﻿@model HomeMyDay.ViewModels.HolidaySearchResultsViewModel
+
+@{
+    ViewData["Title"] = "Zoekresultaten";
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/search.css" />
+
+<h1>Zoekresultaten</h1>
+
+<div id="search-terms">
+    <div class="location">
+
+    </div>
+    <div class="date">
+
+    </div>
+    <div class="persons">
+
+    </div>
+</div>
+
+<div id="search-results">
+
+    @foreach(Holiday holiday in Model.Holidays)
+    {
+        <div class="search-result">
+            <div class="accommodation-preview">
+                <img src="~/images/accommodationplaceholder.jpg" />
+                <div class="accommodation-image-text">
+                    <h2>@holiday.Accommodation.Name</h2>
+                    <p>@holiday.Accommodation.Country, @holiday.Accommodation.Continent</p>
+                </div>
+            </div>
+            <div class="accommodation-info">
+                <p>@holiday.Accommodation.Description</p>
+
+                <p class="price">&euro;@holiday.Price</p>
+            </div>
+        </div>
+    }
+
+</div>
