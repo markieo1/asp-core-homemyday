@@ -1,21 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace HomeMyDay.ViewModels
 {
     public class LoginViewModel
     {
+		/// <summary>
+		/// The username of the user.
+		/// </summary>
         [Required]
         public string Username { get; set; }
 
-        [Required]
-        [UIHint("password")]
+		/// <summary>
+		/// The password of the user.
+		/// </summary>
+		[Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public string ReturnUrl = "/";
-
+	    /// <summary>
+	    /// The return URL.
+	    /// </summary>
+	    public string ReturnUrl { get; set; } = "/";
     }
 }

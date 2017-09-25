@@ -1,0 +1,28 @@
+﻿@import 'footer';
+@import 'navbar';
+
+.bottom-buffer {
+    padding-bottom: 15px;
+}
+
+.row.equal {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.p-t-51 {
+    padding-top: 51px;
+}
+
+.img-thumbnail {
+    width: 100%;
+}
+
+.black-thin-border {
+    border: solid;
+    border-width: thin;
+}
+
+.container-about {
+    padding-bottom: 30px;
+}

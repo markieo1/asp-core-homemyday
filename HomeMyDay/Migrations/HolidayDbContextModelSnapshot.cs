@@ -77,6 +77,10 @@ namespace HomeMyDay.Migrations
 
                     b.Property<DateTime>("DepartureDate");
 
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
                     b.Property<decimal>("Price");
 
                     b.Property<bool>("Recommended");

@@ -8,8 +8,8 @@ using HomeMyDay.Repository;
 
 namespace HomeMyDay.Controllers
 {
-    public class SearchController : Controller
-    {
+	public class SearchController : Controller
+	{
 		private IHolidayRepository holidayRepo;
 
 		public SearchController(IHolidayRepository repo)
@@ -27,7 +27,14 @@ namespace HomeMyDay.Controllers
 			//Perform search
 			searchResultsModel.Holidays = holidayRepo.Search(search.Location, search.StartDate, search.EndDate, search.Persons);
 
-			return View("Results", searchResultsModel);
+			if (searchResultsModel.Holidays.Any())
+			{
+				return View("Results", searchResultsModel);
+			}
+			else
+			{
+				return View("NoResults", searchResultsModel);
+			}
 		}
-    }
+	}
 }

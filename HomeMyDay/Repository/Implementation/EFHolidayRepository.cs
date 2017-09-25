@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -16,15 +17,16 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public IEnumerable<Holiday> Holidays
-		{
-			get
-			{
-				return _context.Holidays;
-			}
-		}
+		public IEnumerable<Holiday> Holidays => _context.Holidays;
 
-		public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
+		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
+
+        public IEnumerable<Holiday> GetRecommendedHolidays()
+        {
+            return Holidays.Where(m => m.Recommended == true);
+        }
+
+        public IEnumerable<Holiday> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
 			if (string.IsNullOrWhiteSpace(location))
 			{
@@ -53,8 +55,8 @@ namespace HomeMyDay.Repository.Implementation
 
 			string searchLocation = location.Trim();
 
-			var selectQuery = from holiday in _context.Holidays
-							  where holiday.Accommodation.Name == searchLocation
+			var selectQuery = from holiday in _context.Holidays.Include(nameof(Holiday.Accommodation))
+							  where holiday.Accommodation.Location == searchLocation
 							  && (amountOfGuests <= holiday.Accommodation.MaxPersons)
 							  && (holiday.DepartureDate >= departure.Date && holiday.ReturnDate <= returnDate.Date)
 							  select holiday;
