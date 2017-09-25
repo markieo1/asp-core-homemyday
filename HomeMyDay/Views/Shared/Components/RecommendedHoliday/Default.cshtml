@@ -4,9 +4,7 @@
     <div class="row">
         @foreach (var m in Model)
         {
-            <div class="col-sm-3">
-                <img src="@m.Image" class="img-thumbnail">
-                <p class="black-thin-border">@m.Description</p>
-            </div>}
+            @Html.Partial("../Partials/RecommendedHolidayPreview", m);
+        }
     </div>
 </div>
