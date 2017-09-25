@@ -59,13 +59,13 @@ namespace HomeMyDay.Controllers
             return View(loginModel);
         }
 
-        public async Task<RedirectResult> Logout(string returnUrl = "/")
-        {
-            await _signInManager.SignOutAsync();
-            return Redirect(returnUrl);
-        }
+		public async Task<ViewResult> Logout(string returnUrl = "/")
+		{
+			await _signInManager.SignOutAsync();
+			return View();
+		}
 
-        [AllowAnonymous]
+		[AllowAnonymous]
         public ViewResult Register(string returnUrl)
         {
             return View(new RegisterViewModel
@@ -78,7 +78,7 @@ namespace HomeMyDay.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel registerModel)
+        public async Task<ViewResult> Register(RegisterViewModel registerModel)
         {
             if (ModelState.IsValid)
             {
@@ -95,10 +95,10 @@ namespace HomeMyDay.Controllers
                     await _emailServices.SendEmailAsync(user.Email, "Confirm your account",
                         "Please confirm your account by clicking this link:"  + callbackUrl);
 
-                    //This log the user automatic in
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
-                }
+					//This log the user automatic in
+					//await _signInManager.SignInAsync(user, isPersistent: false);
+					return View("ConfirmEmail");
+				}
             }
             return View();
         }
