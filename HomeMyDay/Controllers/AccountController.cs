@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using HomeMyDay.ViewModels;
+using HomeMyDay.Extensions;
 
 namespace HomeMyDay.Controllers
 {
@@ -35,7 +36,7 @@ namespace HomeMyDay.Controllers
             {
                 if ((await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false)).Succeeded)
                 {
-                    return Redirect(loginModel?.ReturnUrl ?? "/home");
+                    return Redirect(loginModel?.ReturnUrl ?? StringExtensions.TrimControllerName(Url.Action(nameof(HomeController))));
                 }
             }
             ModelState.AddModelError("", "Invalid name or password");
@@ -70,7 +71,7 @@ namespace HomeMyDay.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    return RedirectToAction(nameof(HomeController.Index));
                 }
             }
             return View();

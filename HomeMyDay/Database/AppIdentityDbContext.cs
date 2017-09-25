@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Database
 {
-    public class AppIdentityDbContext : IdentityDbContext<IdentityUser>
+    public class AppIdentityDbContext : IdentityDbContext<User>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
