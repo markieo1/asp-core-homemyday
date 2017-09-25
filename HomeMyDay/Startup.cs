@@ -4,6 +4,7 @@ using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using HomeMyDay.Services;
 using HomeMyDay.Services.Implementation;
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
