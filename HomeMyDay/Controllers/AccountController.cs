@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using HomeMyDay.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -6,12 +7,13 @@ using HomeMyDay.ViewModels;
 
 namespace HomeMyDay.Controllers
 {
+	[Authorize]
     public class AccountController : Controller
     {
-        private SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
+        private SignInManager<User> _signInManager;
+        private UserManager<User> _userManager;
 
-        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
+        public AccountController(UserManager<User> userMgr, SignInManager<User> signInMgr)
         {
             _signInManager = signInMgr;
             _userManager = userMgr;
@@ -65,7 +67,7 @@ namespace HomeMyDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = registerModel.Username, Email = registerModel.Email };
+                var user = new User { UserName = registerModel.Username, Email = registerModel.Email };
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
                 {
