@@ -2,7 +2,7 @@
 
 namespace HomeMyDay.ViewModels
 {
-	public class ForgetPasswordViewModel
+	public class ForgotPasswordViewModel
 	{
 		/// <summary>
 		/// The email of the user

@@ -111,7 +111,7 @@ namespace HomeMyDay.Controllers
 		[HttpPost]
 		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> ForgotPassword(ForgetPasswordViewModel model)
+		public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
 		{
 			if (ModelState.IsValid)
 			{
