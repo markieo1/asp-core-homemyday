@@ -4,6 +4,7 @@ using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using HomeMyDay.Services;
 using HomeMyDay.Services.Implementation;
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -99,7 +100,10 @@ namespace HomeMyDay
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+	        var cultureInfo = new CultureInfo("nl-NL");
+	        CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+
+			app.UseStaticFiles();
             app.UseAuthentication();
 
             app.UseMvc(routes =>
