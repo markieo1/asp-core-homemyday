@@ -99,7 +99,10 @@ namespace HomeMyDay
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+	        var cultureInfo = new CultureInfo("nl-NL");
+	        CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+
+			app.UseStaticFiles();
             app.UseAuthentication();
 
             app.UseMvc(routes =>
