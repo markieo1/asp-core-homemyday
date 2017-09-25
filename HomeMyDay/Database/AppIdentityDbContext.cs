@@ -1,5 +1,4 @@
-﻿using HomeMyDay.Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using HomeMyDay.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,5 +1,5 @@
 ﻿using HomeMyDay.Database;
-using HomeMyDay.Identity;
+using HomeMyDay.Models;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using Microsoft.AspNetCore.Builder;
