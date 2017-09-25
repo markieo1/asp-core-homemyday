@@ -118,7 +118,7 @@ namespace HomeMyDay.Controllers
                 return View("Error");
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            return View(result.Succeeded ? "EmailConfirmed" : "Error");
         }
     }
 }

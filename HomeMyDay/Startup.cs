@@ -1,5 +1,4 @@
 ﻿using HomeMyDay.Database;
-using HomeMyDay.Identity;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
@@ -14,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HomeMyDay
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -81,10 +80,10 @@ namespace HomeMyDay
 				options.SmtpMailFromName = "HomeMyWay";
 				options.SmtpMailFromEmail = "kenwai2010@gmail.com";
 			});
-
-			services.AddTransient<IUserRepository, EFUserRepository>();
+			
             services.AddTransient<IEmailServices, EmailServices>();
-            services.AddMvc();
+            services.AddTransient<IHolidayRepository , EFHolidayRepository>();
+			services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
