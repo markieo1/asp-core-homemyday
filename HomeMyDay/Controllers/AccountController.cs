@@ -19,6 +19,7 @@ namespace HomeMyDay.Controllers
 			_signInManager = signInMgr;
 			_userManager = userMgr;
 			_emailServices = emailServices;
+
 		}
 
 		[AllowAnonymous]
@@ -124,7 +125,7 @@ namespace HomeMyDay.Controllers
 				var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 				var callbackUrl = Url.Action("ResetPassword", "Account",
 	new { UserId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-				await _emailServices.SendEmailAsync(user.Id, "Reset Password",
+				await _emailServices.SendEmailAsync(user.Email, "Reset Password",
 			"Please reset your password by clicking here: " + callbackUrl);
 				return View("ConfirmPassword");
 			}
@@ -151,13 +152,13 @@ namespace HomeMyDay.Controllers
 			if (user == null)
 			{
 				//Do not reveal that the user does not exist
-				return View("ResetPasswordConfirmation");
+				return View("ResetPasswordConfirm");
 			}
 
 			var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
 			if (result.Succeeded)
 			{
-				return View("ResetPasswordConfirmation");
+				return View("ResetPasswordConfirm");
 			}
 
 			return View();
