@@ -21,5 +21,10 @@ namespace HomeMyDay.ViewModels
         /// The return URL.
         /// </summary>
         public string ReturnUrl { get; set; } = "/";
+
+		/// <summary>
+		/// if ModelState is invalid set this to true
+		/// </summary>
+		public bool ValidationError { get; set; } = false;
     }
 }

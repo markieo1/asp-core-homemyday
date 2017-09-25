@@ -43,7 +43,7 @@ namespace HomeMyDay.Controllers
             }
             ModelState.AddModelError("", "Invalid name or password");
             return View(loginModel);
-        }
+		}
 
         public async Task<ViewResult> Logout(string returnUrl = "/")
         {

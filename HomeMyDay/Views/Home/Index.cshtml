@@ -16,3 +16,6 @@
 <div class="row" id="theprocess">
     @Html.Partial("../Partials/TheProcess")
 </div>
+<div class="row">
+    @await Component.InvokeAsync("PopupLogin")
+</div>
