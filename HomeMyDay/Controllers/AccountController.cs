@@ -11,12 +11,12 @@ namespace HomeMyDay.Controllers
 {
     public class AccountController : Controller
     {
-        private SignInManager<IdentityUser> _signInManager;
-        private UserManager<IdentityUser> _userManager;
+        private SignInManager<User> _signInManager;
+        private UserManager<User> _userManager;
         private IUserRepository _IUserRepository;
         private IEmailServices _emailServices;
 
-        public AccountController(IUserRepository repo,IEmailServices emailServices , UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signInMgr)
+        public AccountController(IUserRepository repo,IEmailServices emailServices , UserManager<User> userMgr, SignInManager<User> signInMgr)
         {
             _IUserRepository = repo;
             _signInManager = signInMgr;
@@ -85,7 +85,7 @@ namespace HomeMyDay.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = registerModel.Username, Email = registerModel.Email };
+                var user = new User { UserName = registerModel.Username, Email = registerModel.Email };
                 var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if (result.Succeeded)
                 {

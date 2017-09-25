@@ -40,7 +40,7 @@ namespace HomeMyDay
                 options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            services.AddIdentity<User, IdentityRole>(config =>
             {
                 //Require confirmed email to login
                 config.SignIn.RequireConfirmedEmail = true;
