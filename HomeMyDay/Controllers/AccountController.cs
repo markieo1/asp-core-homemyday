@@ -66,7 +66,7 @@ namespace HomeMyDay.Controllers
 		}
 
 		[AllowAnonymous]
-        public ViewResult Register(string returnUrl)
+        public ViewResult Register(string returnUrl = "/")
         {
             return View(new RegisterViewModel
             {
@@ -94,9 +94,7 @@ namespace HomeMyDay.Controllers
 
                     await _emailServices.SendEmailAsync(user.Email, "Confirm your account",
                         "Please confirm your account by clicking this link:"  + callbackUrl);
-
-					//This log the user automatic in
-					//await _signInManager.SignInAsync(user, isPersistent: false);
+					
 					return View("ConfirmEmail");
 				}
             }
