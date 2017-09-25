@@ -3,22 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using HomeMyDay.ViewModels;
-using HomeMyDay.Repository;
-using HomeMyDay.Identity;
 using HomeMyDay.Services;
+using HomeMyDay.Models;
 
 namespace HomeMyDay.Controllers
 {
-    public class AccountController : Controller
+	public class AccountController : Controller
     {
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
-        private IUserRepository _IUserRepository;
         private IEmailServices _emailServices;
 
-        public AccountController(IUserRepository repo,IEmailServices emailServices , UserManager<User> userMgr, SignInManager<User> signInMgr)
+        public AccountController(IEmailServices emailServices , UserManager<User> userMgr, SignInManager<User> signInMgr)
         {
-            _IUserRepository = repo;
             _signInManager = signInMgr;
             _userManager = userMgr;
             _emailServices = emailServices;
