@@ -1,21 +1,29 @@
-﻿<div class="row">
-    @Html.Partial("../Partials/HomeVideo", "https://www.youtube.com/embed/1_5n1EfcWyM?autoplay=1&loop=1&showinfo=0&controls=0&playlist=1_5n1EfcWyM")
+﻿@Html.Partial("../Partials/HomeVideo", "https://www.youtube.com/embed/1_5n1EfcWyM?autoplay=1&loop=1&showinfo=0&controls=0&playlist=1_5n1EfcWyM")
+
+<div class="container">
+    <div class="row search-bar">
+        @await Component.InvokeAsync("SearchBar")
+    </div>
 </div>
-<div class="row search-bar">
-    @await Component.InvokeAsync("SearchBar")
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("../Partials/HomeAbout")
+    </div>
 </div>
-<div class="row">
-    @Html.Partial("../Partials/HomeAbout")
+
+<div class="container">
+    <div class="row">
+        @await Component.InvokeAsync("RecommendedHoliday")
+    </div>
 </div>
-<div class="row">
-    @await Component.InvokeAsync("RecommendedHoliday")
-</div>
-<div class="row" id="howitworks">
+
+<div id="howitworks">
     @Html.Partial("../Partials/HomeVideo", "https://www.youtube.com/embed/j5hQrpt0Mdc?autoplay=1&loop=1&showinfo=0&controls=0&playlist=j5hQrpt0Mdc")
 </div>
-<div class="row" id="theprocess">
-    @Html.Partial("../Partials/TheProcess")
-</div>
-<div class="row">
-    @await Component.InvokeAsync("PopupLogin")
+
+<div class="container mtop80 mbot80">
+    <div class="row" id="theprocess">
+        @Html.Partial("../Partials/TheProcess")
+    </div>
 </div>
