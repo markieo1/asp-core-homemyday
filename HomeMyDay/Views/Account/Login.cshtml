@@ -1,25 +1,28 @@
 ﻿@model HomeMyDay.ViewModels.LoginViewModel
 
-<div class="text-danger" asp-validation-summary="All"></div>
+<div class="container mtop80 mbot80">
+    <h1>Login</h1>
+    <div class="text-danger" asp-validation-summary="All"></div>
 
-<form asp-action="Login" asp-controller="Account" method="post">
-    <input type="hidden" asp-for="ReturnUrl" />
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <div><span asp-validation-for="Username" class="text-danger"></span></div>
-        <input asp-for="Username" class="form-control" />
+    <form asp-action="Login" asp-controller="Account" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="form-group">
+            <label asp-for="Username"></label>
+            <div><span asp-validation-for="Username" class="text-danger"></span></div>
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <div><span asp-validation-for="Password" class="text-danger"></span></div>
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+
+    <div>
+        <p>Bent u nog niet geregisteerd? Registeer dan eerst <a asp-action="Register" asp-controller="Account"> Klik hier!</a></p>
+
+        <span><a asp-controller="Account" asp-action="ForgotPassword"> Wachtwoord vergeten?</a></span>
+
     </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <div><span asp-validation-for="Password" class="text-danger"></span></div>
-        <input asp-for="Password" class="form-control" />
-    </div>
-    <button class="btn btn-primary" type="submit">Login</button>
-</form>
-
-<div>
-    <p>Bent u nog niet geregisteerd? Registeer dan eerst <a asp-action="Register" asp-controller="Account"> Klik hier!</a></p>
-
-    <span><a asp-controller="Account" asp-action="ForgotPassword"> Wachtwoord vergeten?</a></span>
-
 </div>
