@@ -10,7 +10,7 @@ namespace HomeMyDay.Controllers
     {
         public IActionResult BookingForm()
         {
-            return View("BookingForm");
+            return View();
         }
     }
 }

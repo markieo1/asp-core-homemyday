@@ -16,6 +16,11 @@ namespace HomeMyDay.Models
 		public int Id { get; set; }
 
 		/// <summary>
+		/// The list of people who are traveling.
+		/// </summary>
+		public List<BookingPerson> Persons { get; set; }
+
+		/// <summary>
 		/// The accommodation where the customer is staying.
 		/// </summary>
 		public Accommodation Accommodation { get; set; }
@@ -29,10 +34,5 @@ namespace HomeMyDay.Models
 		/// The departure date of the return flight.
 		/// </summary>
 		public DateTime ReturnDate { get; set; }
-
-		/// <summary>
-		/// The amount of people who are traveling.
-		/// </summary>
-		public int NrPersons { get; set; }
     }
 }
