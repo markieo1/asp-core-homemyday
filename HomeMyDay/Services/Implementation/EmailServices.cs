@@ -13,7 +13,7 @@ namespace HomeMyDay.Services.Implementation
     {
         public MimeMessage message;
 
-		public AuthMailServices Options { get; }
+		private readonly AuthMailServices Options;
 
 		public EmailServices(IOptions<AuthMailServices> optionsAccessor)
         {
@@ -39,7 +39,7 @@ namespace HomeMyDay.Services.Implementation
 
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                client.Authenticate(Options.UserName, Options.PassWord);
+                client.Authenticate(Options.UserName, Options.Password);
 
                 await client.SendAsync(this.message);
                 await client.DisconnectAsync(true);

@@ -11,7 +11,7 @@ namespace HomeMyDay.Services
 	public class AuthMailServices
     {
 		public string UserName { get; set; }
-		public string PassWord { get; set; }
+		public string Password { get; set; }
 		public string SmtpServer { get; set; }
 		public int SmtpPort { get; set; }
 		public string SmtpMailFromEmail { get; set; }
