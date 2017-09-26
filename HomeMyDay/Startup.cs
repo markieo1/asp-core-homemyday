@@ -72,7 +72,7 @@ namespace HomeMyDay
 			});
 
 			//Mail Services setting
-			services.Configure<AuthMailServices>(options=>
+			services.Configure<AuthMailServices>(options =>
 			{
 				options.UserName = "kenwai2010@gmail.com";
 				options.PassWord = "qfevaksissurlgvt";
@@ -81,9 +81,9 @@ namespace HomeMyDay
 				options.SmtpMailFromName = "HomeMyWay";
 				options.SmtpMailFromEmail = "kenwai2010@gmail.com";
 			});
-			
+
 			services.AddTransient<IEmailServices, EmailServices>();
-			services.AddTransient<IHolidayRepository , EFHolidayRepository>();
+			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
 			services.AddMvc();
 		}
 
@@ -97,7 +97,7 @@ namespace HomeMyDay
 			}
 			else
 			{
-				app.UseExceptionHandler();	   
+				app.UseExceptionHandler();
 			}
 
 			var cultureInfo = new CultureInfo("nl-NL");
