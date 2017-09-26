@@ -8,9 +8,9 @@ namespace HomeMyDay.Controllers
 {
     public class BookingController : Controller
     {
-        public IActionResult Index()
+        public IActionResult BookingForm()
         {
-            return View();
+            return View("BookingForm");
         }
     }
 }
