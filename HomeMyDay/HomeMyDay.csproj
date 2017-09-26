@@ -6,10 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="NETCore.MailKit" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\Components\SearchBar\" />
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\logo\" />
   </ItemGroup>
 
 </Project>
