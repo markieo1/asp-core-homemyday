@@ -19,10 +19,9 @@ namespace HomeMyDay.ViewModels
 		public string Email { get; set; }
 
 		/// <summary>
-		/// Gets or sets the Passorws of the user.
+		/// Gets or sets the Passorwd of the user.
 		/// </summary>
 		[Required]
-		[StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 

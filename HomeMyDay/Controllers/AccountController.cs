@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using HomeMyDay.ViewModels;
 using HomeMyDay.Services;
 using HomeMyDay.Models;
+using HomeMyDay.Extensions;
 
 namespace HomeMyDay.Controllers
 {
@@ -53,7 +54,7 @@ namespace HomeMyDay.Controllers
 
 				if ((await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false)).Succeeded)
 				{
-					return Redirect(loginModel?.ReturnUrl ?? "/home");
+					return Redirect(loginModel?.ReturnUrl ?? StringExtensions.TrimControllerName(Url.Action(nameof(HomeController))));
 				}
 			}
 			ModelState.AddModelError("", "Invalid name or password");
@@ -89,12 +90,12 @@ namespace HomeMyDay.Controllers
 				{
 					//Generate EmailConfirmationToken
 					var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-					var callbackUrl = Url.Action("ConfirmEmail", "Account",
+					var callbackUrl = Url.Action(nameof(AccountController.ConfirmEmail), nameof(AccountController).TrimControllerName(),
 						new { userid = user.Id, code = code },
 						protocol: HttpContext.Request.Scheme);
 
 					await _emailServices.SendEmailAsync(user.Email, "Confirm your account",
-						"Please confirm your account by clicking this link:" + callbackUrl);
+						$"Please confirm your account by clicking this link: {callbackUrl}");
 
 					return View("ConfirmEmail");
 				}
@@ -123,10 +124,10 @@ namespace HomeMyDay.Controllers
 					return View("ConfirmPassword");
 				}
 				var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-				var callbackUrl = Url.Action("ResetPassword", "Account",
+				var callbackUrl = Url.Action(nameof(AccountController.ResetPassword), nameof(AccountController).TrimControllerName(),
 	new { UserId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 				await _emailServices.SendEmailAsync(user.Email, "Reset Password",
-			"Please reset your password by clicking here: " + callbackUrl);
+			$"Please reset your password by clicking here: { callbackUrl}");
 				return View("ConfirmPassword");
 			}
 			return View(model);
