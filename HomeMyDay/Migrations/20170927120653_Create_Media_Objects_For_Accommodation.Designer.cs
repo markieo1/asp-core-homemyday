@@ -12,7 +12,7 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170927092200_Create_Media_Objects_For_Accommodation")]
+    [Migration("20170927120653_Create_Media_Objects_For_Accommodation")]
     partial class Create_Media_Objects_For_Accommodation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace HomeMyDay.Migrations
 
             modelBuilder.Entity("HomeMyDay.Models.Accommodation", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Beds");
@@ -53,7 +53,7 @@ namespace HomeMyDay.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<int?>("AccommodationId");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -73,7 +73,7 @@ namespace HomeMyDay.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<int?>("AccommodationId");
 
                     b.Property<string>("Category");
 
@@ -101,9 +101,11 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<int?>("AccommodationId");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Title");
 
                     b.Property<int>("Type");
 

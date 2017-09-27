@@ -19,6 +19,8 @@ namespace HomeMyDay.Repository
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns></returns>
+		/// <exception cref="ArgumentOutOfRangeException">id</exception>
+		/// <exception cref="KeyNotFoundException"></exception>
 		Accommodation GetAccommodation(long id);
 	}
 }

@@ -23,7 +23,7 @@ namespace HomeMyDay.Migrations
 
             modelBuilder.Entity("HomeMyDay.Models.Accommodation", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Beds");
@@ -52,7 +52,7 @@ namespace HomeMyDay.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<int?>("AccommodationId");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -72,7 +72,7 @@ namespace HomeMyDay.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<int?>("AccommodationId");
 
                     b.Property<string>("Category");
 
@@ -100,9 +100,11 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<int?>("AccommodationId");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Title");
 
                     b.Property<int>("Type");
 
