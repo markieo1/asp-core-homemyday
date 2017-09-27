@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Controllers
 {
-    public class PersController : Controller
+    public class PressController : Controller
     {
         public ViewResult Index()
         {
