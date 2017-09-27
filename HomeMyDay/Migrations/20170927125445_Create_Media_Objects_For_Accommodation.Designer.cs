@@ -12,7 +12,7 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170927120653_Create_Media_Objects_For_Accommodation")]
+    [Migration("20170927125445_Create_Media_Objects_For_Accommodation")]
     partial class Create_Media_Objects_For_Accommodation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,7 +115,7 @@ namespace HomeMyDay.Migrations
 
                     b.HasIndex("AccommodationId");
 
-                    b.ToTable("MediaObject");
+                    b.ToTable("MediaObjects");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>

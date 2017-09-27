@@ -10,7 +10,7 @@ namespace HomeMyDay.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "MediaObject",
+                name: "MediaObjects",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -23,9 +23,9 @@ namespace HomeMyDay.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MediaObject", x => x.Id);
+                    table.PrimaryKey("PK_MediaObjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MediaObject_Accommodations_AccommodationId",
+                        name: "FK_MediaObjects_Accommodations_AccommodationId",
                         column: x => x.AccommodationId,
                         principalTable: "Accommodations",
                         principalColumn: "Id",
@@ -33,15 +33,15 @@ namespace HomeMyDay.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MediaObject_AccommodationId",
-                table: "MediaObject",
+                name: "IX_MediaObjects_AccommodationId",
+                table: "MediaObjects",
                 column: "AccommodationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MediaObject");
+                name: "MediaObjects");
         }
     }
 }

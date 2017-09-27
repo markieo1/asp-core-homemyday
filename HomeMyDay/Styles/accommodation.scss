@@ -1,6 +1,6 @@
 ﻿@import '_mixins';
 
-.carousel .item img {
+.carousel .item img, .video, video {
     margin: auto;
 
     @include for-phone-only {

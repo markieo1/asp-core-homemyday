@@ -114,7 +114,7 @@ namespace HomeMyDay.Migrations
 
                     b.HasIndex("AccommodationId");
 
-                    b.ToTable("MediaObject");
+                    b.ToTable("MediaObjects");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
