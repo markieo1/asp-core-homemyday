@@ -5,26 +5,22 @@ using System.Collections.Generic;
 
 namespace HomeMyDay.Migrations
 {
-    public partial class BookingPersons : Migration
+    public partial class BookingPersonsCountries : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "NrPersons",
-                table: "Bookings");
-
             migrationBuilder.CreateTable(
-                name: "Country",
+                name: "Countries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    GeoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Continent = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Country", x => x.Id);
+                    table.PrimaryKey("PK_Countries", x => x.GeoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,14 +32,14 @@ namespace HomeMyDay.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: true),
                     BookingOwner = table.Column<bool>(type: "bit", nullable: false),
-                    CountryId = table.Column<int>(type: "int", nullable: true),
+                    CountryGeoId = table.Column<int>(type: "int", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HouseNumber = table.Column<int>(type: "int", nullable: false),
                     HouseNumberSuffix = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Insertion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NationalityId = table.Column<int>(type: "int", nullable: true),
+                    NationalityGeoId = table.Column<int>(type: "int", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -57,16 +53,16 @@ namespace HomeMyDay.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BookingPerson_Country_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Country",
-                        principalColumn: "Id",
+                        name: "FK_BookingPerson_Countries_CountryGeoId",
+                        column: x => x.CountryGeoId,
+                        principalTable: "Countries",
+                        principalColumn: "GeoId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BookingPerson_Country_NationalityId",
-                        column: x => x.NationalityId,
-                        principalTable: "Country",
-                        principalColumn: "Id",
+                        name: "FK_BookingPerson_Countries_NationalityGeoId",
+                        column: x => x.NationalityGeoId,
+                        principalTable: "Countries",
+                        principalColumn: "GeoId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -76,14 +72,14 @@ namespace HomeMyDay.Migrations
                 column: "BookingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingPerson_CountryId",
+                name: "IX_BookingPerson_CountryGeoId",
                 table: "BookingPerson",
-                column: "CountryId");
+                column: "CountryGeoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookingPerson_NationalityId",
+                name: "IX_BookingPerson_NationalityGeoId",
                 table: "BookingPerson",
-                column: "NationalityId");
+                column: "NationalityGeoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -92,13 +88,7 @@ namespace HomeMyDay.Migrations
                 name: "BookingPerson");
 
             migrationBuilder.DropTable(
-                name: "Country");
-
-            migrationBuilder.AddColumn<int>(
-                name: "NrPersons",
-                table: "Bookings",
-                nullable: false,
-                defaultValue: 0);
+                name: "Countries");
         }
     }
 }

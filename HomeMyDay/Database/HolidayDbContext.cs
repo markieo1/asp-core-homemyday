@@ -32,5 +32,10 @@ namespace HomeMyDay.Database
 		/// The Accommodations that have been saved.
 		/// </summary>
 		public DbSet<Accommodation> Accommodations { get; set; }
+
+		/// <summary>
+		/// The Countries that have been saved.
+		/// </summary>
+		public DbSet<Country> Countries { get; set; }
 	}
 }

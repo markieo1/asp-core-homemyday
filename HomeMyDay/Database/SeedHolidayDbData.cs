@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Models;
+using System.Globalization;
 
 namespace HomeMyDay.Database
 {
@@ -15,6 +16,7 @@ namespace HomeMyDay.Database
 				return;
 			}
 
+			//Seed holidays
 			context.Holidays.Add(new Holiday() {
 				Category = "House",
 				DepartureDate = new DateTime(2017, 9, 20),
@@ -68,6 +70,29 @@ namespace HomeMyDay.Database
 					Rooms = 7
 				}
 			});
+
+			//Seed countries
+
+			//Generate a list of countries to be deduplicated later.
+			var countries = new List<Country>();
+
+			CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+			foreach (CultureInfo culture in cultures)
+			{
+				RegionInfo cultureRegion = new RegionInfo(culture.LCID);
+				countries.Add(new Country()
+				{
+					CountryCode = cultureRegion.ThreeLetterISORegionName,
+					Name = cultureRegion.EnglishName
+				});
+			}
+
+			//Deduplicate list
+			countries = countries.GroupBy(c => c.GeoId)
+				.Select(i => i.First())
+				.ToList();
+
+			context.Countries.AddRange(countries);
 
 			context.SaveChanges();
 		}

@@ -11,8 +11,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170926132551_BookingPersons")]
-    partial class BookingPersons
+    [Migration("20170927085318_BookingPersonsCountries")]
+    partial class BookingPersonsCountries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,7 +76,7 @@ namespace HomeMyDay.Migrations
 
                     b.Property<bool>("BookingOwner");
 
-                    b.Property<int?>("CountryId");
+                    b.Property<int?>("CountryGeoId");
 
                     b.Property<string>("Email");
 
@@ -90,7 +90,7 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<int?>("NationalityId");
+                    b.Property<int?>("NationalityGeoId");
 
                     b.Property<string>("PhoneNumber");
 
@@ -100,25 +100,25 @@ namespace HomeMyDay.Migrations
 
                     b.HasIndex("BookingId");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("CountryGeoId");
 
-                    b.HasIndex("NationalityId");
+                    b.HasIndex("NationalityGeoId");
 
                     b.ToTable("BookingPerson");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Country", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GeoId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Continent");
+                    b.Property<string>("CountryCode");
 
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("GeoId");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
@@ -164,11 +164,11 @@ namespace HomeMyDay.Migrations
 
                     b.HasOne("HomeMyDay.Models.Country", "Country")
                         .WithMany()
-                        .HasForeignKey("CountryId");
+                        .HasForeignKey("CountryGeoId");
 
                     b.HasOne("HomeMyDay.Models.Country", "Nationality")
                         .WithMany()
-                        .HasForeignKey("NationalityId");
+                        .HasForeignKey("NationalityGeoId");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
