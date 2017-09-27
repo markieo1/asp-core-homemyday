@@ -34,5 +34,30 @@ namespace HomeMyDay.Models
 		/// The departure date of the return flight.
 		/// </summary>
 		public DateTime ReturnDate { get; set; }
-    }
+
+		/// <summary>
+		/// Whether the user has chosen for Service Insurance.
+		/// </summary>
+		public bool InsuranceService { get; set; }
+
+		/// <summary>
+		/// Whether the user has chosen for the Explore service.
+		/// </summary>
+		public bool InsuranceExplore { get; set; }
+
+		/// <summary>
+		/// Whether the user has chosen for the basic cancellation insurance.
+		/// </summary>
+		public bool InsuranceCancellationBasic { get; set; }
+
+		/// <summary>
+		/// Whether the user has chosen for the all-risk cancellation insurance.
+		/// </summary>
+		public bool InsuranceCancellationAllRisk { get; set; }
+
+		/// <summary>
+		/// The type of insurance that the user has chosen.
+		/// </summary>
+		public InsuranceType InsuranceType { get; set; }
+	}
 }
