@@ -13,13 +13,13 @@ namespace HomeMyDay.Services.Implementation
     {
         public MimeMessage message;
 
-		public AuthMailServices Options { get; }
+		private readonly MailServiceOptions _options;
 
-		public EmailServices(IOptions<AuthMailServices> optionsAccessor)
+		public EmailServices(IOptions<MailServiceOptions> optionsAccessor)
         {
             message = new MimeMessage();
-			Options = optionsAccessor.Value;
-			message.From.Add(new MailboxAddress(Options.SmtpMailFromName, Options.SmtpMailFromEmail));
+			_options = optionsAccessor.Value;
+			message.From.Add(new MailboxAddress(_options.SmtpMailFromName, _options.SmtpMailFromEmail));
 		}
 
 		public async Task SendEmailAsync(string email, string subject, string message)
@@ -35,11 +35,11 @@ namespace HomeMyDay.Services.Implementation
             {
 				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-				await client.ConnectAsync(Options.SmtpServer, Options.SmtpPort, SecureSocketOptions.SslOnConnect);
+				await client.ConnectAsync(_options.SmtpServer, _options.SmtpPort, SecureSocketOptions.SslOnConnect);
 
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                client.Authenticate(Options.UserName, Options.PassWord);
+                client.Authenticate(_options.UserName, _options.Password);
 
                 await client.SendAsync(this.message);
                 await client.DisconnectAsync(true);
