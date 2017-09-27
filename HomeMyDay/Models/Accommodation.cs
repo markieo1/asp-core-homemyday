@@ -58,6 +58,6 @@ namespace HomeMyDay.Models
 		/// <summary>
 		/// Gets or sets the media objects.
 		/// </summary>
-		public IEnumerable<MediaObject> MediaObjects { get; set; }
+		public List<MediaObject> MediaObjects { get; set; }
 	}
 }
