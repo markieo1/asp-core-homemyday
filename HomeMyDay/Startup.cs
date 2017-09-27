@@ -76,6 +76,8 @@ namespace HomeMyDay
 
 			services.AddTransient<IEmailServices, EmailServices>();
 			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
+			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
+
 			services.AddMvc();
 		}
 

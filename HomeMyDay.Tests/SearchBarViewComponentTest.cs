@@ -21,7 +21,7 @@ namespace HomeMyDay.Tests
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			SearchBarViewComponent target = new SearchBarViewComponent(repository);
 
@@ -52,7 +52,7 @@ namespace HomeMyDay.Tests
 
 			context.SaveChanges();
 
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			SearchBarViewComponent target = new SearchBarViewComponent(repository);
 
