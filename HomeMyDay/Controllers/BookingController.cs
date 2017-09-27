@@ -11,9 +11,9 @@ namespace HomeMyDay.Controllers
 {
     public class BookingController : Controller
     {
-		private IHolidayRepository repository;
+		private IAccommodationRepository repository;
 
-		public BookingController(IHolidayRepository repo)
+		public BookingController(IAccommodationRepository repo)
 		{
 			this.repository = repo;
 		}
