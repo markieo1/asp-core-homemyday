@@ -6,6 +6,10 @@
     margin-top: 80px;
 }
 
+.mtop52{
+    margin-top: 52px;
+}
+
 .mbot80 {
     margin-bottom: 80px;
 }
@@ -27,7 +31,9 @@
     padding: 45px;
 }
 
-
+.p-b-20{
+    padding-bottom: 20px;
+}
 
 .container-about {
     padding-bottom: 30px;
@@ -56,4 +62,8 @@
         border: 2px solid $theprocess-line-color;
         border-radius: 2px;
     }
+}
+
+.icon-color-black{
+    color: #333;
 }
