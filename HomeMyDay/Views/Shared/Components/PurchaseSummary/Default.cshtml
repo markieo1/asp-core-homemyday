@@ -1,0 +1,59 @@
+﻿@model HomeMyDay.Models.Holiday
+@* Refresh this page for each selection from the purchase proces *@
+@* Probaly a controller method for each selection call the method to refresh this page *@
+
+<row>
+    <div class="col-lg-6 col-sm-12 left">
+        <form id="@Model.Id" asp-action="AddToCart"
+              asp-controller="Cart" method="post">
+            <input type="hidden" asp-for="ProductID" />
+            <input type="hidden" name="returnUrl"
+                   value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="lead">
+                @Model.Description
+                <button type="submit" class="btn btn-success btn-sm pull-right">
+                    Add To Cart
+                </button>
+            </span>
+        </form>
+    </div>
+    <div class="col-lg-6 col-sm-12 right">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Item Name</strong></td>
+                                    <td class="text-right"><strong>Price</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Samsung Galaxy S5</td>
+                                    <td class="text-right">$900</td>
+                                </tr>
+                                <tr>
+                                    <td>Samsung Galaxy S5 Extra Battery</td>
+                                    <td class="text-right">$30.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="highrow text-center"><strong>Subtotal</strong></td>
+                                    <td class="highrow text-right">$958.00</td>
+                                </tr>
+                                <tr>
+                                    <td class="emptyrow text-center"><strong>Total</strong></td>
+                                    <td class="emptyrow text-right">$978.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</row>
