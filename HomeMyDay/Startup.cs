@@ -97,7 +97,7 @@ namespace HomeMyDay
 			}
 			else
 			{
-				app.UseExceptionHandler("/Home/Error");
+				app.UseExceptionHandler();
 			}
 
 			var cultureInfo = new CultureInfo("nl-NL");

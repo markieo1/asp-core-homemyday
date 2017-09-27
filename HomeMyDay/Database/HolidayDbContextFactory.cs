@@ -1,23 +1,31 @@
-﻿using System.IO;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace HomeMyDay.Database
 {
 	public class HolidayDbContextFactory : IDesignTimeDbContextFactory<HolidayDbContext>
-    {
-	    public HolidayDbContext CreateDbContext(string[] args)
-	    {
-			var config = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetCurrentDirectory())
+	{
+		public HolidayDbContext CreateDbContext(string[] args)
+		{
+			string basePath = AppContext.BaseDirectory;
+
+			string envName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+			IConfigurationBuilder builder = new ConfigurationBuilder()
+				.SetBasePath(basePath)
 				.AddJsonFile("appsettings.json")
-				.Build();
+				.AddJsonFile($"appsettings.{envName}.json", true)
+				.AddEnvironmentVariables();
 
-		    var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
-		    optionsBuilder.UseSqlServer(config.GetConnectionString("HolidayConnection"));
+			IConfiguration config = builder.Build();
 
-		    return new HolidayDbContext(optionsBuilder.Options);
+			DbContextOptionsBuilder<HolidayDbContext> optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+
+			optionsBuilder.UseSqlServer(config.GetConnectionString("HolidayConnection"));
+
+			return new HolidayDbContext(optionsBuilder.Options);
 		}
-    }
+	}
 }
