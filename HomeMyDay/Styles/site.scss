@@ -6,6 +6,10 @@
     margin-top: 80px;
 }
 
+.mtop52{
+    margin-top: 52px;
+}
+
 .mbot80 {
     margin-bottom: 80px;
 }
@@ -27,6 +31,9 @@
     padding: 45px;
 }
 
+.p-b-20{
+    padding-bottom: 20px;
+}
 
 .container-about {
     padding-bottom: 30px;
@@ -101,4 +108,8 @@
         width: 150px;
         margin-bottom: 10px;
     }
+}
+
+.icon-color{
+    color: $icon-color;
 }
