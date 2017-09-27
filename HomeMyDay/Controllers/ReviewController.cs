@@ -10,17 +10,24 @@ namespace HomeMyDay.Controllers
 {
     public class ReviewController : Controller
     {
-        private IHolidayRepository _IHolidayRepository;
+        private readonly IHolidayRepository _repository ;
 
         public ReviewController(IHolidayRepository repo)
         {
-            _IHolidayRepository = repo;           
+            _repository = repo;           
         }
 
         public ViewResult Index(ReviewViewModel model)
         {
-            var reviews = _IHolidayRepository.Reviews;
-            return View("index", reviews.OrderByDescending(a => a.Id));
+            var reviews = _repository.Reviews;
+            if(!reviews.Any())
+            {
+                return null;
+            }
+            else
+            {
+                return View("index", reviews.OrderByDescending(a => a.Id));
+            }
         }
     }
 }

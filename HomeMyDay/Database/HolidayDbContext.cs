@@ -30,8 +30,8 @@ namespace HomeMyDay.Database
 		public DbSet<Accommodation> Accommodations { get; set; }
 
         /// <summary>
-		/// The Reviews that have been saved.
-		/// </summary>
+        /// The Reviews that have been saved.
+        /// </summary>
         public DbSet<Review> Reviews { get; set; }
     }
 }
