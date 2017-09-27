@@ -20,6 +20,16 @@ namespace HomeMyDay.Models
 		public bool BookingOwner { get; set; }
 
 		/// <summary>
+		/// The salutation of the person (mr/mrs)
+		/// </summary>
+		public string Salutation { get; set; }
+
+		/// <summary>
+		/// The person's initials.
+		/// </summary>
+		public string Initials { get; set; }
+
+		/// <summary>
 		/// The person's first name.
 		/// </summary>
 		public string FirstName { get; set; }

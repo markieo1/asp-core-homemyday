@@ -12,5 +12,10 @@ namespace HomeMyDay.ViewModels
 		/// The accommodation that the user wants to book.
 		/// </summary>
 		public Accommodation Accommodation { get; set; }
+
+		/// <summary>
+		/// A list of people who are booking the trip.
+		/// </summary>
+		public List<BookingPerson> Persons { get; set; }
     }
 }

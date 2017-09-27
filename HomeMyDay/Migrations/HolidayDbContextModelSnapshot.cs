@@ -64,62 +64,6 @@ namespace HomeMyDay.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("HomeMyDay.Models.BookingPerson", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<int?>("BookingId");
-
-                    b.Property<bool>("BookingOwner");
-
-                    b.Property<int?>("CountryGeoId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<int>("HouseNumber");
-
-                    b.Property<string>("HouseNumberSuffix");
-
-                    b.Property<string>("Insertion");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<int?>("NationalityGeoId");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("PostalCode");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
-
-                    b.HasIndex("CountryGeoId");
-
-                    b.HasIndex("NationalityGeoId");
-
-                    b.ToTable("BookingPerson");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Country", b =>
-                {
-                    b.Property<int>("GeoId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CountryCode");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("GeoId");
-
-                    b.ToTable("Countries");
-                });
-
             modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
                 {
                     b.Property<int>("Id")
@@ -153,21 +97,6 @@ namespace HomeMyDay.Migrations
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
                         .HasForeignKey("AccommodationId");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.BookingPerson", b =>
-                {
-                    b.HasOne("HomeMyDay.Models.Booking")
-                        .WithMany("Persons")
-                        .HasForeignKey("BookingId");
-
-                    b.HasOne("HomeMyDay.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryGeoId");
-
-                    b.HasOne("HomeMyDay.Models.Country", "Nationality")
-                        .WithMany()
-                        .HasForeignKey("NationalityGeoId");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
