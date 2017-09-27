@@ -38,3 +38,27 @@
         }
     }
 }
+
+#search-terms {
+    margin: 0 auto;
+}
+
+#search-terms > .col-md-2 > p > i {
+    float: left;
+    padding: 10px 0px;
+}
+
+#search-terms > #border:not(:last-of-type) {
+    border: 2px solid grey;
+    height: 55px;
+    border-right: none;
+}
+
+#search-terms > #border:last-of-type {
+    border: 2px solid grey;
+    height: 55px;
+    border-radius: 0 10px 10px 0px;
+}
+#search-terms div:nth-child(2) {
+    border-radius: 10px 0 0 10px !important;
+}
