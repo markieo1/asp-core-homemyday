@@ -94,6 +94,24 @@ namespace HomeMyDay.Migrations
                     b.ToTable("Holidays");
                 });
 
+            modelBuilder.Entity("HomeMyDay.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")

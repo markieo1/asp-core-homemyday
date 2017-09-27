@@ -1,0 +1,18 @@
+﻿@model IEnumerable<HomeMyDay.Models.Review>
+<div class="container">
+    <h1 class="page-header">Reviews</h1>
+
+    <div class="col-lg-12">
+        <section>
+            @foreach (var p in Model)
+             {
+                <div class="review-overview">
+                    <h3>@p.Title</h3>
+                    <p>@p.Text</p>
+                    <span>@p.Name</span>
+                    <span>@p.Date.ToString("dd MMM yyyy")</span>
+                </div>
+             }
+        </section>
+    </div>
+</div>

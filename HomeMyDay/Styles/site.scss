@@ -27,7 +27,13 @@
     padding: 45px;
 }
 
+.review-overview {
+    margin-bottom: 30px;
 
+    > span {
+        color: $colorGray;
+    }
+}
 
 .container-about {
     padding-bottom: 30px;

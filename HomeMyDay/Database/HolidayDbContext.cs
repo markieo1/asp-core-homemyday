@@ -1,13 +1,9 @@
 ﻿using HomeMyDay.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeMyDay.Database
 {
-	public class HolidayDbContext : DbContext
+    public class HolidayDbContext : DbContext
 	{
 		/// <summary>
 		/// Required constructor for entity framework. Passes options to parent class constructor.
@@ -32,5 +28,10 @@ namespace HomeMyDay.Database
 		/// The Accommodations that have been saved.
 		/// </summary>
 		public DbSet<Accommodation> Accommodations { get; set; }
-	}
+
+        /// <summary>
+		/// The Reviews that have been saved.
+		/// </summary>
+        public DbSet<Review> Reviews { get; set; }
+    }
 }

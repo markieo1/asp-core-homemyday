@@ -11,8 +11,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170920095922_AccommodationDescription")]
-    partial class AccommodationDescription
+    [Migration("20170926140326_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,6 +78,10 @@ namespace HomeMyDay.Migrations
 
                     b.Property<DateTime>("DepartureDate");
 
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
                     b.Property<decimal>("Price");
 
                     b.Property<bool>("Recommended");
@@ -89,6 +93,24 @@ namespace HomeMyDay.Migrations
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("Holidays");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>

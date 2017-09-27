@@ -19,6 +19,8 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Holiday> Holidays => _context.Holidays;
 
+        public IEnumerable<Review> Reviews => _context.Reviews;
+
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
 		public IEnumerable<Holiday> GetRecommendedHolidays()
