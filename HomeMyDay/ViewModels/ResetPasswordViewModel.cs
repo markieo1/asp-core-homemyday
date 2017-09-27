@@ -36,6 +36,7 @@ namespace HomeMyDay.ViewModels
 		/// <summary>
 		/// Gets or sets the Confirm Code of the user.
 		/// </summary>
+		[Required]
 		public string Code { get; set; }
 	}
 }
