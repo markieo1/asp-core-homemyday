@@ -13,9 +13,9 @@ namespace HomeMyDay.Services.Implementation
     {
         public MimeMessage message;
 
-		private readonly AuthMailServices Options;
+		private readonly MailServiceOptions Options;
 
-		public EmailServices(IOptions<AuthMailServices> optionsAccessor)
+		public EmailServices(IOptions<MailServiceOptions> optionsAccessor)
         {
             message = new MimeMessage();
 			Options = optionsAccessor.Value;

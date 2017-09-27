@@ -8,7 +8,7 @@ namespace HomeMyDay.Services
 	/// <summary>
 	/// Email Smtp Setting
 	/// </summary>
-	public class AuthMailServices
+	public class MailServiceOptions
     {
 		/// <summary>
 		/// Smtp username
