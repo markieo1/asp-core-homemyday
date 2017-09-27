@@ -19,24 +19,6 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Holiday> Holidays => _context.Holidays;
 
-		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
-
-		public Accommodation GetAccommodation(long id)
-		{
-			if (id <= 0)
-			{
-				throw new ArgumentOutOfRangeException(nameof(id));
-			}
-
-			Accommodation accommodation = Accommodations.FirstOrDefault(a => a.Id == id);
-			if (accommodation == null)
-			{
-				throw new KeyNotFoundException($"Accommodation with ID: {id} is not found");
-			}
-
-			return accommodation;
-		}
-
 		public IEnumerable<Holiday> GetRecommendedHolidays()
 		{
 			return Holidays.Where(m => m.Recommended == true);
