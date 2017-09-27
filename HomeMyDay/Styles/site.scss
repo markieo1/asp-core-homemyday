@@ -59,8 +59,8 @@
 }
 
 #process-text > .col-md-5 > #night, #process-text > .col-md-5 > #good {
-    background-color: grey;
-    color: white;
+    background-color: $primary-color;
+    color: $text-color;
     height: 200px;
     padding-top: 10px;
     margin-bottom: -35px;
