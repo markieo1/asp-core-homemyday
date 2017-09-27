@@ -1,14 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    @Html.Partial("../Partials/Header")
+    @Html.Partial("../Partials/Header.cshtml")
 </head>
 <body class="p-t-51" data-spy="scroll" data-target="#navbar-navigation">
-    @Html.Partial("../Partials/Navigation")
+    @Html.Partial("../Partials/Navigation.cshtml")
 
     @RenderBody()
 
-    @*@Html.Partial("../Partials/Footer")*@
+    @Html.Partial("../Partials/Footer.cshtml")
 
     <environment include="Development">
         <script src="~/js/site.js" asp-append-version="true"></script>
