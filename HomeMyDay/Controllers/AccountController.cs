@@ -54,7 +54,7 @@ namespace HomeMyDay.Controllers
 
 				if ((await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false)).Succeeded)
 				{
-					return Redirect(loginModel?.ReturnUrl ?? StringExtensions.TrimControllerName(Url.Action(nameof(HomeController))));
+					return Redirect(loginModel?.ReturnUrl ?? Url.Action(nameof(HomeController)).TrimControllerName());
 				}
 			}
 			ModelState.AddModelError("", "Invalid name or password");
