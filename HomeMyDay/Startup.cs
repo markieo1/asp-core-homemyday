@@ -72,18 +72,12 @@ namespace HomeMyDay
 			});
 
 			//Mail Services setting
-			services.Configure<AuthMailServices>(options =>
-			{
-				options.UserName = "kenwai2010@gmail.com";
-				options.PassWord = "qfevaksissurlgvt";
-				options.SmtpServer = "smtp.gmail.com";
-				options.SmtpPort = 465;
-				options.SmtpMailFromName = "HomeMyWay";
-				options.SmtpMailFromEmail = "kenwai2010@gmail.com";
-			});
+			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
 
 			services.AddTransient<IEmailServices, EmailServices>();
 			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
+			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
+
 			services.AddMvc();
 		}
 
