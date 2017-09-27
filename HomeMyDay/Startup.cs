@@ -111,10 +111,6 @@ namespace HomeMyDay
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRoute(
-                    name: "FAQ",
-                    template: "{controller=FAQ}/{action=Index}");
             });
 
 			SeedHolidayDbData.Seed(dbContext);
