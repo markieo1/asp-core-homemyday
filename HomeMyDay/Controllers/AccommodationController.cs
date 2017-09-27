@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HomeMyDay.Models;
+using HomeMyDay.Repository;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,32 @@ namespace HomeMyDay.Controllers
 {
 	public class AccommodationController : Controller
 	{
-		[HttpGet]
-		public IActionResult Detail(int id)
+		private readonly IAccommodationRepository _accommodationRepository;
+
+		public AccommodationController(IAccommodationRepository repository)
 		{
-			return View();
+			_accommodationRepository = repository;
+		}
+
+		[HttpGet]
+		public IActionResult Detail(long id)
+		{
+			Accommodation accommodation = null;
+
+			try
+			{
+				accommodation = _accommodationRepository.GetAccommodation(id);
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return BadRequest();
+			}
+			catch (KeyNotFoundException)
+			{
+				return NotFound();
+			}
+
+			return View(accommodation);
 		}
 	}
 }

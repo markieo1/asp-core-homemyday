@@ -19,7 +19,7 @@ namespace HomeMyDay.Models
 		/// The user-friendly name of the accommodation.
 		/// </summary>
 		public string Name { get; set; }
-		
+
 		/// <summary>
 		/// The user-friendly description of the accommodation.
 		/// </summary>
@@ -30,15 +30,15 @@ namespace HomeMyDay.Models
 		/// </summary>
 		public int MaxPersons { get; set; }
 
-        /// <summary>
-        /// Optional: The continent from the world map
-        /// </summary>
-        public string Continent { get; set; }
+		/// <summary>
+		/// Optional: The continent from the world map
+		/// </summary>
+		public string Continent { get; set; }
 
-        /// <summary>
-        /// The country where the customer is staying
-        /// </summary>
-        public string Country { get; set; }
+		/// <summary>
+		/// The country where the customer is staying
+		/// </summary>
+		public string Country { get; set; }
 
 		/// <summary>
 		/// The location string. Usually the city name.
@@ -54,5 +54,10 @@ namespace HomeMyDay.Models
 		/// Optional: The amount of beds available in total of all the rooms
 		/// </summary>
 		public int? Beds { get; set; }
+
+		/// <summary>
+		/// Gets or sets the media objects.
+		/// </summary>
+		public List<MediaObject> MediaObjects { get; set; }
 	}
 }
