@@ -11,8 +11,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HolidayDbContext))]
-    [Migration("20170926140326_Initial")]
-    partial class Initial
+    [Migration("20170927101619_Review")]
+    partial class Review
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
