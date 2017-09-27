@@ -23,8 +23,7 @@ namespace HomeMyDay.Controllers
         {
 			var formModel = new BookingFormViewModel();
 
-			//TODO: move this to a repository method
-			formModel.Accommodation = repository.Accommodations.Where(a => a.Id == accommodation).First();
+			formModel.Accommodation = repository.GetAccommodation(accommodation);
 
 			if(formModel.Accommodation == null)
 			{
@@ -43,9 +42,35 @@ namespace HomeMyDay.Controllers
         }
 
 		[HttpPost]
-		public IActionResult BookingForm(BookingFormViewModel formModel)
+		public IActionResult BookingForm(BookingFormViewModel formData)
 		{
-			return View();
+			if(!ModelState.IsValid)
+			{
+				return View();
+			}
+			else
+			{
+				//Store model in TempData
+				TempData["booking"] = new Booking() {
+					Accommodation = formData.Accommodation,
+					Persons = formData.Persons,			
+				};
+
+				return RedirectToAction("InsuranceForm");
+			}
+		}
+
+		[HttpGet]
+		public IActionResult InsuranceForm()
+		{
+			//Retrieve booking from TempData
+			Booking booking = (Booking)TempData["booking"];
+			if(booking == null)
+			{
+				return RedirectToAction("Error", "Home");
+			}
+
+			return View(booking);
 		}
     }
 }

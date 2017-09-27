@@ -1,65 +1,134 @@
 ﻿@model HomeMyDay.ViewModels.BookingFormViewModel
 
-<h1>Boeking @Model.Accommodation.Name</h1>
+<form id="booking-form" class="container" asp-action="BookingForm" method="post">
 
-<p>Algemene gegevens personen</p>
+	<h1>Boeking @Model.Accommodation.Name</h1>
 
-<form asp-action="BookingForm" method="post">
+	<p>Algemene gegevens personen</p>
 
-    @for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
-    {
-        @if (i == 0)
+	@for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
+	{
+		<div class="bookingperson">
+			@if (i == 0)
+			{
+				<h2>Hoofdboeker</h2>
+			}
+			else
+			{
+				<h2>Boeker nummer @i</h2>
+			}
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].Salutation"></label>
+				<select asp-for="@Model.Persons[i].Salutation">
+					<option>Dhr.</option>
+					<option>Mevr.</option>
+				</select>
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].Initials"></label>
+				<input asp-for="@Model.Persons[i].Initials" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].FirstName"></label>
+				<input asp-for="@Model.Persons[i].FirstName" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].Insertion"></label>
+				<input asp-for="@Model.Persons[i].Insertion" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].LastName"></label>
+				<input asp-for="@Model.Persons[i].LastName" />
+			</div>
+
+			<div class="form-input-group birthdate">
+				<label asp-for="@Model.Persons[i].BirthDate"></label>
+				<input class="form-control" type="text" asp-for="@Model.Persons[i].BirthDate" value="" />
+				<span class="input-group-addon datepickerbutton"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].Email"></label>
+				<input asp-for="@Model.Persons[i].Email" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].Country"></label>
+				<input asp-for="@Model.Persons[i].Country" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].PostalCode"></label>
+				<input asp-for="@Model.Persons[i].PostalCode" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].HouseNumber"></label>
+				<input asp-for="@Model.Persons[i].HouseNumber" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].HouseNumberSuffix"></label>
+				<input asp-for="@Model.Persons[i].HouseNumberSuffix" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].PhoneNumber"></label>
+				<input asp-for="@Model.Persons[i].PhoneNumber" />
+			</div>
+
+			<div class="form-input-group">
+				<label asp-for="@Model.Persons[i].Nationality"></label>
+				<input asp-for="@Model.Persons[i].Nationality" />
+			</div>
+		</div>
+
+		<hr />
+	}
+
+    <h2>Bagage</h2>
+
+    <p>Handbagage is inbegrepen. Wil je meer meenemen, kies dan hier je ruimbagage!</p>
+
+    <div class="baggage">
+        @for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
         {
-            <h2>Hoofdboeker</h2>
+            @if (i == 0)
+            {
+                <label for="@Model.Persons[i].Baggage">Hoofdboeker</label>
+}
+            else
+            {
+                <label for="@Model.Persons[i].Baggage">Boeker nummer @i</label>
+}
+
+            <input asp-for="@Model.Persons[i].Baggage" />
         }
-        else
-        {
-            <h2>Boeker nummer @i</h2>
-        }
+    </div>
 
-        <label asp-for="@Model.Persons[i].Salutation"></label>
-        <select asp-for="@Model.Persons[i].Salutation">
-            <option>Dhr.</option>
-            <option>Mevr.</option>
-        </select>
-
-        <label asp-for="@Model.Persons[i].Initials"></label>
-        <input asp-for="@Model.Persons[i].Initials" />
-
-        <label asp-for="@Model.Persons[i].FirstName"></label>
-        <input asp-for="@Model.Persons[i].FirstName" />
-
-        <label asp-for="@Model.Persons[i].Insertion"></label>
-        <input asp-for="@Model.Persons[i].Insertion" />
-
-        <label asp-for="@Model.Persons[i].LastName"></label>
-        <input asp-for="@Model.Persons[i].LastName" />
-
-        <label asp-for="@Model.Persons[i].BirthDate"></label>
-        <input asp-for="@Model.Persons[i].BirthDate" />
-
-        <label asp-for="@Model.Persons[i].Email"></label>
-        <input asp-for="@Model.Persons[i].Email" />
-
-        <label asp-for="@Model.Persons[i].Country"></label>
-        <input asp-for="@Model.Persons[i].Country" />
-
-        <label asp-for="@Model.Persons[i].PostalCode"></label>
-        <input asp-for="@Model.Persons[i].PostalCode" />
-
-        <label asp-for="@Model.Persons[i].HouseNumber"></label>
-        <input asp-for="@Model.Persons[i].HouseNumber" />
-
-        <label asp-for="@Model.Persons[i].HouseNumberSuffix"></label>
-        <input asp-for="@Model.Persons[i].HouseNumberSuffix" />
-
-        <label asp-for="@Model.Persons[i].PhoneNumber"></label>
-        <input asp-for="@Model.Persons[i].PhoneNumber" />
-
-        <label asp-for="@Model.Persons[i].Nationality"></label>
-        <input asp-for="@Model.Persons[i].Nationality" />
-    }
-
-    <input type="submit" />
+	<input type="submit" value="Volgende stap" />
 
 </form>
+
+<script type="text/javascript">
+
+	(function () {
+
+		$('.birthdate input').datepicker({
+			autoclose: true,
+			immediateUpdates: true,
+			format: 'dd/mm/yyyy'
+		});
+
+		$('.birthdate .datepickerbutton').click(function () {
+			$(this).parent().find('input').datepicker('show');
+		});
+
+	})();
+
+</script>
