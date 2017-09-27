@@ -19,12 +19,15 @@ namespace HomeMyDay.ViewModels
 		public string Email { get; set; }
 
 		/// <summary>
-		/// Gets or sets the Passorwd of the user.
+		/// Gets or sets the Password of the user.
 		/// </summary>
 		[Required]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
 
+		/// <summary>
+		/// get and set second password and compare Password of the user.
+		/// </summary>
 		[DataType(DataType.Password)]
 		[Display(Name = "Confirm password")]
 		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
