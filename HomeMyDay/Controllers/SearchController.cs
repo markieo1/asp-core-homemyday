@@ -10,24 +10,26 @@ namespace HomeMyDay.Controllers
 {
 	public class SearchController : Controller
 	{
-		private IHolidayRepository holidayRepo;
+		private readonly IAccommodationRepository _accommodationRepo;
 
-		public SearchController(IHolidayRepository repo)
+		public SearchController(IAccommodationRepository repo)
 		{
-			this.holidayRepo = repo;
+			this._accommodationRepo = repo;
 		}
 
 		[HttpPost]
-		public ViewResult Results(HolidaySearchViewModel search)
+		public ViewResult Results(AccommodationSearchViewModel search)
 		{
-			var searchResultsModel = new HolidaySearchResultsViewModel();
-			//Store the original search parameters
-			searchResultsModel.Search = search;
+			var searchResultsModel = new AccommodationSearchResultsViewModel
+			{
+				//Store the original search parameters
+				Search = search,
 
-			//Perform search
-			searchResultsModel.Holidays = holidayRepo.Search(search.Location, search.StartDate ?? DateTime.Now, search.EndDate ?? DateTime.Now.AddDays(1), search.Persons);
+				//Perform search
+				Accommodations = _accommodationRepo.Search(search.Location, search.StartDate, search.EndDate, search.Persons)
+			};
 
-			if (searchResultsModel.Holidays.Any())
+			if (searchResultsModel.Accommodations.Any())
 			{
 				return View("Results", searchResultsModel);
 			}
@@ -36,6 +38,5 @@ namespace HomeMyDay.Controllers
 				return View("NoResults", searchResultsModel);
 			}
 		}
-
 	}
 }

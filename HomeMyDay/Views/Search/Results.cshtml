@@ -1,4 +1,4 @@
-﻿@model HomeMyDay.ViewModels.HolidaySearchResultsViewModel
+﻿@model HomeMyDay.ViewModels.AccommodationSearchResultsViewModel
 
 @{
     ViewData["Title"] = "Zoekresultaten";
@@ -12,20 +12,20 @@
 
 <div id="search-results">
 
-    @foreach(Holiday holiday in Model.Holidays)
+    @foreach(Accommodation accommodation in Model.Accommodations)
     {
         <div class="search-result">
             <div class="accommodation-preview">
                 <img src="~/images/accommodationplaceholder.jpg" />
                 <div class="accommodation-image-text">
-                    <h2>@holiday.Accommodation.Name</h2>
-                    <p>@holiday.Accommodation.Country, @holiday.Accommodation.Continent</p>
+                    <h2>@accommodation.Name</h2>
+                    <p>@accommodation.Country, @accommodation.Continent</p>
                 </div>
             </div>
             <div class="accommodation-info">
-                <p>@holiday.Accommodation.Description</p>
+                <p>@accommodation.Description</p>
 
-                <p class="price">&euro;@holiday.Price</p>
+                <p class="price">&euro;@accommodation.Price</p>
             </div>
         </div>
     }

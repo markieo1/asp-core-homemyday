@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.ViewModels
 {
-	public class HolidaySearchViewModel
+	public class AccommodationSearchViewModel
 	{
 		/// <summary>
 		/// Gets or sets the available accommodations.
