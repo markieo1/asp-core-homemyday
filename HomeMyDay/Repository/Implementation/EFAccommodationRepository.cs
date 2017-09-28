@@ -74,8 +74,8 @@ namespace HomeMyDay.Repository.Implementation
 
 			var selectQuery = from accommodation in _context.Accommodations
 							  where accommodation.Location == searchLocation
-							  && (amountOfGuests <= accommodation.MaxPersons)
-							  //&& (accommodation.DepartureDate >= departure.Date && accommodation.ReturnDate <= returnDate.Date)
+							  && (amountOfGuests <= accommodation.MaxPersons
+							  && accommodation.NotAvailableDates.Any(x => (x.Date.Date != departure.Date || x.Date != returnDate.Date)))
 							  select accommodation;
 
 			return selectQuery;

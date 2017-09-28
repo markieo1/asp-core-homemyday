@@ -16,7 +16,7 @@ namespace HomeMyDay.Tests
 {
 	public class SearchControllerTest
 	{
-		/*[Fact]
+		[Fact]
 		public void TestEmptySearchAccommodations()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
@@ -51,15 +51,21 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
 
-			context.Holidays.Add(new Holiday()
+			context.Accommodations.Add(new Accommodation()
 			{
-				DepartureDate = new DateTime(2017, 10, 12),
-				ReturnDate = new DateTime(2017, 10, 22),
-				Accommodation = new Models.Accommodation()
+				NotAvailableDates = new List<DateEntity>()
 				{
-					Location = "Amsterdam",
-					MaxPersons = 4
-				}
+					new DateEntity()
+					{
+						Date= new DateTime(2017, 10, 11)
+					},
+					new DateEntity()
+					{
+						Date= new DateTime(2017, 10, 23)
+					},
+				},
+				Location = "Amsterdam",
+				MaxPersons = 4
 			});
 
 			context.SaveChanges();
@@ -86,6 +92,6 @@ namespace HomeMyDay.Tests
 			Assert.NotNull(resultsModel.Search);
 			Assert.Equal(searchModel, resultsModel.Search);
 			Assert.Equal("Results", result.ViewName);
-		}*/
+		}
 	}
 }
