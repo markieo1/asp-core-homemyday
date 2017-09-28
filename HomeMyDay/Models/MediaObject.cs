@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Models
 {
-	public class MediaObject
+	public class MediaObject : BaseModel
 	{
-		/// <summary>
-		/// Gets or sets the identifier.
-		/// </summary>
-		[Key]
-		public long Id { get; set; }
-
 		/// <summary>
 		/// Gets or sets the URL of the media.
 		/// </summary>
@@ -33,5 +27,10 @@ namespace HomeMyDay.Models
 		/// Gets or sets the description.
 		/// </summary>
 		public string Description { get; set; }
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="MediaObject"/> is primary for displayal.
+		/// </summary>
+		public bool Primary { get; set; }
 	}
 }

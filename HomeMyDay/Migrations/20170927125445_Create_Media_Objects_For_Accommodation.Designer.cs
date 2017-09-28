@@ -11,7 +11,7 @@ using System;
 
 namespace HomeMyDay.Migrations
 {
-    [DbContext(typeof(HolidayDbContext))]
+    [DbContext(typeof(HomeMyDayDbContext))]
     [Migration("20170927125445_Create_Media_Objects_For_Accommodation")]
     partial class Create_Media_Objects_For_Accommodation
     {
