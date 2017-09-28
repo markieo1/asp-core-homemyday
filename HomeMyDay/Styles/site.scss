@@ -65,7 +65,7 @@
     }
 }
 
-#process-text > div > #night, #process-text > div > #good {
+#process-text > .the-text > #night, #process-text > .the-text > #good {
     padding-top: 10px;
     border-color: $primary-color;
 
@@ -75,7 +75,7 @@
     }
 }
 
-#process-text > div {
+#process-text > .the-text {
         display: flex;
         vertical-align: middle;
         align-items: center;
