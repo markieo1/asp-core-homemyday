@@ -1,20 +1,28 @@
 ﻿@model HomeMyDay.Models.Booking
 
 <div class="container">
-    <form asp-action="InsuranceForm" method="post">
+    <form id="insurance-form" asp-action="InsuranceForm" method="post">
         <h2>Extra bij te boeken</h2>
 
-        <label asp-for="InsuranceService"></label>
-        <input asp-for="InsuranceService" />
+        <div class="form-group">
+            <input asp-for="InsuranceService" />
+            <label asp-for="InsuranceService"></label>
+        </div>
 
-        <label asp-for="InsuranceExplore"></label>
-        <input asp-for="InsuranceExplore" />
+        <div class="form-group">
+            <input asp-for="InsuranceExplore" />
+            <label asp-for="InsuranceExplore"></label>
+        </div>
 
-        <label asp-for="TransferFromAirport"></label>
-        <input asp-for="TransferFromAirport" />
+        <div class="form-group">
+            <input asp-for="TransferFromAirport" />
+            <label asp-for="TransferFromAirport"></label>
+        </div>
 
-        <label asp-for="TransferToAirport"></label>
-        <input asp-for="TransferToAirport" />
+        <div class="form-group">
+            <input asp-for="TransferToAirport" />
+            <label asp-for="TransferToAirport"></label>
+        </div>
 
         <hr />
 
@@ -22,16 +30,57 @@
 
         <p>Het laatste wat je wilt, is je reis annuleren en niets terug krijgen.</p>
 
-        <label asp-for="InsuranceCancellationBasic"></label>
-        <input asp-for="InsuranceCancellationBasic" />
+        <div class="form-group">
+            <input asp-for="InsuranceCancellationBasic" />
+            <label asp-for="InsuranceCancellationBasic"></label>
+        </div>
 
-        <label asp-for="InsuranceCancellationAllRisk"></label>
-        <input asp-for="InsuranceCancellationAllRisk" />
+        <div class="form-group">
+            <input asp-for="InsuranceCancellationAllRisk" />
+            <label asp-for="InsuranceCancellationAllRisk"></label>
+        </div>
 
         <hr />
 
-        <h2>Reisverzekering: <a target="_blank" asp-controller="Booking" asp-action="InsuranceTerms">Voorwaarde</a></h2>
+        <h2>Reisverzekering <a target="_blank" asp-controller="Booking" asp-action="InsuranceTerms">(voorwaarden)</a></h2>
 
-        <input name="travelinsurance_type" type="radio" value="" />
+        @foreach (string type in Enum.GetNames(typeof(InsuranceType)))
+        {
+            <div class="form-group">
+                <input name="travelinsurance_type" type="radio" value="@type" />
+                <label>@type</label>
+            </div>
+        }
+
+        <hr />
+
+        <div id="insurance-prices">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Voor:</th>
+                        <th>Prijs</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Poliskosten</td>
+                        <td>&euro;...</td>
+                    </tr>
+                    <tr>
+                        <td>Assurantiebelasting</td>
+                        <td>&euro;...</td>
+                    </tr>
+                    <tr>
+                        <td>Boekingskosten</td>
+                        <td>&euro;...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Naar bevestiging" />
+        </div>
     </form>
 </div>

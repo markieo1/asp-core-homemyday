@@ -51,11 +51,13 @@ namespace HomeMyDay.Models
 		/// <summary>
 		/// Whether the user has chosen for the basic cancellation insurance.
 		/// </summary>
+		[DisplayName("Basisverzekering Annuleren")]
 		public bool InsuranceCancellationBasic { get; set; }
 
 		/// <summary>
 		/// Whether the user has chosen for the all-risk cancellation insurance.
 		/// </summary>
+		[DisplayName("All Risk Annuleren")]
 		public bool InsuranceCancellationAllRisk { get; set; }
 
 		/// <summary>

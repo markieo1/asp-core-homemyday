@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.ViewModels;
 using HomeMyDay.Repository;
 using HomeMyDay.Models;
+using HomeMyDay.Extensions;
 
 namespace HomeMyDay.Controllers
 {
@@ -51,10 +52,12 @@ namespace HomeMyDay.Controllers
 			else
 			{
 				//Store model in TempData
-				TempData["booking"] = new Booking() {
+				TempData.Put("booking", new Booking() {
 					Accommodation = formData.Accommodation,
-					Persons = formData.Persons,			
-				};
+					Persons = formData.Persons,
+				});
+
+				Console.WriteLine("Redirecting to InsuranceForm");
 
 				return RedirectToAction("InsuranceForm");
 			}
@@ -64,7 +67,17 @@ namespace HomeMyDay.Controllers
 		public IActionResult InsuranceForm()
 		{
 			//Retrieve booking from TempData
-			Booking booking = (Booking)TempData["booking"];
+			//Booking booking = TempData.Get<Booking>("booking");
+
+			//TODO: remove empty booking for testing
+			Booking booking = new Booking() {
+				Accommodation = repository.GetAccommodation(1),
+				Persons = new List<BookingPerson>() {
+					new BookingPerson(),
+					new BookingPerson()
+				}
+			};
+
 			if(booking == null)
 			{
 				return RedirectToAction("Error", "Home");
