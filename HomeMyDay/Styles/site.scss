@@ -6,6 +6,10 @@
     margin-top: 80px;
 }
 
+.mtop52{
+    margin-top: 52px;
+}
+
 .mbot80 {
     margin-bottom: 80px;
 }
@@ -27,7 +31,9 @@
     padding: 45px;
 }
 
-
+.p-b-20{
+    padding-bottom: 20px;
+}
 
 .container-about {
     padding-bottom: 30px;
@@ -56,17 +62,4 @@
         border: 2px solid $theprocess-line-color;
         border-radius: 2px;
     }
-}
-
-#process-text > .col-md-5 > #night, #process-text > .col-md-5 > #good {
-    height: 200px;
-    padding-top: 10px;
-    margin-bottom: -35px;
-    border-color:$primary-color;
-}
-
-#process-text > .col-md-5 {
-    display: flex;
-    vertical-align: middle;
-    align-items: center;
 }

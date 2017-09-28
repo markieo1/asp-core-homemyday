@@ -1,5 +1,6 @@
 ﻿using HomeMyDay.Database;
 using HomeMyDay.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,10 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Accommodation accommodation = Accommodations.FirstOrDefault(a => a.Id == id);
+			Accommodation accommodation = _context.Accommodations
+				.Include(nameof(Accommodation.MediaObjects))
+				.FirstOrDefault(a => a.Id == id);
+
 			if (accommodation == null)
 			{
 				throw new KeyNotFoundException($"Accommodation with ID: {id} is not found");

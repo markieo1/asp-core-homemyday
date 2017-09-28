@@ -32,5 +32,10 @@ namespace HomeMyDay.Database
 		/// The Accommodations that have been saved.
 		/// </summary>
 		public DbSet<Accommodation> Accommodations { get; set; }
+
+		/// <summary>
+		/// Gets or sets the media objects.
+		/// </summary>
+		public DbSet<MediaObject> MediaObjects { get; set; }
 	}
 }
