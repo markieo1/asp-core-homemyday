@@ -51,9 +51,8 @@ namespace HomeMyDay.Controllers
 			}
 			else
 			{
-				//Store model in TempData
-				TempData.Put("booking", new Booking()
-				{
+				//Store model in Session
+				HttpContext.Session.Set("booking", new Booking() {
 					Accommodation = formData.Accommodation,
 					Persons = formData.Persons,
 				});
@@ -65,24 +64,55 @@ namespace HomeMyDay.Controllers
 		[HttpGet]
 		public IActionResult InsuranceForm()
 		{
-			//Retrieve booking from TempData
-			//Booking booking = TempData.Get<Booking>("booking");
+			//Retrieve booking from Session
+			InsuranceFormViewModel formModel = new InsuranceFormViewModel();
 
 			//TODO: remove empty booking for testing
+			/*
 			Booking booking = new Booking() {
-				Accommodation = repository.GetAccommodation(1),
+				Accommodation = repository.GetAccommodation(7),
 				Persons = new List<BookingPerson>() {
 					new BookingPerson(),
 					new BookingPerson()
 				}
 			};
+			*/
 
-			if(booking == null)
+			return View(formModel);
+		}
+
+		[HttpPost]
+		public IActionResult InsuranceForm(InsuranceFormViewModel formModel)
+		{
+			if(!ModelState.IsValid)
 			{
-				return RedirectToAction("Error", "Home");
+				return View();
 			}
+			else
+			{
+				Booking booking = HttpContext.Session.Get<Booking>("booking");
 
-			return View(booking);
+				booking.InsuranceCancellationBasic = formModel.InsuranceCancellationBasic;
+				booking.InsuranceCancellationAllRisk = formModel.InsuranceCancellationAllRisk;
+				booking.InsuranceService = formModel.InsuranceService;
+				booking.InsuranceExplore = formModel.InsuranceExplore;
+				booking.InsuranceType = formModel.InsuranceType;
+				booking.TransferFromAirport = formModel.TransferFromAirport;
+				booking.TransferToAirport = formModel.TransferToAirport;
+
+				HttpContext.Session.Set("booking", booking);
+
+				return RedirectToAction("Confirmation");
+			}
+		}
+
+		[HttpGet]
+		public IActionResult Confirmation()
+		{
+			//Retrieve booking from TempData
+			Booking booking = HttpContext.Session.Get<Booking>("booking");
+
+			return View();
 		}
     }
 }

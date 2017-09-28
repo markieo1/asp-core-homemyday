@@ -1,4 +1,4 @@
-﻿@model HomeMyDay.Models.Booking
+﻿@model HomeMyDay.ViewModels.InsuranceFormViewModel
 
 <div class="container">
     <form id="insurance-form" asp-action="InsuranceForm" method="post">
@@ -82,5 +82,17 @@
         <div class="form-group">
             <input type="submit" value="Naar bevestiging" />
         </div>
+
+        @* Generate hidden form fields from previous step
+
+        @for(int i = 0; i < Model.Persons.Count; i++)
+        {
+            @foreach (var prop in Model.Persons[i].GetType().GetProperties())
+            {
+                <input type="hidden" asp-for="@Model.Persons[i].GetType().GetProperty(prop.Name)" />
+            }
+        }
+        *@
+
     </form>
 </div>
