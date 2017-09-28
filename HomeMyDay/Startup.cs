@@ -75,7 +75,6 @@ namespace HomeMyDay
 			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
 
 			services.AddTransient<IEmailServices, EmailServices>();
-			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
 
 			services.AddMvc();

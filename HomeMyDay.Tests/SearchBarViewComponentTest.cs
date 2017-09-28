@@ -25,7 +25,7 @@ namespace HomeMyDay.Tests
 
 			SearchBarViewComponent target = new SearchBarViewComponent(repository);
 
-			HolidaySearchViewModel results = (HolidaySearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
+			AccommodationSearchViewModel results = (AccommodationSearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 
 			Assert.NotNull(results);
 			Assert.Empty(results.Accommodations);
@@ -56,7 +56,7 @@ namespace HomeMyDay.Tests
 
 			SearchBarViewComponent target = new SearchBarViewComponent(repository);
 
-			HolidaySearchViewModel results = (HolidaySearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
+			AccommodationSearchViewModel results = (AccommodationSearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 
 			Assert.NotNull(results);
 			Assert.NotEmpty(results.Accommodations);

@@ -37,5 +37,48 @@ namespace HomeMyDay.Repository.Implementation
 
 			return accommodation;
 		}
+
+		public IEnumerable<Accommodation> GetRecommendedAccommodations()
+		{
+			return Accommodations.Where(m => m.Recommended == true);
+		}
+
+		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
+		{
+			if (string.IsNullOrWhiteSpace(location))
+			{
+				throw new ArgumentNullException(nameof(location));
+			}
+
+			if (departure == default(DateTime))
+			{
+				throw new ArgumentOutOfRangeException(nameof(departure));
+			}
+
+			if (returnDate == default(DateTime))
+			{
+				throw new ArgumentOutOfRangeException(nameof(returnDate));
+			}
+
+			if (amountOfGuests <= 0)
+			{
+				throw new ArgumentNullException(nameof(amountOfGuests));
+			}
+
+			if (returnDate.Date <= departure.Date)
+			{
+				throw new ArgumentOutOfRangeException(nameof(returnDate));
+			}
+
+			string searchLocation = location.Trim();
+
+			var selectQuery = from accommodation in _context.Accommodations
+							  where accommodation.Location == searchLocation
+							  && (amountOfGuests <= accommodation.MaxPersons)
+							  //&& (accommodation.DepartureDate >= departure.Date && accommodation.ReturnDate <= returnDate.Date)
+							  select accommodation;
+
+			return selectQuery;
+		}
 	}
 }

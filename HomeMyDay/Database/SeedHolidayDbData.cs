@@ -6,10 +6,11 @@ using HomeMyDay.Models;
 
 namespace HomeMyDay.Database
 {
-    public static class SeedHolidayDbData
-    {
+	public static class SeedHolidayDbData
+	{
 		public static void Seed(HolidayDbContext context)
 		{
+			/*
 			if(context.Holidays.Any())
 			{
 				return;
@@ -70,6 +71,7 @@ namespace HomeMyDay.Database
 			});
 
 			context.SaveChanges();
+		}*/
 		}
-    }
+	}
 }
