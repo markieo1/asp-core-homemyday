@@ -26,7 +26,7 @@ namespace HomeMyDay.Controllers
 				Search = search,
 
 				//Perform search
-				Accommodations = _accommodationRepo.Search(search.Location, search.StartDate, search.EndDate, search.Persons)
+				Accommodations = _accommodationRepo.Search(search.Location, search.StartDate ?? DateTime.Now, search.EndDate ?? DateTime.Now.AddDays(1), search.Persons)
 			};
 
 			if (searchResultsModel.Accommodations.Any())

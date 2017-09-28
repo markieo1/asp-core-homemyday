@@ -32,7 +32,7 @@ namespace HomeMyDay.ViewModels
 		[Required]
 		[DataType(DataType.Date)]
 		[DisplayFormat(DataFormatString = "dd/MM/yyyy")]
-		public DateTime StartDate { get; set; }
+		public DateTime? StartDate { get; set; }
 
 		/// <summary>
 		/// The end date of the search range.
@@ -40,7 +40,7 @@ namespace HomeMyDay.ViewModels
 		[Required]
 		[DataType(DataType.Date)]
 		[DisplayFormat(DataFormatString = "dd/MM/yyyy")]
-		public DateTime EndDate { get; set; }
+		public DateTime? EndDate { get; set; }
 
 		/// <summary>
 		/// The amount of people that the Accommodation should support.

@@ -8,21 +8,15 @@
 
 <h1>Zoekresultaten</h1>
 
-<div id="search-terms">
-    <div class="location">
-
-    </div>
-    <div class="date">
-
-    </div>
-    <div class="persons">
-
+<div class="container">
+    <div class="row">
+        @await Component.InvokeAsync("SearchBar", Model.Search)
     </div>
 </div>
 
 <div id="search-results">
 
-    @foreach(Accommodation accommodation in Model.Accommodations)
+    @foreach (Accommodation accommodation in Model.Accommodations)
     {
         <div class="search-result">
             <div class="accommodation-preview">
