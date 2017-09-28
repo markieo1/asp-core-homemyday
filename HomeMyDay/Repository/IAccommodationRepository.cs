@@ -22,5 +22,21 @@ namespace HomeMyDay.Repository
 		/// <exception cref="ArgumentOutOfRangeException">id</exception>
 		/// <exception cref="KeyNotFoundException"></exception>
 		Accommodation GetAccommodation(long id);
+
+		/// <summary>
+		/// Get all recommended accommodations from repository
+		/// </summary>
+		/// <returns></returns>
+		IEnumerable<Accommodation> GetRecommendedAccommodations();
+
+		/// <summary>
+		/// Searches possible accommodations for the specified parameters.
+		/// </summary>
+		/// <param name="location">The location.</param>
+		/// <param name="departure">The departure date.</param>
+		/// <param name="returnDate">The return date.</param>
+		/// <param name="amountOfGuests">The amount of guests.</param>
+		/// <returns>IEnumerable containing all search results</returns>
+		IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests);
 	}
 }
