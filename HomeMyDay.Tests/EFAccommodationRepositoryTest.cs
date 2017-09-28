@@ -469,7 +469,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestSearchAcccommodationWithoutNotAvailbleDates()
+		public void TestSearchAcccommodationWithoutNotAvailableDates()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
