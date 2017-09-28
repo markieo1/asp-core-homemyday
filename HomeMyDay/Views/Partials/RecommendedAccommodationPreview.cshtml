@@ -1,18 +1,19 @@
 ﻿@model Accommodation
 
 <div class="col-sm-3">
-    <div class="thumbnail">
-        @{  MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
+    <a asp-controller="Accommodation" asp-action="Detail" asp-route-id="@Model.Id">
+        <div class="thumbnail">
+            @{  MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
 
-            if (primaryObject != null && primaryObject.Type == MediaType.Image)
+                if (primaryObject != null && primaryObject.Type == MediaType.Image)
+                {
+                    <img src="@primaryObject.Url" alt="@primaryObject.Description">}
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Description))
             {
-                <img src="@primaryObject.Url" alt="@primaryObject.Description">}
-        }
-        @if (!string.IsNullOrWhiteSpace(Model.Description))
-        {
-            <div class="caption">
-                <p>@Model.Description</p>
-            </div>
-        }
-    </div>
+                <div class="caption">
+                    <p>@Model.Description</p>
+                </div>}
+        </div>
+    </a>
 </div>
