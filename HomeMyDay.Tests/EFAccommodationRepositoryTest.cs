@@ -467,5 +467,27 @@ namespace HomeMyDay.Tests
 
 			Assert.NotEmpty(searchResults);
 		}
+
+		[Fact]
+		public void TestSearchAcccommodationWithoutNotAvailbleDates()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.Add(new Accommodation()
+			{
+				Location = "Amsterdam",
+				MaxPersons = 4
+			});
+
+			context.SaveChanges();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			IEnumerable<Accommodation> searchResults = repository.Search("Amsterdam", new DateTime(2017, 10, 11), new DateTime(2017, 10, 23), 4);
+
+			Assert.NotEmpty(searchResults);
+		}
 	}
 }
