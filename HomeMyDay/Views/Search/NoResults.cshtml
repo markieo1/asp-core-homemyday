@@ -9,6 +9,10 @@
 
 <h1>Zoekresultaten</h1>
 
-@await Component.InvokeAsync("SearchBar", Model.Search)
+<div class="container">
+    <div class="row">
+        @await Component.InvokeAsync("SearchBar", Model.Search)
+    </div>
+</div>
 
 <p>Uw zoekopdracht heeft geen resultaten opgeleverd.</p>
