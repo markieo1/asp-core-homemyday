@@ -23,7 +23,7 @@ namespace HomeMyDay.Components
 		{
 			IEnumerable<Accommodation> accommodations = _accommodationRepository.Accommodations;
 
-			HolidaySearchViewModel viewModel = new HolidaySearchViewModel
+			AccommodationSearchViewModel viewModel = new AccommodationSearchViewModel
 			{
 				Accommodations = accommodations
 			};

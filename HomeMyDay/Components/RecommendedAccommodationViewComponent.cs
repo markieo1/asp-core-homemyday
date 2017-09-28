@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Components
 {
-    public class RecommendedHolidayViewComponent : ViewComponent
+    public class RecommendedAccommodationViewComponent : ViewComponent
     {
-        private IHolidayRepository repository;
+        private IAccommodationRepository repository;
 
-        public RecommendedHolidayViewComponent(IHolidayRepository repository)
+        public RecommendedAccommodationViewComponent(IAccommodationRepository repository)
         {
             this.repository = repository;
         }
 
         public IViewComponentResult Invoke()
         {
-            var model = repository.GetRecommendedHolidays();
+            var model = repository.GetRecommendedAccommodations();
 
             return View(model);
         }

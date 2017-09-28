@@ -11,7 +11,7 @@ using System;
 
 namespace HomeMyDay.Migrations
 {
-    [DbContext(typeof(HolidayDbContext))]
+    [DbContext(typeof(HomeMyDayDbContext))]
     partial class HolidayDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace HomeMyDay.Migrations
 
             modelBuilder.Entity("HomeMyDay.Models.Accommodation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Beds");
@@ -40,6 +40,10 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<decimal>("Price");
+
+                    b.Property<bool>("Recommended");
+
                     b.Property<int?>("Rooms");
 
                     b.HasKey("Id");
@@ -49,10 +53,10 @@ namespace HomeMyDay.Migrations
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AccommodationId");
+                    b.Property<long?>("AccommodationId");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -67,32 +71,20 @@ namespace HomeMyDay.Migrations
                     b.ToTable("Bookings");
                 });
 
-            modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
+            modelBuilder.Entity("HomeMyDay.Models.DateEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AccommodationId");
+                    b.Property<long?>("AccommodationId");
 
-                    b.Property<string>("Category");
-
-                    b.Property<DateTime>("DepartureDate");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Image");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<bool>("Recommended");
-
-                    b.Property<DateTime>("ReturnDate");
+                    b.Property<DateTime>("Date");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccommodationId");
 
-                    b.ToTable("Holidays");
+                    b.ToTable("DateEntity");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.MediaObject", b =>
@@ -100,9 +92,11 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AccommodationId");
+                    b.Property<long?>("AccommodationId");
 
                     b.Property<string>("Description");
+
+                    b.Property<bool>("Primary");
 
                     b.Property<string>("Title");
 
@@ -124,10 +118,10 @@ namespace HomeMyDay.Migrations
                         .HasForeignKey("AccommodationId");
                 });
 
-            modelBuilder.Entity("HomeMyDay.Models.Holiday", b =>
+            modelBuilder.Entity("HomeMyDay.Models.DateEntity", b =>
                 {
-                    b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
-                        .WithMany()
+                    b.HasOne("HomeMyDay.Models.Accommodation")
+                        .WithMany("NotAvailableDates")
                         .HasForeignKey("AccommodationId");
                 });
 

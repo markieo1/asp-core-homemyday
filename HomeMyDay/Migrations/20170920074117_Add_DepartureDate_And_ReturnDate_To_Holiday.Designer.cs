@@ -10,7 +10,7 @@ using System;
 
 namespace HomeMyDay.Migrations
 {
-    [DbContext(typeof(HolidayDbContext))]
+    [DbContext(typeof(HomeMyDayDbContext))]
     [Migration("20170920074117_Add_DepartureDate_And_ReturnDate_To_Holiday")]
     partial class Add_DepartureDate_And_ReturnDate_To_Holiday
     {
