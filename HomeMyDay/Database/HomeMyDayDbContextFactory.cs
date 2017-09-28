@@ -5,9 +5,9 @@ using System;
 
 namespace HomeMyDay.Database
 {
-	public class HolidayDbContextFactory : IDesignTimeDbContextFactory<HolidayDbContext>
+	public class HomeMyDayDbContextFactory : IDesignTimeDbContextFactory<HomeMyDayDbContext>
 	{
-		public HolidayDbContext CreateDbContext(string[] args)
+		public HomeMyDayDbContext CreateDbContext(string[] args)
 		{
 			string basePath = AppContext.BaseDirectory;
 
@@ -21,11 +21,11 @@ namespace HomeMyDay.Database
 
 			IConfiguration config = builder.Build();
 
-			DbContextOptionsBuilder<HolidayDbContext> optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			DbContextOptionsBuilder<HomeMyDayDbContext> optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 
-			optionsBuilder.UseSqlServer(config.GetConnectionString("HolidayConnection"));
+			optionsBuilder.UseSqlServer(config.GetConnectionString("HomeMyDayConnection"));
 
-			return new HolidayDbContext(optionsBuilder.Options);
+			return new HomeMyDayDbContext(optionsBuilder.Options);
 		}
 	}
 }

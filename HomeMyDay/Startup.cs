@@ -27,11 +27,11 @@ namespace HomeMyDay
 		public void ConfigureServices(IServiceCollection services)
 		{
 			//Add entity framework.
-			services.AddDbContext<HolidayDbContext>(options =>
+			services.AddDbContext<HomeMyDayDbContext>(options =>
 			{
 
 				//This connection string can be changed in appsettings.json.
-				options.UseSqlServer(Configuration.GetConnectionString("HolidayConnection"));
+				options.UseSqlServer(Configuration.GetConnectionString("HomeMyDayConnection"));
 
 			});
 
@@ -75,14 +75,13 @@ namespace HomeMyDay
 			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
 
 			services.AddTransient<IEmailServices, EmailServices>();
-			services.AddTransient<IHolidayRepository, EFHolidayRepository>();
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
 
 			services.AddMvc();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, HolidayDbContext dbContext)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, HomeMyDayDbContext dbContext)
 		{
 			if (env.IsDevelopment())
 			{
