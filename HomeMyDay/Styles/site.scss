@@ -6,6 +6,10 @@
     margin-top: 80px;
 }
 
+.mtop52{
+    margin-top: 52px;
+}
+
 .mbot80 {
     margin-bottom: 80px;
 }
@@ -75,4 +79,8 @@
         border: 2px solid $theprocess-line-color;
         border-radius: 2px;
     }
+}
+
+.icon-color{
+    color: $icon-color;
 }
