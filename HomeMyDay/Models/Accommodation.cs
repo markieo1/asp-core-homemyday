@@ -9,6 +9,12 @@ namespace HomeMyDay.Models
 {
 	public class Accommodation : BaseModel
 	{
+		public Accommodation()
+		{
+			MediaObjects = new List<MediaObject>();
+			NotAvailableDates = new List<DateEntity>();
+		}
+
 		/// <summary>
 		/// The user-friendly name of the accommodation.
 		/// </summary>

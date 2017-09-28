@@ -40,7 +40,7 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> GetRecommendedAccommodations()
 		{
-			return Accommodations.Where(m => m.Recommended == true);
+			return _context.Accommodations.Include(nameof(Accommodation.MediaObjects)).Where(m => m.Recommended == true);
 		}
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
