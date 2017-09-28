@@ -1,7 +1,37 @@
-﻿<div class="container">
+﻿@model HomeMyDay.Models.Booking
+
+<div class="container">
     <form asp-action="InsuranceForm" method="post">
         <h2>Extra bij te boeken</h2>
 
+        <label asp-for="InsuranceService"></label>
+        <input asp-for="InsuranceService" />
 
+        <label asp-for="InsuranceExplore"></label>
+        <input asp-for="InsuranceExplore" />
+
+        <label asp-for="TransferFromAirport"></label>
+        <input asp-for="TransferFromAirport" />
+
+        <label asp-for="TransferToAirport"></label>
+        <input asp-for="TransferToAirport" />
+
+        <hr />
+
+        <h2>Verzekering</h2>
+
+        <p>Het laatste wat je wilt, is je reis annuleren en niets terug krijgen.</p>
+
+        <label asp-for="InsuranceCancellationBasic"></label>
+        <input asp-for="InsuranceCancellationBasic" />
+
+        <label asp-for="InsuranceCancellationAllRisk"></label>
+        <input asp-for="InsuranceCancellationAllRisk" />
+
+        <hr />
+
+        <h2>Reisverzekering: <a target="_blank" asp-controller="Booking" asp-action="InsuranceTerms">Voorwaarde</a></h2>
+
+        <input name="travelinsurance_type" type="radio" value="" />
     </form>
 </div>
