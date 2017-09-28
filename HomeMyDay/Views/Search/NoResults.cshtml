@@ -9,6 +9,6 @@
 
 <h1>Zoekresultaten</h1>
 
-@Html.Partial("../Partials/SearchTerms.cshtml")
+@await Component.InvokeAsync("SearchBar", Model.Search)
 
 <p>Uw zoekopdracht heeft geen resultaten opgeleverd.</p>

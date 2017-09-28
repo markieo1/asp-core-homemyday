@@ -8,7 +8,7 @@
 
 <h1>Zoekresultaten</h1>
 
-@Html.Partial("../Partials/SearchTerms.cshtml")
+@await Component.InvokeAsync("SearchBar", Model.Search)
 
 <div id="search-results">
 

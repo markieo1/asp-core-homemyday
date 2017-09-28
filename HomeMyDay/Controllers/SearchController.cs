@@ -25,7 +25,7 @@ namespace HomeMyDay.Controllers
 			searchResultsModel.Search = search;
 
 			//Perform search
-			searchResultsModel.Holidays = holidayRepo.Search(search.Location, search.StartDate, search.EndDate, search.Persons);
+			searchResultsModel.Holidays = holidayRepo.Search(search.Location, search.StartDate ?? DateTime.Now, search.EndDate ?? DateTime.Now.AddDays(1), search.Persons);
 
 			if (searchResultsModel.Holidays.Any())
 			{
@@ -36,5 +36,6 @@ namespace HomeMyDay.Controllers
 				return View("NoResults", searchResultsModel);
 			}
 		}
+
 	}
 }
