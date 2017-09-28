@@ -117,7 +117,22 @@
     color: $icon-color;
 }
 
-.width-120 {
+.newspaper {
+    margin-bottom: 150px;
+
+
+    @include for-phone-only {
+        strong {
+            font-size: 10px;
+        }
+    }
+
+    @include for-desktop-up {
+        margin-bottom: 30px;
+    }
+}
+
+.newspaper-label {
     width: 120px;
     z-index: 2;
     margin-top: -20px;
