@@ -1,6 +1,7 @@
 ﻿@import 'footer';
 @import 'navbar';
 @import 'colors';
+@import '_mixins';
 
 .mtop80 {
     margin-top: 80px;
@@ -63,3 +64,19 @@
         border-radius: 2px;
     }
 }
+
+#process-text > .col-md-5 > #night, #process-text > .col-md-5 > #good {
+    padding-top: 10px;
+    border-color: $primary-color;
+
+    @include for-desktop-up {
+        height: 220px;
+        margin-bottom: -35px;
+    }
+}
+
+#process-text > .col-md-5 {
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+    }
