@@ -12,18 +12,18 @@ namespace HomeMyDay.Components
 {
 	public class SearchBarViewComponent : ViewComponent
 	{
-		private readonly IHolidayRepository _holidayRepository;
+		private readonly IAccommodationRepository _accommodationRepository;
 
-		public SearchBarViewComponent(IHolidayRepository repository)
+		public SearchBarViewComponent(IAccommodationRepository repository)
 		{
-			_holidayRepository = repository;
+			_accommodationRepository = repository;
 		}
 
 		public IViewComponentResult Invoke()
 		{
-			IEnumerable<Accommodation> accommodations = _holidayRepository.Accommodations;
+			IEnumerable<Accommodation> accommodations = _accommodationRepository.Accommodations;
 
-			HolidaySearchViewModel viewModel = new HolidaySearchViewModel
+			AccommodationSearchViewModel viewModel = new AccommodationSearchViewModel
 			{
 				Accommodations = accommodations
 			};

@@ -1,0 +1,20 @@
+﻿@import '_mixins';
+
+.carousel .item img, .video, video {
+    margin: auto;
+
+    @include for-phone-only {
+        height: 200px;
+        max-height: 200px;
+    }
+
+    @include for-tablet-up {
+        height: 300px;
+        max-height: 300px;
+    }
+
+    @include for-desktop-up {
+        height: 400px;
+        max-height: 400px;
+    }
+}

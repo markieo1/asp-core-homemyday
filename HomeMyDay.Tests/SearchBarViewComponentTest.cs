@@ -18,14 +18,14 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestEmptySearchAccommodations()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			SearchBarViewComponent target = new SearchBarViewComponent(repository);
 
-			HolidaySearchViewModel results = (HolidaySearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
+			AccommodationSearchViewModel results = (AccommodationSearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 
 			Assert.NotNull(results);
 			Assert.Empty(results.Accommodations);
@@ -34,9 +34,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestFilledSearchAccommodations()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -52,11 +52,11 @@ namespace HomeMyDay.Tests
 
 			context.SaveChanges();
 
-			IHolidayRepository repository = new EFHolidayRepository(context);
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			SearchBarViewComponent target = new SearchBarViewComponent(repository);
 
-			HolidaySearchViewModel results = (HolidaySearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
+			AccommodationSearchViewModel results = (AccommodationSearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 
 			Assert.NotNull(results);
 			Assert.NotEmpty(results.Accommodations);

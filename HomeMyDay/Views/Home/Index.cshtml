@@ -14,7 +14,7 @@
 
 <div class="container">
     <div class="row">
-        @await Component.InvokeAsync("RecommendedHoliday")
+        @await Component.InvokeAsync("RecommendedAccommodation")
     </div>
 </div>
 
@@ -27,3 +27,5 @@
         @Html.Partial("../Partials/TheProcess.cshtml")
     </div>
 </div>
+
+@await Component.InvokeAsync("PopupLogin")
