@@ -3,6 +3,11 @@
 @import 'colors';
 @import '_mixins';
 
+html,
+body {
+    height: 100%;
+}
+
 .mtop80 {
     margin-top: 80px;
 }
@@ -38,6 +43,10 @@
 
 .container-about {
     padding-bottom: 30px;
+    min-height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .row.search-bar {
