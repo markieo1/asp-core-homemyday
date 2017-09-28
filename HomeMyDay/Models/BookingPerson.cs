@@ -8,14 +8,8 @@ using System.Web;
 
 namespace HomeMyDay.Models
 {
-    public class BookingPerson
+    public class BookingPerson : BaseModel
     {
-		/// <summary>
-		/// The ID of the Person. Database-generated.
-		/// </summary>
-		[Key]
-		public int Id { get; set; }
-
 		/// <summary>
 		/// Whether this person is the owner of the booking.
 		/// </summary>

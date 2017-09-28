@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Models
 {
-    public class Country
+    public class Country : BaseModel
     {
-		/// <summary>
-		/// The primary key of this table.
-		/// </summary>
-		[Key]
-		public int GeoId { get; set; }
-
 		/// <summary>
 		/// The country code of the country. (USA, etc.)
 		/// </summary>

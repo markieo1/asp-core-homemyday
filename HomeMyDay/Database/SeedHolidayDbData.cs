@@ -75,7 +75,7 @@ namespace HomeMyDay.Database
 			}
 
 			//Deduplicate list
-			countries = countries.GroupBy(c => c.GeoId)
+			countries = countries.GroupBy(c => c.CountryCode)
 				.Select(i => i.First())
 				.ToList();
 

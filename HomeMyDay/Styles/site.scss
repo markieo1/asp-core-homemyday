@@ -43,6 +43,10 @@
     padding-top: 20px;
 }
 
+table, td, th {
+    padding: 3px;
+}
+
 #theprocess {
     display: flex;
     justify-content: space-between;

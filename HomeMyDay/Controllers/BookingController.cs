@@ -52,12 +52,11 @@ namespace HomeMyDay.Controllers
 			else
 			{
 				//Store model in TempData
-				TempData.Put("booking", new Booking() {
+				TempData.Put("booking", new Booking()
+				{
 					Accommodation = formData.Accommodation,
 					Persons = formData.Persons,
 				});
-
-				Console.WriteLine("Redirecting to InsuranceForm");
 
 				return RedirectToAction("InsuranceForm");
 			}
