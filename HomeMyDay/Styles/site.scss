@@ -1,6 +1,7 @@
 ﻿@import 'footer';
 @import 'navbar';
 @import 'colors';
+@import '_mixins';
 
 .mtop80 {
     margin-top: 80px;
@@ -31,8 +32,25 @@
     padding: 45px;
 }
 
-.p-b-20{
-    padding-bottom: 20px;
+.header-image {
+    width: 100%;
+    height: 140px;
+
+    @include for-desktop-up {
+        height: 420px;
+    }
+}
+
+.m-b-25 {
+    margin-bottom: 25px;
+}
+
+.f-s-17 {
+    font-size: 17px;
+}
+
+.f-s-20 {
+    font-size: 20px;
 }
 
 .container-about {
@@ -47,7 +65,7 @@ table, td, th {
     padding: 3px;
 }
 
-#theprocess {
+#theprocess > .process-visual {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -66,6 +84,22 @@ table, td, th {
         border: 2px solid $theprocess-line-color;
         border-radius: 2px;
     }
+}
+
+#process-text > .the-text > #night, #process-text > .the-text > #good {
+    padding-top: 10px;
+    border-color: $primary-color;
+
+    @include for-desktop-up {
+        height: 240px;
+        margin-bottom: -35px;
+    }
+}
+
+#process-text > .the-text {
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
 }
 
 .form-input-group {
