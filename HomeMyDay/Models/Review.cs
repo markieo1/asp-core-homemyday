@@ -12,6 +12,11 @@ namespace HomeMyDay.Models
         public int Id { get; set; }
 
         /// <summary>
+		/// The accommodation where the customer is staying.
+		/// </summary>
+		public Accommodation Accommodation { get; set; }
+
+        /// <summary>
         /// The Name of the user who filled in the form
         /// </summary>
         public string Title { get; set; }

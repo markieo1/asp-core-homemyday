@@ -28,7 +28,6 @@ namespace HomeMyDay.Database
 		/// Gets or sets the media objects.
 		/// </summary>
 		public DbSet<MediaObject> MediaObjects { get; set; }
-	}
 
         /// <summary>
         /// The Reviews that have been saved.

@@ -116,6 +116,8 @@ namespace HomeMyDay.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<long?>("AccommodationId");
+
                     b.Property<DateTime>("Date");
 
                     b.Property<string>("Name");
@@ -125,6 +127,8 @@ namespace HomeMyDay.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccommodationId");
 
                     b.ToTable("Reviews");
                 });
@@ -147,6 +151,13 @@ namespace HomeMyDay.Migrations
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation")
                         .WithMany("MediaObjects")
+                        .HasForeignKey("AccommodationId");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.Review", b =>
+                {
+                    b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
+                        .WithMany()
                         .HasForeignKey("AccommodationId");
                 });
 #pragma warning restore 612, 618

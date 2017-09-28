@@ -10,9 +10,9 @@ namespace HomeMyDay.Controllers
 {
     public class ReviewController : Controller
     {
-        private readonly IHolidayRepository _repository ;
+        private readonly IAccommodationRepository _repository ;
 
-        public ReviewController(IHolidayRepository repo)
+        public ReviewController(IAccommodationRepository repo)
         {
             _repository = repo;           
         }

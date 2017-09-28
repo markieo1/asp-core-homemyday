@@ -6,7 +6,7 @@ namespace HomeMyDay.Database
 {
     public class SeedReviewDbData
     {
-        public static void Seed(HolidayDbContext context)
+        public static void Seed(HomeMyDayDbContext context)
         {
             if (context.Reviews.Any())
             {
@@ -15,7 +15,7 @@ namespace HomeMyDay.Database
 
             context.Reviews.Add(new Review()
             {
-                Title = "Review 1",
+                Title = "Review 1",                
                 Name = "Pieter B.",
                 Date = new DateTime(2017, 9, 23),
                 Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis mi vestibulum, finibus leo nec, iaculis ante. Aenean maximus dui in dolor finibus iaculis. Ut nisl risus, ultricies sit amet pretium eu, iaculis vel diam. Ut quis sollicitudin lorem. Nullam fermentum iaculis elit et aliquet. Fusce elementum aliquet nunc ut lacinia. Donec aliquam consectetur vehicula. Curabitur porttitor justo neque, at consequat augue fringilla id. In viverra interdum massa eu sodales. Morbi bibendum feugiat quam, sit amet euismod velit posuere nec. Ut eu urna est. Morbi felis erat, congue a magna eget, facilisis ultrices justo."
