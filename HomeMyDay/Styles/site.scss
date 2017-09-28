@@ -1,6 +1,7 @@
 ﻿@import 'footer';
 @import 'navbar';
 @import 'colors';
+@import '_mixins.scss';
 
 .mtop80 {
     margin-top: 80px;
@@ -32,8 +33,20 @@
 }
 
 .header-image {
-    width: 100%;
-    height: 400px;
+    @include for-desktop-up {
+        width: 100%;
+        height: 400px;
+    }
+
+    @include for-phone-only {
+        width: 100%;
+        height: 150px;
+    }
+
+    @include for-tablet-up {
+        width: 100%;
+        height: 250px;
+    }
 }
 
 .m-b-25 {
