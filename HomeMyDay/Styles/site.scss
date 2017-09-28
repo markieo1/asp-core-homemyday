@@ -53,6 +53,17 @@
     font-size: 20px;
 }
 
+.searchbarContainer {
+    z-index: 2;
+    margin-top: 25px;
+    position: absolute;
+    width: 100%;
+}
+
+.videoWrapper {
+    padding-bottom: 47.25%;
+}
+
 .container-about {
     padding-bottom: 30px;
 }
