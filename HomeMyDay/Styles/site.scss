@@ -65,18 +65,18 @@
     }
 }
 
-#process-text > .the-text > #night, #process-text > .the-text > #good {
-    padding-top: 10px;
-    border-color: $primary-color;
+#process-text > .the-text {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
 
-    @include for-desktop-up {
-        height: 240px;
-        margin-bottom: -35px;
+    > #night, #good {
+        padding-top: 10px;
+        border-color: $primary-color;
+
+        @include for-desktop-up {
+            height: 240px;
+            margin-bottom: -35px;
+        }
     }
 }
-
-#process-text > .the-text {
-        display: flex;
-        vertical-align: middle;
-        align-items: center;
-    }
