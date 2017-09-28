@@ -8,7 +8,7 @@ namespace HomeMyDay.Database
 {
 	public static class SeedHolidayDbData
 	{
-		public static void Seed(HolidayDbContext context)
+		public static void Seed(HomeMyDayDbContext context)
 		{
 			if (context.Accommodations.Any())
 			{

@@ -10,9 +10,9 @@ namespace HomeMyDay.Repository.Implementation
 {
 	public class EFAccommodationRepository : IAccommodationRepository
 	{
-		private readonly HolidayDbContext _context;
+		private readonly HomeMyDayDbContext _context;
 
-		public EFAccommodationRepository(HolidayDbContext context)
+		public EFAccommodationRepository(HomeMyDayDbContext context)
 		{
 			_context = context;
 		}

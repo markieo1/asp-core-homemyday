@@ -11,7 +11,7 @@ using System;
 
 namespace HomeMyDay.Migrations
 {
-    [DbContext(typeof(HolidayDbContext))]
+    [DbContext(typeof(HomeMyDayDbContext))]
     partial class HolidayDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -11,7 +11,7 @@ using System;
 
 namespace HomeMyDay.Migrations
 {
-    [DbContext(typeof(HolidayDbContext))]
+    [DbContext(typeof(HomeMyDayDbContext))]
     [Migration("20170928084838_Remove_Holiday_Use_BaseModel")]
     partial class Remove_Holiday_Use_BaseModel
     {

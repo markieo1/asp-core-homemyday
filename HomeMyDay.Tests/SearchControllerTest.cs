@@ -19,9 +19,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestEmptySearchAccommodations()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			SearchController target = new SearchController(repository);
@@ -47,9 +47,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestFilledSearchAccommodations()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{

@@ -18,9 +18,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestGetIdBelowZeroAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccommodation(0));
@@ -29,9 +29,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestGetIdNotExistingAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -50,9 +50,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestGetIdExistingAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -74,9 +74,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestAccommodationsEmptyRepository()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Empty(repository.Accommodations);
@@ -85,9 +85,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestAccommodationsFilledRepository()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
 				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
@@ -105,9 +105,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestAccommodationsTrueRecommended()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
 				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
@@ -129,9 +129,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestAccommodationsFalseRecommended()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
 				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
@@ -153,9 +153,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchEmptyLocation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Throws<ArgumentNullException>(() => repository.Search("", DateTime.Now, DateTime.Now, 1));
@@ -164,9 +164,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchEmptyArrivalDate()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", new DateTime(), DateTime.Now, 1));
@@ -175,9 +175,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchEmptyLeaveDate()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", DateTime.Now, new DateTime(), 1));
@@ -186,9 +186,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchEmptyGuests()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Throws<ArgumentNullException>(() => repository.Search("Amsterdam", DateTime.Now, DateTime.Now, 0));
@@ -197,9 +197,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchReturnAfterDeparture()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
 			Assert.Throws<ArgumentOutOfRangeException>(() => repository.Search("Amsterdam", new DateTime(2017, 10, 12), new DateTime(2017, 10, 11), 4));
@@ -208,9 +208,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchDepartureAndArrivalReturnExistingAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -246,9 +246,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchDepartureAndArrivalReturnNoAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -306,9 +306,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchDepartureAndArrivalReturnMulitpleExistingAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(new Accommodation()
 			{
@@ -372,9 +372,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchNotExistingNrOfPersons()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -405,9 +405,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchNotExistingLocationReturnNoAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
@@ -438,9 +438,9 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSearchLocationSpacesReturnAccommodation()
 		{
-			var optionsBuilder = new DbContextOptionsBuilder<HolidayDbContext>();
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HolidayDbContext context = new HolidayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.Add(new Accommodation()
 			{
