@@ -30,6 +30,23 @@ namespace HomeMyDay.Database
 		public DbSet<MediaObject> MediaObjects { get; set; }
 
 		/// <summary>
+		/// The Countries that have been saved.
+		/// </summary>
+		public DbSet<Country> Countries { get; set; }
+
+		/// <summary>
+		/// Gets or sets the newspaper objects.
+		/// </summary>
+		public DbSet<Newspaper> Newspapers { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			builder.Entity<Newspaper>()
+				.HasAlternateKey(x => x.Email)
+				.HasName("Alt_Email");
+		}
+
+		/// <summary>
 		/// The Reviews that have been saved.
 		/// </summary>
 		public DbSet<Review> Reviews { get; set; }

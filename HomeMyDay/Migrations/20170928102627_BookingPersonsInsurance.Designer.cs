@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170928102627_BookingPersonsInsurance")]
+    partial class BookingPersonsInsurance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +28,6 @@ namespace HomeMyDay.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Beds");
-
-                    b.Property<string>("CancellationText");
 
                     b.Property<string>("Continent");
 
@@ -44,17 +43,9 @@ namespace HomeMyDay.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("PricesText");
-
                     b.Property<bool>("Recommended");
 
                     b.Property<int?>("Rooms");
-
-                    b.Property<string>("RulesText");
-
-                    b.Property<string>("ServicesText");
-
-                    b.Property<string>("SpaceText");
 
                     b.HasKey("Id");
 
@@ -195,44 +186,6 @@ namespace HomeMyDay.Migrations
                     b.ToTable("MediaObjects");
                 });
 
-            modelBuilder.Entity("HomeMyDay.Models.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("AccommodationId");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Text");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
-
-                    b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Newspaper", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("Email")
-                        .HasName("Alt_Email");
-
-                    b.ToTable("Newspapers");
-                });
-
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
@@ -266,13 +219,6 @@ namespace HomeMyDay.Migrations
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation")
                         .WithMany("MediaObjects")
-                        .HasForeignKey("AccommodationId");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Review", b =>
-                {
-                    b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
-                        .WithMany()
                         .HasForeignKey("AccommodationId");
                 });
 #pragma warning restore 612, 618

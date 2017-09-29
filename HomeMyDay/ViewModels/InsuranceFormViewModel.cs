@@ -1,35 +1,14 @@
-﻿using System;
+﻿using HomeMyDay.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.ViewModels
 {
-	public class Booking : BaseModel
-	{
-		/// <summary>
-		/// The list of people who are traveling.
-		/// </summary>
-		public List<BookingPerson> Persons { get; set; }
-
-		/// <summary>
-		/// The accommodation where the customer is staying.
-		/// </summary>
-		public Accommodation Accommodation { get; set; }
-
-		/// <summary>
-		/// The departure date of the flight.
-		/// </summary>
-		public DateTime DepartureDate { get; set; }
-
-		/// <summary>
-		/// The departure date of the return flight.
-		/// </summary>
-		public DateTime ReturnDate { get; set; }
-
+    public class InsuranceFormViewModel
+    {
 		/// <summary>
 		/// Whether the user has chosen for Service Insurance.
 		/// </summary>

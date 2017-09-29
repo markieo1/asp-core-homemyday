@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" type="text/css" href="~/css/search.css" />
 
-<h1>Zoekresultaten</h1>
+<h1 class="text-center">Zoekresultaten</h1>
 
 <div class="container">
     <div class="row">
@@ -14,24 +14,32 @@
     </div>
 </div>
 
-<div id="search-results">
-
-    @foreach (Accommodation accommodation in Model.Accommodations)
-    {
-        <div class="search-result">
-            <div class="accommodation-preview">
-                <img src="~/images/accommodationplaceholder.jpg" />
-                <div class="accommodation-image-text">
-                    <h2>@accommodation.Name</h2>
-                    <p>@accommodation.Country, @accommodation.Continent</p>
+<div class="row">
+    <div class="container" id="search-results">
+        @foreach (Accommodation accommodation in Model.Accommodations)
+        {
+            <div class="panel panel-default">
+                <div class="panel panel-body">
+                    <div class="accommodation-image-text">
+                        <h2>@accommodation.Name</h2>
+                        <p>@accommodation.Country, @accommodation.Continent</p>
+                    </div>
+                    <div class="search-result">
+                        <div class="accommodation-preview">
+                            <img src="~/images/accommodationplaceholder.jpg" />
+                        </div>
+                        <div class="accommodation-info">
+                            <p>@accommodation.Description</p>
+                            <p class="planecar col-md-6">
+                                <i class="fa fa-plane fa-2x" aria-hidden="true"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                <i class="fa fa-car fa-2x" aria-hidden="true"></i>
+                            </p>
+                            <p class="price col-md-6">&euro;@accommodation.Price</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="accommodation-info">
-                <p>@accommodation.Description</p>
-
-                <p class="price">&euro;@accommodation.Price</p>
-            </div>
-        </div>
-    }
-
+        }
+    </div>
 </div>
