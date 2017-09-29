@@ -1,12 +1,10 @@
 ﻿@model HomeMyDay.ViewModels.BookingFormViewModel
 
-<form id="booking-form" class="container" asp-action="BookingForm" method="post">
+<form id="booking-form" class="container bottom-buffer" asp-action="BookingForm" method="post">
 
 	<h1>Boeking @Model.Accommodation.Name</h1>
 
 	<p>Algemene gegevens personen</p>
-
-    <div asp-validation-summary="All" class="alert-danger"></div>
 
 	@for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
 	{
@@ -125,7 +123,7 @@
         }
     </div>
 
-	<input type="submit" value="Volgende stap" class="btn btn-info" />
+	<input type="submit" value="Volgende stap" class="btn btn-primary" />
 
     <input type="hidden" asp-for="@Model.Accommodation.Id" />
 
