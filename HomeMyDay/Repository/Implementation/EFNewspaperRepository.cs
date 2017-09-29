@@ -17,6 +17,11 @@ namespace HomeMyDay.Repository.Implementation
 	    {
 			bool isSaved = false;
 
+		    if (string.IsNullOrWhiteSpace(email))
+		    {
+				throw new ArgumentNullException(nameof(email));
+			}
+
 			try
 		    {
 			    _context.Newspapers.Add(new Newspaper { Email = email });

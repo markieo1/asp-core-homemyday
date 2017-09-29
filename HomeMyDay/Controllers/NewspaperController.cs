@@ -12,8 +12,9 @@ namespace HomeMyDay.Controllers
 		{
 			_newspaperRepository = newspaperRepository;
 		}
-
-	    public ViewResult Index()
+			 
+		[HttpGet]
+	    public ViewResult Subscribe()
 	    {
 		    return View();
 	    }
@@ -26,11 +27,11 @@ namespace HomeMyDay.Controllers
 			    if (_newspaperRepository.Subscribe(newspaperViewModel.Email))
 			    {
 				    return View("Result");
-			    }
+			    }									 
 		    } 
 
 			ModelState.AddModelError("Error", "Het ingevulde emailadres is niet correct of is al gebruikt."); 
-		    return View("Index", newspaperViewModel);
+		    return View(newspaperViewModel);
 	    }
     }
 }
