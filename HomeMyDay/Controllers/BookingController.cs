@@ -24,15 +24,15 @@ namespace HomeMyDay.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult BookingForm(int accommodation)
+		public IActionResult BookingForm(int id)
 		{
 			var formModel = new BookingFormViewModel();
 
-			formModel.Accommodation = accommodationRepository.GetAccommodation(accommodation);
+			formModel.Accommodation = accommodationRepository.GetAccommodation(id);
 
 			if(formModel.Accommodation == null)
 			{
-				return RedirectToAction("Error", "Home");
+				return BadRequest();
 			}
 
 			formModel.Persons = new List<BookingPerson>();
