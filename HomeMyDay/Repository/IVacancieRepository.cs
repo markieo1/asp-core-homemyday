@@ -18,6 +18,6 @@ namespace HomeMyDay.Repository
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException">id</exception>
         /// <exception cref="KeyNotFoundException"></exception>
-        Vacancie Vacancie(long id);
+        Vacancie GetVacancie(long id);
     }
 }

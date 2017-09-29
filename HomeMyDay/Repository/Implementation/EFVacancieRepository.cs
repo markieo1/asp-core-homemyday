@@ -18,7 +18,7 @@ namespace HomeMyDay.Repository.Implementation
 
         public IEnumerable<Vacancie> Vacancies => _context.Vacancies;
 
-        public Vacancie Vacancie(long id)
+        public Vacancie GetVacancie(long id)
         {
             if (id <= 0)
             {
