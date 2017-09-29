@@ -1,6 +1,6 @@
 @import 'colors';
 
-#search-results {
+#search-results > div {
 
     .search-result {
         display: flex;
@@ -8,35 +8,22 @@
         padding-bottom: 20px;
 
         .accommodation-preview, .accommodation-info {
-            width: 50%;
-            border: 2px solid $searchresults-border-color;
+            width: 49%;
             border-collapse: collapse;
             position: relative;
         }
-
-        .accommodation-preview > .accommodation-image-text {
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            h2 {
-                margin-top: 0;
-            }
-        }
-
         .accommodation-preview > img {
             width: 100%;
         }
 
         .accommodation-info {
-            border-left: none;
             text-align: center;
 
             .price {
                 font-weight: bold;
                 position: absolute;
                 bottom: 5px;
-                right: 150px;
+                right: 0px;
                 margin: 0 auto;
             }
 
@@ -45,7 +32,6 @@
                 align-items: center;
                 position: absolute;
                 bottom: 5px;
-                left: 150px;
                 margin: 0 auto;
 
                 > i {
