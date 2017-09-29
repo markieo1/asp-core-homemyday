@@ -33,6 +33,14 @@ p {
     padding-top: 51px;
 }
 
+.p-l-50 {
+    padding-left: 50px;
+}
+
+.p-r-50 {
+    padding-right: 50px;
+}
+
 .pad-45 {
     padding: 45px;
 }
@@ -48,6 +56,10 @@ p {
 
 .m-b-25 {
     margin-bottom: 25px;
+}
+
+.m-b-45 {
+    margin-bottom: 45px;
 }
 
 .f-s-17 {
@@ -208,5 +220,13 @@ p {
     z-index: 2;
     margin-top: -20px;
     position: relative;
-    float: none;
+    float:none;
+}
+
+.border-left {
+    border-left: $border-color-5px;
+}
+
+.border-right {
+    border-right: $border-color-5px;
 }
