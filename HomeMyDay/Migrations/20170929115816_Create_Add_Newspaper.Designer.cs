@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170929115816_Create_Add_Newspaper")]
+    partial class Create_Add_Newspaper
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,89 +61,15 @@ namespace HomeMyDay.Migrations
 
                     b.Property<DateTime>("DepartureDate");
 
-                    b.Property<bool>("InsuranceCancellationAllRisk");
-
-                    b.Property<bool>("InsuranceCancellationBasic");
-
-                    b.Property<bool>("InsuranceExplore");
-
-                    b.Property<bool>("InsuranceService");
-
-                    b.Property<int>("InsuranceType");
+                    b.Property<int>("NrPersons");
 
                     b.Property<DateTime>("ReturnDate");
-
-                    b.Property<bool>("TransferFromAirport");
-
-                    b.Property<bool>("TransferToAirport");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.BookingPerson", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Baggage");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<long?>("BookingId");
-
-                    b.Property<bool>("BookingOwner");
-
-                    b.Property<long?>("CountryId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<int>("HouseNumber");
-
-                    b.Property<string>("HouseNumberSuffix");
-
-                    b.Property<string>("Initials");
-
-                    b.Property<string>("Insertion");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<long?>("NationalityId");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("Salutation");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("NationalityId");
-
-                    b.ToTable("BookingPerson");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Country", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CountryCode");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.DateEntity", b =>
@@ -206,21 +133,6 @@ namespace HomeMyDay.Migrations
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
                         .HasForeignKey("AccommodationId");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.BookingPerson", b =>
-                {
-                    b.HasOne("HomeMyDay.Models.Booking")
-                        .WithMany("Persons")
-                        .HasForeignKey("BookingId");
-
-                    b.HasOne("HomeMyDay.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryId");
-
-                    b.HasOne("HomeMyDay.Models.Country", "Nationality")
-                        .WithMany()
-                        .HasForeignKey("NationalityId");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.DateEntity", b =>

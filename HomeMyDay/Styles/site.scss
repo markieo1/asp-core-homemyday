@@ -3,12 +3,16 @@
 @import 'colors';
 @import '_mixins';
 
-.mtop80 {
-    margin-top: 80px;
+.mtop25{
+    margin-top: 25px;
 }
 
 .mtop52{
     margin-top: 52px;
+}
+
+.mtop80 {
+    margin-top: 80px;
 }
 
 .mbot80 {
@@ -181,4 +185,27 @@
 .field-validation-error {
     color: $error-text-color;
     display: block;
+}
+
+.newspaper {
+    margin-bottom: 150px;
+
+
+    @include for-phone-only {
+        strong {
+            font-size: 10px;
+        }
+    }
+
+    @include for-desktop-up {
+        margin-bottom: 30px;
+    }
+}
+
+.newspaper-label {
+    width: 120px;
+    z-index: 2;
+    margin-top: -20px;
+    position: relative;
+    float:none;
 }
