@@ -191,3 +191,7 @@
 .icon-color{
     color: $icon-color;
 }
+
+.field-validation-error {
+    color: $error-text-color;
+}
