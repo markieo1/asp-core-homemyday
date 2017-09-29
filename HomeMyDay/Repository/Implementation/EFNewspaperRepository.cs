@@ -25,7 +25,7 @@ namespace HomeMyDay.Repository.Implementation
 				    isSaved = true;
 			    }
 		    }
-		    catch (Exception ex)
+		    catch (Exception)
 		    {
 			    isSaved = false;
 		    }				
