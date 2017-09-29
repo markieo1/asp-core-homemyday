@@ -36,10 +36,7 @@ namespace HomeMyDay.Controllers
 				return NotFound();
 			}
 
-			AccommodationViewModel viewModel = new AccommodationViewModel()
-			{
-				Accommodation = accommodation
-			};
+			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation);
 
 			return View(viewModel);
 		}

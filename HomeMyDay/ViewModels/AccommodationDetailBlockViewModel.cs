@@ -30,5 +30,20 @@ namespace HomeMyDay.ViewModels
 		/// The text.
 		/// </value>
 		public string Text { get; set; }
+
+		/// <summary>
+		/// Gets a value indicating whether this instance can display.
+		/// This is based on the title and text being not whitespace or null
+		/// </summary>
+		/// <value>
+		///   <c>true</c> if this instance can display; otherwise, <c>false</c>.
+		/// </value>
+		public bool CanDisplay
+		{
+			get
+			{
+				return !string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Text);
+			}
+		}
 	}
 }
