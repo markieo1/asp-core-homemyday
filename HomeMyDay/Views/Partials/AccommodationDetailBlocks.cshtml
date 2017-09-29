@@ -32,7 +32,7 @@
                     continue;
                 }
 
-                <div role="tabpanel" class="tab-pane @((i == 0) ? "active" : "")" id="@blockModel.Title.Dashed()">
+                <div role="tabpanel" class="tab-pane fade @((i == 0) ? "in active" : "")" id="@blockModel.Title.Dashed()">
                     <p>@blockModel.Text</p>
                 </div>
 }
