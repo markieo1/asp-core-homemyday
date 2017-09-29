@@ -24,7 +24,8 @@ namespace HomeMyDay.Repository.Implementation
 
 			try
 			{
-				_context.Newspapers.Add(new Newspaper { Email = email });
+				string subscribeEmail = email.Trim();
+				_context.Newspapers.Add(new Newspaper {Email = subscribeEmail});
 				if (_context.SaveChanges() > 0)
 				{
 					isSaved = true;

@@ -22,6 +22,18 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
+		public void TestInsertWhiteSpaceSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			var repository = new EFNewspaperRepository(context);
+			string email = "  test@avans.nl  ";
+
+			Assert.True(repository.Subscribe(email));
+		}
+
+		[Fact]
 		public void TestInsertDuplicateSubscription()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
@@ -39,6 +51,17 @@ namespace HomeMyDay.Tests
 			string email = "test@avans.nl";
 										
 			Assert.False(repository.Subscribe(email));
+		}	
+
+		[Fact]
+		public void TestArgumentExceptionEmptyStringOnSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			var repository = new EFNewspaperRepository(context);
+									   
+			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));	
 		}
 
 		[Fact]
@@ -48,8 +71,8 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
-									   
-			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));	
+
+			Assert.Throws<ArgumentNullException>(() => repository.Subscribe("  "));
 		}
 
 		[Fact]
