@@ -55,6 +55,9 @@ namespace HomeMyDay.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
+				formData.Accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
+				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
+
 				return View(formData);
 			}
 			else
