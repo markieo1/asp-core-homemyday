@@ -2,6 +2,7 @@
 using HomeMyDay.Controllers;
 using HomeMyDay.Database;
 using HomeMyDay.Models;
+using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
 using HomeMyDay.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -17,13 +18,13 @@ namespace HomeMyDay.Tests
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
-			var repository = new EFNewspaperRepository(context);
+			INewspaperRepository repository = new EFNewspaperRepository(context);
 			var target = new NewspaperController(repository);
 			var newspaperViewModel = new NewspaperViewModel()
 			{
 				Email = "test@avans.nl"
 			};
-			var result = target.Subscribe(newspaperViewModel);
+			var result = target.Index(newspaperViewModel);
 
 			Assert.NotNull(target);
 			Assert.NotNull(result);
@@ -52,7 +53,7 @@ namespace HomeMyDay.Tests
 			{
 				Email = "test@avans.nl"
 			};
-			var result = target.Subscribe(newspaperViewModel);
+			var result = target.Index(newspaperViewModel);
 
 			Assert.NotNull(target);
 			Assert.NotNull(result);
@@ -72,8 +73,8 @@ namespace HomeMyDay.Tests
 			var target = new NewspaperController(repository);
 
 			Assert.NotNull(target);
-			Assert.Throws<ArgumentNullException>(() => target.Subscribe(new NewspaperViewModel() { Email = "" }));
-			Assert.Throws<ArgumentNullException>(() => target.Subscribe(new NewspaperViewModel() { Email = null }));
+			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = "" }));
+			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = null }));
 		}
 	}
 }
