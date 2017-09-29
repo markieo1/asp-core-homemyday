@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Models;
+using System.Globalization;
 
 namespace HomeMyDay.Database
 {
-	public static class SeedHolidayDbData
+	public static class SeedHomeMyDayDbData
 	{
 		public static void Seed(HomeMyDayDbContext context)
 		{
-			if (context.Accommodations.Any())
+			//Seed accommodations
+			if (!context.Accommodations.Any())
 			{
-				return;
+				SeedAccommodations(context);				
 			}
 
+			//Seed countries
+			if (!context.Countries.Any())
+			{
+				SeedCountries(context);
+			}
+		}
+
+		private static void SeedAccommodations(HomeMyDayDbContext context)
+		{
 			context.Accommodations.Add(new Accommodation()
 			{
 				Price = 310,
@@ -56,6 +67,32 @@ namespace HomeMyDay.Database
 				MaxPersons = 6,
 				Rooms = 7
 			});
+
+			context.SaveChanges();
+		}
+
+		private static void SeedCountries(HomeMyDayDbContext context)
+		{
+			//Generate a list of countries to be deduplicated later.
+			var countries = new List<Country>();
+
+			CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+			foreach (CultureInfo culture in cultures)
+			{
+				RegionInfo cultureRegion = new RegionInfo(culture.LCID);
+				countries.Add(new Country()
+				{
+					CountryCode = cultureRegion.ThreeLetterISORegionName,
+					Name = cultureRegion.EnglishName
+				});
+			}
+
+			//Deduplicate list
+			countries = countries.GroupBy(c => c.CountryCode)
+				.Select(i => i.First())
+				.ToList();
+
+			context.Countries.AddRange(countries);
 
 			context.SaveChanges();
 		}

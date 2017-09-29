@@ -3,12 +3,16 @@
 @import 'colors';
 @import '_mixins';
 
-.mtop80 {
-    margin-top: 80px;
+.mtop25{
+    margin-top: 25px;
 }
 
 .mtop52{
     margin-top: 52px;
+}
+
+.mtop80 {
+    margin-top: 80px;
 }
 
 .mbot80 {
@@ -125,8 +129,98 @@
     }
 }
 
+#booking-form {
+    clear: both;
+    overflow: auto;
+
+    table, td, th {
+        padding: 3px;
+    }
+
+    input[type="submit"] {
+        display: block;
+        clear: both;
+    }
+
+    hr {
+        clear: both;
+    }
+
+    .bookingperson .form-input-group:last-child {
+        margin-bottom: 20px;
+    }
+
+    .baggage label {
+        float: left;
+        clear: left;
+        width: 150px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+
+    .baggage input {
+        float: left;
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    .housenumber {
+        display: inline;
+        width: 70px;
+    }
+
+    .housenumbersuffix {
+        display: inline;
+        width: 50px;
+    }
+}
+
+#booking-confirmation {
+    form, input[type="submit"] {
+        clear: both;
+        margin-bottom: 10px;
+    }
+
+    #booking-information {
+        border-right: 1px solid $bookingconfirmation-border-color;
+    }
+
+    table, td, th {
+        padding: 3px;
+    }
+}
+
 .icon-color{
     color: $icon-color;
+}
+
+.field-validation-error {
+    color: $error-text-color;
+    display: block;
+}
+
+.newspaper {
+    margin-bottom: 150px;
+
+
+    @include for-phone-only {
+        strong {
+            font-size: 10px;
+        }
+    }
+
+    @include for-desktop-up {
+        margin-bottom: 30px;
+    }
+}
+
+.newspaper-label {
+    width: 120px;
+    z-index: 2;
+    margin-top: -20px;
+    position: relative;
+    float:none;
+}
 }
 
 .border-left {
