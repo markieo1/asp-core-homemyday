@@ -37,7 +37,7 @@ namespace HomeMyDay.Controllers
 
             try
             {
-                vacancie = _vacancieRepository.Vacancie(id);
+                vacancie = _vacancieRepository.GetVacancie(id);
             }
             catch (ArgumentOutOfRangeException)
             {
