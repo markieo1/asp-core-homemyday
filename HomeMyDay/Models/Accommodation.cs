@@ -74,5 +74,30 @@ namespace HomeMyDay.Models
 		/// Gets or sets the not available dates.
 		/// </summary>
 		public List<DateEntity> NotAvailableDates { get; set; }
+
+		/// <summary>
+		/// Gets or sets the space text.
+		/// </summary>
+		public string SpaceText { get; set; }
+
+		/// <summary>
+		/// Gets or sets the services text.
+		/// </summary>
+		public string ServicesText { get; set; }
+
+		/// <summary>
+		/// Gets or sets the prices text.
+		/// </summary>
+		public string PricesText { get; set; }
+
+		/// <summary>
+		/// Gets or sets the house rules text.
+		/// </summary>
+		public string RulesText { get; set; }
+
+		/// <summary>
+		/// Gets or sets the cancellation text.
+		/// </summary>
+		public string CancellationText { get; set; }
 	}
 }
