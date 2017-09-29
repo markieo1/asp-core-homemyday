@@ -25,8 +25,7 @@ namespace HomeMyDay.Tests
 				Email = "test@avans.nl"
 			};
 			var result = target.Index(newspaperViewModel);
-
-			Assert.NotNull(target);
+									 
 			Assert.NotNull(result);
 			Assert.NotNull(newspaperViewModel);
 			Assert.NotNull(result.ViewName);
@@ -54,17 +53,16 @@ namespace HomeMyDay.Tests
 				Email = "test@avans.nl"
 			};
 			var result = target.Index(newspaperViewModel);
-
-			Assert.NotNull(target);
+									 
 			Assert.NotNull(result);
 			Assert.NotNull(newspaperViewModel);
 			Assert.Null(result.ViewName);
 			Assert.NotNull(result.ViewData);
 			Assert.True(result.ViewData.ModelState.ErrorCount > 0);
-		}
+		}  
 
 		[Fact]
-		public void TestArgumentExceptionOnSubscription()
+		public void TestArgumentExceptionWhiteSpaceOnSubscription()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -72,8 +70,18 @@ namespace HomeMyDay.Tests
 			var repository = new EFNewspaperRepository(context);
 			var target = new NewspaperController(repository);
 
-			Assert.NotNull(target);
 			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = "" }));
+		}
+
+		[Fact]
+		public void TestArgumentExceptionNullOnSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			var repository = new EFNewspaperRepository(context);
+			var target = new NewspaperController(repository);
+
 			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = null }));
 		}
 	}

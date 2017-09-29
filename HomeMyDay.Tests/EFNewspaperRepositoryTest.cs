@@ -17,9 +17,7 @@ namespace HomeMyDay.Tests
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
 			string email = "test@avans.nl";
-
-			Assert.NotNull(context);
-			Assert.NotNull(repository);
+									  	  
 			Assert.True(repository.Subscribe(email));
 		}
 
@@ -39,23 +37,29 @@ namespace HomeMyDay.Tests
 
 			var repository = new EFNewspaperRepository(context);
 			string email = "test@avans.nl";
-
-			Assert.NotNull(context);
-			Assert.NotNull(repository);
+										
 			Assert.False(repository.Subscribe(email));
 		}
 
 		[Fact]
-		public void TestArgumentExceptionOnSubscription()
+		public void TestArgumentExceptionWhiteSpaceOnSubscription()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
+									   
+			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));	
+		}
 
-			Assert.NotNull(context);
-			Assert.NotNull(repository);
-			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));
+		[Fact]
+		public void TestArgumentExceptionNullOnSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			var repository = new EFNewspaperRepository(context);
+																				   
 			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(null));
 		}
 	}
