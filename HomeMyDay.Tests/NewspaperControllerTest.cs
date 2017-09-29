@@ -33,6 +33,26 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
+		public void TestResultViewWithWhiteSpaceOnSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			INewspaperRepository repository = new EFNewspaperRepository(context);
+			var target = new NewspaperController(repository);
+			var newspaperViewModel = new NewspaperViewModel()
+			{
+				Email = "  test@avans.nl  "
+			};
+			var result = target.Index(newspaperViewModel);
+
+			Assert.NotNull(result);
+			Assert.NotNull(newspaperViewModel);
+			Assert.NotNull(result.ViewName);
+			Assert.Equal("Result", result.ViewName);
+		}
+
+		[Fact]
 		public void TestErrorViewOnSubscription()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
@@ -62,7 +82,7 @@ namespace HomeMyDay.Tests
 		}  
 
 		[Fact]
-		public void TestArgumentExceptionWhiteSpaceOnSubscription()
+		public void TestArgumentExceptionEmptyStringOnSubscription()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -71,6 +91,18 @@ namespace HomeMyDay.Tests
 			var target = new NewspaperController(repository);
 
 			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = "" }));
+		}
+
+		[Fact]
+		public void TestArgumentExceptionWhiteSpaceOnSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			var repository = new EFNewspaperRepository(context);
+			var target = new NewspaperController(repository);
+
+			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = " " }));
 		}
 
 		[Fact]
