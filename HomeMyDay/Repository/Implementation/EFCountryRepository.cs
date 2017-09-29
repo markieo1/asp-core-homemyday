@@ -17,5 +17,12 @@ namespace HomeMyDay.Repository.Implementation
 		{
 			_context = context;
 		}
+
+		public Country GetCountry(long id)
+		{
+			var country = _context.Countries.First(c => c.Id == id);
+
+			return country;
+		}
 	}
 }

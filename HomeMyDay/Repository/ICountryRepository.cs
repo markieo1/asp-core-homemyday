@@ -12,5 +12,12 @@ namespace HomeMyDay.Repository
 		/// An IEnumerable of all countries.
 		/// </summary>
 		IEnumerable<Country> Countries { get; }
+
+		/// <summary>
+		/// Find a single country by ID.
+		/// </summary>
+		/// <param name="id">The ID to search by.</param>
+		/// <returns>The country.</returns>
+		Country GetCountry(long id);
     }
 }

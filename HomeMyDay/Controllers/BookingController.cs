@@ -65,6 +65,13 @@ namespace HomeMyDay.Controllers
 				//Get accommodation ID
 				long accommodationId = formData.Accommodation.Id;
 
+				//Get country ID
+				foreach(BookingPerson person in formData.Persons)
+				{
+					person.Country = countryRepository.GetCountry(person.Country.Id);
+					person.Nationality = countryRepository.GetCountry(person.Nationality.Id);
+				}
+
 				//Store model in Session
 				HttpContext.Session.Set(BOOKINGSESSIONKEY, new Booking() {
 					Accommodation = accommodationRepository.GetAccommodation(accommodationId),
