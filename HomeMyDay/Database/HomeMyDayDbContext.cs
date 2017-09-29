@@ -41,8 +41,8 @@ namespace HomeMyDay.Database
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<Newspaper>()
-				.HasIndex(x => x.Email)
-				.IsUnique();
+				.HasAlternateKey(x => x.Email)
+				.HasName("Alt_Email");
 		}
 	}
 }
