@@ -13,10 +13,12 @@ namespace HomeMyDay.Controllers
     public class BookingController : Controller
     {
 		private IAccommodationRepository repository;
+		private ICountryRepository countryRepository;
 
-		public BookingController(IAccommodationRepository repo)
+		public BookingController(IAccommodationRepository repo, ICountryRepository countryRepo)
 		{
 			this.repository = repo;
+			this.countryRepository = countryRepo;
 		}
 
 		[HttpGet]
@@ -39,6 +41,10 @@ namespace HomeMyDay.Controllers
 				formModel.Persons.Add(new BookingPerson());
 			}
 
+			//Get countries from db
+			List<Country> countries = countryRepository.Countries.OrderBy(c => c.Name).ToList();
+			ViewBag.Countries = countries;
+
             return View(formModel);
         }
 
@@ -51,9 +57,12 @@ namespace HomeMyDay.Controllers
 			}
 			else
 			{
+				//Get accommodation ID
+				long accommodationId = formData.Accommodation.Id;
+
 				//Store model in Session
 				HttpContext.Session.Set("booking", new Booking() {
-					Accommodation = formData.Accommodation,
+					Accommodation = repository.GetAccommodation(accommodationId),
 					Persons = formData.Persons,
 				});
 
@@ -112,7 +121,7 @@ namespace HomeMyDay.Controllers
 			//Retrieve booking from TempData
 			Booking booking = HttpContext.Session.Get<Booking>("booking");
 
-			return View();
+			return View(booking);
 		}
     }
 }
