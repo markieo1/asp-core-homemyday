@@ -113,20 +113,6 @@
     }
 }
 
-.form-input-group {
-    float: left;
-    margin-left: 1em;
-    margin-right: 1em;
-
-    label, input, select {
-        display: block;
-    }
-
-    + h2, + input[type="submit"] {
-        clear: both;
-    }
-}
-
 #booking-form {
     clear: both;
     overflow: auto;
