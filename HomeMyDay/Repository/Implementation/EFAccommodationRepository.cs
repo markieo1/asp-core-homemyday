@@ -19,8 +19,6 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
-        public IEnumerable<Review> Reviews => _context.Reviews;
-
         public Accommodation GetAccommodation(long id)
 		{
 			if (id <= 0)

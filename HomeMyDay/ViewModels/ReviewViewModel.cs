@@ -9,12 +9,6 @@ namespace HomeMyDay.ViewModels
     public class ReviewViewModel
     {
         /// <summary>
-        /// Key for the Database 
-        /// </summary>
-        [Required]
-        public int Id { get; set; }
-
-        /// <summary>
         /// The Name of the user who filled in the form
         /// </summary>
         [Required]

@@ -15,11 +15,6 @@ namespace HomeMyDay.Repository
 		IEnumerable<Accommodation> Accommodations { get; }
 
         /// <summary>
-		/// Gets the reviews.
-		/// </summary>
-		/// <returns>IEnumerable containing all reviews</returns>
-        IEnumerable<Review> Reviews { get; }
-        /// <summary>
         /// Gets one accommodation.
         /// </summary>
         /// <param name="id">The identifier.</param>

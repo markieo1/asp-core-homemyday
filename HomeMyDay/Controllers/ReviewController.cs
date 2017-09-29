@@ -1,18 +1,15 @@
 ﻿using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeMyDay.Controllers
 {
     public class ReviewController : Controller
     {
-        private readonly IAccommodationRepository _repository ;
+        private readonly IReviewRepository _repository ;
 
-        public ReviewController(IAccommodationRepository repo)
+        public ReviewController(IReviewRepository repo)
         {
             _repository = repo;           
         }

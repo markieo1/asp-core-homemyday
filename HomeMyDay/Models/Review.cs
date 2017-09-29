@@ -3,14 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HomeMyDay.Models
 {
-    public class Review
+    public class Review : BaseModel
     {
-        /// <summary>
-		/// Key for the Database 
-		/// </summary>
-		[Key]
-        public int Id { get; set; }
-
         /// <summary>
 		/// The accommodation where the customer is staying.
 		/// </summary>
