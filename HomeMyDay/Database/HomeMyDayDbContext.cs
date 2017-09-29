@@ -33,6 +33,9 @@ namespace HomeMyDay.Database
 		/// </summary>
 		public DbSet<MediaObject> MediaObjects { get; set; }
 
+        /// <summary>
+		/// The Vacancies that have been saved.
+		/// </summary>
         public DbSet<Vacancie> Vacancies { get; set; }
     }
 }

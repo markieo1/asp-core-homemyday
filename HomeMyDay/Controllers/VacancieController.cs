@@ -19,17 +19,25 @@ namespace HomeMyDay.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_vacancieRepository.GetVacancies.OrderByDescending(a => a.Id));                
+            if(!_vacancieRepository.Vacancies.Any())
+            {
+                return View("../Partials/NoVacancies.cshtml");
+            }
+            else
+            {
+                return View(_vacancieRepository.Vacancies.OrderByDescending(a => a.Id));
+            }
+                          
         }
 
         [HttpGet]
         public IActionResult Detail(long id)
         {
-            Vacancie Vacancie = null;
+            Vacancie vacancie = null;
 
             try
             {
-                Vacancie = _vacancieRepository.GetVacancie(id);
+                vacancie = _vacancieRepository.Vacancie(id);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -40,7 +48,7 @@ namespace HomeMyDay.Controllers
                 return NotFound();
             }
 
-            return View(Vacancie);
+            return View(vacancie);
         }
     }
 }
