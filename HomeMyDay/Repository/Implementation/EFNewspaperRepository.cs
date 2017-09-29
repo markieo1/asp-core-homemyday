@@ -5,37 +5,37 @@ using HomeMyDay.Models;
 namespace HomeMyDay.Repository.Implementation
 {
 	public class EFNewspaperRepository : INewspaperRepository
-    {
-	    private readonly HomeMyDayDbContext _context;
+	{
+		private readonly HomeMyDayDbContext _context;
 
-	    public EFNewspaperRepository(HomeMyDayDbContext context)
-	    {
-		    _context = context;
-	    }
+		public EFNewspaperRepository(HomeMyDayDbContext context)
+		{
+			_context = context;
+		}
 
-	    public bool Subscribe(string email)
-	    {
+		public bool Subscribe(string email)
+		{
 			bool isSaved = false;
 
-		    if (string.IsNullOrWhiteSpace(email))
-		    {
+			if (string.IsNullOrWhiteSpace(email))
+			{
 				throw new ArgumentNullException(nameof(email));
 			}
 
 			try
-		    {
-			    _context.Newspapers.Add(new Newspaper { Email = email });
-			    if (_context.SaveChanges() > 0)
-			    {
-				    isSaved = true;
-			    }
-		    }
-		    catch (Exception)
-		    {
-			    isSaved = false;
-		    }				
+			{
+				_context.Newspapers.Add(new Newspaper { Email = email });
+				if (_context.SaveChanges() > 0)
+				{
+					isSaved = true;
+				}
+			}
+			catch (Exception)
+			{
+				isSaved = false;
+			}
 
-		    return isSaved;
-	    }
-    }
+			return isSaved;
+		}
+	}
 }

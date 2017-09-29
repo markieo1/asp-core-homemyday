@@ -10,54 +10,54 @@ using Xunit;
 namespace HomeMyDay.Tests
 {
 	public class NewspaperControllerTest
-    {
-	    [Fact]
-	    public void TestResultViewOnSubscription()
-	    {
-		    var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+	{
+		[Fact]
+		public void TestResultViewOnSubscription()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
-		    var target = new NewspaperController(repository);  
-		    var newspaperViewModel = new NewspaperViewModel()
-		    {
+			var target = new NewspaperController(repository);
+			var newspaperViewModel = new NewspaperViewModel()
+			{
 				Email = "test@avans.nl"
-		    };	
-		    var result = target.Subscribe(newspaperViewModel);	
+			};
+			var result = target.Subscribe(newspaperViewModel);
 
 			Assert.NotNull(target);
 			Assert.NotNull(result);
 			Assert.NotNull(newspaperViewModel);
 			Assert.NotNull(result.ViewName);
 			Assert.Equal("Result", result.ViewName);
-	    }
+		}
 
-	    [Fact]
-	    public void TestErrorOnSubscription()
-	    {
+		[Fact]
+		public void TestErrorOnSubscription()
+		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-		    var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-		    context.Newspapers.Add(new Newspaper()
-		    {
-			   Email = "test@avans.nl"
-		    });
+			context.Newspapers.Add(new Newspaper()
+			{
+				Email = "test@avans.nl"
+			});
 
-		    context.SaveChanges();
+			context.SaveChanges();
 
 			var repository = new EFNewspaperRepository(context);
-		    var target = new NewspaperController(repository);  
-		    var newspaperViewModel = new NewspaperViewModel()
-		    {
-			    Email = "test@avans.nl"
-		    }; 
-		    var result = target.Subscribe(newspaperViewModel);
+			var target = new NewspaperController(repository);
+			var newspaperViewModel = new NewspaperViewModel()
+			{
+				Email = "test@avans.nl"
+			};
+			var result = target.Subscribe(newspaperViewModel);
 
-		    Assert.NotNull(target);
-		    Assert.NotNull(result);
+			Assert.NotNull(target);
+			Assert.NotNull(result);
 			Assert.NotNull(newspaperViewModel);
-		    Assert.Null(result.ViewName);  
+			Assert.Null(result.ViewName);
 			Assert.NotNull(result.ViewData);
 			Assert.True(result.ViewData.ModelState.ErrorCount > 0);
 		}
@@ -71,9 +71,9 @@ namespace HomeMyDay.Tests
 			var repository = new EFNewspaperRepository(context);
 			var target = new NewspaperController(repository);
 
-			Assert.NotNull(target);	 
-			Assert.Throws<ArgumentNullException>(() => target.Subscribe(new NewspaperViewModel(){ Email = ""}));
-			Assert.Throws<ArgumentNullException>(() => target.Subscribe(new NewspaperViewModel(){ Email = null}));
+			Assert.NotNull(target);
+			Assert.Throws<ArgumentNullException>(() => target.Subscribe(new NewspaperViewModel() { Email = "" }));
+			Assert.Throws<ArgumentNullException>(() => target.Subscribe(new NewspaperViewModel() { Email = null }));
 		}
 	}
 }

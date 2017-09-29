@@ -8,55 +8,55 @@ using Xunit;
 namespace HomeMyDay.Tests
 {
 	public class EFNewspaperRepositoryTest
-    {
-	    [Fact]
-	    public void TestInsertSubscription()
-	    {
+	{
+		[Fact]
+		public void TestInsertSubscription()
+		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-		    var context = new HomeMyDayDbContext(optionsBuilder.Options);
-		    var repository = new EFNewspaperRepository(context);
-		    string email = "test@avans.nl";
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			var repository = new EFNewspaperRepository(context);
+			string email = "test@avans.nl";
 
-		    Assert.NotNull(context);
+			Assert.NotNull(context);
 			Assert.NotNull(repository);
 			Assert.True(repository.Subscribe(email));
-	    }
+		}
 
-	    [Fact]
-	    public void TestInsertDuplicateSubscription()
-	    {
+		[Fact]
+		public void TestInsertDuplicateSubscription()
+		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-		    var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-		    context.Newspapers.Add(new Newspaper()
-		    {
+			context.Newspapers.Add(new Newspaper()
+			{
 				Email = "test@avans.nl"
-		    });
+			});
 
-		    context.SaveChanges();
+			context.SaveChanges();
 
 			var repository = new EFNewspaperRepository(context);
-		    string email = "test@avans.nl";
+			string email = "test@avans.nl";
 
-		    Assert.NotNull(context);
+			Assert.NotNull(context);
 			Assert.NotNull(repository);
 			Assert.False(repository.Subscribe(email));
 		}
 
-	    [Fact]
-	    public void TestArgumentExceptionOnSubscription()
-	    {
+		[Fact]
+		public void TestArgumentExceptionOnSubscription()
+		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-		    var context = new HomeMyDayDbContext(optionsBuilder.Options);
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
 
-		    Assert.NotNull(context);
+			Assert.NotNull(context);
 			Assert.NotNull(repository);
-		    Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));
-		    Assert.Throws<ArgumentNullException>(() => repository.Subscribe(null));
+			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));
+			Assert.Throws<ArgumentNullException>(() => repository.Subscribe(null));
 		}
 	}
 }
