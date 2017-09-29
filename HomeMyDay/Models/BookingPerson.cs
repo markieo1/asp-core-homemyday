@@ -55,7 +55,7 @@ namespace HomeMyDay.Models
 		/// </summary>
 		[DisplayName("Geboortedatum")]
 		[Required]
-		public DateTime BirthDate { get; set; }
+		public DateTime? BirthDate { get; set; }
 
 		/// <summary>
 		/// The person's email address.
