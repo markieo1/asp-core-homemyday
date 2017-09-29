@@ -53,7 +53,7 @@ namespace HomeMyDay.Extensions
 			}
 
 			string trimmedValue = value.Trim();
-			return value.Replace(" ", "-");
+			return trimmedValue.Replace(" ", "-");
 		}
 	}
 }
