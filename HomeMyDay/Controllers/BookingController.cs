@@ -10,23 +10,25 @@ using HomeMyDay.Extensions;
 
 namespace HomeMyDay.Controllers
 {
-    public class BookingController : Controller
-    {
-		private IAccommodationRepository repository;
-		private ICountryRepository countryRepository;
+	public class BookingController : Controller
+	{
+		private const string BOOKINGSESSIONKEY = "booking";
+
+		private readonly IAccommodationRepository accommodationRepository;
+		private readonly ICountryRepository countryRepository;
 
 		public BookingController(IAccommodationRepository repo, ICountryRepository countryRepo)
 		{
-			this.repository = repo;
+			this.accommodationRepository = repo;
 			this.countryRepository = countryRepo;
 		}
 
 		[HttpGet]
-        public IActionResult BookingForm(int accommodation)
-        {
+		public IActionResult BookingForm(int accommodation)
+		{
 			var formModel = new BookingFormViewModel();
 
-			formModel.Accommodation = repository.GetAccommodation(accommodation);
+			formModel.Accommodation = accommodationRepository.GetAccommodation(accommodation);
 
 			if(formModel.Accommodation == null)
 			{
@@ -42,18 +44,18 @@ namespace HomeMyDay.Controllers
 			}
 
 			//Get countries from db
-			List<Country> countries = countryRepository.Countries.OrderBy(c => c.Name).ToList();
+			IEnumerable<Country> countries = countryRepository.Countries.OrderBy(c => c.Name);
 			ViewBag.Countries = countries;
 
-            return View(formModel);
-        }
+			return View(formModel);
+		}
 
 		[HttpPost]
 		public IActionResult BookingForm(BookingFormViewModel formData)
 		{
 			if(!ModelState.IsValid)
 			{
-				return View();
+				return View(formData);
 			}
 			else
 			{
@@ -61,8 +63,8 @@ namespace HomeMyDay.Controllers
 				long accommodationId = formData.Accommodation.Id;
 
 				//Store model in Session
-				HttpContext.Session.Set("booking", new Booking() {
-					Accommodation = repository.GetAccommodation(accommodationId),
+				HttpContext.Session.Set(BOOKINGSESSIONKEY, new Booking() {
+					Accommodation = accommodationRepository.GetAccommodation(accommodationId),
 					Persons = formData.Persons,
 				});
 
@@ -84,11 +86,11 @@ namespace HomeMyDay.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
-				return View();
+				return View(formModel);
 			}
 			else
 			{
-				Booking booking = HttpContext.Session.Get<Booking>("booking");
+				Booking booking = HttpContext.Session.Get<Booking>(BOOKINGSESSIONKEY);
 
 				booking.InsuranceCancellationBasic = formModel.InsuranceCancellationBasic;
 				booking.InsuranceCancellationAllRisk = formModel.InsuranceCancellationAllRisk;
@@ -98,7 +100,7 @@ namespace HomeMyDay.Controllers
 				booking.TransferFromAirport = formModel.TransferFromAirport;
 				booking.TransferToAirport = formModel.TransferToAirport;
 
-				HttpContext.Session.Set("booking", booking);
+				HttpContext.Session.Set(BOOKINGSESSIONKEY, booking);
 
 				return RedirectToAction("Confirmation");
 			}
@@ -108,9 +110,9 @@ namespace HomeMyDay.Controllers
 		public IActionResult Confirmation()
 		{
 			//Retrieve booking from TempData
-			Booking booking = HttpContext.Session.Get<Booking>("booking");
+			Booking booking = HttpContext.Session.Get<Booking>(BOOKINGSESSIONKEY);
 
 			return View(booking);
 		}
-    }
+	}
 }

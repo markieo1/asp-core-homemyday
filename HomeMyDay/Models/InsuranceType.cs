@@ -7,7 +7,7 @@ namespace HomeMyDay.Models
 {
     public enum InsuranceType
     {
-		None,
+		None = 0,
 		Basic,
 		Comfort,
 		Optimal
