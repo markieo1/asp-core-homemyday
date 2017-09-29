@@ -169,6 +169,17 @@ table, td, th {
     }
 }
 
+#booking-confirmation {
+    form, input[type="submit"] {
+        clear: both;
+        margin-bottom: 10px;
+    }
+
+    #booking-information {
+        border-right: 1px solid $bookingconfirmation-border-color;
+    }
+}
+
 .icon-color{
     color: $icon-color;
 }

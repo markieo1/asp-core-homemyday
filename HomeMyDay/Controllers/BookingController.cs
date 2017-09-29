@@ -76,17 +76,6 @@ namespace HomeMyDay.Controllers
 			//Retrieve booking from Session
 			InsuranceFormViewModel formModel = new InsuranceFormViewModel();
 
-			//TODO: remove empty booking for testing
-			/*
-			Booking booking = new Booking() {
-				Accommodation = repository.GetAccommodation(7),
-				Persons = new List<BookingPerson>() {
-					new BookingPerson(),
-					new BookingPerson()
-				}
-			};
-			*/
-
 			return View(formModel);
 		}
 

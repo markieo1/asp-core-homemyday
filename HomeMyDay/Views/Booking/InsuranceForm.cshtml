@@ -80,19 +80,8 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Naar bevestiging" />
+            <input type="submit" value="Naar bevestiging" class="btn btn-info" />
         </div>
-
-        @* Generate hidden form fields from previous step
-
-        @for(int i = 0; i < Model.Persons.Count; i++)
-        {
-            @foreach (var prop in Model.Persons[i].GetType().GetProperties())
-            {
-                <input type="hidden" asp-for="@Model.Persons[i].GetType().GetProperty(prop.Name)" />
-            }
-        }
-        *@
 
     </form>
 </div>
