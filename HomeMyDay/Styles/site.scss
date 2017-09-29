@@ -3,11 +3,15 @@
 @import 'colors';
 @import '_mixins';
 
+p {
+    white-space: pre-wrap;
+}
+
 .mtop80 {
     margin-top: 80px;
 }
 
-.mtop52{
+.mtop52 {
     margin-top: 52px;
 }
 
@@ -104,11 +108,11 @@
 }
 
 #process-text > .the-text {
-        display: flex;
-        vertical-align: middle;
-        align-items: center;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
 }
 
-.icon-color{
+.icon-color {
     color: $icon-color;
 }

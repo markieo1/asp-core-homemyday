@@ -3,3 +3,21 @@
 <link rel="stylesheet" type="text/css" href="~/css/accommodation.css" />
 
 @Html.Partial("../Partials/AccommodationCarousel.cshtml", Model.MediaObjects)
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>
+                @Model.Name
+                <small>
+                    <em>@Model.Location, @Model.Country</em>
+                </small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>
