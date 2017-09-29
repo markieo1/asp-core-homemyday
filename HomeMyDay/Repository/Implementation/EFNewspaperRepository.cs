@@ -1,4 +1,5 @@
-﻿using HomeMyDay.Database;
+﻿using System;
+using HomeMyDay.Database;
 using HomeMyDay.Models;
 
 namespace HomeMyDay.Repository.Implementation
@@ -14,10 +15,20 @@ namespace HomeMyDay.Repository.Implementation
 
 	    public bool Subscribe(string email)
 	    {
-		    bool isSaved = false;
-		    _context.Newspapers.Add(new Newspaper {Email = email});
-		    if (_context.SaveChanges() > 0)
-			    isSaved = true;
+			bool isSaved = false;
+
+			try
+		    {
+			    _context.Newspapers.Add(new Newspaper { Email = email });
+			    if (_context.SaveChanges() > 0)
+			    {
+				    isSaved = true;
+			    }
+		    }
+		    catch (Exception ex)
+		    {
+			    isSaved = false;
+		    }				
 
 		    return isSaved;
 	    }

@@ -37,5 +37,12 @@ namespace HomeMyDay.Database
 		/// Gets or sets the newspaper objects.
 		/// </summary>
 		public DbSet<Newspaper> Newspapers { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder builder)
+		{
+			builder.Entity<Newspaper>()
+				.HasIndex(x => x.Email)
+				.IsUnique();
+		}
 	}
 }

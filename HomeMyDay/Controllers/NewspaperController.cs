@@ -26,10 +26,10 @@ namespace HomeMyDay.Controllers
 			    {
 				    return View("Result");
 			    }
-		    }
+		    } 
 
 			ModelState.AddModelError("Error", "Het ingevulde emailadres is niet correct of is al gebruikt."); 
-		    return View("Index");
+		    return View("Index", newspaperViewModel);
 	    }
     }
 }
