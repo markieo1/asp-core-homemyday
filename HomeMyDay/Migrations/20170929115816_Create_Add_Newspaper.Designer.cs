@@ -12,8 +12,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    [Migration("20170929082348_Add_Newspaper")]
-    partial class Add_Newspaper
+    [Migration("20170929115816_Create_Add_Newspaper")]
+    partial class Create_Add_Newspaper
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,13 +117,13 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
+                    b.HasAlternateKey("Email")
+                        .HasName("Alt_Email");
 
                     b.ToTable("Newspapers");
                 });

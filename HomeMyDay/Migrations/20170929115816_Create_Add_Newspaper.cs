@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HomeMyDay.Migrations
 {
-    public partial class Add_Newspaper : Migration
+    public partial class Create_Add_Newspaper : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,19 +15,13 @@ namespace HomeMyDay.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Newspapers", x => x.Id);
+                    table.UniqueConstraint("Alt_Email", x => x.Email);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Newspapers_Email",
-                table: "Newspapers",
-                column: "Email",
-                unique: true,
-                filter: "[Email] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
