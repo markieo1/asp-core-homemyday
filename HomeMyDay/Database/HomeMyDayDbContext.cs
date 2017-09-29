@@ -34,6 +34,11 @@ namespace HomeMyDay.Database
 		public DbSet<MediaObject> MediaObjects { get; set; }
 
 		/// <summary>
+		/// The Countries that have been saved.
+		/// </summary>
+		public DbSet<Country> Countries { get; set; }
+
+		/// <summary>
 		/// Gets or sets the newspaper objects.
 		/// </summary>
 		public DbSet<Newspaper> Newspapers { get; set; }
