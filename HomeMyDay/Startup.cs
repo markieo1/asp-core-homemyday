@@ -76,8 +76,9 @@ namespace HomeMyDay
 
 			services.AddTransient<IEmailServices, EmailServices>();
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
+            services.AddTransient<IVacancieRepository, EFVacancieRepository>();
 
-			services.AddMvc();
+            services.AddMvc();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
