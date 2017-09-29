@@ -1,7 +1,7 @@
 ﻿namespace HomeMyDay.ViewModels
 {
-    public class NewspaperViewModel
-    {
-		public string Email { get; set; }
+	public class NewspaperViewModel
+    {									
+		public string Email { get; set; }	
     }
 }
