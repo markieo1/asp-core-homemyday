@@ -18,6 +18,7 @@ namespace HomeMyDay.Controllers
 		    return View();
 	    }
 
+		[HttpPost]
 	    public ViewResult Subscribe(NewspaperViewModel newspaperViewModel)
 	    {
 		    if (ModelState.IsValid)
