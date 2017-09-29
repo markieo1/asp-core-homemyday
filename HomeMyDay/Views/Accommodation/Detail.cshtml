@@ -1,5 +1,32 @@
-﻿@model Accommodation
+﻿@model AccommodationViewModel
 
 <link rel="stylesheet" type="text/css" href="~/css/accommodation.css" />
 
-@Html.Partial("../Partials/AccommodationCarousel.cshtml", Model.MediaObjects)
+@Html.Partial("../Partials/AccommodationCarousel.cshtml", Model.Accommodation.MediaObjects)
+
+<div class="container bottom-buffer">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>
+                @Model.Accommodation.Name
+                <small>
+                    <em>@Model.Accommodation.Location, @Model.Accommodation.Country</em>
+                </small>
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>@Model.Accommodation.Description</p>
+        </div>
+    </div>
+    @if (Model.DetailBlocks != null)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @Html.Partial("../Partials/AccommodationDetailBlocks.cshtml", Model.DetailBlocks)
+            </div>
+        </div>
+    }
+
+</div>

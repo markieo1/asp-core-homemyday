@@ -3,11 +3,12 @@
 @import 'colors';
 @import '_mixins';
 
-.mtop25{
-    margin-top: 25px;
+p {
+    white-space: pre-wrap;
 }
 
-.mtop52{
+
+.mtop52 {
     margin-top: 52px;
 }
 
@@ -190,7 +191,7 @@
     }
 }
 
-.icon-color{
+.icon-color {
     color: $icon-color;
 }
 
