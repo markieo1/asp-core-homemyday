@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170929115816_Create_Add_Newspaper")]
+    partial class Create_Add_Newspaper
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +28,6 @@ namespace HomeMyDay.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Beds");
-
-                    b.Property<string>("CancellationText");
 
                     b.Property<string>("Continent");
 
@@ -44,17 +43,9 @@ namespace HomeMyDay.Migrations
 
                     b.Property<decimal>("Price");
 
-                    b.Property<string>("PricesText");
-
                     b.Property<bool>("Recommended");
 
                     b.Property<int?>("Rooms");
-
-                    b.Property<string>("RulesText");
-
-                    b.Property<string>("ServicesText");
-
-                    b.Property<string>("SpaceText");
 
                     b.HasKey("Id");
 
