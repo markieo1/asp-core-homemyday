@@ -8,7 +8,7 @@ namespace HomeMyDay.ViewModels
         /// Key for the Database 
         /// </summary>
         [Required]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// The jobtitle of the vacancy

@@ -33,6 +33,6 @@ namespace HomeMyDay.Database
 		/// </summary>
 		public DbSet<MediaObject> MediaObjects { get; set; }
 
-        public DbSet<Vacancie> Jobs { get; set; }
+        public DbSet<Vacancie> Vacancies { get; set; }
     }
 }

@@ -1,6 +1,8 @@
-﻿using HomeMyDay.Repository;
-using HomeMyDay.ViewModels;
+﻿using HomeMyDay.Models;
+using HomeMyDay.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HomeMyDay.Controllers
@@ -14,15 +16,31 @@ namespace HomeMyDay.Controllers
             _vacancieRepository = repo;
         }
 
-        public ViewResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
             return View(_vacancieRepository.GetVacancies.OrderByDescending(a => a.Id));                
         }
 
-        public ViewResult Detail(int id)
+        [HttpGet]
+        public IActionResult Detail(long id)
         {
-            var getVacancie = _vacancieRepository.GetVacancie(id);
-            return View(getVacancie);
+            Vacancie Vacancie = null;
+
+            try
+            {
+                Vacancie = _vacancieRepository.GetVacancie(id);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return BadRequest();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+
+            return View(Vacancie);
         }
     }
 }

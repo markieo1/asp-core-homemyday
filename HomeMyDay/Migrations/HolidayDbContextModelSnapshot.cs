@@ -111,6 +111,30 @@ namespace HomeMyDay.Migrations
                     b.ToTable("MediaObjects");
                 });
 
+            modelBuilder.Entity("HomeMyDay.Models.Vacancie", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AboutFunction");
+
+                    b.Property<string>("AboutVacancy");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Company");
+
+                    b.Property<string>("JobRequirements");
+
+                    b.Property<string>("JobTitle");
+
+                    b.Property<string>("WeOffer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vacancies");
+                });
+
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")

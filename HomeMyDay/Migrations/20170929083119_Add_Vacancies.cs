@@ -5,34 +5,34 @@ using System.Collections.Generic;
 
 namespace HomeMyDay.Migrations
 {
-    public partial class Add_Jobs : Migration
+    public partial class Add_Vacancies : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Jobs",
+                name: "Vacancies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Jobtitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AboutVacancy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AboutFunction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AboutVacancy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     JobRequirements = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WeOffer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WeOffer = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Jobs", x => x.Id);
+                    table.PrimaryKey("PK_Vacancies", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Jobs");
+                name: "Vacancies");
         }
     }
 }

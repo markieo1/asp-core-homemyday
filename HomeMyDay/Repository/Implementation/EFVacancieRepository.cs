@@ -16,7 +16,7 @@ namespace HomeMyDay.Repository.Implementation
             _context = context;
         }
 
-        public IEnumerable<Vacancie> GetVacancies => _context.Jobs;
+        public IEnumerable<Vacancie> GetVacancies => _context.Vacancies;
 
         public Vacancie GetVacancie(long id)
         {
@@ -25,11 +25,11 @@ namespace HomeMyDay.Repository.Implementation
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
 
-            Vacancie vacancie = _context.Jobs.FirstOrDefault(a => a.Id == id);
+            Vacancie vacancie = _context.Vacancies.FirstOrDefault(item => item.Id == id);
 
             if (vacancie == null)
             {
-                throw new KeyNotFoundException($"Accommodation with ID: {id} is not found");
+                throw new KeyNotFoundException($"Vacancie with ID: {id} is not found");
             }
 
             return vacancie;
