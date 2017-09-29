@@ -118,7 +118,7 @@ namespace HomeMyDay
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
 
-			SeedHolidayDbData.Seed(dbContext);
+			SeedHomeMyDayDbData.Seed(dbContext);
 		}
 	}
 }
