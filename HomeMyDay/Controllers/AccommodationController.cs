@@ -1,5 +1,6 @@
 ﻿using HomeMyDay.Models;
 using HomeMyDay.Repository;
+using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,12 @@ namespace HomeMyDay.Controllers
 				return NotFound();
 			}
 
-			return View(accommodation);
+			AccommodationViewModel viewModel = new AccommodationViewModel()
+			{
+				Accommodation = accommodation
+			};
+
+			return View(viewModel);
 		}
 	}
 }

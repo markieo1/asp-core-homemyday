@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace HomeMyDay.ViewModels
+{
+	public class AccommodationDetailBlockViewModel
+	{
+		/// <summary>
+		/// Gets or sets the title.
+		/// </summary>
+		/// <value>
+		/// The title.
+		/// </value>
+		public string Title { get; set; }
+
+		/// <summary>
+		/// Gets or sets the icon to display before the title.
+		/// </summary>
+		/// <value>
+		/// The icon.
+		/// </value>
+		public string Icon { get; set; }
+
+		/// <summary>
+		/// Gets or sets the text.
+		/// </summary>
+		/// <value>
+		/// The text.
+		/// </value>
+		public string Text { get; set; }
+	}
+}

@@ -26,7 +26,9 @@ namespace HomeMyDay.Extensions
 		public static string Truncate(this string value, int maxLength)
 		{
 			if (string.IsNullOrEmpty(value))
+			{
 				return value;
+			}
 
 			if (value.Length <= maxLength)
 			{
@@ -36,6 +38,22 @@ namespace HomeMyDay.Extensions
 			{
 				return $"{value.Substring(0, maxLength)}...";
 			}
+		}
+
+		/// <summary>
+		/// Replaces the whitespaces in a string with dashes
+		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns></returns>
+		public static string Dashed(this string value)
+		{
+			if (string.IsNullOrWhiteSpace(value))
+			{
+				return value;
+			}
+
+			string trimmedValue = value.Trim();
+			return value.Replace(" ", "-");
 		}
 	}
 }
