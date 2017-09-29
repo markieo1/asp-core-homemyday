@@ -18,7 +18,7 @@ namespace HomeMyDay.Database
 		/// The Bookings that have been saved.
 		/// </summary>
 		public DbSet<Booking> Bookings { get; set; }
-		
+
 		/// <summary>
 		/// The Accommodations that have been saved.
 		/// </summary>
@@ -29,9 +29,9 @@ namespace HomeMyDay.Database
 		/// </summary>
 		public DbSet<MediaObject> MediaObjects { get; set; }
 
-        /// <summary>
-        /// The Reviews that have been saved.
-        /// </summary>
-        public DbSet<Review> Reviews { get; set; }
-    }
+		/// <summary>
+		/// The Reviews that have been saved.
+		/// </summary>
+		public DbSet<Review> Reviews { get; set; }
+	}
 }

@@ -17,14 +17,7 @@ namespace HomeMyDay.Controllers
         public ViewResult Index(ReviewViewModel model)
         {
             var reviews = _repository.Reviews;
-            if(!reviews.Any())
-            {
-                return null;
-            }
-            else
-            {
-                return View("index", reviews.OrderByDescending(a => a.Id));
-            }
+            return View("index", reviews.OrderByDescending(a => a.Id));            
         }
     }
 }
