@@ -14,13 +14,13 @@ namespace HomeMyDay.Controllers
 		}
 
 		[HttpGet]
-		public ViewResult Subscribe()
+		public ViewResult Index()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		public ViewResult Subscribe(NewspaperViewModel newspaperViewModel)
+		public ViewResult Index(NewspaperViewModel newspaperViewModel)
 		{
 			if (ModelState.IsValid)
 			{

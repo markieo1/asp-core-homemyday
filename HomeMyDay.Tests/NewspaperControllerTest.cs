@@ -33,7 +33,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestErrorOnSubscription()
+		public void TestErrorViewOnSubscription()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
