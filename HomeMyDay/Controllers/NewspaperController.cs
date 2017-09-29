@@ -31,7 +31,7 @@ namespace HomeMyDay.Controllers
 		    } 
 
 			ModelState.AddModelError("Error", "Het ingevulde emailadres is niet correct of is al gebruikt."); 
-		    return View(newspaperViewModel);
+		    return View();
 	    }
     }
 }

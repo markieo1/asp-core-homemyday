@@ -18,6 +18,7 @@ namespace HomeMyDay.Tests
 		    var repository = new EFNewspaperRepository(context);
 		    string email = "test@avans.nl";
 
+		    Assert.NotNull(context);
 			Assert.NotNull(repository);
 			Assert.True(repository.Subscribe(email));
 	    }
@@ -39,6 +40,7 @@ namespace HomeMyDay.Tests
 			var repository = new EFNewspaperRepository(context);
 		    string email = "test@avans.nl";
 
+		    Assert.NotNull(context);
 			Assert.NotNull(repository);
 			Assert.False(repository.Subscribe(email));
 		}
@@ -51,6 +53,7 @@ namespace HomeMyDay.Tests
 		    var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
 
+		    Assert.NotNull(context);
 			Assert.NotNull(repository);
 		    Assert.Throws<ArgumentNullException>(() => repository.Subscribe(""));
 		    Assert.Throws<ArgumentNullException>(() => repository.Subscribe(null));
