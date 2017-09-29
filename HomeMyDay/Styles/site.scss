@@ -117,8 +117,74 @@
     }
 }
 
+#booking-form {
+    clear: both;
+    overflow: auto;
+
+    table, td, th {
+        padding: 3px;
+    }
+
+    input[type="submit"] {
+        display: block;
+        clear: both;
+    }
+
+    hr {
+        clear: both;
+    }
+
+    .bookingperson .form-input-group:last-child {
+        margin-bottom: 20px;
+    }
+
+    .baggage label {
+        float: left;
+        clear: left;
+        width: 150px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
+
+    .baggage input {
+        float: left;
+        width: 150px;
+        margin-bottom: 10px;
+    }
+
+    .housenumber {
+        display: inline;
+        width: 70px;
+    }
+
+    .housenumbersuffix {
+        display: inline;
+        width: 50px;
+    }
+}
+
+#booking-confirmation {
+    form, input[type="submit"] {
+        clear: both;
+        margin-bottom: 10px;
+    }
+
+    #booking-information {
+        border-right: 1px solid $bookingconfirmation-border-color;
+    }
+
+    table, td, th {
+        padding: 3px;
+    }
+}
+
 .icon-color{
     color: $icon-color;
+}
+
+.field-validation-error {
+    color: $error-text-color;
+    display: block;
 }
 
 .newspaper {

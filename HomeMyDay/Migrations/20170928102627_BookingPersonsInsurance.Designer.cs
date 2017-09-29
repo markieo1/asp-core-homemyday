@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170928102627_BookingPersonsInsurance")]
+    partial class BookingPersonsInsurance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,22 +184,6 @@ namespace HomeMyDay.Migrations
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("MediaObjects");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Newspaper", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("Email")
-                        .HasName("Alt_Email");
-
-                    b.ToTable("Newspapers");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
