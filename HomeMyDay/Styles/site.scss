@@ -70,6 +70,9 @@
 
 .container-about {
     padding-bottom: 30px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
 }
 
 .row.search-bar {
@@ -81,6 +84,7 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+    font-size: 1.2em;
 
     > div {
         width: 10%;
@@ -97,20 +101,20 @@
     }
 }
 
-#process-text > .the-text > #night, #process-text > .the-text > #good {
-    padding-top: 10px;
-    border-color: $primary-color;
-
-    @include for-desktop-up {
-        height: 240px;
-        margin-bottom: -35px;
-    }
-}
-
 #process-text > .the-text {
-        display: flex;
-        vertical-align: middle;
-        align-items: center;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+
+    > #night, #good {
+        padding-top: 10px;
+        border-color: $primary-color;
+
+        @include for-desktop-up {
+            height: 240px;
+            margin-bottom: -35px;
+        }
+    }
 }
 
 .icon-color{
