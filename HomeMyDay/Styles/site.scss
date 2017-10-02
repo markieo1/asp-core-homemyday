@@ -1,7 +1,7 @@
 ﻿@import 'footer';
 @import 'navbar';
 @import 'colors';
-@import '_mixins';
+@import 'mixins';
 
 p {
     white-space: pre-wrap;
@@ -49,13 +49,16 @@ p {
     padding: 45px;
 }
 
-.header-image {
-    width: 100%;
-    height: 140px;
+.review-overview {
+    margin-bottom: 30px;
 
-    @include for-desktop-up {
-        height: 420px;
+    > span {
+        color: $color-gray;
     }
+}
+
+.p-b-20 {
+    padding-bottom: 20px;
 }
 
 .m-b-25 {
@@ -242,7 +245,7 @@ p {
     z-index: 2;
     margin-top: -20px;
     position: relative;
-    float:none;
+    float: none;
 }
 
 .border-left {
@@ -255,4 +258,10 @@ p {
 
 .vacancy-overview > :last-child {
     margin-bottom: 66px;
+}
+}
+
+.accomodation-detail-reviews {
+    overflow-y: scroll;
+    max-height: 400px;
 }
