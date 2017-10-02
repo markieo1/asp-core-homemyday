@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Models;
 using System.Globalization;
+using NLipsum.Core;
 
 namespace HomeMyDay.Database
 {
@@ -14,7 +15,7 @@ namespace HomeMyDay.Database
 			//Seed accommodations
 			if (!context.Accommodations.Any())
 			{
-				SeedAccommodations(context);				
+				SeedAccommodations(context);
 			}
 
 			//Seed countries
@@ -26,18 +27,43 @@ namespace HomeMyDay.Database
 
 		private static void SeedAccommodations(HomeMyDayDbContext context)
 		{
+			var generator = new LipsumGenerator();
+
 			context.Accommodations.Add(new Accommodation()
 			{
 				Price = 310,
-				Recommended = false,
+				Recommended = true,
 				Name = "Casa del Sol",
-				Description = "A nice, sunny house in Spain.",
+				Description = String.Join(Environment.NewLine, generator.GenerateParagraphs(2)),
 				Continent = "Europe",
 				Country = "Spain",
 				Location = "Barcelona",
 				Beds = 2,
 				MaxPersons = 2,
-				Rooms = 4
+				Rooms = 4,
+				CancellationText = generator.GenerateParagraphs(1)[0],
+				RulesText = generator.GenerateParagraphs(1)[0],
+				PricesText = generator.GenerateParagraphs(1)[0],
+				SpaceText = generator.GenerateParagraphs(1)[0],
+				ServicesText = generator.GenerateParagraphs(1)[0],
+				MediaObjects = new List<MediaObject>()
+				{
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-1.jpg",
+						Type = MediaType.Image,
+						Title = "Indoor living room",
+						Description = "Example description",
+						Primary = true
+					},
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-2.jpg",
+						Type = MediaType.Image,
+						Title = "Outdoor house",
+						Description = "Example description",
+					}
+				}
 			});
 
 			context.Accommodations.Add(new Accommodation()
@@ -45,13 +71,36 @@ namespace HomeMyDay.Database
 				Price = 340,
 				Recommended = true,
 				Name = "Greece House",
-				Description = "A nice, sunny house in Greece.",
+				Description = String.Join(Environment.NewLine, generator.GenerateParagraphs(2)),
 				Continent = "Europe",
 				Country = "Greece",
 				Location = "Athens",
 				Beds = 1,
 				MaxPersons = 2,
-				Rooms = 3
+				Rooms = 3,
+				CancellationText = generator.GenerateParagraphs(1)[0],
+				RulesText = generator.GenerateParagraphs(1)[0],
+				PricesText = generator.GenerateParagraphs(1)[0],
+				SpaceText = generator.GenerateParagraphs(1)[0],
+				ServicesText = generator.GenerateParagraphs(1)[0],
+				MediaObjects = new List<MediaObject>()
+				{
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-3.jpg",
+						Type = MediaType.Image,
+						Title = "Sea sight",
+						Description = "Example description",
+						Primary = true
+					},
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-4.jpg",
+						Type = MediaType.Image,
+						Title = "Terras view",
+						Description = "Example description"
+					}
+				}
 			});
 
 			context.Accommodations.Add(new Accommodation()
@@ -59,13 +108,36 @@ namespace HomeMyDay.Database
 				Price = 320,
 				Recommended = false,
 				Name = "Germany House",
-				Description = "A nice house in Germany.",
+				Description = String.Join(Environment.NewLine, generator.GenerateParagraphs(2)),
 				Continent = "Europe",
 				Country = "Germany",
 				Location = "Frankfurt",
 				Beds = 4,
 				MaxPersons = 6,
-				Rooms = 7
+				Rooms = 7,
+				CancellationText = generator.GenerateParagraphs(1)[0],
+				RulesText = generator.GenerateParagraphs(1)[0],
+				PricesText = generator.GenerateParagraphs(1)[0],
+				SpaceText = generator.GenerateParagraphs(1)[0],
+				ServicesText = generator.GenerateParagraphs(1)[0],
+				MediaObjects = new List<MediaObject>()
+				{
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-1.jpg",
+						Type = MediaType.Image,
+						Title = "Indoor living room",
+						Description = "Example description",
+						Primary = true
+					},
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-2.jpg",
+						Type = MediaType.Image,
+						Title = "Outdoor house",
+						Description = "Example description"
+					}
+				}
 			});
 
 			context.SaveChanges();
