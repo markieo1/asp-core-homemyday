@@ -1,9 +1,10 @@
-﻿using HomeMyDay.Models;
+﻿using System;
+using HomeMyDay.Models;
 using System.Collections.Generic;
 
 namespace HomeMyDay.Repository
 {
-    public interface IVacancieRepository
+	public interface IVacancieRepository
     {
         /// <summary>
 		/// Gets the Vacancies.

@@ -2,12 +2,11 @@
 using HomeMyDay.Models;
 using HomeMyDay.Database;
 using System;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace HomeMyDay.Repository.Implementation
 {
-    public class EFVacancieRepository : IVacancieRepository
+	public class EFVacancieRepository : IVacancieRepository
     {
         private readonly HomeMyDayDbContext _context;
 

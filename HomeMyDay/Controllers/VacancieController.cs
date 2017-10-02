@@ -4,48 +4,54 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HomeMyDay.ViewModels;
 
 namespace HomeMyDay.Controllers
 {
-    public class VacancieController : Controller
-    {
-        private readonly IVacancieRepository _vacancieRepository;
+	public class VacancieController : Controller
+	{
+		private readonly IVacancieRepository _vacancieRepository;
 
-        public VacancieController(IVacancieRepository repo)
-        {
-            _vacancieRepository = repo;
-        }
+		public VacancieController(IVacancieRepository repo)
+		{
+			_vacancieRepository = repo;
+		}
 
-        [HttpGet]
-        public IActionResult Index()
-        {	   
-	        if (_vacancieRepository.Vacancies.Any())
-	        {
-		        return View(_vacancieRepository.Vacancies.OrderByDescending(a => a.Id));
-	        }
+		[HttpGet]
+		public IActionResult Index()
+		{
+			var vacancies = _vacancieRepository.Vacancies.ToList();
+			var vacancieViewModels = new List<VacancieViewModel>();
+			vacancies.ForEach(x => vacancieViewModels.Add(VacancieViewModel.FromVacancie(x)));
 
-	        return View("NoVacancies");	
-        }
+			if (vacancieViewModels.Any())
+			{
+				return View(vacancieViewModels);
+			}
 
-        [HttpGet]
-        public IActionResult Detail(long id)
-        {
-            Vacancie vacancie = null;
+			return View("NoVacancies");
+		}
 
-            try
-            {
-                vacancie = _vacancieRepository.GetVacancie(id);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return BadRequest();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
+		[HttpGet]
+		public IActionResult Detail(long id)
+		{
+			Vacancie vacancie = null;
 
-            return View(vacancie);
-        }
-    }
+			try
+			{
+				vacancie = _vacancieRepository.GetVacancie(id);
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return BadRequest();
+			}
+			catch (KeyNotFoundException)
+			{
+				return NotFound();
+			}
+
+			var vacancieViewModel = VacancieViewModel.FromVacancie(vacancie);
+			return View(vacancieViewModel);
+		}
+	}
 }
