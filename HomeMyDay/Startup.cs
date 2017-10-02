@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace HomeMyDay
 {
@@ -74,8 +75,19 @@ namespace HomeMyDay
 			//Mail Services setting
 			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
 
+			//Session settings
+			services.AddDistributedMemoryCache();
+
+			services.AddSession(options =>
+			{
+				options.IdleTimeout = TimeSpan.FromMinutes(30);
+				options.Cookie.HttpOnly = true;
+			});
+
 			services.AddTransient<IEmailServices, EmailServices>();
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
+			services.AddTransient<ICountryRepository, EFCountryRepository>();
+			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();
             services.AddTransient<IVacancieRepository, EFVacancieRepository>();
 
             services.AddMvc();
@@ -99,6 +111,7 @@ namespace HomeMyDay
 
 			app.UseStaticFiles();
 			app.UseAuthentication();
+			app.UseSession();
 
 			app.UseMvc(routes =>
 			{
@@ -107,7 +120,7 @@ namespace HomeMyDay
 					template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-			SeedHolidayDbData.Seed(dbContext);
+			SeedHomeMyDayDbData.Seed(dbContext);
 		}
 	}
 }
