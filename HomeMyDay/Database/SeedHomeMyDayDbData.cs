@@ -15,7 +15,7 @@ namespace HomeMyDay.Database
 			//Seed accommodations
 			if (!context.Accommodations.Any())
 			{
-				SeedAccommodations(context);				
+				SeedAccommodations(context);
 			}
 
 			//Seed countries
@@ -46,6 +46,24 @@ namespace HomeMyDay.Database
 				PricesText = generator.GenerateParagraphs(1)[0],
 				SpaceText = generator.GenerateParagraphs(1)[0],
 				ServicesText = generator.GenerateParagraphs(1)[0],
+				MediaObjects = new List<MediaObject>()
+				{
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-1.jpg",
+						Type = MediaType.Image,
+						Title = "Indoor living room",
+						Description = "Example description",
+						Primary = true
+					},
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-2.jpg",
+						Type = MediaType.Image,
+						Title = "Outdoor house",
+						Description = "Example description",
+					}
+				}
 			});
 
 			context.Accommodations.Add(new Accommodation()
@@ -65,6 +83,24 @@ namespace HomeMyDay.Database
 				PricesText = generator.GenerateParagraphs(1)[0],
 				SpaceText = generator.GenerateParagraphs(1)[0],
 				ServicesText = generator.GenerateParagraphs(1)[0],
+				MediaObjects = new List<MediaObject>()
+				{
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-3.jpg",
+						Type = MediaType.Image,
+						Title = "Sea sight",
+						Description = "Example description",
+						Primary = true
+					},
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-4.jpg",
+						Type = MediaType.Image,
+						Title = "Terras view",
+						Description = "Example description"
+					}
+				}
 			});
 
 			context.Accommodations.Add(new Accommodation()
@@ -84,6 +120,24 @@ namespace HomeMyDay.Database
 				PricesText = generator.GenerateParagraphs(1)[0],
 				SpaceText = generator.GenerateParagraphs(1)[0],
 				ServicesText = generator.GenerateParagraphs(1)[0],
+				MediaObjects = new List<MediaObject>()
+				{
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-1.jpg",
+						Type = MediaType.Image,
+						Title = "Indoor living room",
+						Description = "Example description",
+						Primary = true
+					},
+					new MediaObject()
+					{
+						Url = "/images/holiday/image-2.jpg",
+						Type = MediaType.Image,
+						Title = "Outdoor house",
+						Description = "Example description"
+					}
+				}
 			});
 
 			context.SaveChanges();
