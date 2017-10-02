@@ -14,14 +14,14 @@ namespace HomeMyDay.Repository
 		/// <returns>IEnumerable containing all accommodations</returns>
 		IEnumerable<Accommodation> Accommodations { get; }
 
-		/// <summary>
-		/// Gets one accommodation.
-		/// </summary>
-		/// <param name="id">The identifier.</param>
-		/// <returns></returns>
-		/// <exception cref="ArgumentOutOfRangeException">id</exception>
-		/// <exception cref="KeyNotFoundException"></exception>
-		Accommodation GetAccommodation(long id);
+        /// <summary>
+        /// Gets one accommodation.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException">id</exception>
+        /// <exception cref="KeyNotFoundException"></exception>
+        Accommodation GetAccommodation(long id);
 
 		/// <summary>
 		/// Get all recommended accommodations from repository
