@@ -48,8 +48,7 @@ namespace HomeMyDay.Database
 			builder.Entity<Newspaper>()
 				.HasAlternateKey(x => x.Email)
 				.HasName("Alt_Email");
-		}
-	}
+		}  
 
         /// <summary>
 		/// The Vacancies that have been saved.
