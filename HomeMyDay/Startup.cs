@@ -88,6 +88,7 @@ namespace HomeMyDay
             services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
             services.AddTransient<ICountryRepository, EFCountryRepository>();
             services.AddTransient<INewspaperRepository, EFNewspaperRepository>();
+            services.AddTransient<IReviewRepository, EFReviewRepository>();
 
             services.AddMvc();
         }

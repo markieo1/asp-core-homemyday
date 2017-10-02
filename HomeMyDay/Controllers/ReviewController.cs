@@ -1,6 +1,9 @@
-﻿using HomeMyDay.Repository;
+﻿using HomeMyDay.Models;
+using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HomeMyDay.Controllers
@@ -14,10 +17,10 @@ namespace HomeMyDay.Controllers
             _repository = repo;           
         }
 
-        public ViewResult Index(ReviewViewModel model)
+        public ViewResult Index()
         {
             var reviews = _repository.Reviews;
-            return View("index", reviews.OrderByDescending(a => a.Id));            
+            return View(reviews);
         }
     }
 }

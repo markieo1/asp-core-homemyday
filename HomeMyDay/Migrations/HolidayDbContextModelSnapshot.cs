@@ -225,7 +225,7 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<long>("AccommodationId");
 
                     b.Property<DateTime>("Date");
 
@@ -284,7 +284,8 @@ namespace HomeMyDay.Migrations
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
-                        .HasForeignKey("AccommodationId");
+                        .HasForeignKey("AccommodationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

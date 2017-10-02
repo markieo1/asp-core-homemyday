@@ -12,8 +12,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    [Migration("20170929132106_Add_Reviews")]
-    partial class Add_Reviews
+    [Migration("20171002102734_Add_Review")]
+    partial class Add_Review
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -226,7 +226,7 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
+                    b.Property<long>("AccommodationId");
 
                     b.Property<DateTime>("Date");
 
@@ -285,7 +285,8 @@ namespace HomeMyDay.Migrations
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
-                        .HasForeignKey("AccommodationId");
+                        .HasForeignKey("AccommodationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

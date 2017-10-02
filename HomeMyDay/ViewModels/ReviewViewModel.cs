@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeMyDay.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,11 @@ namespace HomeMyDay.ViewModels
 {
     public class ReviewViewModel
     {
+        /// <summary>
+        /// The Name of the user who filled in the form
+        /// </summary>
+        public string Title { get; set; }
+
         /// <summary>
         /// The Name of the user who filled in the form
         /// </summary>

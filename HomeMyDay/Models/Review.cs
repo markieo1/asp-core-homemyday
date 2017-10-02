@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeMyDay.Models
 {
@@ -8,7 +9,8 @@ namespace HomeMyDay.Models
         /// <summary>
 		/// The accommodation where the customer is staying.
 		/// </summary>
-		public Accommodation Accommodation { get; set; }
+        
+		public long AccommodationId { get; set; }
 
         /// <summary>
         /// The Name of the user who filled in the form
@@ -29,5 +31,8 @@ namespace HomeMyDay.Models
         /// The date of when the review is placed
         /// </summary>
         public DateTime Date { get; set; }
+
+        [ForeignKey("AccommodationId")]
+        public virtual Accommodation Accommodation { get; set; }
     }
 }

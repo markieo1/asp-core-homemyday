@@ -1,6 +1,7 @@
 ﻿using HomeMyDay.Database;
 using HomeMyDay.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -14,5 +15,10 @@ namespace HomeMyDay.Repository.Implementation
         }
 
         public IEnumerable<Review> Reviews => _context.Reviews;
+
+        public IEnumerable<Review> GetAccomodationReviews(long id)
+        {
+            return _context.Reviews.Where(a => a.AccommodationId == id);
+        }        
     }
 }

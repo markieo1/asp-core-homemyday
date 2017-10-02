@@ -10,5 +10,7 @@ namespace HomeMyDay.Repository
         /// </summary>
         /// <returns>IEnumerable containing all reviews</returns>
         IEnumerable<Review> Reviews { get; }
+
+        IEnumerable<Review> GetAccomodationReviews(long id);
     }
 }
