@@ -20,6 +20,10 @@ p {
     margin-bottom: 80px;
 }
 
+.mbot150{
+    margin-bottom: 150px
+}
+
 .bottom-buffer {
     padding-bottom: 15px;
 }
@@ -247,4 +251,8 @@ p {
 
 .border-right {
     border-right: $border-color-5px;
+}
+
+.vacancy-overview > :last-child {
+    margin-bottom: 66px;
 }

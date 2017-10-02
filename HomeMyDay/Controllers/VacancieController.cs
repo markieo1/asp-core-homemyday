@@ -18,16 +18,13 @@ namespace HomeMyDay.Controllers
 
         [HttpGet]
         public IActionResult Index()
-        {
-            if(!_vacancieRepository.Vacancies.Any())
-            {
-                return View("../Partials/NoVacancies.cshtml");
-            }
-            else
-            {
-                return View(_vacancieRepository.Vacancies.OrderByDescending(a => a.Id));
-            }
-                          
+        {	   
+	        if (_vacancieRepository.Vacancies.Any())
+	        {
+		        return View(_vacancieRepository.Vacancies.OrderByDescending(a => a.Id));
+	        }
+
+	        return View("NoVacancies");	
         }
 
         [HttpGet]
