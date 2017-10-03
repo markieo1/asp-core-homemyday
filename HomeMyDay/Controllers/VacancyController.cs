@@ -8,11 +8,11 @@ using HomeMyDay.ViewModels;
 
 namespace HomeMyDay.Controllers
 {
-	public class VacancieController : Controller
+	public class VacancyController : Controller
 	{
 		private readonly IVacancieRepository _vacancieRepository;
 
-		public VacancieController(IVacancieRepository repo)
+		public VacancyController(IVacancieRepository repo)
 		{
 			_vacancieRepository = repo;
 		}
@@ -20,13 +20,11 @@ namespace HomeMyDay.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
-			var vacancies = _vacancieRepository.Vacancies.ToList();
-			var vacancieViewModels = new List<VacancieViewModel>();
-			vacancies.ForEach(x => vacancieViewModels.Add(VacancieViewModel.FromVacancie(x)));
-
-			if (vacancieViewModels.Any())
+			var vacancies = _vacancieRepository.Vacancies;
+            
+			if (vacancies.Any())
 			{
-				return View(vacancieViewModels);
+				return View(vacancies);
 			}
 
 			return View("NoVacancies");
@@ -35,7 +33,7 @@ namespace HomeMyDay.Controllers
 		[HttpGet]
 		public IActionResult Detail(long id)
 		{
-			Vacancie vacancie = null;
+			Vacancy vacancie = null;
 
 			try
 			{
@@ -50,8 +48,7 @@ namespace HomeMyDay.Controllers
 				return NotFound();
 			}
 
-			var vacancieViewModel = VacancieViewModel.FromVacancie(vacancie);
-			return View(vacancieViewModel);
+			return View(vacancie);
 		}
 	}
 }

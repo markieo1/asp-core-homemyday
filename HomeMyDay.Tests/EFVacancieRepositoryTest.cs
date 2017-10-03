@@ -41,7 +41,7 @@ namespace HomeMyDay.Tests
 		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-		    context.Vacancies.Add(new Vacancie()
+		    context.Vacancies.Add(new Vacancy()
 		    {
 				Id = 1,
 				JobTitle = "Test",
@@ -66,7 +66,7 @@ namespace HomeMyDay.Tests
 		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-		    context.Vacancies.Add(new Vacancie()
+		    context.Vacancies.Add(new Vacancy()
 		    {
 				Id = 1,
 			    JobTitle = "Test",
@@ -107,10 +107,10 @@ namespace HomeMyDay.Tests
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 		    context.Vacancies.AddRange(
-			    new Vacancie() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test0"},
-			    new Vacancie() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test1"},
-			    new Vacancie() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test2"},
-			    new Vacancie() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test3" }
+			    new Vacancy() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test0"},
+			    new Vacancy() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test1"},
+			    new Vacancy() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test2"},
+			    new Vacancy() { JobTitle = "Dit is een omschrijving", AboutFunction = "Test3" }
 		    );
 		    context.SaveChanges();
 

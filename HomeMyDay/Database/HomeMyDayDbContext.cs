@@ -42,7 +42,7 @@ namespace HomeMyDay.Database
         /// <summary>
 		/// The Vacancies that have been saved.
 		/// </summary>
-        public DbSet<Vacancie> Vacancies { get; set; }
+        public DbSet<Vacancy> Vacancies { get; set; }
 
         /// <summary>
         /// The Reviews that have been saved.

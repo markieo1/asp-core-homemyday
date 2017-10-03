@@ -10,7 +10,7 @@ namespace HomeMyDay.Repository
 		/// Gets the Vacancies.
 		/// </summary>
 		/// <returns>IEnumerable containing all vacancies</returns>
-        IEnumerable<Vacancie> Vacancies { get; }
+        IEnumerable<Vacancy> Vacancies { get; }
 
         /// <summary>
         /// Gets one vacancie.
@@ -19,6 +19,6 @@ namespace HomeMyDay.Repository
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException">id</exception>
         /// <exception cref="KeyNotFoundException"></exception>
-        Vacancie GetVacancie(long id);
+        Vacancy GetVacancie(long id);
     }
 }

@@ -15,16 +15,16 @@ namespace HomeMyDay.Repository.Implementation
             _context = context;
         }
 
-        public IEnumerable<Vacancie> Vacancies => _context.Vacancies;
+        public IEnumerable<Vacancy> Vacancies => _context.Vacancies;
 
-        public Vacancie GetVacancie(long id)
+        public Vacancy GetVacancie(long id)
         {
             if (id <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(id));
             }
 
-            Vacancie vacancie = _context.Vacancies.FirstOrDefault(item => item.Id == id);
+            Vacancy vacancie = _context.Vacancies.FirstOrDefault(item => item.Id == id);
 
             if (vacancie == null)
             {

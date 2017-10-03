@@ -2,7 +2,7 @@
 
 namespace HomeMyDay.Models
 {
-    public class Vacancie : BaseModel
+    public class Vacancy : BaseModel
     {
         /// <summary>
         /// The job-title of the vacancie

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HomeMyDay.Migrations
 {
-    public partial class Add_Vacancies : Migration
+    public partial class Add_Vacancy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
