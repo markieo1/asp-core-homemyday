@@ -5,11 +5,6 @@ namespace HomeMyDay.ViewModels
 	public class VacancieViewModel
     {
 		/// <summary>
-		/// The id of the vacancie
-		/// </summary>
-		public long Id { get; set; }
-
-		/// <summary>
 		/// The job-title of the vacancie
 		/// </summary>
 		public string JobTitle { get; set; }

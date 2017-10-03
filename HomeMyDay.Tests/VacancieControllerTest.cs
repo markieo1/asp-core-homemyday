@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using HomeMyDay.Controllers;
 using HomeMyDay.Database;
 using HomeMyDay.Repository;
@@ -22,7 +20,7 @@ namespace HomeMyDay.Tests
 
 			VacancieController target = new VacancieController(repository);
 
-			VacancieView
-		}
+            Assert.Empty(repository.Vacancies);
+        }
 	}
 }
