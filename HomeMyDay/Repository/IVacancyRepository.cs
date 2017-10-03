@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HomeMyDay.Repository
 {
-	public interface IVacancieRepository
+	public interface IVacancyRepository
     {
         /// <summary>
 		/// Gets the Vacancies.
@@ -19,6 +19,6 @@ namespace HomeMyDay.Repository
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException">id</exception>
         /// <exception cref="KeyNotFoundException"></exception>
-        Vacancy GetVacancie(long id);
+        Vacancy GetVacancy(long id);
     }
 }

@@ -18,9 +18,9 @@ namespace HomeMyDay.Tests
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-			IVacancieRepository repository = new EFVacancieRepository(context);
+			IVacancyRepository repository = new EFVacancyRepository(context);
 
-		    Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetVacancie(0));
+		    Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetVacancy(0));
 	    }
 
 	    [Fact]
@@ -29,9 +29,9 @@ namespace HomeMyDay.Tests
 		    var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-		    IVacancieRepository repository = new EFVacancieRepository(context);
+		    IVacancyRepository repository = new EFVacancyRepository(context);
 
-		    Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetVacancie(-1));
+		    Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetVacancy(-1));
 	    }	
 
 		[Fact]
@@ -55,9 +55,9 @@ namespace HomeMyDay.Tests
 
 		    context.SaveChanges();
 
-			IVacancieRepository repository = new EFVacancieRepository(context);
+			IVacancyRepository repository = new EFVacancyRepository(context);
 
-		    Assert.Throws<KeyNotFoundException>(() => repository.GetVacancie(2));
+		    Assert.Throws<KeyNotFoundException>(() => repository.GetVacancy(2));
 	    }
 
 	    public void TestGetIdExistingAccommodation()
@@ -81,9 +81,9 @@ namespace HomeMyDay.Tests
 
 		    context.SaveChanges();
 
-		    IVacancieRepository repository = new EFVacancieRepository(context);
+		    IVacancyRepository repository = new EFVacancyRepository(context);
 
-		    var vacancie = repository.GetVacancie(1);
+		    var vacancie = repository.GetVacancy(1);
 
 		    Assert.NotNull(vacancie);			   
 	    }
@@ -94,7 +94,7 @@ namespace HomeMyDay.Tests
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-			IVacancieRepository repository = new EFVacancieRepository(context);
+			IVacancyRepository repository = new EFVacancyRepository(context);
 
 			Assert.Empty(repository.Vacancies);
 		}
@@ -114,7 +114,7 @@ namespace HomeMyDay.Tests
 		    );
 		    context.SaveChanges();
 
-		    IVacancieRepository repository = new EFVacancieRepository(context);
+		    IVacancyRepository repository = new EFVacancyRepository(context);
 
 		    Assert.True(repository.Vacancies.Count() == 4);
 	    }  

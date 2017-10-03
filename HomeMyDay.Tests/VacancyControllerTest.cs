@@ -16,7 +16,7 @@ namespace HomeMyDay.Tests
             var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
             optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
             HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-            IVacancieRepository repository = new EFVacancieRepository(context);
+            IVacancyRepository repository = new EFVacancyRepository(context);
 
             VacancyController target = new VacancyController(repository);
 

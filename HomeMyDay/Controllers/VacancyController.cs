@@ -10,9 +10,9 @@ namespace HomeMyDay.Controllers
 {
 	public class VacancyController : Controller
 	{
-		private readonly IVacancieRepository _vacancieRepository;
+		private readonly IVacancyRepository _vacancieRepository;
 
-		public VacancyController(IVacancieRepository repo)
+		public VacancyController(IVacancyRepository repo)
 		{
 			_vacancieRepository = repo;
 		}
@@ -37,7 +37,7 @@ namespace HomeMyDay.Controllers
 
 			try
 			{
-				vacancie = _vacancieRepository.GetVacancie(id);
+				vacancie = _vacancieRepository.GetVacancy(id);
 			}
 			catch (ArgumentOutOfRangeException)
 			{
