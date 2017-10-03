@@ -256,12 +256,20 @@ p {
     border-right: $border-color-5px;
 }
 
-.vacancy-overview > :last-child {
-    margin-bottom: 66px;
-}
-}
+.header-image {
+    width: 100%;
 
-.accomodation-detail-reviews {
-    overflow-y: scroll;
-    max-height: 400px;
+    @include for-phone-only {
+        height: 200px;
+    }
+
+    @include for-tablet-up {
+        height: 300px;
+    }
+
+    @include for-desktop-up {
+        height: 500px;
+    }
 }
+.vacancy-overview > :last-child {
+    margin-bottom: 66px;}
