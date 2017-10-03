@@ -21,7 +21,7 @@ p {
 }
 
 .mbot150 {
-	margin-bottom: 150px
+    margin-bottom: 150px
 }
 
 .bottom-buffer {
@@ -105,8 +105,9 @@ p {
 }
 
 .bold {
-	font-weight: bold;
+    font-weight: bold;
 }
+
 
 .row.search-bar {
 	padding-top: 20px;
@@ -138,16 +139,15 @@ p {
 	display: flex;
 	vertical-align: middle;
 	align-items: center;
+	
+    > #night, #good {
+        border-color: $primary-color;
 
-	> #night, #good {
-		padding-top: 10px;
-		border-color: $primary-color;
-
-		@include for-desktop-up {
-			height: 240px;
-			margin-bottom: -35px;
-		}
-	}
+        @include for-desktop-up {
+            height: 240px;
+            margin-bottom: 35px;
+        }
+    }
 }
 
 #booking-form {
@@ -278,5 +278,18 @@ p {
 }
 
 .vacancy-overview > :last-child {
-	margin-bottom: 66px;
+    margin-bottom: 66px;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.content {
+    padding-bottom: 200px;
 }
