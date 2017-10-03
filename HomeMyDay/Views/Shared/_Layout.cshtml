@@ -4,14 +4,19 @@
     @Html.Partial("../Partials/Header.cshtml")
 
 </head>
-<body class="p-t-51" data-spy="scroll" data-target="#navbar-navigation">
-    @Html.Partial("../Partials/Navigation.cshtml")
-
-    @RenderBody()
-
-    @await Component.InvokeAsync("PopupLogin")
-    @Html.Partial("../Partials/Footer.cshtml")
-
+<body data-spy="scroll" data-target="#navbar-navigation">
+    <div class="wrapper">
+        <div class="header p-t-51">
+            @Html.Partial("../Partials/Navigation.cshtml")
+        </div>
+        <div class="content">
+            @RenderBody()
+            @await Component.InvokeAsync("PopupLogin")
+        </div>
+        <footer>
+            @Html.Partial("../Partials/Footer.cshtml")
+        </footer>
+    </div>
     <environment include="Development">
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
