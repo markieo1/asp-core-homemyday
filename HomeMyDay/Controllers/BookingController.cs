@@ -7,6 +7,8 @@ using HomeMyDay.ViewModels;
 using HomeMyDay.Repository;
 using HomeMyDay.Models;
 using HomeMyDay.Extensions;
+using HomeMyDay.Services;
+using Microsoft.Extensions.Options;
 
 namespace HomeMyDay.Controllers
 {
@@ -16,11 +18,13 @@ namespace HomeMyDay.Controllers
 
 		private readonly IAccommodationRepository accommodationRepository;
 		private readonly ICountryRepository countryRepository;
+		private readonly IOptions<GoogleApiServiceOptions> googleOptions;
 
-		public BookingController(IAccommodationRepository repo, ICountryRepository countryRepo)
+		public BookingController(IAccommodationRepository repo, ICountryRepository countryRepo, IOptions<GoogleApiServiceOptions> googleOpts)
 		{
 			this.accommodationRepository = repo;
 			this.countryRepository = countryRepo;
+			this.googleOptions = googleOpts;
 		}
 
 		[HttpGet]
@@ -46,6 +50,9 @@ namespace HomeMyDay.Controllers
 			//Get countries from db
 			IEnumerable<Country> countries = countryRepository.Countries.OrderBy(c => c.Name);
 			ViewBag.Countries = countries;
+
+			//Get google client API key
+			ViewBag.GoogleClientApiKey = googleOptions.Value.ClientApiKey;
 
 			return View(formModel);
 		}

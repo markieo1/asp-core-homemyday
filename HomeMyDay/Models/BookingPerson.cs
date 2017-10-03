@@ -72,6 +72,13 @@ namespace HomeMyDay.Models
 		public Country Country { get; set; }
 
 		/// <summary>
+		/// The city that the person resides in.
+		/// </summary>
+		[DisplayName("Stad")]
+		[Required]
+		public string City { get; set; }
+
+		/// <summary>
 		/// The postal code that the person resides in.
 		/// </summary>
 		[DisplayName("Postcode")]
