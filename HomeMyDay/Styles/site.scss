@@ -20,7 +20,7 @@ p {
     margin-bottom: 80px;
 }
 
-.mbot150{
+.mbot150 {
     margin-bottom: 150px
 }
 
@@ -93,7 +93,7 @@ p {
 }
 
 .bold {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .container-about {
@@ -135,12 +135,11 @@ p {
     align-items: center;
 
     > #night, #good {
-        padding-top: 10px;
         border-color: $primary-color;
 
         @include for-desktop-up {
             height: 240px;
-            margin-bottom: -35px;
+            margin-bottom: 35px;
         }
     }
 }
@@ -274,4 +273,17 @@ p {
 
 .vacancy-overview > :last-child {
     margin-bottom: 66px;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.content {
+    padding-bottom: 200px;
 }
