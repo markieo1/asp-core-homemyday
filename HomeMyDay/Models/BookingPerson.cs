@@ -40,7 +40,6 @@ namespace HomeMyDay.Models
 		/// The person's insertion (tussenvoegsel).
 		/// </summary>
 		[DisplayName("Tussenvoegsel")]
-		[Required]
 		public string Insertion { get; set; }
 
 		/// <summary>
