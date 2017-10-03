@@ -88,8 +88,14 @@ p {
 	padding-bottom: 47.25%;
 }
 
-.container-full-height {
+.container-about {
 	min-height: 100vh;
+	display: grid;
+	align-items: center;
+}
+
+.container-process {
+	min-height: 70vh;
 	display: grid;
 	align-items: center;
 }
