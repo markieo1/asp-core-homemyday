@@ -7,14 +7,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img class="logo" alt="Logo" src="~/images/logo/logo.png" /></a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <span class="navbar-text">
+                    HomeMyDay
+                </span>
+            </a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#index">Home</a></li>
                 <li><a href="#howitworks">Hoe werkt het</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#review">Review</a></li>
+                <li><a asp-controller="Faq" asp-action="Index">FAQ</a></li>
+                <li><a asp-controller="Review" asp-action="Index">Review</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -23,9 +27,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="#supriseholiday">Verassingsreizen</a></li>
-                        <li><a href="#newsletter">Nieuwsbrief</a></li>
+                        <li><a asp-controller="Newspaper" asp-action="Index">Nieuwsbrief</a></li>
                         <li><a href="#jobs">Vacatures</a></li>
-                        <li><a href="#press">Pers</a></li>
+                        <li><a asp-controller="Press" asp-action="Index">Pers</a></li>
                     </ul>
                 </li>
 
@@ -38,8 +42,8 @@
                 }
                 else
                 {
-                    <li><a asp-controller="Account" asp-action="Login">Login</a></li>
-                    
+                    <li><a href="" data-toggle="modal" data-target="#modal-login">Login</a></li>
+
                 }
             </ul>
         </div>

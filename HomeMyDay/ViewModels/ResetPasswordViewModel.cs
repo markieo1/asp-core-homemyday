@@ -12,17 +12,31 @@ namespace HomeMyDay.ViewModels
 		public Guid Id { get; set; }
 
 		/// <summary>
-		/// Gets or sets the new password of the user.
+		/// Gets or sets the Email of the user.
 		/// </summary>
 		[Required]
-		[DataType(DataType.Password)]
-		public string NewPassword { get; set; }
+		[EmailAddress]
+		public string Email { get; set; }
 
 		/// <summary>
-		/// Gets or sets the new password confirmation of the user.
+		/// Gets or sets the Password of the user.
 		/// </summary>
 		[Required]
 		[DataType(DataType.Password)]
-		public string NewPasswordConfirmation { get; set; }
-    }
+		public string Password { get; set; }
+
+		/// <summary>
+		/// get and set second password and compare Password of the user.
+		/// </summary>
+		[DataType(DataType.Password)]
+		[Display(Name = "Confirm password")]
+		[Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+		public string ConfirmPassword { get; set; }
+
+		/// <summary>
+		/// Gets or sets the Confirm Code of the user.
+		/// </summary>
+		[Required]
+		public string Code { get; set; }
+	}
 }

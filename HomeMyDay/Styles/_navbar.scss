@@ -5,6 +5,10 @@ nav .navbar-brand > img {
     width: auto;
 }
 
+.navbar-inverse .navbar-text {
+    color: $text-color;
+}
+
 nav .navbar-brand {
     margin-left: 15px !important;
     padding: 0px;
