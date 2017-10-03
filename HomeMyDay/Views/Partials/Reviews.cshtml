@@ -2,20 +2,23 @@
 
 @if (Model.Any())
 {
-    <div class="accomodation-detail-reviews">
-        <h3>Bekijk recensies over deze accomodatie</h3>
-        @foreach (var p in Model)
-        {
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>@p.Title</h3>
-                    <p>@p.Text</p>
-                    <span>@p.Name</span>
-                    <span>@p.Date.ToString("dd MMM yyyy")</span>
+    @foreach (var p in Model)
+    {
+        <div class="panel panel-default">
+            @if (!string.IsNullOrWhiteSpace(p.Title))
+            {
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        @p.Title
                 </div>
+            </div>}
+            <div class="panel-body">
+                <p>@p.Text</p>
+                <span>@p.Name</span>
+                <span>@p.Date.ToString("dd MMM yyyy")</span>
             </div>
-        }
-    </div>
+        </div>
+    }
 }
 else
 {
