@@ -16,6 +16,14 @@ namespace HomeMyDay.ViewModels
 		/// </value>
 		public Accommodation Accommodation { get; set; }
 
+        /// <summary>
+		/// Gets reviews of an accomodation.
+		/// </summary>
+		/// <value>
+		/// The reviews.
+		/// </value>
+        public List<ReviewViewModel> Reviews { get; set; }
+
 		/// <summary>
 		/// Gets or sets the detail blocks.
 		/// </summary>
@@ -29,40 +37,51 @@ namespace HomeMyDay.ViewModels
 		/// </summary>
 		/// <param name="accommodation">The accommodation.</param>
 		/// <returns></returns>
-		public static AccommodationViewModel FromAccommodation(Accommodation accommodation)
+		public static AccommodationViewModel FromAccommodation(Accommodation accommodation, List<Review> reviews)
 		{
-			return new AccommodationViewModel()
-			{
-				Accommodation = accommodation,
-				DetailBlocks = new List<AccommodationDetailBlockViewModel>
-				{
-					new AccommodationDetailBlockViewModel()
-					{
-						Title = "Ruimte",
-						Text = accommodation.SpaceText
-					},
-					new AccommodationDetailBlockViewModel()
-					{
-						Title = "Voorzieningen",
-						Text = accommodation.ServicesText
-					},
-					new AccommodationDetailBlockViewModel()
-					{
-						Title = "Prijzen",
-						Text = accommodation.PricesText
-					},
-					new AccommodationDetailBlockViewModel()
-					{
-						Title = "Huisregels",
-						Text = accommodation.RulesText
-					},
-					new AccommodationDetailBlockViewModel()
-					{
-						Title = "Annulering",
-						Text = accommodation.CancellationText
-					}
-				}
-			};
+            var reviewViewModels = new List<ReviewViewModel>();
+
+            reviews.ForEach(x => reviewViewModels.Add(new ReviewViewModel()
+            {
+                Name = x.Name,
+                Text = x.Text,
+                Date = x.Date
+            }));
+
+            return new AccommodationViewModel()
+            {
+                Accommodation = accommodation,
+
+                DetailBlocks = new List<AccommodationDetailBlockViewModel>
+                {
+                    new AccommodationDetailBlockViewModel()
+                    {
+                        Title = "Ruimte",
+                        Text = accommodation.SpaceText
+                    },
+                    new AccommodationDetailBlockViewModel()
+                    {
+                        Title = "Voorzieningen",
+                        Text = accommodation.ServicesText
+                    },
+                    new AccommodationDetailBlockViewModel()
+                    {
+                        Title = "Prijzen",
+                        Text = accommodation.PricesText
+                    },
+                    new AccommodationDetailBlockViewModel()
+                    {
+                        Title = "Huisregels",
+                        Text = accommodation.RulesText
+                    },
+                    new AccommodationDetailBlockViewModel()
+                    {
+                        Title = "Annulering",
+                        Text = accommodation.CancellationText
+                    },
+                },
+                Reviews = reviewViewModels
+            };
 		}
 	}
 }

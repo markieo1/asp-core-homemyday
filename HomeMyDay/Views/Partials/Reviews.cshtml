@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HomeMyDay.ViewModels.ReviewViewModel>
+
+@if (Model.Any())
+{
+    <div class="accomodation-detail-reviews">
+        <h3>Bekijk recensies over deze accomodatie</h3>
+        @foreach (var p in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>@p.Title</h3>
+                    <p>@p.Text</p>
+                    <span>@p.Name</span>
+                    <span>@p.Date.ToString("dd MMM yyyy")</span>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Er zijn op dit moment geen reviews</h2>
+        </div>
+    </div>
+}
