@@ -20,6 +20,10 @@ p {
     margin-bottom: 80px;
 }
 
+.mbot150{
+    margin-bottom: 150px
+}
+
 .bottom-buffer {
     padding-bottom: 15px;
 }
@@ -82,6 +86,14 @@ p {
 
 .videoWrapper {
     padding-bottom: 47.25%;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+.bold {
+    font-weight:bold;
 }
 
 .container-about {
@@ -198,6 +210,16 @@ p {
     color: $icon-color;
 }
 
+.vacancy-shadow {
+    -webkit-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    -moz-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+}
+
+.gray {
+    color: $color-gray;
+}
+
 .field-validation-error {
     color: $error-text-color;
     display: block;
@@ -248,4 +270,8 @@ p {
     @include for-desktop-up {
         height: 500px;
     }
+}
+
+.vacancy-overview > :last-child {
+    margin-bottom: 66px;
 }

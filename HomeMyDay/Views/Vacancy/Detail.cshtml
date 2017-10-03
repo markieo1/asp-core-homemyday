@@ -1,0 +1,57 @@
+﻿@model Vacancy
+
+<div class="container">
+    <h1 class="page-header">Vacature</h1>
+    <div class="col-md-12 mbot150">
+        <div class="col-md-8">
+            <div class="panel panel-default vacancy-shadow ">
+                <div class="panel-body">
+                    <h3>@Model.JobTitle - @Model.Company</h3>
+                    <span class="gray">@Model.City</span>
+                </div>                
+            </div>
+
+            <div class="panel panel-default vacancy-shadow">
+                <div class="panel-body">
+                    <h3>Over de vacature:</h3>
+                    <div>@Model.AboutVacancy</div>
+
+                    <h3>Functieomschrijving:</h3>
+                    <div>@Model.AboutFunction</div>
+
+                    <h3>Functie-eisen:</h3>
+                    <div>@Model.JobRequirements</div>
+
+                    <h3>Wij bieden:</h3>
+                    <div>@Model.WeOffer</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default vacancy-shadow">
+                <div class="panel-body">
+                    <h3>Vacature Samenvatting</h3>
+                    <div class="m-b-20">
+                        <p><strong>Locatie</strong></p>
+                        <span>Breda</span>
+                    </div>
+
+                    <div class="m-b-20">
+                        <p><strong>Vacature type</strong></p>
+                        <span>Fulltime</span>
+                    </div>
+
+                    <div class="m-b-20">
+                        <p><strong>Geplaatst</strong></p>
+                        <span>1 Dagen geleden</span>
+                    </div>
+
+                    <div class="m-b-20">
+                        <p><strong>Industrie</strong></p>
+                        <span>Transport / Opslag / Distributie</span>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
