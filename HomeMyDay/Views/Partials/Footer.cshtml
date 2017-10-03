@@ -1,56 +1,91 @@
-﻿<footer class="footer">
+﻿<footer>
     <div class="container">
-        <div class="row equal">
-            <div class="col-sm-3"></div>
-
-            <div class="col-sm-2 border text-center">
+        <div class="row">
+            <div class="col-sm-3">
                 <h2>Informatie</h2>
-                <a>Onze garanties</a>
-                <a>Reviews</a>
-                <a>Verrassing</a>
-                <a>Informatie pakket</a>
-                <a>Werken bij</a>
+                <ul>
+                    <li>
+                        <a>Garanties</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Review" asp-action="Index">Reviews</a>
+                    </li>
+                    <li>
+                        <a>Suprise</a>
+                    </li>
+                    <li>
+                        <a>Informatie pakket</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Vacancy" asp-action="Index">Werken bij</a>
+                    </li>
+                </ul>
             </div>
-
-            <div class="col-sm-2 border text-center">
+            <div class="col-sm-3">
                 <h2>Extra's</h2>
-                <a asp-controller="Newspaper" asp-action="Index">Nieuwsbrief</a>
-                <a>Annulerings verzekering</a>
-                <a>Reis verzekering</a>
-                <a>Algemene voorwaarden</a>
-                <a>Juridische aspecten</a>
-                <a asp-controller="Press" asp-action="Index">Pers en media</a>
-
+                <ul>
+                    <li>
+                        <a asp-controller="Newspaper" asp-action="Index">Nieuwsbrief</a>
+                    </li>
+                    <li>
+                        <a>Annulerings verzekering</a>
+                    </li>
+                    <li>
+                        <a>Reisverzekering</a>
+                    </li>
+                    <li>
+                        <a>Algemene voorwaarden</a>
+                    </li>
+                    <li>
+                        <a>Juridische aspecten</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Press" asp-action="Index">Pers en media</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-3">
+                <h2>Community</h2>
+                <a class="btn btn-default" aria-label="Facebook">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-default" aria-label="Instagram">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-default" aria-label="LinkedIn">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-default" aria-label="Tumblr">
+                    <i class="fa fa-tumblr" aria-hidden="true"></i>
+                </a>
             </div>
 
-            <div class="col-sm-2 text-center">
+            <div class="col-sm-3">
                 <h2>Contact</h2>
-                <div>
-                    <a href="callto:0612345678">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                        0612345678
-                    </a>
-                </div>
-
-                <div>
-                    <a href="mailto:info@locallife.nl">
-                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        info@locallife.nl
-                    </a>
-                </div>
-
-                <div class="bottom-buffer">
-                    <address>
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        Mina Krusemanerf 72<br />
-                        3315 GC<br />
-                        Dordrecht
-                    </address>
-                </div>
+                <ul>
+                    <li>
+                        <a href="callto:31639874819">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            0639874819
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@homemyday.nl">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                            info@homemyday.nl
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://api.whatsapp.com/send?phone=31681129236">
+                            <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                            0681129236
+                        </a>
+                    </li>
+                    <li>
+                        KvK: 69734410
+                    </li>
+                </ul>
             </div>
-
-            <div class="col-sm-3"></div>
-
         </div>
     </div>
 </footer>

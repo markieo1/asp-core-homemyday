@@ -1,20 +1,15 @@
 ﻿@import 'colors';
 
-.footer {
+footer {
     background-color: $primary-color;
-    clear: both;
+    color: $text-color;
 
-    h2, a, address {
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    a {
         color: $text-color;
-        display: block;
-    }
-
-    h2 {
-        text-decoration: underline;
-    }
-
-    .border {
-        border-right: $border-color-1px;
     }
 }
-
