@@ -12,6 +12,7 @@ namespace HomeMyDay.Tests
 {
 	public class EFSupriseRepositoryTest
 	{
+		
 		[Fact]
 		public void TestGetSuprise()
 		{
@@ -25,6 +26,8 @@ namespace HomeMyDay.Tests
 				);
 
 			context.SaveChanges();
+
+
 			ISupriseRepository repository = new EFSupriseRepository(context);
 
 			Assert.Equal("LastSuprise", repository.GetLastSuprise().Title);
