@@ -160,15 +160,16 @@
 
         //Get city from postal code
         $('#booking-form .housenumber, #booking-form .postalcode').blur(function (e) { 
-            var personform = $(this).closest('.bookingperson');
+            let personform = $(this).closest('.bookingperson');
 
-            var postalcode = personform.find('input.postalcode').val();
+            let postalcode = personform.find('input.postalcode').val();
 
             //Get the city input field to autofill once the request completes
-            var cityinput = personform.find('input.city')[0];
+            let cityinput = personform.find('input.city')[0];
 
             if(postalcode)
             {
+                cityinput.readOnly = true;
                 getCityFromAddress(postalcode, cityinput);
             }
         });
@@ -177,21 +178,46 @@
         function getCityFromAddress(postalcode, cityinput)
         {
             //The base API URL
-            var baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
-            var searchString = postalcode;
+            let baseUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
+            let searchString = postalcode;
 
-            var geocoder = new google.maps.Geocoder();
+            let geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'address': searchString }, function (results, status) {
                 if(!status === 'OK')
                 {
                     //If autocomplete fails, unlock the city input.
-                    $(cityinput).prop('readonly', false);
+                    cityinput.readOnly = false;
                     return;
                 }
 
                 console.log(results);
 
-                cityinput.value = results[0].address_components[2].long_name
+                let cityname = null;
+
+                //Loop through the results until we find one in the Netherlands.
+                for(i = 0; i < results.length; i++)
+                {
+                    let result = results[i];
+
+                    //Loop through the address components and look for the Netherlands.
+                    for(j = 0; j < result.address_components.length; j++)
+                    {
+                        if(result.address_components[j].short_name === 'NL')
+                        {
+                            cityname = result.address_components[2].long_name;
+                        }
+                    }
+                }
+
+                if (cityname !== null)
+                {
+                    cityinput.value = cityname;
+                }
+                else
+                {
+                    //If no city was found, unlock the city input.
+                    cityinput.readOnly = false;
+                }
             });
         }
 
