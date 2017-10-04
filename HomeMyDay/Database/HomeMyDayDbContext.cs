@@ -35,6 +35,11 @@ namespace HomeMyDay.Database
 		public DbSet<Country> Countries { get; set; }
 
 		/// <summary>
+		/// Get or set the Suprise Model Content
+		/// </summary>
+		public DbSet<Suprise> Suprise { get; set; }
+
+		/// <summary>
 		/// Gets or sets the newspaper objects.
 		/// </summary>
 		public DbSet<Newspaper> Newspapers { get; set; }
