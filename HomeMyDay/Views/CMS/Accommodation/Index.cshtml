@@ -1,1 +1,7 @@
-﻿Welkom to the CMS area
+﻿@model PaginatedList<Accommodation>
+
+@foreach (Accommodation accommodation in Model)
+{
+    <p>@accommodation.Description</p>
+
+}

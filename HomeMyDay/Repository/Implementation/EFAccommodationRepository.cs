@@ -1,4 +1,5 @@
 ﻿using HomeMyDay.Database;
+using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,7 +20,7 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
-        public Accommodation GetAccommodation(long id)
+		public Accommodation GetAccommodation(long id)
 		{
 			if (id <= 0)
 			{
@@ -41,6 +42,21 @@ namespace HomeMyDay.Repository.Implementation
 		public IEnumerable<Accommodation> GetRecommendedAccommodations()
 		{
 			return _context.Accommodations.Include(nameof(Accommodation.MediaObjects)).Where(m => m.Recommended == true);
+		}
+
+		public Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10)
+		{
+			if (page < 1)
+			{
+				throw new ArgumentOutOfRangeException(nameof(page));
+			}
+
+			if (pageSize < 1)
+			{
+				throw new ArgumentOutOfRangeException(nameof(pageSize));
+			}
+
+			return PaginatedList<Accommodation>.CreateAsync(_context.Accommodations.AsNoTracking(), page, pageSize);
 		}
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
