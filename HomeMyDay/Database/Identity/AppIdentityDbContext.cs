@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeMyDay.Database
+namespace HomeMyDay.Database.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<User>
     {
