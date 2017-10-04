@@ -75,8 +75,11 @@ namespace HomeMyDay
 			//Mail Services setting
 			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
 
-			//Session settings
-			services.AddDistributedMemoryCache();
+			//Google API settings
+			services.Configure<GoogleApiServiceOptions>(Configuration.GetSection("GoogleMapsSettings"));
+
+            //Session settings
+            services.AddDistributedMemoryCache();
 
 			services.AddSession(options =>
 			{
