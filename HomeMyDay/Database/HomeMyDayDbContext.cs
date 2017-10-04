@@ -49,6 +49,16 @@ namespace HomeMyDay.Database
         /// </summary>
         public DbSet<Review> Reviews { get; set; }
 
+        /// <summary>
+        /// The FAQ category items that have been saved.
+        /// </summary>
+        public DbSet<FaqCategory> FaqCategory { get; set; }
+
+        /// <summary>
+        /// The FAQ Questions that have been saved.
+        /// </summary>
+        public DbSet<FaqQuestion> FaqQuestions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<Newspaper>()
