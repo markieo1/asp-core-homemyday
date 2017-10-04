@@ -16,7 +16,7 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public Suprise GetSuprise()
+		public virtual Suprise GetLastSuprise()
 		{
 			return _context.Suprise.LastOrDefault();
 		}

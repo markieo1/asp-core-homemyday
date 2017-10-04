@@ -20,9 +20,16 @@ namespace HomeMyDay.Components
 
 		public IViewComponentResult Invoke()
 		{
-			Suprise _suprise = _supriseRepository.GetSuprise();
-			SuprisePopUpViewModel model = new SuprisePopUpViewModel() { Title = _suprise.Title, Content = _suprise.Content };
-			return View(model);
+			Suprise _suprise = _supriseRepository.GetLastSuprise();
+			if (_suprise != null)
+			{
+				SuprisePopUpViewModel model = new SuprisePopUpViewModel() { Title = _suprise.Title, Content = _suprise.Content };
+				return View(model);
+			}
+			else
+			{
+				return View("NoSuprise");
+			}
 		}
 	}
 }

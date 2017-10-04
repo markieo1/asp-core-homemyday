@@ -11,6 +11,6 @@ namespace HomeMyDay.Repository
 		/// <summary>
 		/// Gets the latest suprise.
 		/// </summary>
-		Suprise GetSuprise();
+		Suprise GetLastSuprise();
 	}
 }
