@@ -1,7 +1,7 @@
 ﻿@import 'footer';
 @import 'navbar';
 @import 'colors';
-@import '_mixins';
+@import 'mixins';
 
 p {
     white-space: pre-wrap;
@@ -18,6 +18,10 @@ p {
 
 .mbot80 {
     margin-bottom: 80px;
+}
+
+.mbot150 {
+    margin-bottom: 150px
 }
 
 .bottom-buffer {
@@ -45,13 +49,16 @@ p {
     padding: 45px;
 }
 
-.header-image {
-    width: 100%;
-    height: 140px;
+.review-overview {
+    margin-bottom: 30px;
 
-    @include for-desktop-up {
-        height: 420px;
+    > span {
+        color: $color-gray;
     }
+}
+
+.p-b-20 {
+    padding-bottom: 20px;
 }
 
 .m-b-25 {
@@ -79,6 +86,14 @@ p {
 
 .videoWrapper {
     padding-bottom: 47.25%;
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .container-about {
@@ -120,12 +135,11 @@ p {
     align-items: center;
 
     > #night, #good {
-        padding-top: 10px;
         border-color: $primary-color;
 
         @include for-desktop-up {
             height: 240px;
-            margin-bottom: -35px;
+            margin-bottom: 35px;
         }
     }
 }
@@ -195,6 +209,16 @@ p {
     color: $icon-color;
 }
 
+.vacancy-shadow {
+    -webkit-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    -moz-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+}
+
+.gray {
+    color: $color-gray;
+}
+
 .field-validation-error {
     color: $error-text-color;
     display: block;
@@ -216,11 +240,10 @@ p {
 }
 
 .newspaper-label {
-    width: 120px;
-    z-index: 2;
-    margin-top: -20px;
+    max-width: 200px;
+    margin-top: -40px;
     position: relative;
-    float:none;
+    font-size: x-large;
 }
 
 .border-left {
@@ -229,4 +252,37 @@ p {
 
 .border-right {
     border-right: $border-color-5px;
+}
+
+.header-image {
+    width: 100%;
+
+    @include for-phone-only {
+        height: 200px;
+    }
+
+    @include for-tablet-up {
+        height: 300px;
+    }
+
+    @include for-desktop-up {
+        height: 500px;
+    }
+}
+
+.vacancy-overview > :last-child {
+    margin-bottom: 66px;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.content {
+    padding-bottom: 200px;
 }

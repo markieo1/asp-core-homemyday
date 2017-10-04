@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171002102734_Add_Review")]
+    partial class Add_Review
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,30 +241,6 @@ namespace HomeMyDay.Migrations
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Vacancy", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AboutFunction");
-
-                    b.Property<string>("AboutVacancy");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("Company");
-
-                    b.Property<string>("JobRequirements");
-
-                    b.Property<string>("JobTitle");
-
-                    b.Property<string>("WeOffer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Vacancies");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>

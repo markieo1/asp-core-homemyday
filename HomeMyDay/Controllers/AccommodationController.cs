@@ -12,20 +12,25 @@ namespace HomeMyDay.Controllers
 	public class AccommodationController : Controller
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
+		private readonly IReviewRepository _reviewRepository;
 
-		public AccommodationController(IAccommodationRepository repository)
+		public AccommodationController(IAccommodationRepository repository, IReviewRepository repo)
 		{
 			_accommodationRepository = repository;
+			_reviewRepository = repo;
 		}
 
 		[HttpGet]
 		public IActionResult Detail(long id)
 		{
 			Accommodation accommodation = null;
+			IEnumerable<Review> reviews = null;
+
 
 			try
 			{
 				accommodation = _accommodationRepository.GetAccommodation(id);
+				reviews = _reviewRepository.GetAccomodationReviews(id);
 			}
 			catch (ArgumentOutOfRangeException)
 			{
@@ -36,7 +41,7 @@ namespace HomeMyDay.Controllers
 				return NotFound();
 			}
 
-			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation);
+			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation, reviews.ToList());
 
 			return View(viewModel);
 		}

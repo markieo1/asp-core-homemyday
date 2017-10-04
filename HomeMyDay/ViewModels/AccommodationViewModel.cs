@@ -17,6 +17,14 @@ namespace HomeMyDay.ViewModels
 		public Accommodation Accommodation { get; set; }
 
 		/// <summary>
+		/// Gets reviews of an accomodation.
+		/// </summary>
+		/// <value>
+		/// The reviews.
+		/// </value>
+		public IEnumerable<ReviewViewModel> Reviews { get; set; }
+
+		/// <summary>
 		/// Gets or sets the detail blocks.
 		/// </summary>
 		/// <value>
@@ -28,12 +36,14 @@ namespace HomeMyDay.ViewModels
 		/// Creates an instance of <see cref="AccommodationViewModel"/> by using the <paramref name="accommodation"/>
 		/// </summary>
 		/// <param name="accommodation">The accommodation.</param>
+		/// <param name="reviews">The reviews of the accommodation</param>
 		/// <returns></returns>
-		public static AccommodationViewModel FromAccommodation(Accommodation accommodation)
+		public static AccommodationViewModel FromAccommodation(Accommodation accommodation, List<Review> reviews)
 		{
 			return new AccommodationViewModel()
 			{
 				Accommodation = accommodation,
+
 				DetailBlocks = new List<AccommodationDetailBlockViewModel>
 				{
 					new AccommodationDetailBlockViewModel()
@@ -60,8 +70,15 @@ namespace HomeMyDay.ViewModels
 					{
 						Title = "Annulering",
 						Text = accommodation.CancellationText
-					}
-				}
+					},
+				},
+				Reviews = reviews.Select(x => new ReviewViewModel()
+				{
+					Title = x.Title,
+					Name = x.Name,
+					Text = x.Text,
+					Date = x.Date
+				})
 			};
 		}
 	}

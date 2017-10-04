@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeMyDay.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,5 +46,7 @@ namespace HomeMyDay.ViewModels
 				return !string.IsNullOrWhiteSpace(Title) && !string.IsNullOrWhiteSpace(Text);
 			}
 		}
+
+        public IEnumerable<Review> Reviews { get; set; }
 	}
 }
