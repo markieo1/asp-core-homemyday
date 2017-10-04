@@ -19,6 +19,10 @@ namespace HomeMyDay.Models
         /// </summary>
         public string Answer { get; set; }
 
+
+        /// <summary>
+        /// The forgein key constraint on the FaqCategory object
+        /// </summary>
         [ForeignKey("CategoryId")]
         public virtual FaqCategory FaqCategory { get; set; }
     }

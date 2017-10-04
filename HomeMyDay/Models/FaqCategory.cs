@@ -14,6 +14,9 @@ namespace HomeMyDay.Models
         /// </summary>
         public string CategoryName { get; set; }
 
+        /// <summary>
+        /// List of questions which belongs to a category
+        /// </summary>
         public List<FaqQuestion> FaqQuestions {get; set;}
     }
 }
