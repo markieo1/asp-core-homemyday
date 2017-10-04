@@ -1,14 +1,10 @@
-﻿using HomeMyDay.Models;
-using HomeMyDay.Repository;
+﻿using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace HomeMyDay.Controllers
 {
-    public class ReviewController : Controller
+	public class ReviewController : Controller
     {
         private readonly IReviewRepository _repository ;
 
@@ -22,5 +18,25 @@ namespace HomeMyDay.Controllers
             var reviews = _repository.Reviews;
             return View(reviews);
         }
+
+		[HttpGet]
+	    public ViewResult Review()
+	    {	   
+		    return View();
+	    }
+
+	    [HttpPost]
+	    public ViewResult Review(ReviewViewModel reviewViewModel)
+	    {
+		    if (_repository.AddReview(reviewViewModel.AccommodationId, reviewViewModel.Title, 
+				reviewViewModel.Name, reviewViewModel.Text))
+		    {
+			    ViewData["Succeeded"] = "true";
+			    return View();
+		    }
+
+		    ViewData["Succeeded"] = "false";
+			return View();
+	    }
     }
 }

@@ -1,13 +1,9 @@
-﻿using HomeMyDay.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeMyDay.ViewModels
 {
-    public class ReviewViewModel
+	public class ReviewViewModel
     {
         /// <summary>
         /// The Name of the user who filled in the form
@@ -31,5 +27,10 @@ namespace HomeMyDay.ViewModels
         /// </summary>
         [Required]
         public DateTime Date { get; set; }
+
+		/// <summary>
+		/// The id of the accommodation
+		/// </summary>
+		public long AccommodationId { get; set; }
     }
 }
