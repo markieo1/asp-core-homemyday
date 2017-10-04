@@ -6,9 +6,11 @@ using HomeMyDay.ViewModels;
 using HomeMyDay.Services;
 using HomeMyDay.Models;
 using HomeMyDay.Extensions;
+using HomeMyDay.Database;
 
 namespace HomeMyDay.Controllers
 {
+	[Authorize]
 	public class AccountController : Controller
 	{
 		private SignInManager<User> _signInManager;
@@ -164,7 +166,7 @@ namespace HomeMyDay.Controllers
 
 			return View();
 		}
-		
+
 		[HttpGet]
 		[AllowAnonymous]
 		public async Task<IActionResult> ConfirmEmail(string userId, string code)
