@@ -17,26 +17,20 @@ namespace HomeMyDay.Controllers
         {
             var reviews = _repository.Reviews;
             return View(reviews);
-        }
-
-		[HttpGet]
-	    public ViewResult Review()
-	    {	   
-		    return View();
-	    }
+        } 
 
 	    [HttpPost]
-	    public ViewResult Review(ReviewViewModel reviewViewModel)
+	    public IActionResult AddReview(ReviewViewModel reviewViewModel)
 	    {
 		    if (_repository.AddReview(reviewViewModel.AccommodationId, reviewViewModel.Title, 
 				reviewViewModel.Name, reviewViewModel.Text))
 		    {
-			    ViewData["Succeeded"] = "true";
-			    return View();
+			    TempData["Succeeded"] = true;	    
+				return RedirectToAction("Detail", "Accommodation", new {id = reviewViewModel.AccommodationId});
 		    }
 
-		    ViewData["Succeeded"] = "false";
-			return View();
-	    }
+			TempData["Succeeded"] = false;
+			return RedirectToAction("Detail", "Accommodation");
+		}
     }
 }

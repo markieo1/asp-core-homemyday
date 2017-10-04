@@ -1,8 +1,6 @@
 ﻿using HomeMyDay.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeMyDay.ViewModels
 {
@@ -77,7 +75,8 @@ namespace HomeMyDay.ViewModels
 					Title = x.Title,
 					Name = x.Name,
 					Text = x.Text,
-					Date = x.Date
+					Date = x.Date,
+					AccommodationId = accommodation.Id
 				})
 			};
 		}
