@@ -18,13 +18,13 @@ namespace HomeMyDay.Controllers
 
 		private readonly IAccommodationRepository accommodationRepository;
 		private readonly ICountryRepository countryRepository;
-		private readonly IOptions<GoogleApiServiceOptions> googleOptions;
+		private readonly GoogleApiServiceOptions googleOptions;
 
 		public BookingController(IAccommodationRepository repo, ICountryRepository countryRepo, IOptions<GoogleApiServiceOptions> googleOpts)
 		{
 			this.accommodationRepository = repo;
 			this.countryRepository = countryRepo;
-			this.googleOptions = googleOpts;
+			this.googleOptions = googleOpts.Value;
 		}
 
 		[HttpGet]
@@ -52,7 +52,7 @@ namespace HomeMyDay.Controllers
 			ViewBag.Countries = countries;
 
 			//Get google client API key
-			ViewBag.GoogleClientApiKey = googleOptions.Value.ClientApiKey;
+			ViewBag.GoogleClientApiKey = googleOptions.ClientApiKey;
 
 			return View(formModel);
 		}
