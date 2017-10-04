@@ -151,7 +151,7 @@ namespace HomeMyDay.Database
 			CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
 			foreach (CultureInfo culture in cultures)
 			{
-				RegionInfo cultureRegion = new RegionInfo(culture.LCID);
+				RegionInfo cultureRegion = new RegionInfo(culture.Name);
 				countries.Add(new Country()
 				{
 					CountryCode = cultureRegion.ThreeLetterISORegionName,
