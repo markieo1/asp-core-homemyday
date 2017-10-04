@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\CMS\Accommodation\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\logo\" />
   </ItemGroup>

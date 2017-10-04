@@ -1,7 +1,77 @@
 ﻿@model PaginatedList<Accommodation>
 
-@foreach (Accommodation accommodation in Model)
-{
-    <p>@accommodation.Description</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Max Persons
+                            </th>
+                            <th>
+                                Country
+                            </th>
+                            <th>
+                                Recommended
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Accommodation accommodation in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @accommodation.Name
+                                </td>
+                                <td>
+                                    @accommodation.Description.Truncate(250)
+                                </td>
+                                <td class="text-right">
+                                    @accommodation.MaxPersons
+                                </td>
+                                <td>
+                                    @accommodation.Country
+                                </td>
+                                <td class="text-right">
+                                    @Html.DisplayFor(x => accommodation.Recommended)
+                                </td>
+                                <td class="text-right">
+                                    @accommodation.Price
+                                </td>
+                            </tr>}
+                    </tbody>
+                </table>
+            </div>
 
-}
+            @{  var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <a asp-area="CMS"
+               asp-action="List"
+               asp-route-page="@(Model.PageIndex - 1)"
+               asp-controller="Accommodation"
+               class="btn btn-default @prevDisabled">
+                Previous
+            </a>
+            <a asp-area="CMS"
+               asp-action="List"
+               asp-route-page="@(Model.PageIndex + 1)"
+               asp-controller="Accommodation"
+               class="btn btn-default @nextDisabled">
+                Next
+            </a>
+        </div>
+    </div>
+</div>

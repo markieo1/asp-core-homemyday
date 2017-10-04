@@ -22,7 +22,7 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page)
 		{
-			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1);
+			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1, 1);
 			return View(paginatedResult);
 		}
 	}

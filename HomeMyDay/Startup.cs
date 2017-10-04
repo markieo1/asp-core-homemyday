@@ -86,8 +86,8 @@ namespace HomeMyDay
 			//Google API settings
 			services.Configure<GoogleApiServiceOptions>(Configuration.GetSection("GoogleMapsSettings"));
 
-            //Session settings
-            services.AddDistributedMemoryCache();
+			//Session settings
+			services.AddDistributedMemoryCache();
 
 			services.AddSession(options =>
 			{
@@ -136,7 +136,7 @@ namespace HomeMyDay
 			{
 				routes.MapRoute(
 					name: "areaRoute",
-					template: "{area:exists}/{controller=Accommodation}/{action=Index}/{id?}");
+					template: "{area:exists}/{controller}/{action=Index}/{id?}");
 
 				routes.MapRoute(
 					name: "default",
