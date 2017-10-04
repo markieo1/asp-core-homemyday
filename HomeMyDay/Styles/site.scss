@@ -246,11 +246,10 @@ p {
 }
 
 .newspaper-label {
-	width: 120px;
-	z-index: 2;
-	margin-top: -20px;
-	position: relative;
-	float: none;
+    max-width: 200px;
+    margin-top: -40px;
+    position: relative;
+    font-size: x-large;
 }
 
 .border-left {
