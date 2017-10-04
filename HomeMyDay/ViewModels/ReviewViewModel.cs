@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using HomeMyDay.Models;
 
 namespace HomeMyDay.ViewModels
 {
@@ -31,6 +32,6 @@ namespace HomeMyDay.ViewModels
 		/// <summary>
 		/// The id of the accommodation
 		/// </summary>
-		public long AccommodationId { get; set; }
+		public Accommodation Accommodation { get; set; }
     }
 }

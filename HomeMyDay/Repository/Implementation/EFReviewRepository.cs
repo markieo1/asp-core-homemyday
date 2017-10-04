@@ -19,17 +19,17 @@ namespace HomeMyDay.Repository.Implementation
 
         public IEnumerable<Review> GetAccomodationReviews(long id)
         {
-            return _context.Reviews.Where(a => a.AccommodationId == id);
+            return _context.Reviews.Where(a => a.Accommodation.Id == id);
         }
 
-	    public bool AddReview(long accommodationId, string title, string name, string text)
+	    public bool AddReview(Accommodation accommodation, string title, string name, string text)
 	    {
 		    bool isAdded;
 		    try											 
 		    {
 			    var reviewToAdd = new Review()
 			    {
-					AccommodationId = accommodationId,
+					Accommodation = accommodation,
 					Title = title,
 					Name = name,
 					Text = text,

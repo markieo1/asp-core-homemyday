@@ -76,7 +76,7 @@ namespace HomeMyDay.ViewModels
 					Name = x.Name,
 					Text = x.Text,
 					Date = x.Date,
-					AccommodationId = accommodation.Id
+					Accommodation = accommodation
 				})
 			};
 		}

@@ -26,6 +26,6 @@ namespace HomeMyDay.Repository
 		/// <param name="name">The name of the user</param>
 		/// <param name="text">The text of the review</param>
 		/// <returns></returns>
-	    bool AddReview(long accommodationId, string title, string name, string text);
+	    bool AddReview(Accommodation accommodation, string title, string name, string text);
     }
 }

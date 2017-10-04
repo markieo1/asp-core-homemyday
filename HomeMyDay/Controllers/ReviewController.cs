@@ -22,11 +22,11 @@ namespace HomeMyDay.Controllers
 	    [HttpPost]
 	    public IActionResult AddReview(ReviewViewModel reviewViewModel)
 	    {
-		    if (_repository.AddReview(reviewViewModel.AccommodationId, reviewViewModel.Title, 
+		    if (_repository.AddReview(reviewViewModel.Accommodation, reviewViewModel.Title, 
 				reviewViewModel.Name, reviewViewModel.Text))
 		    {
 			    TempData["Succeeded"] = true;	    
-				return RedirectToAction("Detail", "Accommodation", new {id = reviewViewModel.AccommodationId});
+				return RedirectToAction("Detail", "Accommodation", new {id = reviewViewModel.Accommodation.Id});
 		    }
 
 			TempData["Succeeded"] = false;
