@@ -12,12 +12,12 @@ namespace HomeMyDay.Models
         /// <summary>
         /// The Question string of the FAQ
         /// </summary>
-        public string Question;
+        public string Question { get; set; }
 
         /// <summary>
         /// The Answer string of a question in the FAQ
         /// </summary>
-        public string Answer;
+        public string Answer { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual FaqCategory FaqCategory { get; set; }

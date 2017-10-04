@@ -12,8 +12,8 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    [Migration("20171003114839_Add_FaqCategory")]
-    partial class Add_FaqCategory
+    [Migration("20171003122950_Add_FaqQuestion")]
+    partial class Add_FaqQuestion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,6 +240,30 @@ namespace HomeMyDay.Migrations
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.Vacancy", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AboutFunction");
+
+                    b.Property<string>("AboutVacancy");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Company");
+
+                    b.Property<string>("JobRequirements");
+
+                    b.Property<string>("JobTitle");
+
+                    b.Property<string>("WeOffer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vacancies");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Booking", b =>
