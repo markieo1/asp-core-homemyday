@@ -1,4 +1,5 @@
-﻿using HomeMyDay.Repository;
+﻿using System.Linq;
+using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,8 @@ namespace HomeMyDay.Controllers
         }
 
         public ViewResult Index()
-        {
-            var reviews = _repository.Reviews;
-            return View(reviews);
+        {									  
+            return View(_repository.Reviews.Where(x => x.Approved));
         } 
 
 	    [HttpPost]

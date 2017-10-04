@@ -9,10 +9,12 @@ namespace HomeMyDay.Repository.Implementation
     public class EFReviewRepository : IReviewRepository
     {
         private readonly HomeMyDayDbContext _context;
+	    private readonly IAccommodationRepository _accommodationRepository;
 
-        public EFReviewRepository(HomeMyDayDbContext context)
+        public EFReviewRepository(HomeMyDayDbContext context, IAccommodationRepository accommodationRepository)
         {
             _context = context;
+	        _accommodationRepository = accommodationRepository;
         }
 
         public IEnumerable<Review> Reviews => _context.Reviews;
@@ -25,11 +27,12 @@ namespace HomeMyDay.Repository.Implementation
 	    public bool AddReview(Accommodation accommodation, string title, string name, string text)
 	    {
 		    bool isAdded;
-		    try											 
-		    {
-			    var reviewToAdd = new Review()
+		    try
+		    {	
+			    var fetchedAccommodation = _accommodationRepository.GetAccommodation(accommodation.Id);	 
+				var reviewToAdd = new Review()
 			    {
-					Accommodation = accommodation,
+					Accommodation = fetchedAccommodation,
 					Title = title,
 					Name = name,
 					Text = text,
@@ -40,8 +43,7 @@ namespace HomeMyDay.Repository.Implementation
 			    isAdded = true;
 		    }
 		    catch (Exception)
-		    {
-				// log exception
+		    {					
 			    isAdded = false;
 		    }
 		    return isAdded;

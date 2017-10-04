@@ -27,7 +27,7 @@ namespace HomeMyDay.Models
 		/// <summary>
 		/// The approve status of the review
 		/// </summary>
-		public bool IsApproved { get; set; }
+		public bool Approved { get; set; }
 							
 		/// <summary>
 		/// The accommodation of the review

@@ -1,16 +1,20 @@
 ﻿@model ReviewViewModel
 
-<h3 class="text-center">Review toevoegen</h3>
-
 <form asp-controller="Review" asp-action="AddReview" method="post">
-    <div class="row panel panel-default">
-        <input asp-for="@Model.AccommodationId" hidden />
-        <div class="form-input-group panel panel-body">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                Review toevoegen
+            </div>
+        </div>
+        <div class="form-input-group panel-body">
+            <input asp-for="@Model.Accommodation.Id" hidden />
+
             <label asp-for="@Model.Title">Titel:</label>
-            <input class="form-control" asp-for="@Model.Title" />
+            <input class="form-control" asp-for="@Model.Title"/>
 
             <label asp-for="@Model.Name">Naam:</label>
-            <input class="form-control" asp-for="@Model.Name" />
+            <input class="form-control" asp-for="@Model.Name"/>
 
             <label asp-for="@Model.Text">Omschrijving:</label>
             <textarea rows="5" class="form-control " asp-for="@Model.Text"></textarea>
