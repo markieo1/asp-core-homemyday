@@ -83,11 +83,12 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestBookingFormBadRequest()
 		{
-			//Initialize controller and excute action
+			//Initialize controller and excute action.
+			//No accommodations are in the repository.
 			BookingController controller = GetController(false);
 			IActionResult result = controller.BookingForm(1);
 
-			//Test if controller returned a BadRequestResult.
+			//Test if controller returned a BadRequest.
 			Assert.IsType<BadRequestResult>(result);
 		}
 
@@ -95,6 +96,7 @@ namespace HomeMyDay.Tests
 		public void TestBookingFormSuccessfulGet()
 		{
 			//Initialize controller and execute action
+			//There are accommodations in the repository.
 			BookingController controller = GetController(true);
 
 			ViewResult result = controller.BookingForm(1) as ViewResult;
@@ -173,11 +175,50 @@ namespace HomeMyDay.Tests
 				}
 			};
 
-			IActionResult result = controller.BookingForm(formModel);
+			RedirectToActionResult result = controller.BookingForm(formModel) as RedirectToActionResult;
 
-			Assert.IsType<RedirectToActionResult>(result);
+			Assert.Equal("InsuranceForm", result.ActionName);
+		}
 
-			
+		[Fact]
+		public void TestInsuranceFormSuccessfulGet()
+		{
+			BookingController controller = GetController(true);
+			ViewResult result = controller.InsuranceForm();
+
+			Assert.Equal("InsuranceForm", result.ViewName);
+		}
+
+		[Fact]
+		public void TestInsuranceFormBadPost()
+		{
+			var viewModel = new InsuranceFormViewModel();
+
+			BookingController controller = GetController(true);
+			controller.ModelState.AddModelError("test", "Test Error");
+			ViewResult result = controller.InsuranceForm(viewModel) as ViewResult;
+
+			Assert.Equal("InsuranceForm", result.ViewName);
+		}
+
+		[Fact]
+		public void TestInsuranceFormSuccessfulPost()
+		{
+			var viewModel = new InsuranceFormViewModel();
+
+			BookingController controller = GetController(true);
+			RedirectToActionResult result = controller.InsuranceForm(viewModel) as RedirectToActionResult;
+
+			Assert.Equal("Confirmation", result.ActionName);
+		}
+
+		[Fact]
+		public void TestConfirmationSuccessfulGet()
+		{
+			BookingController controller = GetController(true);
+			ViewResult result = controller.Confirmation() as ViewResult;
+
+			Assert.Equal("Confirmation", result.ViewName);
 		}
 	}
 }

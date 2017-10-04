@@ -90,12 +90,12 @@ namespace HomeMyDay.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult InsuranceForm()
+		public ViewResult InsuranceForm()
 		{
 			//Retrieve booking from Session
 			InsuranceFormViewModel formModel = new InsuranceFormViewModel();
 
-			return View(formModel);
+			return View("InsuranceForm", formModel);
 		}
 
 		[HttpPost]
@@ -103,7 +103,7 @@ namespace HomeMyDay.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
-				return View(formModel);
+				return View("InsuranceForm", formModel);
 			}
 			else
 			{
@@ -129,7 +129,7 @@ namespace HomeMyDay.Controllers
 			//Retrieve booking from TempData
 			Booking booking = HttpContext.Session.Get<Booking>(BOOKINGSESSIONKEY);
 
-			return View(booking);
+			return View("Confirmation", booking);
 		}
 	}
 }
