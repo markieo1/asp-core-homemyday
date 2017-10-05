@@ -101,6 +101,7 @@ namespace HomeMyDay
             services.AddTransient<IVacancyRepository, EFVacancyRepository>();
             services.AddTransient<IReviewRepository, EFReviewRepository>();
             services.AddTransient<IFaqRepository, EFFaqRepository>();
+            services.AddTransient<IPageRepository, EFPageRepository>();
 
 			services.AddMvc();
 		}

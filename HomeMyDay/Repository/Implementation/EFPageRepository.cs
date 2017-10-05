@@ -7,11 +7,11 @@ using HomeMyDay.Models;
 
 namespace HomeMyDay.Repository.Implementation
 {
-    public class EFSupriseRepository : IPageRepository
+    public class EFPageRepository : IPageRepository
     {
 		private readonly HomeMyDayDbContext _context;
 
-		public EFSupriseRepository(HomeMyDayDbContext context)
+		public EFPageRepository(HomeMyDayDbContext context)
 		{
 			_context = context;
 		}
