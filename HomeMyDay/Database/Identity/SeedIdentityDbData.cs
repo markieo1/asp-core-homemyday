@@ -23,35 +23,49 @@ namespace HomeMyDay.Database.Identity
 		/// <param name="services">The app services.</param>
 		public static void Seed(AppIdentityDbContext context, IServiceProvider services)
 		{
-			SeedRoles(context);
-
-			using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+			var task = Task.Run(async () =>
 			{
-				UserManager<User> userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
-				var task = Task.Run(async () => { await SeedUser(userManager); });
-				task.Wait();
-			}
+				await SeedRoles(context);
 
-			context.SaveChangesAsync();
+				using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+				{
+					UserManager<User> userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+					await SeedUser(userManager);
+				}
+
+				await context.SaveChangesAsync();
+			});
+
+			task.Wait();
 		}
 
 		/// <summary>
 		/// Seeds the roles.
 		/// </summary>
 		/// <param name="context">The context.</param>
-		private static void SeedRoles(AppIdentityDbContext context)
+		private static async Task SeedRoles(AppIdentityDbContext context)
 		{
 			RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(context);
 
 			if (!context.Roles.Any(r => r.Name == IdentityRoles.Administrator))
 			{
-				roleStore.CreateAsync(new IdentityRole(IdentityRoles.Administrator));
+				await roleStore.CreateAsync(new IdentityRole()
+				{
+					Name = IdentityRoles.Administrator,
+					NormalizedName = IdentityRoles.Administrator
+				});
 			}
 
 			if (!context.Roles.Any(r => r.Name == IdentityRoles.Booker))
 			{
-				roleStore.CreateAsync(new IdentityRole(IdentityRoles.Booker));
+				await roleStore.CreateAsync(new IdentityRole()
+				{
+					Name = IdentityRoles.Booker,
+					NormalizedName = IdentityRoles.Booker
+				});
 			}
+
+			await context.SaveChangesAsync();
 		}
 
 		/// <summary>
