@@ -26,8 +26,15 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
-			return View(paginatedResult);
+			try
+			{
+				PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
+				return View(paginatedResult);
+			}catch (Exception)
+			{
+				return View("Error", new ErrorViewModel() {RequestId = "Error" });
+			}
+			
 		}
 
 		[HttpGet]

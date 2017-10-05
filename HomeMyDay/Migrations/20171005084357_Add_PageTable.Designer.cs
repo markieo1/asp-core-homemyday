@@ -260,7 +260,7 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<string>("Page_Id");
+                    b.Property<string>("Page_Name");
 
                     b.Property<string>("Title");
 
