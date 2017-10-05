@@ -23,6 +23,11 @@ namespace HomeMyDay.ViewModels
         [Required]
         public string Text { get; set; }
 
+		/// <summary>
+		/// The status of the review
+		/// </summary>
+		public bool Approved { get; set; }
+
         /// <summary>
         /// The date of when the review is placed
         /// </summary>
@@ -33,5 +38,23 @@ namespace HomeMyDay.ViewModels
 		/// The id of the accommodation
 		/// </summary>
 		public Accommodation Accommodation { get; set; }
+
+		/// <summary>
+		/// Creates an instance of <see cref="ReviewViewModel"/> by using the <paramref name="review"/>
+		/// </summary>
+		/// <param name="review">The reviews of the accommodation</param>
+		/// <returns></returns>
+		public static ReviewViewModel FromReview(Review review)
+	    {
+		    return new ReviewViewModel()
+		    {
+			    Accommodation = review.Accommodation,
+				Name = review.Name,
+				Date = review.Date,
+				Title = review.Title,
+				Text = review.Text,
+				Approved = review.Approved
+		    };
+	    }
     }
 }
