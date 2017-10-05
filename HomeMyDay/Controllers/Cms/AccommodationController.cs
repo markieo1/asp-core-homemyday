@@ -1,6 +1,8 @@
-﻿using HomeMyDay.Helpers;
+﻿using HomeMyDay.Database.Identity;
+using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
+	[Authorize(Policy = IdentityPolicies.Administrator)]
 	public class AccommodationController : Controller
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
