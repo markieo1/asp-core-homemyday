@@ -47,8 +47,7 @@ namespace HomeMyDay.ViewModels
 		public static ReviewViewModel FromReview(Review review)
 		{
 			return new ReviewViewModel()
-			{
-				AccommodationId = review.Accommodation.Id,
+			{										   
 				Name = review.Name,
 				Date = review.Date,
 				Title = review.Title,

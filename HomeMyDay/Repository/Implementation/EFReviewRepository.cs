@@ -3,6 +3,7 @@ using HomeMyDay.Database;
 using HomeMyDay.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Repository.Implementation
 {
