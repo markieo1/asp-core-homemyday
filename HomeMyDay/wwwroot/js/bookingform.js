@@ -3,6 +3,9 @@
     //Disable all hidden input fields
     $('.bookingperson.hidden input, .bookingperson.hidden select').prop('disabled', true);
 
+    //Disable hidden baggage inputs
+    $('.person-baggage.hidden input').prop('disabled', true);
+
     //Datepicker for birth date
     $('.birthdate input').datepicker({
         autoclose: true,
@@ -12,23 +15,33 @@
 
     //Add booker to form
     $('#add-booker-button').click(function() {
+        //Get the first hidden booker section and re-enable it
         let bookerSection = $('.bookingperson.hidden').first();
         bookerSection.removeClass('hidden');
-
-        //Re-enable input fields
         bookerSection.find('input, select').prop('disabled', false);
+
+        let personIndex = bookerSection.data('person-index');
+
+        //Get the correct baggage section and re-enable it
+        let baggageSection = $('.person-baggage[data-person-index="'+ personIndex +'"]');
+        baggageSection.removeClass('hidden');
+        baggageSection.find('input, select').prop('disabled', false);
 
         checkButtonVisibility();
     });
 
     $('.remove-booker').click(function() {
+        //Hide the last person section and disable inputs
         let bookerSection = $(this).closest('.bookingperson');
-
-        //Hide form section
         bookerSection.addClass('hidden');
-
-        //Disable input fields
         bookerSection.find('input, select').prop('disabled', true);
+
+        let personIndex = bookerSection.data('person-index');
+
+        //Hide the correct baggage section and disable inputs
+        let baggageSection = $('.person-baggage[data-person-index="' + personIndex + '"]');
+        baggageSection.addClass('hidden');
+        baggageSection.find('input, select').prop('disabled', true);
 
         checkButtonVisibility();
     });
