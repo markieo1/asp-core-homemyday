@@ -7,7 +7,7 @@ using HomeMyDay.Models;
 
 namespace HomeMyDay.Repository.Implementation
 {
-    public class EFSupriseRepository : ISupriseRepository
+    public class EFSupriseRepository : IPageRepository
     {
 		private readonly HomeMyDayDbContext _context;
 
@@ -16,9 +16,9 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public Suprise GetLastSuprise()
+		public Page GetSuprise()
 		{
-			return _context.Suprise.LastOrDefault();
+			return _context.Page.Where(r=>r.Page_Id == "TheSuprise").LastOrDefault();
 		}
 	}
 }

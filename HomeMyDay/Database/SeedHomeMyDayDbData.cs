@@ -25,7 +25,7 @@ namespace HomeMyDay.Database
 			}
 
 			//Seed suprise modal
-			if (!context.Suprise.Any())
+			if (!context.Page.Any())
 			{
 				SeedSuprise(context);
 			}
@@ -34,7 +34,7 @@ namespace HomeMyDay.Database
 		private static void SeedSuprise(HomeMyDayDbContext context)
 		{
 			var generator = new LipsumGenerator();
-			context.Suprise.Add(new Suprise() { Title = "Suprise", Content = generator.GenerateParagraphs(1)[0] });
+			context.Page.Add(new Page() {Page_Id = "TheSuprise", Title = "Suprise", Content = generator.GenerateParagraphs(1)[0] });
 			context.SaveChanges();
 		}
 

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Repository
 {
-    public interface ISupriseRepository
+    public interface IPageRepository
     {
 		/// <summary>
 		/// Gets the latest suprise.
 		/// </summary>
-		Suprise GetLastSuprise();
+		Page GetSuprise();
 	}
 }

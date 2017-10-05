@@ -11,16 +11,16 @@ namespace HomeMyDay.Components
 {
 	public class SuprisePopUpViewComponent : ViewComponent
 	{
-		private readonly ISupriseRepository _supriseRepository;
+		private readonly IPageRepository _supriseRepository;
 
-		public SuprisePopUpViewComponent(ISupriseRepository repository)
+		public SuprisePopUpViewComponent(IPageRepository repository)
 		{
 			_supriseRepository = repository;
 		}
 
 		public IViewComponentResult Invoke()
 		{
-			Suprise _suprise = _supriseRepository.GetLastSuprise();
+			Page _suprise = _supriseRepository.GetSuprise();
 			if (_suprise != null)
 			{
 				SuprisePopUpViewModel model = new SuprisePopUpViewModel() { Title = _suprise.Title, Content = _suprise.Content };

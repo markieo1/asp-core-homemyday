@@ -20,7 +20,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-			context.Suprise.AddRange(
+			context.Page.AddRange(
 				new Suprise() { Title = "Suprise", Content = "Hallo" },
 				new Suprise() { Title = "LastSuprise", Content = "Hallo" }
 				);
@@ -28,9 +28,9 @@ namespace HomeMyDay.Tests
 			context.SaveChanges();
 
 
-			ISupriseRepository repository = new EFSupriseRepository(context);
+			IPageRepository repository = new EFSupriseRepository(context);
 
-			Assert.Equal("LastSuprise", repository.GetLastSuprise().Title);
+			Assert.Equal("LastSuprise", repository.GetSuprise().Title);
 		}
 
 	}
