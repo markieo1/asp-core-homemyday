@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using HomeMyDay.Database.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace HomeMyDay
 {
@@ -85,8 +86,8 @@ namespace HomeMyDay
 			//Google API settings
 			services.Configure<GoogleApiServiceOptions>(Configuration.GetSection("GoogleMapsSettings"));
 
-            //Session settings
-            services.AddDistributedMemoryCache();
+			//Session settings
+			services.AddDistributedMemoryCache();
 
 			services.AddSession(options =>
 			{
@@ -102,6 +103,13 @@ namespace HomeMyDay
             services.AddTransient<IReviewRepository, EFReviewRepository>();
             services.AddTransient<IFaqRepository, EFFaqRepository>();
             services.AddTransient<IPageRepository, EFPageRepository>();
+
+			services.Configure<RazorViewEngineOptions>(options =>
+			{
+				options.AreaViewLocationFormats.Clear();
+				options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
+				options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+			});
 
 			services.AddMvc();
 		}
@@ -128,6 +136,10 @@ namespace HomeMyDay
 
 			app.UseMvc(routes =>
 			{
+				routes.MapRoute(
+					name: "areaRoute",
+					template: "{area:exists}/{controller}/{action=Index}/{id?}");
+
 				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
