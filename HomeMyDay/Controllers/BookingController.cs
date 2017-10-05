@@ -28,20 +28,36 @@ namespace HomeMyDay.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult BookingForm(int id)
+		public IActionResult BookingForm(int id, int? persons)
 		{
 			var formModel = new BookingFormViewModel();
 
-			formModel.Accommodation = accommodationRepository.GetAccommodation(id);
-
-			if(formModel.Accommodation == null)
+			try
 			{
-				return BadRequest();
+				formModel.Accommodation = accommodationRepository.GetAccommodation(id);
+			}
+			catch(KeyNotFoundException)
+			{
+				return NotFound();
 			}
 
 			formModel.Persons = new List<BookingPerson>();
 
-			//Initialize empty BookingPersons
+			//If an amount of persons was given, use it.
+			//Otherwise, get the maximum persons from the Accommodation.
+			int maxPersons;
+			if(persons.HasValue && persons.Value <= formModel.Accommodation.MaxPersons)
+			{
+				maxPersons = persons.Value;
+			}
+			else
+			{
+				maxPersons = formModel.Accommodation.MaxPersons;
+			}
+
+			ViewBag.MaxPersons = maxPersons;
+
+			//Initialize BookingPersons for the form
 			for(int i = 0; i < formModel.Accommodation.MaxPersons; i++)
 			{
 				formModel.Persons.Add(new BookingPerson());
@@ -54,7 +70,7 @@ namespace HomeMyDay.Controllers
 			//Get google client API key
 			ViewBag.GoogleClientApiKey = googleOptions.ClientApiKey;
 
-			return View(formModel);
+			return View("BookingForm", formModel);
 		}
 
 		[HttpPost]
@@ -62,17 +78,38 @@ namespace HomeMyDay.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
+				//Restore accommodation object from ID
 				formData.Accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
-				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
 
-				return View(formData);
+				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
+				ViewBag.MaxPersons = formData.Persons.Count();
+
+				//Initialize BookingPersons up to the maximum that the accommodation will support.
+				//Old values entered by the user should be kept.
+				for(int i = 0; i < formData.Accommodation.MaxPersons; i++)
+				{
+					if(formData.Persons.ElementAtOrDefault(i) == null)
+					{
+						formData.Persons.Add(new BookingPerson());
+					}
+				}
+
+				return View("BookingForm", formData);
 			}
 			else
 			{
-				//Get accommodation ID
-				long accommodationId = formData.Accommodation.Id;
+				//Get accommodation from posted ID
+				Accommodation accommodation;
+				try
+				{
+					accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
+				}
+				catch(KeyNotFoundException)
+				{
+					return BadRequest();
+				}
 
-				//Get country ID
+				//Get country and nationality objects from ID
 				foreach(BookingPerson person in formData.Persons)
 				{
 					person.Country = countryRepository.GetCountry(person.Country.Id);
@@ -81,7 +118,7 @@ namespace HomeMyDay.Controllers
 
 				//Store model in Session
 				HttpContext.Session.Set(BOOKINGSESSIONKEY, new Booking() {
-					Accommodation = accommodationRepository.GetAccommodation(accommodationId),
+					Accommodation = accommodation,
 					Persons = formData.Persons,
 				});
 
@@ -90,12 +127,12 @@ namespace HomeMyDay.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult InsuranceForm()
+		public ViewResult InsuranceForm()
 		{
 			//Retrieve booking from Session
 			InsuranceFormViewModel formModel = new InsuranceFormViewModel();
 
-			return View(formModel);
+			return View("InsuranceForm", formModel);
 		}
 
 		[HttpPost]
@@ -103,7 +140,7 @@ namespace HomeMyDay.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
-				return View(formModel);
+				return View("InsuranceForm", formModel);
 			}
 			else
 			{
@@ -129,7 +166,7 @@ namespace HomeMyDay.Controllers
 			//Retrieve booking from TempData
 			Booking booking = HttpContext.Session.Get<Booking>(BOOKINGSESSIONKEY);
 
-			return View(booking);
+			return View("Confirmation", booking);
 		}
 	}
 }
