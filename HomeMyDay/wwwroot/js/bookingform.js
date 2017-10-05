@@ -64,7 +64,7 @@
 
         //Show only the last "remove booker" button
         $('.remove-booker').addClass('hidden');
-        $('.remove-booker').last().removeClass('hidden');
+        $('.bookingperson:not(.hidden)').last().find('.remove-booker').removeClass('hidden');
     }
 
     //Get city from postal code
