@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FaqCategory>
+<div class="detail-blocks">
+    <ul class="nav nav-tabs" role="tablist">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            var item = Model.ElementAt(i);
+            <li role="presentation" class="@((i == 0) ? "active" : "")">
+                <a href="#@(@item.CategoryName.Dashed())" aria-controls="@item.CategoryName.Dashed()" role="tab" data-toggle="tab" aria-expanded="false">
+                    @item.CategoryName
+                </a>
+            </li>
+        }
+    </ul>
+
+    <div class="tab-content">
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            var item = Model.ElementAt(i);
+            <div role="tabpanel" class="tab-pane fade @((i == 0) ? "in active" : "")" id="@item.CategoryName.Dashed()">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    @foreach (var question in item.FaqQuestions)
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading@(@question.Id)">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse@(@question.Id)" aria-expanded="true" aria-controls="collapse@(@question.Id)">
+                                        @question.Question
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse@(@question.Id)" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading@(@question.Id)">
+                                <div class="panel-body">
+                                    @question.Answer
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
