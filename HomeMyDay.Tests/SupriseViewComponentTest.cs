@@ -37,7 +37,7 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSupriseNotNullAndEmpty()
 		{
-			Page suprise = new Page {Title = "Hallo", Content="Test" };
+			Page suprise = new Page {Page_Id = "TheSuprise", Title = "Hallo", Content="Test" };
 
 			var repo = new Mock<IPageRepository>();
 			repo.Setup(r => r.GetSuprise()).Returns(suprise);
