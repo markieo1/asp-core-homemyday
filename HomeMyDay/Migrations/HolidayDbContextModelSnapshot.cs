@@ -122,7 +122,8 @@ namespace HomeMyDay.Migrations
                     b.Property<string>("Initials")
                         .IsRequired();
 
-                    b.Property<string>("Insertion");
+                    b.Property<string>("Insertion")
+                        .IsRequired();
 
                     b.Property<string>("LastName")
                         .IsRequired();
@@ -239,20 +240,6 @@ namespace HomeMyDay.Migrations
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Suprise", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Suprise");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Vacancy", b =>
