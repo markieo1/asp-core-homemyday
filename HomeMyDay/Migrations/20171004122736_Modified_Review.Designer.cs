@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171004122736_Modified_Review")]
+    partial class Modified_Review
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,36 +183,6 @@ namespace HomeMyDay.Migrations
                     b.ToTable("DateEntity");
                 });
 
-            modelBuilder.Entity("HomeMyDay.Models.FaqCategory", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CategoryName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FaqCategory");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.FaqQuestion", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Answer");
-
-                    b.Property<long>("CategoryId");
-
-                    b.Property<string>("Question");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("FaqQuestions");
-                });
-
             modelBuilder.Entity("HomeMyDay.Models.MediaObject", b =>
                 {
                     b.Property<long>("Id")
@@ -250,22 +221,6 @@ namespace HomeMyDay.Migrations
                         .HasName("Alt_Email");
 
                     b.ToTable("Newspapers");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.Page", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Content");
-
-                    b.Property<string>("Page_Name");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Page");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.Review", b =>
@@ -345,14 +300,6 @@ namespace HomeMyDay.Migrations
                     b.HasOne("HomeMyDay.Models.Accommodation")
                         .WithMany("NotAvailableDates")
                         .HasForeignKey("AccommodationId");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Models.FaqQuestion", b =>
-                {
-                    b.HasOne("HomeMyDay.Models.FaqCategory", "FaqCategory")
-                        .WithMany("FaqQuestions")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.MediaObject", b =>

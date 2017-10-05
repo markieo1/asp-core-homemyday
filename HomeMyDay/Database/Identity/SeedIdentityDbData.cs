@@ -47,7 +47,7 @@ namespace HomeMyDay.Database.Identity
 		{
 			RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(context);
 
-			if (!context.Roles.Any(r => r.Name == IdentityRoles.Administrator))
+			if (!context.Roles.Any(r => r.NormalizedName == IdentityRoles.Administrator))
 			{
 				await roleStore.CreateAsync(new IdentityRole()
 				{
@@ -56,7 +56,7 @@ namespace HomeMyDay.Database.Identity
 				});
 			}
 
-			if (!context.Roles.Any(r => r.Name == IdentityRoles.Booker))
+			if (!context.Roles.Any(r => r.NormalizedName == IdentityRoles.Booker))
 			{
 				await roleStore.CreateAsync(new IdentityRole()
 				{
