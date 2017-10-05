@@ -38,7 +38,11 @@ namespace HomeMyDay.Repository
 		/// <returns></returns>
 		Task<PaginatedList<Review>> List(int page = 1, int pageSize = 10);
 
-        // Update GuestResponse
-        void AcceptReview(Review review);
+        /// <summary>
+        /// Update the review to accepted based on the review id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        void AcceptReview(long id);
     }
 }

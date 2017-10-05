@@ -3,7 +3,6 @@ using HomeMyDay.Database;
 using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -74,19 +73,15 @@ namespace HomeMyDay.Repository.Implementation
 		    }
 		    return isAdded;
 	    }
-        public void AcceptReview(Review review)
+
+        public void AcceptReview(long id)
         {
-            Review dbEntry = _context.Reviews.FirstOrDefault(s => s.Id == review.Id);
-            if (dbEntry != null)
+            Review dbEntry = _context.Reviews.FirstOrDefault(s => s.Id == id);
+            if (dbEntry.Id >= 1)
             {
-                dbEntry.Approved = review.Approved;
+                dbEntry.Approved = true;
             }
             _context.SaveChanges();
-        }
-
-        public IEnumerable<Review> GetAccomodationReviews(long id)
-        {
-            return _context.Reviews.Where(a => a.AccommodationId == id);
         }
 
         public Task<PaginatedList<Review>> List(int page = 1, int pageSize = 10)
@@ -101,7 +96,7 @@ namespace HomeMyDay.Repository.Implementation
                 throw new ArgumentOutOfRangeException(nameof(pageSize));
             }
 
-            IQueryable<Review> reviews = _context.Reviews.OrderBy(x => x.Id).AsNoTracking();
+            IQueryable<Review> reviews = _context.Reviews.Where(a => a.Approved == false).OrderBy(x => x.Id).AsNoTracking();
 
             return PaginatedList<Review>.CreateAsync(reviews, page, pageSize);
         }

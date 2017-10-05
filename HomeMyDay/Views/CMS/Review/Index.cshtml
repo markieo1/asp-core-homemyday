@@ -14,28 +14,28 @@
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="5"
-                           asp-controller="Accommodation">5</a>
+                           asp-controller="Review">5</a>
                     </li>
                     <li>
                         <a asp-area="CMS"
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="10"
-                           asp-controller="Accommodation">10</a>
+                           asp-controller="Review">10</a>
                     </li>
                     <li>
                         <a asp-area="CMS"
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="25"
-                           asp-controller="Accommodation">25</a>
+                           asp-controller="Review">25</a>
                     </li>
                     <li>
                         <a asp-area="CMS"
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="50"
-                           asp-controller="Accommodation">50</a>
+                           asp-controller="Review">50</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
                                 Title
                             </th>
                             <th>
-                                ReviewText
+                                Review text
                             </th>
                             <th>
                                 Date
@@ -81,20 +81,17 @@
                                     @Html.DisplayFor(x => review.Date)
                                 </td>
                                 <td>
-                                    <a asp-area="CMS"
-                                       asp-controller="Review"
-                                       asp-action="Accept"
-                                       asp-route-id="@review.Id"
-                                       class="btn btn-block btn-success">
-                                        <i class="fa fa-check-square-o"></i> Accept
-                                    </a>
-                                    <a asp-area="CMS"
-                                       asp-controller="Review"
-                                       asp-action="Denied"
-                                       asp-route-id="@review.Id"
-                                       class="btn btn-block btn-danger">
-                                        <i class="fa fa-times"></i> Denied
-                                    </a>
+                                    <form 
+                                          asp-area="CMS" 
+                                          asp-controller="Review" 
+                                          asp-action="Accept"
+                                          asp-route-id="@review.Id"
+                                          method="post">
+
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fa fa-check-square"></i> Accept
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>}
                     </tbody>

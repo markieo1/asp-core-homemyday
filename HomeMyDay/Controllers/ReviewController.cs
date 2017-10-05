@@ -2,6 +2,7 @@
 using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using HomeMyDay.Models;
 
 namespace HomeMyDay.Controllers
 {

@@ -1,15 +1,15 @@
-﻿using HomeMyDay.Helpers;
+﻿using HomeMyDay.Database.Identity;
+using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HomeMyDay.Controllers.Cms
 {
     [Area("CMS")]
+    [Authorize(Policy = IdentityPolicies.Administrator)]
     public class ReviewController : Controller
     {
         private readonly IReviewRepository _reviewRepository;
@@ -27,12 +27,10 @@ namespace HomeMyDay.Controllers.Cms
         }
 
         [HttpPost]
-
-
-        [HttpPost]
-        public async Task<IActionResult> Accept()
+        public IActionResult Accept(long id)
         {
-
+            _reviewRepository.AcceptReview(id);
+            return RedirectToAction("Index");
         }
     }
 }
