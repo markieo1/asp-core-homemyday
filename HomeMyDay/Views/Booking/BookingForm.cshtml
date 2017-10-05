@@ -132,7 +132,7 @@
     <p>Handbagage is inbegrepen. Wil je meer meenemen, kies dan hier je ruimbagage!</p>
 
     <div class="baggage">
-        @for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
+        @for (int i = 0; i < Model.Persons.Count; i++)
         {
             @* Generate form fields up to the maximum amount of people, but only show the amount of people that the user has selected. *@
             string baggageClass;
