@@ -33,5 +33,26 @@ namespace HomeMyDay.Tests
 			Assert.Equal("LastSuprise", repository.GetSuprise().Title);
 		}
 
+		[Fact]
+		public void TestEditSuprisePage()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Page.Add(new Page() { Page_Id = "TheSuprise", Title = "LastSuprise", Content = "Hallo" });
+
+			context.SaveChanges();
+
+			Page page = new Page() {Title = "NewSuprise", Content = "NewContent" };
+
+			IPageRepository repository = new EFPageRepository(context);
+
+			repository.EditPage("TheSuprise", page);
+
+			Assert.Equal("NewSuprise", repository.GetSuprise().Title);
+			Assert.Equal("NewContent", repository.GetSuprise().Content);
+		}
+
 	}
 }

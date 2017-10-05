@@ -24,6 +24,7 @@ namespace HomeMyDay.Components
 			if (_suprise != null)
 			{
 				SuprisePopUpViewModel model = new SuprisePopUpViewModel() { Title = _suprise.Title, Content = _suprise.Content };
+				
 				return View(model);
 			}
 			else

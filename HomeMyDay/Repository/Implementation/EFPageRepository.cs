@@ -20,5 +20,20 @@ namespace HomeMyDay.Repository.Implementation
 		{
 			return _context.Page.Where(r => r.Page_Id == "TheSuprise").LastOrDefault();
 		}
+
+		public void EditPage(string pageid, Page page)
+		{
+			var db = _context.Page.Any(r=>r.Page_Id == pageid);
+
+			if (db)
+			{
+				var db_page = _context.Page.Where(r => r.Page_Id == pageid).LastOrDefault();
+
+				db_page.Title = page.Title;
+				db_page.Content = page.Content;
+
+				_context.SaveChanges();
+			}
+		}
 	}
 }

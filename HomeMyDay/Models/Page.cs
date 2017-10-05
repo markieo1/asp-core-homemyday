@@ -1,4 +1,6 @@
-﻿namespace HomeMyDay.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HomeMyDay.Models
 {
 	public class Page : BaseModel
     {

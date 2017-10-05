@@ -12,5 +12,6 @@ namespace HomeMyDay.Repository
 		/// Gets the latest suprise.
 		/// </summary>
 		Page GetSuprise();
+		void EditPage(string pageid, Page page);
 	}
 }
