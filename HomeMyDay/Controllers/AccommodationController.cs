@@ -41,7 +41,7 @@ namespace HomeMyDay.Controllers
 				return NotFound();
 			}
 
-			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation, reviews.ToList());
+			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation, reviews.Where(x => x.Approved).ToList());
 
 			return View(viewModel);
 		}
