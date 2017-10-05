@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
-	//[Authorize(Policy = IdentityPolicies.Administrator)]
+	[Authorize(Policy = IdentityPolicies.Administrator)]
 	public class PagesController : Controller
 	{
 		private readonly IPageRepository _pageRepository;
