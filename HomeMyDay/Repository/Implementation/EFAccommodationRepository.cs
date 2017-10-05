@@ -21,6 +21,29 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
+		public async Task<bool> Delete(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			Accommodation accommodation = await _context.Accommodations
+				.AsNoTracking()
+				.SingleOrDefaultAsync(a => a.Id == id);
+
+			if (accommodation == null)
+			{
+				return false;
+			}
+
+			_context.Accommodations.Remove(accommodation);
+
+			await _context.SaveChangesAsync();
+
+			return true;
+		}
+
 		public Accommodation GetAccommodation(long id)
 		{
 			if (id <= 0)

@@ -79,5 +79,20 @@ namespace HomeMyDay.Controllers.Cms
 
 			return View(accommodation);
 		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteConfirmed(long id)
+		{
+			bool deleted = await _accommodationRepository.Delete(id);
+
+			if (deleted)
+			{
+				return RedirectToAction(
+							actionName: nameof(Index),
+							controllerName: nameof(AccommodationController).TrimControllerName());
+			}
+
+			return new StatusCodeResult(500);
+		}
 	}
 }
