@@ -47,5 +47,7 @@ namespace HomeMyDay.Repository
 		/// <param name="pageSize">Size of the page.</param>
 		/// <returns></returns>
 		Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10);
+
+		Task<bool> Save(long id, Accommodation accommodation);
 	}
 }

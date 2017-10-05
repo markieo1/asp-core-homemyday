@@ -2,6 +2,7 @@
 using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,19 +47,48 @@ namespace HomeMyDay.Repository.Implementation
 
 		public Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10)
 		{
-			if (page < 1)
+			// Reset to default value
+			if (pageSize <= 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(page));
+				pageSize = 10;
 			}
 
-			if (pageSize < 1)
+			// We are not able to skip before the first page
+			if (page <= 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(pageSize));
+				page = 1;
 			}
 
 			IQueryable<Accommodation> accommodations = _context.Accommodations.OrderBy(x => x.Id).AsNoTracking();
 
 			return PaginatedList<Accommodation>.CreateAsync(accommodations, page, pageSize);
+		}
+
+		public async Task<bool> Save(long id, Accommodation accommodation)
+		{
+			if (accommodation == null)
+			{
+				throw new ArgumentNullException(nameof(accommodation));
+			}
+
+			accommodation.Id = id;
+
+			if (id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				await _context.Accommodations.AddAsync(accommodation);
+			}
+			else
+			{
+				// Get the tracked accommodation using the ID
+				EntityEntry<Accommodation> entityEntry = _context.Entry(accommodation);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
+
+			return true;
 		}
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)

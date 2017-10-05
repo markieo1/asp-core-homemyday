@@ -1,4 +1,5 @@
 ﻿using HomeMyDay.Database.Identity;
+using HomeMyDay.Extensions;
 using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
@@ -30,12 +31,20 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpGet]
-		public IActionResult Edit(int id)
+		public IActionResult Edit(long id)
 		{
 			Accommodation accommodation;
+
 			try
 			{
-				accommodation = _accommodationRepository.GetAccommodation(id);
+				if (id <= 0)
+				{
+					accommodation = new Accommodation();
+				}
+				else
+				{
+					accommodation = _accommodationRepository.GetAccommodation(id);
+				}
 			}
 			catch (KeyNotFoundException)
 			{
@@ -50,9 +59,25 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpPost]
-		public IActionResult Edit(int id, Accommodation accommodation)
+		public async Task<IActionResult> Edit(long id, Accommodation accommodation)
 		{
-			return View();
+			if (ModelState.IsValid)
+			{
+				bool saved = await _accommodationRepository.Save(id, accommodation);
+
+				if (saved)
+				{
+					return RedirectToAction(
+						actionName: nameof(Index),
+						controllerName: nameof(AccommodationController).TrimControllerName());
+				}
+				else
+				{
+					return new StatusCodeResult(500);
+				}
+			}
+
+			return View(accommodation);
 		}
 	}
 }

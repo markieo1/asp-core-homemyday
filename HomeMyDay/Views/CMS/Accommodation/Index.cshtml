@@ -112,13 +112,16 @@
                     </tbody>
                 </table>
             </div>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
             @{  var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
                 var nextDisabled = !Model.HasNextPage ? "disabled" : "";
             }
 
             <nav aria-label="Search results pages">
-                <ul class="pagination">
+                <ul class="pagination mtop0">
                     <li class="@prevDisabled">
                         @if (Model.HasPreviousPage)
                         {
@@ -167,6 +170,14 @@
                     </li>
                 </ul>
             </nav>
+
+        </div>
+        <div class="col-md-3">
+            <a asp-area="CMS"
+               asp-controller="Accommodation"
+               asp-action="Edit"
+               asp-route-id="-1"
+               class="btn btn-default pull-right">Create new</a>
         </div>
     </div>
 </div>
