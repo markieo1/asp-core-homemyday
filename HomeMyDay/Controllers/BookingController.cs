@@ -55,8 +55,10 @@ namespace HomeMyDay.Controllers
 				maxPersons = formModel.Accommodation.MaxPersons;
 			}
 
+			ViewBag.MaxPersons = maxPersons;
+
 			//Initialize BookingPersons for the form
-			for(int i = 0; i < maxPersons; i++)
+			for(int i = 0; i < formModel.Accommodation.MaxPersons; i++)
 			{
 				formModel.Persons.Add(new BookingPerson());
 			}
@@ -78,6 +80,8 @@ namespace HomeMyDay.Controllers
 			{
 				formData.Accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
 				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
+
+				ViewBag.MaxPersons = formData.Persons.Count();
 
 				return View("BookingForm", formData);
 			}
