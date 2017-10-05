@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace HomeMyDay.Models
 {
@@ -7,6 +8,7 @@ namespace HomeMyDay.Models
 		/// <summary>
 		/// A unique Id to call for the page
 		/// </summary>
+		[BindNever]
 		public string Page_Id { get; set; }
 
 		/// <summary>

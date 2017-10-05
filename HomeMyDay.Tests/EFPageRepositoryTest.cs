@@ -30,7 +30,7 @@ namespace HomeMyDay.Tests
 
 			IPageRepository repository = new EFPageRepository(context);
 
-			Assert.Equal("LastSuprise", repository.GetSuprise().Title);
+			Assert.Equal("LastSuprise", repository.GetPage("TheSuprise").Title);
 		}
 
 		[Fact]
@@ -50,8 +50,8 @@ namespace HomeMyDay.Tests
 
 			repository.EditPage("TheSuprise", page);
 
-			Assert.Equal("NewSuprise", repository.GetSuprise().Title);
-			Assert.Equal("NewContent", repository.GetSuprise().Content);
+			Assert.Equal("NewSuprise", repository.GetPage("TheSuprise").Title);
+			Assert.Equal("NewContent", repository.GetPage("TheSuprise").Content);
 		}
 
 	}
