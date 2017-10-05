@@ -20,23 +20,26 @@ namespace HomeMyDay.Tests
 	{
 		private BookingController GetController(bool shouldHaveAccommodations)
 		{
-			Accommodation accommodation = null;
-
+			//Mock accommodation repo
+			var accommodationRepo = new Mock<IAccommodationRepository>();
 			if(shouldHaveAccommodations)
 			{
 				//Setup fake accommodation
-				accommodation = new Accommodation()
+				var accommodation = new Accommodation()
 				{
 					Id = 1,
 					MaxPersons = 4,
 					Name = "Test Accommodation"
 				};
+
+				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<long>())).Returns(accommodation);
 			}
-
-			//Mock accommodation repo
-			var accommodationRepo = new Mock<IAccommodationRepository>();
-			accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<long>())).Returns(accommodation);
-
+			else
+			{
+				//If there are no accommodations, always throw a KeyNotFoundException
+				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<long>())).Throws(new KeyNotFoundException());
+			}
+			
 			//Setup fake countries
 			var countries = new List<Country>() {
 				new Country() { Id = 1, CountryCode = "NED", Name = "Netherlands", },
@@ -60,8 +63,8 @@ namespace HomeMyDay.Tests
 
 			var sessionMock = new Mock<ISession>();
 
-			byte[] emptyString = Encoding.ASCII.GetBytes("{}");
-			sessionMock.Setup(s => s.TryGetValue(It.IsAny<string>(), out emptyString));
+			byte[] emptyJsonObjectString = Encoding.ASCII.GetBytes("{}");
+			sessionMock.Setup(s => s.TryGetValue(It.IsAny<string>(), out emptyJsonObjectString));
 			sessionMock.Setup(s => s.Set(It.IsAny<string>(), It.IsAny<byte[]>()));
 
 			//Set up a default HTTP context so the session can be mocked
@@ -70,7 +73,6 @@ namespace HomeMyDay.Tests
 
 			//Setup controller
 			var controller = new BookingController(accommodationRepo.Object, countryRepo.Object, googleOpts.Object);
-
 			controller.ControllerContext = new ControllerContext()
 			{
 				HttpContext = httpContext,
@@ -86,7 +88,7 @@ namespace HomeMyDay.Tests
 			//Initialize controller and excute action.
 			//No accommodations are in the repository.
 			BookingController controller = GetController(false);
-			IActionResult result = controller.BookingForm(1);
+			IActionResult result = controller.BookingForm(1, null);
 
 			//Test if controller returned a BadRequest.
 			Assert.IsType<BadRequestResult>(result);
@@ -99,7 +101,7 @@ namespace HomeMyDay.Tests
 			//There are accommodations in the repository.
 			BookingController controller = GetController(true);
 
-			ViewResult result = controller.BookingForm(1) as ViewResult;
+			ViewResult result = controller.BookingForm(1, null) as ViewResult;
 			
 			BookingFormViewModel model = result.Model as BookingFormViewModel;
 
@@ -144,6 +146,41 @@ namespace HomeMyDay.Tests
 
 			Assert.Equal("BookingForm", result.ViewName);
 			Assert.False(controller.ModelState.IsValid);
+		}
+
+		[Fact]
+		public void TestBookingFormPostNonExistentAccommodation()
+		{
+			BookingController controller = GetController(false);
+
+			//Fake post data with a non-existent accommodation
+			var formModel = new BookingFormViewModel()
+			{
+				Accommodation = new Accommodation()
+				{
+					Id = 333,
+					MaxPersons = 4,
+					Name = "Test Accommodation"
+				},
+				Persons = new List<BookingPerson>()
+				{
+					new BookingPerson()
+					{
+						Country = new Country()
+						{
+							Id = 1
+						},
+						Nationality = new Country()
+						{
+							Id = 2
+						}
+					}
+				}
+			};
+
+			IActionResult result = controller.BookingForm(formModel);
+
+			Assert.IsType<BadRequestResult>(result);
 		}
 
 		[Fact]

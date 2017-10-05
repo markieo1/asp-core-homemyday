@@ -32,9 +32,11 @@ namespace HomeMyDay.Controllers
 		{
 			var formModel = new BookingFormViewModel();
 
-			formModel.Accommodation = accommodationRepository.GetAccommodation(id);
-
-			if(formModel.Accommodation == null)
+			try
+			{
+				formModel.Accommodation = accommodationRepository.GetAccommodation(id);
+			}
+			catch(KeyNotFoundException)
 			{
 				return BadRequest();
 			}
@@ -44,7 +46,7 @@ namespace HomeMyDay.Controllers
 			//If an amount of persons was given, use it.
 			//Otherwise, get the maximum persons from the Accommodation.
 			int maxPersons;
-			if(persons.HasValue)
+			if(persons.HasValue && persons.Value <= formModel.Accommodation.MaxPersons)
 			{
 				maxPersons = persons.Value;
 			}
@@ -53,7 +55,7 @@ namespace HomeMyDay.Controllers
 				maxPersons = formModel.Accommodation.MaxPersons;
 			}
 
-			//Initialize empty BookingPersons
+			//Initialize BookingPersons for the form
 			for(int i = 0; i < maxPersons; i++)
 			{
 				formModel.Persons.Add(new BookingPerson());
@@ -81,10 +83,18 @@ namespace HomeMyDay.Controllers
 			}
 			else
 			{
-				//Get accommodation ID
-				long accommodationId = formData.Accommodation.Id;
+				//Get accommodation from posted ID
+				Accommodation accommodation;
+				try
+				{
+					accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
+				}
+				catch(KeyNotFoundException)
+				{
+					return BadRequest();
+				}
 
-				//Get country ID
+				//Get country and nationality objects from ID
 				foreach(BookingPerson person in formData.Persons)
 				{
 					person.Country = countryRepository.GetCountry(person.Country.Id);
@@ -93,7 +103,7 @@ namespace HomeMyDay.Controllers
 
 				//Store model in Session
 				HttpContext.Session.Set(BOOKINGSESSIONKEY, new Booking() {
-					Accommodation = accommodationRepository.GetAccommodation(accommodationId),
+					Accommodation = accommodation,
 					Persons = formData.Persons,
 				});
 
