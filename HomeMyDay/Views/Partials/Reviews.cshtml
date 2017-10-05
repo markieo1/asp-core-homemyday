@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HomeMyDay.ViewModels.ReviewViewModel>
+﻿@model IEnumerable<ReviewViewModel>
 
 @if (Model.Any())
 {
@@ -10,8 +10,8 @@
                 <div class="panel-heading">
                     <div class="panel-title">
                         @p.Title
-                </div>
-            </div>}
+                    </div>
+                </div>}
             <div class="panel-body">
                 <p>@p.Text</p>
                 <span>@p.Name</span>
