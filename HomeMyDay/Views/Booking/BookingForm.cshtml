@@ -6,7 +6,7 @@
 
 	<p>Algemene gegevens personen</p>
 
-	@for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
+	@for (int i = 0; i < Model.Persons.Count; i++)
     {
         @* Generate form fields up to the maximum amount of people, but only show the amount that the user has chosen. *@
         string personClass;

@@ -18,6 +18,11 @@ namespace HomeMyDay.Tests
 {
 	public class BookingControllerTest
 	{
+		/// <summary>
+		/// Initializes an instance of BookingController, complete with mocked repositories and services.
+		/// </summary>
+		/// <param name="shouldHaveAccommodations">If true, the mocked repository will always return an accommodation. If false, always throws a KeyNotFoundException instead.</param>
+		/// <returns>An instance of BookingController with mocked services.</returns>
 		private BookingController GetController(bool shouldHaveAccommodations)
 		{
 			//Mock accommodation repo
@@ -90,8 +95,8 @@ namespace HomeMyDay.Tests
 			BookingController controller = GetController(false);
 			IActionResult result = controller.BookingForm(1, null);
 
-			//Test if controller returned a BadRequest.
-			Assert.IsType<BadRequestResult>(result);
+			//Test if controller returned a NotFoundResult.
+			Assert.IsType<NotFoundResult>(result);
 		}
 
 		[Fact]

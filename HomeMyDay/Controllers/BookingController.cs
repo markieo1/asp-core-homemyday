@@ -38,7 +38,7 @@ namespace HomeMyDay.Controllers
 			}
 			catch(KeyNotFoundException)
 			{
-				return BadRequest();
+				return NotFound();
 			}
 
 			formModel.Persons = new List<BookingPerson>();
@@ -78,10 +78,21 @@ namespace HomeMyDay.Controllers
 		{
 			if(!ModelState.IsValid)
 			{
+				//Restore accommodation object from ID
 				formData.Accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
-				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
 
+				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
 				ViewBag.MaxPersons = formData.Persons.Count();
+
+				//Initialize BookingPersons up to the maximum that the accommodation will support.
+				//Old values entered by the user should be kept.
+				for(int i = 0; i < formData.Accommodation.MaxPersons; i++)
+				{
+					if(formData.Persons.ElementAtOrDefault(i) == null)
+					{
+						formData.Persons.Add(new BookingPerson());
+					}
+				}
 
 				return View("BookingForm", formData);
 			}
