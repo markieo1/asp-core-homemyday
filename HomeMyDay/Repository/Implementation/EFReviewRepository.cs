@@ -29,27 +29,22 @@ namespace HomeMyDay.Repository.Implementation
 			return _context.Reviews.Where(a => a.Accommodation.Id == accommodationId);
 		}
 
-		public bool AddReview(Accommodation accommodation, string title, string name, string text)
+		public bool AddReview(long accommodationId, string title, string name, string text)
 		{
 			bool isAdded;
 
-			if (accommodation == null)
-			{
-				throw new ArgumentNullException();
-			}
-
-			if (accommodation.Id <= 0)
+			if (accommodationId <= 0)
 			{
 				throw new ArgumentOutOfRangeException();
 			}
 
-			var fetchedAccommodation = _accommodationRepository.GetAccommodation(accommodation.Id);
+			var fetchedAccommodation = _accommodationRepository.GetAccommodation(accommodationId);
 
 			try
 			{
 				if (fetchedAccommodation == null)
 				{
-					throw new KeyNotFoundException();
+					throw new KeyNotFoundException("Not Found");
 				}
 
 				var reviewToAdd = new Review()

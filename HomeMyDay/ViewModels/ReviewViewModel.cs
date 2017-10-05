@@ -37,7 +37,7 @@ namespace HomeMyDay.ViewModels
 		/// <summary>
 		/// The id of the accommodation
 		/// </summary>
-		public Accommodation Accommodation { get; set; }
+		public long AccommodationId { get; set; }
 
 		/// <summary>
 		/// Creates an instance of <see cref="ReviewViewModel"/> by using the <paramref name="review"/>
@@ -48,7 +48,7 @@ namespace HomeMyDay.ViewModels
 		{
 			return new ReviewViewModel()
 			{
-				Accommodation = review.Accommodation,
+				AccommodationId = review.Accommodation.Id,
 				Name = review.Name,
 				Date = review.Date,
 				Title = review.Title,

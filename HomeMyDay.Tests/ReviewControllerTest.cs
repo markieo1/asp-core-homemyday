@@ -103,7 +103,7 @@ namespace HomeMyDay.Tests
 
 			ReviewViewModel reviewViewModelToAdd = new ReviewViewModel()
 			{
-				Accommodation = accommodation,
+				AccommodationId = accommodation.Id,
 				Name = "TestReviewAddTest",
 				Approved = true,
 				Date = DateTime.Now,

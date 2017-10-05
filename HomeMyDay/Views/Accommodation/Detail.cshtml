@@ -1,25 +1,22 @@
 ﻿@model AccommodationViewModel
 
 @{
-    var result = TempData["Succeeded"];
+    var reviewSucceedAdded = (bool)TempData["Succeeded"];
 }
 
 <link rel="stylesheet" type="text/css" href="~/css/accommodation.css" />
 
-@if (result != null)
+@if (reviewSucceedAdded)
 {
-    if ((bool)result)
-    {
-        <div class="alert alert-success">
-            <strong>Review is in behandeling genomen.</strong> Indien de review wordt goedgekeurd wordt hij zichtbaar.
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-danger">
-            <strong>Er is een fout opgetreden bij het toevoegen van de review.</strong> Neem contact op met de klantenservice.
-        </div>
-    }
+    <div class="alert alert-success">
+        <strong>Review is in behandeling genomen.</strong> Indien de review wordt goedgekeurd wordt hij zichtbaar.
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Er is een fout opgetreden bij het toevoegen van de review.</strong> Neem contact op met de klantenservice.
+    </div>
 }
 
 @Html.Partial("../Partials/AccommodationCarousel.cshtml", Model.Accommodation.MediaObjects)

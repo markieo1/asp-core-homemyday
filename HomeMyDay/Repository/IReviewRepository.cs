@@ -21,11 +21,11 @@ namespace HomeMyDay.Repository
 		/// <summary>
 		/// Adds a review to an accommodation
 		/// </summary>
-		/// <param name="id">The id of the review</param>
+		/// <param name="accommodationId">The id of the accommodation of the review</param>
 		/// <param name="title">The title of the review</param>
 		/// <param name="name">The name of the user</param>
 		/// <param name="text">The text of the review</param>
 		/// <returns></returns>
-		bool AddReview(Accommodation accommodation, string title, string name, string text);
+		bool AddReview(long accommodationId, string title, string name, string text);
 	}
 }

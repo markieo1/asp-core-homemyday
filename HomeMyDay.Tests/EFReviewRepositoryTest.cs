@@ -283,7 +283,7 @@ namespace HomeMyDay.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.True(repository.AddReview(accommodationRepository.GetAccommodation(1), "Review Holiday 001", "TestReview", "De vakantie was goed!"));
+			Assert.True(repository.AddReview(1, "Review Holiday 001", "TestReview", "De vakantie was goed!"));
 			Assert.True(repository.GetAccomodationReviews(1).Count() == 1);
 		}
 
@@ -308,33 +308,9 @@ namespace HomeMyDay.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.Throws<KeyNotFoundException>(() => repository.AddReview(new Accommodation() { Id = 2 }, null, null, null));
+			Assert.Throws<KeyNotFoundException>(() => repository.AddReview(2, null, null, null));
 		}
-
-		[Fact]
-		public void TestAddArgumentNullExceptionReview()
-		{
-			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-
-			IAccommodationRepository accommodationRepository = new EFAccommodationRepository(context);
-
-			context.Accommodations.Add(new Accommodation()
-			{
-				Id = 1,
-				Name = "TestAccommodation",
-				Beds = 6,
-				Country = "Amsterdam",
-				Rooms = 3
-			});
-
-			context.SaveChanges();
-
-			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.Throws<ArgumentNullException>(() => repository.AddReview(null, null, null, null));
-		}
-
+		  
 		[Fact]
 		public void TestAddArgumentOutOfRangeExceptionReview()
 		{
@@ -356,7 +332,7 @@ namespace HomeMyDay.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.Throws<ArgumentOutOfRangeException>(() => repository.AddReview(new Accommodation() { Id = 0 }, null, null, null));
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.AddReview(0, null, null, null));
 		}
 	}
 }
