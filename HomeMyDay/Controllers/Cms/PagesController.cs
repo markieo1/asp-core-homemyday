@@ -15,7 +15,7 @@ namespace HomeMyDay.Controllers.Cms
 	[Area("CMS")]
 	//[Authorize(Policy = IdentityPolicies.Administrator)]
 	public class PagesController : Controller
-    {
+	{
 		private readonly IPageRepository _pageRepository;
 
 		public PagesController(IPageRepository pageRepository)
@@ -30,11 +30,12 @@ namespace HomeMyDay.Controllers.Cms
 			{
 				PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
 				return View(paginatedResult);
-			}catch (Exception)
-			{
-				return View("Error", new ErrorViewModel() {RequestId = "Error" });
 			}
-			
+			catch (Exception)
+			{
+				return View("Error", new ErrorViewModel() { RequestId = "Error" });
+			}
+
 		}
 
 		[HttpGet]
@@ -43,14 +44,15 @@ namespace HomeMyDay.Controllers.Cms
 			Page _suprise = _pageRepository.GetPage(id);
 			PageViewModel model = new PageViewModel() { Title = _suprise.Title, Content = _suprise.Content };
 
-			return View( model);
+			return View(model);
 		}
 
 		[HttpPost]
 		public IActionResult Edit(long id, Page page)
 		{
 			Page _suprise = _pageRepository.GetPage(id);
-			if (_suprise != null) {
+			if (_suprise != null)
+			{
 				_pageRepository.EditPage(id, page);
 				return View();
 			}
