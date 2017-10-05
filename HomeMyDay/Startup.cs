@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using HomeMyDay.Database.Identity;
 
 namespace HomeMyDay
 {
@@ -63,6 +64,12 @@ namespace HomeMyDay
 				options.User.RequireUniqueEmail = true;
 			});
 
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy(IdentityPolicies.Administrator, policy => policy.RequireRole(IdentityRoles.Administrator));
+				options.AddPolicy(IdentityPolicies.Booker, policy => policy.RequireRole(IdentityRoles.Booker));
+			});
+
 			services.ConfigureApplicationCookie(options =>
 			{
 				// Cookie settings
@@ -75,8 +82,11 @@ namespace HomeMyDay
 			//Mail Services setting
 			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
 
-			//Session settings
-			services.AddDistributedMemoryCache();
+			//Google API settings
+			services.Configure<GoogleApiServiceOptions>(Configuration.GetSection("GoogleMapsSettings"));
+
+            //Session settings
+            services.AddDistributedMemoryCache();
 
 			services.AddSession(options =>
 			{
@@ -88,9 +98,9 @@ namespace HomeMyDay
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
 			services.AddTransient<ICountryRepository, EFCountryRepository>();
 			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();
-			services.AddTransient<IVacancyRepository, EFVacancyRepository>();
-			services.AddTransient<IReviewRepository, EFReviewRepository>();
-			services.AddTransient<IPageRepository, EFSupriseRepository>();
+            services.AddTransient<IVacancyRepository, EFVacancyRepository>();
+            services.AddTransient<IReviewRepository, EFReviewRepository>();
+            services.AddTransient<IFaqRepository, EFFaqRepository>();
 
 			services.AddMvc();
 		}
@@ -127,6 +137,7 @@ namespace HomeMyDay
 
 			SeedHomeMyDayDbData.Seed(homeMyDayDbContext);
 			SeedReviewDbData.Seed(homeMyDayDbContext);
+			SeedIdentityDbData.Seed(appIdentityDbContext);
 		}
 	}
 }
