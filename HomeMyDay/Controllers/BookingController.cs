@@ -28,7 +28,7 @@ namespace HomeMyDay.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult BookingForm(int id)
+		public IActionResult BookingForm(int id, int? persons)
 		{
 			var formModel = new BookingFormViewModel();
 
@@ -41,8 +41,20 @@ namespace HomeMyDay.Controllers
 
 			formModel.Persons = new List<BookingPerson>();
 
+			//If an amount of persons was given, use it.
+			//Otherwise, get the maximum persons from the Accommodation.
+			int maxPersons;
+			if(persons.HasValue)
+			{
+				maxPersons = persons.Value;
+			}
+			else
+			{
+				maxPersons = formModel.Accommodation.MaxPersons;
+			}
+
 			//Initialize empty BookingPersons
-			for(int i = 0; i < formModel.Accommodation.MaxPersons; i++)
+			for(int i = 0; i < maxPersons; i++)
 			{
 				formModel.Persons.Add(new BookingPerson());
 			}
