@@ -4,20 +4,24 @@
 @import 'mixins';
 
 p {
-	white-space: pre-wrap;
+    white-space: pre-wrap;
+}
+
+textarea {
+    white-space: pre-wrap;
 }
 
 
 .mtop52 {
-	margin-top: 52px;
+    margin-top: 52px;
 }
 
 .mtop80 {
-	margin-top: 80px;
+    margin-top: 80px;
 }
 
 .mbot80 {
-	margin-bottom: 80px;
+    margin-bottom: 80px;
 }
 
 .mbot150 {
@@ -25,83 +29,83 @@ p {
 }
 
 .bottom-buffer {
-	padding-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 .row.equal {
-	display: flex;
-	flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .p-t-51 {
-	padding-top: 51px;
+    padding-top: 51px;
 }
 
 .p-l-50 {
-	padding-left: 50px;
+    padding-left: 50px;
 }
 
 .p-r-50 {
-	padding-right: 50px;
+    padding-right: 50px;
 }
 
 .pad-45 {
-	padding: 45px;
+    padding: 45px;
 }
 
 .review-overview {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 
-	> span {
-		color: $color-gray;
-	}
+    > span {
+        color: $color-gray;
+    }
 }
 
 .p-b-20 {
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .m-b-25 {
-	margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 .m-b-45 {
-	margin-bottom: 45px;
+    margin-bottom: 45px;
 }
 
 .f-s-17 {
-	font-size: 17px;
+    font-size: 17px;
 }
 
 .f-s-20 {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 .searchbarContainer {
-	z-index: 2;
-	margin-top: 25px;
-	position: absolute;
-	width: 100%;
+    z-index: 2;
+    margin-top: 25px;
+    position: absolute;
+    width: 100%;
 }
 
 .videoWrapper {
-	padding-bottom: 47.25%;
+    padding-bottom: 47.25%;
 }
 
 .container-about {
-	min-height: 100vh;
-	display: grid;
-	align-items: center;
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
 }
 
 .container-process {
-	min-height: 70vh;
-	display: grid;
-	align-items: center;
+    min-height: 70vh;
+    display: grid;
+    align-items: center;
 }
 
 .m-b-20 {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .bold {
@@ -110,36 +114,36 @@ p {
 
 
 .row.search-bar {
-	padding-top: 20px;
+    padding-top: 20px;
 }
 
 #theprocess > .process-visual {
-	display: flex;
-	justify-content: space-between;
-	flex-direction: row;
-	align-items: center;
-	font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.2em;
 
-	> div {
-		width: 10%;
-		text-align: center;
-		flex-shrink: 0;
-	}
+    > div {
+        width: 10%;
+        text-align: center;
+        flex-shrink: 0;
+    }
 
-	> div.line {
-		width: 100%;
-		flex-shrink: 1;
-		margin: 2px;
-		border: 2px solid $theprocess-line-color;
-		border-radius: 2px;
-	}
+    > div.line {
+        width: 100%;
+        flex-shrink: 1;
+        margin: 2px;
+        border: 2px solid $theprocess-line-color;
+        border-radius: 2px;
+    }
 }
 
 #process-text > .the-text {
-	display: flex;
-	vertical-align: middle;
-	align-items: center;
-	
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+
     > #night, #good {
         border-color: $primary-color;
 
@@ -151,98 +155,98 @@ p {
 }
 
 #booking-form {
-	clear: both;
-	overflow: auto;
+    clear: both;
+    overflow: auto;
 
-	table, td, th {
-		padding: 3px;
-	}
+    table, td, th {
+        padding: 3px;
+    }
 
-	input[type="submit"] {
-		display: block;
-		clear: both;
-	}
+    input[type="submit"] {
+        display: block;
+        clear: both;
+    }
 
-	hr {
-		clear: both;
-	}
+    hr {
+        clear: both;
+    }
 
-	.bookingperson .form-input-group:last-child {
-		margin-bottom: 20px;
-	}
+    .bookingperson .form-input-group:last-child {
+        margin-bottom: 20px;
+    }
 
-	.baggage label {
-		float: left;
-		clear: left;
-		width: 150px;
-		margin-right: 20px;
-		margin-bottom: 10px;
-	}
+    .baggage label {
+        float: left;
+        clear: left;
+        width: 150px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
 
-	.baggage input {
-		float: left;
-		width: 150px;
-		margin-bottom: 10px;
-	}
+    .baggage input {
+        float: left;
+        width: 150px;
+        margin-bottom: 10px;
+    }
 
-	.housenumber {
-		display: inline;
-		width: 70px;
-	}
+    .housenumber {
+        display: inline;
+        width: 70px;
+    }
 
-	.housenumbersuffix {
-		display: inline;
-		width: 50px;
-	}
+    .housenumbersuffix {
+        display: inline;
+        width: 50px;
+    }
 }
 
 #booking-confirmation {
-	form, input[type="submit"] {
-		clear: both;
-		margin-bottom: 10px;
-	}
+    form, input[type="submit"] {
+        clear: both;
+        margin-bottom: 10px;
+    }
 
-	#booking-information {
-		border-right: 1px solid $bookingconfirmation-border-color;
-	}
+    #booking-information {
+        border-right: 1px solid $bookingconfirmation-border-color;
+    }
 
-	table, td, th {
-		padding: 3px;
-	}
+    table, td, th {
+        padding: 3px;
+    }
 }
 
 .icon-color {
-	color: $icon-color;
+    color: $icon-color;
 }
 
 .vacancy-shadow {
-	-webkit-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
-	-moz-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
-	box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    -webkit-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    -moz-box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
+    box-shadow: 0px 2px 33px 10px rgba(207,207,207,1);
 }
 
 .gray {
-	color: $color-gray;
+    color: $color-gray;
 }
 
 .field-validation-error {
-	color: $error-text-color;
-	display: block;
+    color: $error-text-color;
+    display: block;
 }
 
 .newspaper {
-	margin-bottom: 150px;
+    margin-bottom: 150px;
 
 
-	@include for-phone-only {
-		strong {
-			font-size: 10px;
-		}
-	}
+    @include for-phone-only {
+        strong {
+            font-size: 10px;
+        }
+    }
 
-	@include for-desktop-up {
-		margin-bottom: 30px;
-	}
+    @include for-desktop-up {
+        margin-bottom: 30px;
+    }
 }
 
 .newspaper-label {
@@ -253,27 +257,27 @@ p {
 }
 
 .border-left {
-	border-left: $border-color-5px;
+    border-left: $border-color-5px;
 }
 
 .border-right {
-	border-right: $border-color-5px;
+    border-right: $border-color-5px;
 }
 
 .header-image {
-	width: 100%;
+    width: 100%;
 
-	@include for-phone-only {
-		height: 200px;
-	}
+    @include for-phone-only {
+        height: 200px;
+    }
 
-	@include for-tablet-up {
-		height: 300px;
-	}
+    @include for-tablet-up {
+        height: 300px;
+    }
 
-	@include for-desktop-up {
-		height: 500px;
-	}
+    @include for-desktop-up {
+        height: 500px;
+    }
 }
 
 .vacancy-overview > :last-child {

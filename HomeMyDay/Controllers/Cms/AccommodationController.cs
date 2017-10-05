@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
-	[Authorize(Policy = IdentityPolicies.Administrator)]
+	//[Authorize(Policy = IdentityPolicies.Administrator)]
 	public class AccommodationController : Controller
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
@@ -27,6 +27,32 @@ namespace HomeMyDay.Controllers.Cms
 		{
 			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1, pageSize ?? 5);
 			return View(paginatedResult);
+		}
+
+		[HttpGet]
+		public IActionResult Edit(int id)
+		{
+			Accommodation accommodation;
+			try
+			{
+				accommodation = _accommodationRepository.GetAccommodation(id);
+			}
+			catch (KeyNotFoundException)
+			{
+				return new NotFoundResult();
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return new BadRequestResult();
+			}
+
+			return View(accommodation);
+		}
+
+		[HttpPost]
+		public IActionResult Edit(int id, Accommodation accommodation)
+		{
+			return View();
 		}
 	}
 }
