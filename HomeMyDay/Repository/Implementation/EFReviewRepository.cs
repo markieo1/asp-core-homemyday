@@ -44,7 +44,7 @@ namespace HomeMyDay.Repository.Implementation
 			{
 				if (fetchedAccommodation == null)
 				{
-					throw new KeyNotFoundException("Not Found");
+					throw new KeyNotFoundException($"Accommodation with ID: {accommodationId} is not found");
 				}
 
 				var reviewToAdd = new Review()
