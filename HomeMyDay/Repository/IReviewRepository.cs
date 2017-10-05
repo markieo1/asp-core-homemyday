@@ -16,7 +16,7 @@ namespace HomeMyDay.Repository
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-        IEnumerable<Review> GetAccomodationReviews(long id);
+        IEnumerable<Review> GetAccomodationReviews(long accommodationId);
 
 		/// <summary>
 		/// Adds a review to an accommodation

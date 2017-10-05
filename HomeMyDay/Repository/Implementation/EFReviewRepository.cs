@@ -19,17 +19,39 @@ namespace HomeMyDay.Repository.Implementation
 
         public IEnumerable<Review> Reviews => _context.Reviews;
 
-        public IEnumerable<Review> GetAccomodationReviews(long id)
+        public IEnumerable<Review> GetAccomodationReviews(long accommodationId)
         {
-            return _context.Reviews.Where(a => a.Accommodation.Id == id);
+	        if (accommodationId <= 0)
+	        {
+		        throw new ArgumentOutOfRangeException();
+	        }
+
+            return _context.Reviews.Where(a => a.Accommodation.Id == accommodationId);
         }
 
 	    public bool AddReview(Accommodation accommodation, string title, string name, string text)
 	    {
 		    bool isAdded;
-		    try
+
+		    if (accommodation == null)
+		    {
+			    throw new ArgumentNullException();
+		    }
+
+		    if (accommodation.Id <= 0)
+		    {
+			    throw new ArgumentOutOfRangeException();
+		    }
+
+		    var fetchedAccommodation = _accommodationRepository.GetAccommodation(accommodation.Id);
+
+			try
 		    {	
-			    var fetchedAccommodation = _accommodationRepository.GetAccommodation(accommodation.Id);	 
+			    if (fetchedAccommodation == null)
+			    {
+				    throw new KeyNotFoundException();
+			    }
+
 				var reviewToAdd = new Review()
 			    {
 					Accommodation = fetchedAccommodation,
