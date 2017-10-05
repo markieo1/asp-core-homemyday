@@ -42,7 +42,7 @@
 
         <hr />
 
-        <h2>Reisverzekering <a target="_blank" asp-controller="Booking" asp-action="InsuranceTerms">(voorwaarden)</a></h2>
+        <h2>Reisverzekering <a target="_blank" asp-area="" asp-controller="Booking" asp-action="InsuranceTerms">(voorwaarden)</a></h2>
 
         @foreach (string type in Enum.GetNames(typeof(InsuranceType)))
         {
