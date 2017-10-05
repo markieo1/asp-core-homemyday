@@ -1,0 +1,160 @@
+﻿@model PaginatedList<Review>
+
+<div class="container">
+    <div class="row p-t-51 m-b-20">
+        <div class="col-md-12">
+            <div class="dropdown pull-right">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                    @Model.PageSize
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="5"
+                           asp-controller="Accommodation">5</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="10"
+                           asp-controller="Accommodation">10</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="25"
+                           asp-controller="Accommodation">25</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="50"
+                           asp-controller="Accommodation">50</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                ReviewText
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Review review in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(x => review.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => review.Title)
+                                </td>
+                                <td class="text-right">
+                                    @Html.DisplayFor(x => review.Text)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => review.Date)
+                                </td>
+                                <td>
+                                    <a asp-area="CMS"
+                                       asp-controller="Review"
+                                       asp-action="Accept"
+                                       asp-route-id="@review.Id"
+                                       class="btn btn-block btn-success">
+                                        <i class="fa fa-check-square-o"></i> Accept
+                                    </a>
+                                    <a asp-area="CMS"
+                                       asp-controller="Review"
+                                       asp-action="Denied"
+                                       asp-route-id="@review.Id"
+                                       class="btn btn-block btn-danger">
+                                        <i class="fa fa-times"></i> Denied
+                                    </a>
+                                </td>
+                            </tr>}
+                    </tbody>
+                </table>
+            </div>
+
+            @{  var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <nav aria-label="Search results pages">
+                <ul class="pagination">
+                    <li class="@prevDisabled">
+                        @if (Model.HasPreviousPage)
+                        {
+                            <a asp-area="CMS"
+                               asp-action="Index"
+                               asp-route-page="@(Model.PageIndex - 1)"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-controller="Review"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>}
+                        else
+                        {
+                            <span aria-hidden="true" aria-label="Previous">&laquo;</span>}
+                    </li>
+
+                    @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                    {
+                        <li class="@(Model.PageIndex == i ? "active": "")">
+                            <a asp-area="CMS"
+                               asp-action="Index"
+                               asp-route-page="@i"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-controller="Review">
+                                @i
+                                @if (Model.PageIndex == i)
+                                {<span class="sr-only">(current)</span>}
+                            </a>
+                        </li>}
+
+
+                    <li class="@nextDisabled">
+                        @if (Model.HasNextPage)
+                        {
+                            <a asp-area="CMS"
+                               asp-action="Index"
+                               asp-route-page="@(Model.PageIndex + 1)"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-controller="Review"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>                        }
+                        else
+                        {
+                            <span aria-hidden="true" aria-label="Next">&raquo;</span>}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
