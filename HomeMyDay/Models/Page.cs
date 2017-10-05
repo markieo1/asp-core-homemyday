@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace HomeMyDay.Models
+﻿namespace HomeMyDay.Models
 {
-    public class Page : BaseModel
+	public class Page : BaseModel
     {
 		/// <summary>
 		/// A unique Id to call for the page
