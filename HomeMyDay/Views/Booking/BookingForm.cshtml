@@ -1,14 +1,24 @@
 ﻿@model HomeMyDay.ViewModels.BookingFormViewModel
 
-<form id="booking-form" class="container bottom-buffer" asp-action="BookingForm" method="post">
+<form id="booking-form" class="container bottom-buffer" asp-action="BookingForm" method="post" data-maxpersons="@ViewBag.MaxPersons">
 
 	<h1>Boeking @Model.Accommodation.Name</h1>
 
 	<p>Algemene gegevens personen</p>
 
-	@for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
-	{
-		<div class="bookingperson">
+	@for (int i = 0; i < Model.Persons.Count; i++)
+    {
+        @* Generate form fields up to the maximum amount of people, but only show the amount that the user has chosen. *@
+        string personClass;
+        @if(i < ViewBag.MaxPersons)
+        {
+            personClass = "bookingperson";
+        }
+        else
+        {
+            personClass = "bookingperson hidden";
+        }
+		<div class="@personClass" data-person-index="@i">
 			@if (i == 0)
 			{
 				<h2>Hoofdboeker</h2>
@@ -105,28 +115,48 @@
                     <span asp-validation-for="@Model.Persons[i].Nationality"></span>
                 </div>
             </div>
-		</div>
 
-		<hr />
+            @if(i > 0)
+            {
+                <button type="button" class="remove-booker btn btn-danger">Boeker verwijderen</button>
+            }
+
+            <hr />
+		</div>
 	}
+
+    <button type="button" id="add-booker-button" class="btn btn-success">Boeker Toevoegen</button>
 
     <h2>Bagage</h2>
 
     <p>Handbagage is inbegrepen. Wil je meer meenemen, kies dan hier je ruimbagage!</p>
 
     <div class="baggage">
-        @for (int i = 0; i < Model.Accommodation.MaxPersons; i++)
+        @for (int i = 0; i < Model.Persons.Count; i++)
         {
-            @if (i == 0)
+            @* Generate form fields up to the maximum amount of people, but only show the amount of people that the user has selected. *@
+            string baggageClass;
+            @if(i < ViewBag.MaxPersons)
             {
-                <label for="@Model.Persons[i].Baggage">Hoofdboeker</label>
-}
+                baggageClass = "person-baggage";
+            }
             else
             {
-                <label for="@Model.Persons[i].Baggage">Boeker nummer @i</label>
-}
+                baggageClass = "person-baggage hidden";
+            }
 
-            <input asp-for="@Model.Persons[i].Baggage" class="form-control" />
+            <div class="@baggageClass" data-person-index="@i">
+                @if (i == 0)
+                {
+                    <label for="@Model.Persons[i].Baggage">Hoofdboeker</label>
+                }
+                else
+                {
+                    <label for="@Model.Persons[i].Baggage">Boeker nummer @i</label>
+                }
+
+                <input asp-for="@Model.Persons[i].Baggage" class="form-control" />
+            </div>
         }
     </div>
 

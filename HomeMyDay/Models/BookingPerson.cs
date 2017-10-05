@@ -89,7 +89,7 @@ namespace HomeMyDay.Models
 		/// </summary>
 		[DisplayName("Huisnummer")]
 		[Required]
-		public int HouseNumber { get; set; }
+		public int? HouseNumber { get; set; }
 
 		/// <summary>
 		/// The house number suffix of the person.
