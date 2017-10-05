@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using HomeMyDay.Extensions;
 using HomeMyDay.Repository;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +27,11 @@ namespace HomeMyDay.Controllers
 				reviewViewModel.Name, reviewViewModel.Text))
 			{
 				TempData["Succeeded"] = true;
-				return RedirectToAction("Detail", "Accommodation", new { id = reviewViewModel.Accommodation.Id });
+				return RedirectToAction(nameof(AccommodationController.Detail), nameof(AccommodationController).TrimControllerName(), new { id = reviewViewModel.Accommodation.Id });
 			}
 
 			TempData["Succeeded"] = false;
-			return RedirectToAction("Detail", "Accommodation");
+			return RedirectToAction(nameof(AccommodationController.Detail), nameof(AccommodationController).TrimControllerName());
 		}
 	}
 }
