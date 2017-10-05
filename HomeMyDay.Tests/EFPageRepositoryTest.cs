@@ -10,7 +10,7 @@ using Xunit;
 
 namespace HomeMyDay.Tests
 {
-	public class EFSupriseRepositoryTest
+	public class EFPageRepositoryTest
 	{
 		
 		[Fact]
@@ -21,14 +21,14 @@ namespace HomeMyDay.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Page.AddRange(
-				new Suprise() { Title = "Suprise", Content = "Hallo" },
-				new Suprise() { Title = "LastSuprise", Content = "Hallo" }
+				new Page() { Page_Id= "TheSuprise", Title = "Suprise", Content = "Hallo" },
+				new Page() { Page_Id = "TheSuprise", Title = "LastSuprise", Content = "Hallo" }
 				);
 
 			context.SaveChanges();
 
 
-			IPageRepository repository = new EFSupriseRepository(context);
+			IPageRepository repository = new EFPageRepository(context);
 
 			Assert.Equal("LastSuprise", repository.GetSuprise().Title);
 		}

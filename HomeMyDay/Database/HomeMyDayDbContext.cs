@@ -35,7 +35,7 @@ namespace HomeMyDay.Database
 		public DbSet<Country> Countries { get; set; }
 
 		/// <summary>
-		/// Get or set the Suprise Model Content
+		/// Get or set the page content
 		/// </summary>
 		public DbSet<Page> Page { get; set; }
 

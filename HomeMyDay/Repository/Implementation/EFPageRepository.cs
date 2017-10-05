@@ -7,8 +7,8 @@ using HomeMyDay.Models;
 
 namespace HomeMyDay.Repository.Implementation
 {
-    public class EFPageRepository : IPageRepository
-    {
+	public class EFPageRepository : IPageRepository
+	{
 		private readonly HomeMyDayDbContext _context;
 
 		public EFPageRepository(HomeMyDayDbContext context)
@@ -18,7 +18,7 @@ namespace HomeMyDay.Repository.Implementation
 
 		public Page GetSuprise()
 		{
-			return _context.Page.Where(r=>r.Page_Id == "TheSuprise").LastOrDefault();
+			return _context.Page.Where(r => r.Page_Id == "TheSuprise").LastOrDefault();
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestNoSuprise()
 		{
-			Suprise suprise = null;
+			Page suprise = null;
 
 			var repo = new Mock<IPageRepository>();
 			repo.Setup(r=>r.GetSuprise()).Returns(suprise);
