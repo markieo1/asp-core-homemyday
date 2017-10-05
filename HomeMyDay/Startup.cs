@@ -149,7 +149,7 @@ namespace HomeMyDay
 
 			SeedHomeMyDayDbData.Seed(homeMyDayDbContext);
 			SeedReviewDbData.Seed(homeMyDayDbContext);
-			SeedIdentityDbData.Seed(appIdentityDbContext);
+			SeedIdentityDbData.Seed(appIdentityDbContext, app.ApplicationServices);
 		}
 	}
 }

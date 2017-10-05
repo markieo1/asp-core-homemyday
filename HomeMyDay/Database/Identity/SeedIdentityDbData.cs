@@ -1,6 +1,7 @@
 ﻿using HomeMyDay.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,18 @@ namespace HomeMyDay.Database.Identity
 		/// Seeds the specified context.
 		/// </summary>
 		/// <param name="context">The context.</param>
-		public static void Seed(AppIdentityDbContext context)
+		/// <param name="services">The app services.</param>
+		public static void Seed(AppIdentityDbContext context, IServiceProvider services)
 		{
 			SeedRoles(context);
-			SeedUser(context);
+
+			using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+			{
+				UserManager<User> userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+				var task = Task.Run(async () => { await SeedUser(userManager); });
+				task.Wait();
+			}
+
 			context.SaveChangesAsync();
 		}
 
@@ -48,8 +57,8 @@ namespace HomeMyDay.Database.Identity
 		/// <summary>
 		/// Seeds the user.
 		/// </summary>
-		/// <param name="context">The context.</param>
-		private static void SeedUser(AppIdentityDbContext context)
+		/// <param name="userManager">The user manager</param>
+		private static async Task SeedUser(UserManager<User> userManager)
 		{
 			User user = new User
 			{
@@ -62,15 +71,18 @@ namespace HomeMyDay.Database.Identity
 				SecurityStamp = Guid.NewGuid().ToString()
 			};
 
-			if (!context.Users.Any(u => u.UserName == user.UserName))
+			if (!userManager.Users.Any(u => u.UserName == user.UserName))
 			{
 				var password = new PasswordHasher<User>();
 				var hashed = password.HashPassword(user, "HomeMyDay@123");
 				user.PasswordHash = hashed;
-				var userStore = new UserStore<User>(context);
-				userStore.CreateAsync(user);
-				userStore.AddToRoleAsync(user, IdentityRoles.Administrator);
+
+				await userManager.CreateAsync(user);
 			}
+
+			User adminUser = await userManager.FindByNameAsync(AdminUsername);
+
+			await userManager.AddToRoleAsync(adminUser, IdentityRoles.Administrator);
 		}
 	}
 }
