@@ -30,7 +30,7 @@ namespace HomeMyDay.Controllers.Cms
         public IActionResult Accept(long id)
         {
             _reviewRepository.AcceptReview(id);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
