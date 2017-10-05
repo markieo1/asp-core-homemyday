@@ -1,7 +1,7 @@
 ﻿@model Accommodation
 
 <div class="col-sm-3">
-    <a asp-controller="Accommodation" asp-action="Detail" asp-route-id="@Model.Id">
+    <a asp-area="" asp-controller="Accommodation" asp-action="Detail" asp-route-id="@Model.Id">
         <div class="thumbnail">
             @{  MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
 
