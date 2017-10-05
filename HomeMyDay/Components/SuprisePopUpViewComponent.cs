@@ -20,7 +20,7 @@ namespace HomeMyDay.Components
 
 		public IViewComponentResult Invoke()
 		{
-			Page _suprise = _supriseRepository.GetPage("TheSuprise");
+			Page _suprise = _supriseRepository.GetPage(1);
 			if (_suprise != null)
 			{
 				PageViewModel model = new PageViewModel() { Title = _suprise.Title, Content = _suprise.Content };

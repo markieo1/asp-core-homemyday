@@ -50,6 +50,9 @@
 					<thead>
 						<tr>
 							<th>
+								Page
+							</th>
+							<th>
 								Title
 							</th>
 							<th>
@@ -66,6 +69,9 @@
 						{
 							<tr>
 								<td>
+									@pages.Page_Name
+								</td>
+								<td>
 									@Html.DisplayFor(x => pages.Title)
 								</td>
 								<td>
@@ -75,7 +81,7 @@
 									<a asp-area="CMS"
 									   asp-controller="Pages"
 									   asp-action="Edit"
-									   asp-route-id="@pages.Page_Id"
+									   asp-route-id="@pages.Id"
 									   class="btn btn-block btn-default">
 										<i class="fa fa-pencil-square-o"></i> Edit
 									</a>

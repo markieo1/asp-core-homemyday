@@ -21,8 +21,8 @@ namespace HomeMyDay.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Page.AddRange(
-				new Page() { Page_Id= "TheSuprise", Title = "Suprise", Content = "Hallo" },
-				new Page() { Page_Id = "TheSuprise", Title = "LastSuprise", Content = "Hallo" }
+				new Page() { Page_Name= "TheSuprise", Title = "Suprise", Content = "Hallo" },
+				new Page() { Page_Name = "TheSuprise", Title = "LastSuprise", Content = "Hallo" }
 				);
 
 			context.SaveChanges();
@@ -30,7 +30,7 @@ namespace HomeMyDay.Tests
 
 			IPageRepository repository = new EFPageRepository(context);
 
-			Assert.Equal("LastSuprise", repository.GetPage("TheSuprise").Title);
+			Assert.Equal("LastSuprise", repository.GetPage(1).Title);
 		}
 
 		[Fact]
@@ -40,7 +40,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-			context.Page.Add(new Page() { Page_Id = "TheSuprise", Title = "LastSuprise", Content = "Hallo" });
+			context.Page.Add(new Page() { Page_Name = "TheSuprise", Title = "LastSuprise", Content = "Hallo" });
 
 			context.SaveChanges();
 
@@ -48,10 +48,10 @@ namespace HomeMyDay.Tests
 
 			IPageRepository repository = new EFPageRepository(context);
 
-			repository.EditPage("TheSuprise", page);
+			repository.EditPage(1, page);
 
-			Assert.Equal("NewSuprise", repository.GetPage("TheSuprise").Title);
-			Assert.Equal("NewContent", repository.GetPage("TheSuprise").Content);
+			Assert.Equal("NewSuprise", repository.GetPage(1).Title);
+			Assert.Equal("NewContent", repository.GetPage(1).Content);
 		}
 
 	}

@@ -25,7 +25,7 @@ namespace HomeMyDay.Tests
 			Page suprise = null;
 
 			var repo = new Mock<IPageRepository>();
-			repo.Setup(r=>r.GetPage("TheSuprise")).Returns(suprise);
+			repo.Setup(r=>r.GetPage(1)).Returns(suprise);
 			SuprisePopUpViewComponent target = new SuprisePopUpViewComponent(repo.Object);
 
 			var result = target.Invoke() as ViewViewComponentResult;
@@ -37,10 +37,10 @@ namespace HomeMyDay.Tests
 		[Fact]
 		public void TestSupriseNotNullAndEmpty()
 		{
-			Page suprise = new Page {Page_Id = "TheSuprise", Title = "Hallo", Content="Test" };
+			Page suprise = new Page {Page_Name = "TheSuprise", Title = "Hallo", Content="Test" };
 
 			var repo = new Mock<IPageRepository>();
-			repo.Setup(r => r.GetPage("TheSuprise")).Returns(suprise);
+			repo.Setup(r => r.GetPage(1)).Returns(suprise);
 
 			SuprisePopUpViewComponent target = new SuprisePopUpViewComponent(repo.Object);
 

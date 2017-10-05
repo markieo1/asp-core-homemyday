@@ -18,20 +18,20 @@ namespace HomeMyDay.Tests
 		{
 
 			// Arrange - create the mock repository
-			Page suprise = new Page { Page_Id = "TheSuprise", Title = "Hallo", Content = "Test" };
+			Page suprise = new Page { Page_Name = "TheSuprise", Title = "Hallo", Content = "Test" };
 
 			var repo = new Mock<IPageRepository>();
-			repo.Setup(r => r.GetPage("TheSuprise")).Returns(suprise);
+			repo.Setup(r => r.GetPage(1)).Returns(suprise);
 
 			// Arrange - create a controller
 			PagesController target = new PagesController(repo.Object);
 
 			// Action
-			var mo = (target.Edit("TheSuprise", suprise) as ViewResult).ViewData.Model;
+			var mo = (target.Edit(1, suprise) as ViewResult).ViewData.Model;
 
 			// Assert
 			//Check if edit was called
-			repo.Verify(foo => foo.EditPage("TheSuprise", suprise));
+			repo.Verify(foo => foo.EditPage(1, suprise));
 			Assert.NotNull(mo);
 		}
 	}

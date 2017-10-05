@@ -35,18 +35,18 @@ namespace HomeMyDay.Repository.Implementation
 			return PaginatedList<Page>.CreateAsync(_page, page, pageSize);
 		}
 
-		public Page GetPage(string pageid)
+		public Page GetPage(long id)
 		{
-			return _context.Page.Where(r => r.Page_Id == pageid).LastOrDefault();
+			return _context.Page.Where(r => r.Id == id).LastOrDefault();
 		}
 
-		public void EditPage(string pageid, Page page)
+		public void EditPage(long id, Page page)
 		{
-			var db = _context.Page.Any(r=>r.Page_Id == pageid);
+			var db = _context.Page.Any(r=>r.Id == id);
 
 			if (db)
 			{
-				var db_page = _context.Page.Where(r => r.Page_Id == pageid).LastOrDefault();
+				var db_page = _context.Page.Where(r => r.Id == id).LastOrDefault();
 
 				db_page.Title = page.Title;
 				db_page.Content = page.Content;

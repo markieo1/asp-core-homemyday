@@ -6,10 +6,10 @@ namespace HomeMyDay.Models
 	public class Page : BaseModel
     {
 		/// <summary>
-		/// A unique Id to call for the page
+		/// The Page Name
 		/// </summary>
 		[BindNever]
-		public string Page_Id { get; set; }
+		public string Page_Name { get; set; }
 
 		/// <summary>
 		/// The Title of the modal

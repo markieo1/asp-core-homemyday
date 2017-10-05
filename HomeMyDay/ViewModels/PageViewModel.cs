@@ -12,8 +12,7 @@ namespace HomeMyDay.ViewModels
 		/// <summary>
 		/// A unique Id to call for the page
 		/// </summary>
-		[BindNever]
-		public string Page_Id { get; set; }
+		public string Page_Name { get; set; }
 
 		/// <summary>
 		/// The Title of the modal

@@ -34,7 +34,7 @@ namespace HomeMyDay.Database
 		private static void SeedSuprise(HomeMyDayDbContext context)
 		{
 			var generator = new LipsumGenerator();
-			context.Page.Add(new Page() {Page_Id = "TheSuprise", Title = "Suprise", Content = generator.GenerateParagraphs(1)[0] });
+			context.Page.Add(new Page() {Page_Name = "TheSuprise", Title = "Suprise", Content = generator.GenerateParagraphs(1)[0] });
 			context.SaveChanges();
 		}
 

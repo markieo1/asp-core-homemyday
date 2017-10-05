@@ -47,25 +47,7 @@ namespace HomeMyDay.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FaqQuestions");
-
-            migrationBuilder.DropTable(
                 name: "Page");
-
-            migrationBuilder.DropTable(
-                name: "FaqCategory");
-
-            migrationBuilder.DropColumn(
-                name: "City",
-                table: "BookingPerson");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Insertion",
-                table: "BookingPerson",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
         }
     }
 }
