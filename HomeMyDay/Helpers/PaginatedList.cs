@@ -23,6 +23,27 @@ namespace HomeMyDay.Helpers
 		public int TotalPages { get; private set; }
 
 		/// <summary>
+		/// Gets the size of the page.
+		/// </summary>
+		public int PageSize { get; private set; }
+
+		/// <summary>
+		/// Gets the start page.
+		/// </summary>
+		/// <value>
+		/// The start page.
+		/// </value>
+		public int StartPage { get; private set; }
+
+		/// <summary>
+		/// Gets the end page.
+		/// </summary>
+		/// <value>
+		/// The end page.
+		/// </value>
+		public int EndPage { get; private set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="PaginatedList{T}"/> class.
 		/// </summary>
 		/// <param name="items">The items.</param>
@@ -33,6 +54,26 @@ namespace HomeMyDay.Helpers
 		{
 			PageIndex = pageIndex;
 			TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+			PageSize = pageSize;
+
+			int startPage = PageIndex - 5;
+			int endPage = PageIndex + 4;
+			if (startPage <= 0)
+			{
+				endPage -= (startPage - 1);
+				startPage = 1;
+			}
+			if (endPage > TotalPages)
+			{
+				endPage = TotalPages;
+				if (endPage > 10)
+				{
+					startPage = endPage - 9;
+				}
+			}
+
+			StartPage = startPage;
+			EndPage = endPage;
 
 			this.AddRange(items);
 		}
@@ -75,8 +116,21 @@ namespace HomeMyDay.Helpers
 		public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex = 1, int pageSize = 10)
 		{
 			int count = await source.CountAsync();
+
+			int skipAmount = 0;
+			do
+			{
+				skipAmount = (pageIndex - 1) * pageSize;
+
+				if (skipAmount >= count)
+				{
+					pageIndex--;
+				}
+			}
+			while (skipAmount >= count);
+
 			List<T> items = await source
-				.Skip((pageIndex - 1) * pageSize)
+				.Skip(skipAmount)
 				.Take(pageSize).ToListAsync();
 
 			return new PaginatedList<T>(items, count, pageIndex, pageSize);

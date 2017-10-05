@@ -20,9 +20,9 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Index(int? page)
+		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1, 1);
+			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1, pageSize ?? 5);
 			return View(paginatedResult);
 		}
 	}

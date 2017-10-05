@@ -56,7 +56,9 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentOutOfRangeException(nameof(pageSize));
 			}
 
-			return PaginatedList<Accommodation>.CreateAsync(_context.Accommodations.AsNoTracking(), page, pageSize);
+			IQueryable<Accommodation> accommodations = _context.Accommodations.OrderBy(x => x.Id).AsNoTracking();
+
+			return PaginatedList<Accommodation>.CreateAsync(accommodations, page, pageSize);
 		}
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
