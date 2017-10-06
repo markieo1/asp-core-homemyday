@@ -1,9 +1,8 @@
-﻿@model PaginatedList<Accommodation>
+﻿@model PaginatedList<Review>
 
 <div class="container">
-    <div class="row m-b-20">
+    <div class="row p-t-51 m-b-20">
         <div class="col-md-12">
-            <h2>Accommodaties</h2>
             <div class="dropdown pull-right">
                 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                     @Model.PageSize
@@ -15,28 +14,28 @@
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="5"
-                           asp-controller="Accommodation">5</a>
+                           asp-controller="Review">5</a>
                     </li>
                     <li>
                         <a asp-area="CMS"
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="10"
-                           asp-controller="Accommodation">10</a>
+                           asp-controller="Review">10</a>
                     </li>
                     <li>
                         <a asp-area="CMS"
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="25"
-                           asp-controller="Accommodation">25</a>
+                           asp-controller="Review">25</a>
                     </li>
                     <li>
                         <a asp-area="CMS"
                            asp-action="Index"
                            asp-route-page="@(Model.PageIndex)"
                            asp-route-pageSize="50"
-                           asp-controller="Accommodation">50</a>
+                           asp-controller="Review">50</a>
                     </li>
                 </ul>
             </div>
@@ -52,19 +51,13 @@
                                 Name
                             </th>
                             <th>
-                                Description
+                                Title
                             </th>
                             <th>
-                                Max Persons
+                                Review text
                             </th>
                             <th>
-                                Country
-                            </th>
-                            <th>
-                                Recommended
-                            </th>
-                            <th>
-                                Price
+                                Date
                             </th>
                             <th>
                                 Actions
@@ -72,42 +65,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (Accommodation accommodation in Model)
+                        @foreach (Review review in Model)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(x => accommodation.Name)
+                                    @Html.DisplayFor(x => review.Name)
                                 </td>
                                 <td>
-                                    @accommodation.Description.Truncate(250)
+                                    @Html.DisplayFor(x => review.Title)
                                 </td>
                                 <td class="text-right">
-                                    @Html.DisplayFor(x => accommodation.MaxPersons)
+                                    @Html.DisplayFor(x => review.Text)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(x => accommodation.Country)
-                                </td>
-                                <td class="text-right">
-                                    @Html.DisplayFor(x => accommodation.Recommended)
-                                </td>
-                                <td class="text-right">
-                                    @Html.DisplayFor(x => accommodation.Price)
+                                    @Html.DisplayFor(x => review.Date)
                                 </td>
                                 <td>
-                                    <a asp-area="CMS"
-                                       asp-controller="Accommodation"
-                                       asp-action="Edit"
-                                       asp-route-id="@accommodation.Id"
-                                       class="btn btn-block btn-default">
-                                        <i class="fa fa-pencil-square-o"></i> Edit
-                                    </a>
-                                    <a asp-area="CMS"
-                                       asp-controller="Accommodation"
-                                       asp-action="Delete"
-                                       asp-route-id="@accommodation.Id"
-                                       class="btn btn-block btn-warning">
-                                        <i class="fa fa-trash-o"></i> Delete
-                                    </a>
+                                    <form 
+                                          asp-area="CMS" 
+                                          asp-controller="Review" 
+                                          asp-action="Accept"
+                                          asp-route-id="@review.Id"
+                                          method="post">
+
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            <i class="fa fa-check-square"></i> Accept
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>}
                     </tbody>
@@ -127,7 +111,7 @@
                                asp-action="Index"
                                asp-route-page="@(Model.PageIndex - 1)"
                                asp-route-pageSize="@Model.PageSize"
-                               asp-controller="Accommodation"
+                               asp-controller="Review"
                                aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>}
@@ -143,7 +127,7 @@
                                asp-action="Index"
                                asp-route-page="@i"
                                asp-route-pageSize="@Model.PageSize"
-                               asp-controller="Accommodation">
+                               asp-controller="Review">
                                 @i
                                 @if (Model.PageIndex == i)
                                 {<span class="sr-only">(current)</span>}
@@ -158,7 +142,7 @@
                                asp-action="Index"
                                asp-route-page="@(Model.PageIndex + 1)"
                                asp-route-pageSize="@Model.PageSize"
-                               asp-controller="Accommodation"
+                               asp-controller="Review"
                                aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>                        }

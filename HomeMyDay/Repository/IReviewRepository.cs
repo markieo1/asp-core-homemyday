@@ -1,5 +1,7 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Helpers;
+using HomeMyDay.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Repository
 {
@@ -26,6 +28,21 @@ namespace HomeMyDay.Repository
 		/// <param name="name">The name of the user</param>
 		/// <param name="text">The text of the review</param>
 		/// <returns></returns>
-		bool AddReview(long accommodationId, string title, string name, string text);
-	}
+	    bool AddReview(long accommodationId, string title, string name, string text);
+
+        /// <summary>
+		/// Lists the reviews which not accepted.
+		/// </summary>
+		/// <param name="page">The page.</param>
+		/// <param name="pageSize">Size of the page.</param>
+		/// <returns></returns>
+		Task<PaginatedList<Review>> List(int page = 1, int pageSize = 10);
+
+        /// <summary>
+        /// Update the review to accepted based on the review id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        void AcceptReview(long id);
+    }
 }
