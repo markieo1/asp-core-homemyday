@@ -3,6 +3,9 @@ using HomeMyDay.Models;
 using HomeMyDay.Database;
 using System;
 using System.Linq;
+using HomeMyDay.Helpers;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -32,6 +35,23 @@ namespace HomeMyDay.Repository.Implementation
             }
 
             return vacancy;
+        }
+
+        public Task<PaginatedList<Vacancy>> List(int page = 1, int pageSize = 10)
+        {
+            if (page < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(page));
+            }
+
+            if (pageSize < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(pageSize));
+            }
+
+            IQueryable<Vacancy> vacancies = _context.Vacancies.OrderBy(x => x.Id).AsNoTracking();
+
+            return PaginatedList<Vacancy>.CreateAsync(vacancies, page, pageSize);
         }
     }
 }
