@@ -4,10 +4,15 @@
 function initMap()
 {
     var mapElement = document.getElementById('accommodation-map');
-    var coordinates = { lat: mapElement.dataset.latitude, long: mapElement.dataset.longitude };
+
+    //Get latitude and longitude
+    //Google API expects a number.
+    var lat = parseFloat(mapElement.dataset.latitude.replace(',', '.'));
+    var lng = parseFloat(mapElement.dataset.longitude.replace(',', '.'));
+    var coordinates = { lat: lat, lng: lng };
 
     var map = new google.maps.Map(mapElement, {
-        zoom: 4,
+        zoom: 12,
         center: coordinates
     });
 
