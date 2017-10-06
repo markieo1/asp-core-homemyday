@@ -9,6 +9,7 @@ using HomeMyDay.Repository.Implementation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using Moq;
 
 namespace HomeMyDay.Tests
 {
@@ -55,6 +56,7 @@ namespace HomeMyDay.Tests
 
 		    Assert.NotNull(model);
 		    Assert.True(model.Count() == 3);
-		}	
-    }
+		}
+
+	}
 }

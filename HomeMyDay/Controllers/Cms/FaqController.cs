@@ -10,11 +10,11 @@ namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
 	//[Authorize(Policy = IdentityPolicies.Administrator)]
-	public class FaqController : Controller
+	public class FaqCmsController : Controller
 	{
 		private readonly IFaqRepository _faqRepository;
 
-		public FaqController(IFaqRepository repository)
+		public FaqCmsController(IFaqRepository repository)
 		{
 			_faqRepository = repository;
 		}
@@ -27,18 +27,17 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpGet]
-		public IActionResult Edit(long id)
+		public IActionResult EditCategory(long id)
 		{
 			return View(_faqRepository.Categories.FirstOrDefault(r=>r.Id == id));
 		}
 
 		[HttpPost]
-		public IActionResult Edit(FaqCategory cat)
+		public IActionResult EditCategory(FaqCategory cat)
 		{
 			if (ModelState.IsValid)
 			{
 				_faqRepository.SaveFaqCategory(cat);
-				TempData["message"] = $"{cat.CategoryName} has been saved";
 				return RedirectToAction("Index");
 			}
 			else
@@ -48,9 +47,9 @@ namespace HomeMyDay.Controllers.Cms
 			}
 		}
 
-		public IActionResult Add() => View("Edit", new FaqCategory());
+		public IActionResult AddCategory() => View("Edit", new FaqCategory());
 
-		public IActionResult Delete(long id)
+		public IActionResult DeleteCategory(long id)
 		{
 			FaqCategory deletedCat = _faqRepository.DeleteFaqCategory(id);
 			if (deletedCat != null)

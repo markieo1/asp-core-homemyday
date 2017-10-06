@@ -10,6 +10,7 @@ using HomeMyDay.Repository.Implementation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using Moq;
 
 namespace HomeMyDay.Tests
 {
@@ -23,7 +24,7 @@ namespace HomeMyDay.Tests
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options); 
 		    IFaqRepository repository = new EFFaqRepository(context);	 
 
-		    var target = new FaqController(repository);	  
+		    var target = new FaqCmsController(repository);	  
 		    var result = target.Index(1, 10).Result as ViewResult; 
 		    var model = result.Model as IEnumerable<FaqCategory>;
 
@@ -47,7 +48,7 @@ namespace HomeMyDay.Tests
 
 			IFaqRepository repository = new EFFaqRepository(context);
 
-		    var target = new FaqController(repository);
+		    var target = new FaqCmsController(repository);
 		    var result = target.Index(1, 10).Result as ViewResult;
 		    var model = result.Model as IEnumerable<FaqCategory>;
 
@@ -71,7 +72,7 @@ namespace HomeMyDay.Tests
 
 		    IFaqRepository repository = new EFFaqRepository(context);
 
-		    var target = new FaqController(repository);
+		    var target = new FaqCmsController(repository);
 
 		    Assert.Throws<AggregateException>(() => target.Index(0, 10).Result);	
 		}
@@ -92,9 +93,45 @@ namespace HomeMyDay.Tests
 
 		    IFaqRepository repository = new EFFaqRepository(context);
 
-		    var target = new FaqController(repository);
+		    var target = new FaqCmsController(repository);
 
 		    Assert.Throws<AggregateException>(() => target.Index(1, 0).Result);
 	    }
+
+		[Fact]
+		public void TestDeleteFaqCategory()
+		{
+			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
+
+			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
+			mock.Setup(m => m.Categories).Returns(new FaqCategory[] {
+			new FaqCategory {Id = 1, CategoryName = "Test2"},cat, new FaqCategory {Id = 3, CategoryName = "Test33"},
+			});
+
+			FaqCmsController target = new FaqCmsController(mock.Object);
+
+			target.DeleteCategory(cat.Id);
+
+			mock.Verify(m => m.DeleteFaqCategory(cat.Id));
+		}
+
+		[Fact]
+		public void TestEditCategory()
+		{
+			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
+
+			FaqCmsController target = new FaqCmsController(mock.Object);
+
+			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
+
+			// Act - try to save
+			IActionResult result = target.EditCategory(cat);
+			// Assert - check that the repository was called
+			mock.Verify(m => m.SaveFaqCategory(cat));
+
+			// Assert - check the result type is a redirection
+			Assert.IsType<RedirectToActionResult>(result);
+			Assert.Equal("Index", (result as RedirectToActionResult).ActionName);
+		}
 	}
 }
