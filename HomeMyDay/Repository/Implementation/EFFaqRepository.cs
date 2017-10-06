@@ -18,6 +18,8 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
+		public IEnumerable<FaqCategory> Categories => _context.FaqCategory;
+
 		public FaqCategory DeleteFaqCategory(long id)
 		{
 

@@ -4,6 +4,7 @@ using HomeMyDay.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Models;
+using System.Linq;
 
 namespace HomeMyDay.Controllers.Cms
 {
@@ -26,9 +27,9 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpGet]
-		public IActionResult Edit()
+		public IActionResult Edit(long id)
 		{
-			return View(_faqRepository.GetCategoriesAndQuestions.);
+			return View(_faqRepository.Categories.FirstOrDefault(r=>r.Id == id));
 		}
 
 		[HttpPost]
@@ -37,7 +38,8 @@ namespace HomeMyDay.Controllers.Cms
 			if (ModelState.IsValid)
 			{
 				_faqRepository.SaveFaqCategory(cat);
-				return View();
+				TempData["message"] = $"{cat.CategoryName} has been saved";
+				return RedirectToAction("Index");
 			}
 			else
 			{
@@ -48,7 +50,6 @@ namespace HomeMyDay.Controllers.Cms
 
 		public IActionResult Add() => View("Edit", new FaqCategory());
 
-		[HttpPost]
 		public IActionResult Delete(long id)
 		{
 			FaqCategory deletedCat = _faqRepository.DeleteFaqCategory(id);

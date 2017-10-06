@@ -3,6 +3,10 @@
 <div class="container">
 	<div class="row p-t-51 m-b-20">
 		<div class="col-md-12">
+			@if (TempData["message"] != null)
+			{
+				<div class="alert alert-success">@TempData["message"]</div>
+			}
 			<div class="dropdown pull-right">
 				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 					@Model.PageSize

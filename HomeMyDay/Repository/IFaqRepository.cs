@@ -14,6 +14,12 @@ namespace HomeMyDay.Repository
         IEnumerable<FaqCategory> GetCategoriesAndQuestions();
 
 		/// <summary>
+		/// Get All Categories
+		/// </summary>
+		/// <returns>all categories</returns>
+		IEnumerable<FaqCategory> Categories { get; }
+
+		/// <summary>
 		/// Delete a Categorie
 		/// </summary>
 		/// <param name="id">the identifier for which category to delete</param>
