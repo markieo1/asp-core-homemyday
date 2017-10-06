@@ -14,7 +14,7 @@ namespace HomeMyDay.Tests
 	public class CMSPagesControllerTest
 	{
 		[Fact]
-		public void EditSuccess()
+		public void TestEditPageIsCalled()
 		{
 
 			// Arrange - create the mock repository
@@ -25,15 +25,13 @@ namespace HomeMyDay.Tests
 
 			// Arrange - create a controller
 			PagesController target = new PagesController(repo.Object);
-			Page newsurp = new Page() {Title = "Test", Content = "New" };
 
 			// Action
-			var mo = (target.Edit(1, newsurp) as ViewResult).ViewData.Model;
+			var model = (target.Edit(1, surprise) as ViewResult).ViewData.Model;
 
 			// Assert
 			//Check if edit was called
-			repo.Verify(foo => foo.EditPage(1, newsurp));
-			Assert.NotNull(mo);
+			repo.Verify(foo => foo.EditPage(1, surprise));
 		}
 	}
 }
