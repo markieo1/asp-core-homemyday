@@ -27,7 +27,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-						<li><a href="" data-toggle="modal" data-target="#modal-surprise">Verrassingsreizen</a></li>
+                        <li><a href="" data-toggle="modal" data-target="#modal-surprise">Verrassingsreizen</a></li>
                         <li><a asp-area="" asp-controller="Newspaper" asp-action="Index">Nieuwsbrief</a></li>
                         <li><a asp-area="" asp-controller="Vacancy" asp-action="Index">Vacatures</a></li>
                         <li><a asp-area="" asp-controller="Press" asp-action="Index">Pers</a></li>
@@ -44,6 +44,21 @@
                         <ul class="dropdown-menu">
                             <li><a asp-area="CMS" asp-controller="Home" asp-action="Index">Home</a></li>
                             <li><a asp-area="CMS" asp-controller="Accommodation" asp-action="Index">Accommodaties</a></li>
+                            <li>
+                                <a asp-area="CMS"
+                                   asp-action="Index"
+                                   asp-controller="Pages">Pages</a>
+                            </li>
+                            <li>
+                                <a asp-area="CMS"
+                                   asp-action="Index"
+                                   asp-controller="Review">Reviews</a>
+                            </li>
+                            <li>
+                                <a asp-area="CMS"
+                                   asp-action="Index"
+                                   asp-controller="Vacancy">Vacatures</a>
+                            </li>
                         </ul>
                     </li>}
                 }
