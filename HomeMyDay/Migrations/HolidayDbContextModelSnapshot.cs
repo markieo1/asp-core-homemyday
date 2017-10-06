@@ -26,7 +26,8 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Beds");
+                    b.Property<int?>("Beds")
+                        .IsRequired();
 
                     b.Property<string>("CancellationText");
 
@@ -34,7 +35,8 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("Country");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<decimal>("Latitude");
 
@@ -44,7 +46,8 @@ namespace HomeMyDay.Migrations
 
                     b.Property<int>("MaxPersons");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -52,7 +55,8 @@ namespace HomeMyDay.Migrations
 
                     b.Property<bool>("Recommended");
 
-                    b.Property<int?>("Rooms");
+                    b.Property<int?>("Rooms")
+                        .IsRequired();
 
                     b.Property<string>("RulesText");
 
@@ -370,7 +374,7 @@ namespace HomeMyDay.Migrations
             modelBuilder.Entity("HomeMyDay.Models.Review", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("AccommodationId");
                 });
 #pragma warning restore 612, 618

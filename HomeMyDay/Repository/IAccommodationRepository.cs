@@ -47,5 +47,19 @@ namespace HomeMyDay.Repository
 		/// <param name="pageSize">Size of the page.</param>
 		/// <returns></returns>
 		Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10);
+
+		/// <summary>
+		/// Saves the specified accommodation with the identifier.
+		/// </summary>
+		/// <param name="accommodation">The accommodation.</param>
+		/// <returns></returns>
+		Task Save(Accommodation accommodation);
+
+		/// <summary>
+		/// Deletes the specified accommodation.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns></returns>
+		Task Delete(long id);
 	}
 }
