@@ -708,7 +708,7 @@ namespace HomeMyDay.Tests
 			Assert.Equal(0, paginatedAccommodations.Count);
 			Assert.Equal(1, paginatedAccommodations.PageIndex);
 			Assert.Equal(10, paginatedAccommodations.PageSize);
-			Assert.Equal(0, paginatedAccommodations.TotalPages);
+			Assert.Equal(1, paginatedAccommodations.TotalPages);
 			Assert.False(paginatedAccommodations.HasPreviousPage);
 			Assert.False(paginatedAccommodations.HasNextPage);
 		}
@@ -728,13 +728,137 @@ namespace HomeMyDay.Tests
 			Assert.Equal(0, paginatedAccommodations.Count);
 			Assert.Equal(1, paginatedAccommodations.PageIndex);
 			Assert.Equal(10, paginatedAccommodations.PageSize);
-			Assert.Equal(0, paginatedAccommodations.TotalPages);
+			Assert.Equal(1, paginatedAccommodations.TotalPages);
 			Assert.False(paginatedAccommodations.HasPreviousPage);
 			Assert.False(paginatedAccommodations.HasNextPage);
 		}
 		#endregion
 
 		#region "Save"
+
+		[Fact]
+		public async void TestSaveNullAccommodation()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentNullException>(() => repository.Save(null));
+		}
+
+		[Fact]
+		public async void TestSaveNewAccommodation()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			Accommodation accommodationToCreate = new Accommodation()
+			{
+				Description = DEFAULT_ACCOMMODATION_DESCRIPTION,
+				Name = "Example Name",
+				Country = "Unknown"
+			};
+
+			await repository.Save(accommodationToCreate);
+
+			// Check if the item was created
+			Accommodation foundAccommodation = await context.Accommodations.FirstOrDefaultAsync(x => x.Name == "Example Name");
+
+			Assert.NotNull(foundAccommodation);
+			Assert.Equal("Example Name", foundAccommodation.Name);
+			Assert.NotEqual(0, foundAccommodation.Id);
+			Assert.Equal("Unknown", foundAccommodation.Country);
+			Assert.Equal(DEFAULT_ACCOMMODATION_DESCRIPTION, foundAccommodation.Description);
+		}
+
+		[Fact]
+		public async void TestSaveUpdatedAccommodation()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			Accommodation accommodationToUpdate = new Accommodation()
+			{
+				Id = 1,
+				Description = DEFAULT_ACCOMMODATION_DESCRIPTION,
+				Name = "Example Name",
+				Country = "Unknown",
+				MaxPersons = 2
+			};
+
+			await context.Accommodations.AddAsync(accommodationToUpdate);
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			// Change some values
+			accommodationToUpdate.Country = "The Netherlands";
+			accommodationToUpdate.Name = "Updated name";
+			accommodationToUpdate.Description = "Updated description";
+
+			await repository.Save(accommodationToUpdate);
+
+			// Check if the item was updated
+			Accommodation updatedAccommodation = await context.Accommodations.FindAsync((long)1);
+
+			Assert.NotNull(updatedAccommodation);
+			Assert.Equal("Updated name", updatedAccommodation.Name);
+			Assert.Equal("The Netherlands", updatedAccommodation.Country);
+			Assert.Equal("Updated description", updatedAccommodation.Description);
+			Assert.Equal(2, updatedAccommodation.MaxPersons);
+		}
+
+		[Fact]
+		public async void TestSaveNotExistingAccommodationWithNotExistingId()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			Accommodation existingAccommodation = new Accommodation()
+			{
+				Id = 2,
+				Description = DEFAULT_ACCOMMODATION_DESCRIPTION,
+				Name = "Example Name",
+				Country = "Unknown",
+				MaxPersons = 2
+			};
+
+			await context.Accommodations.AddAsync(existingAccommodation);
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			// Change some values
+			Accommodation accommodationToUpdate = new Accommodation()
+			{
+				Id = 3,
+				Country = "The Netherlands",
+				Name = "Updated name",
+				Description = "Updated description",
+				MaxPersons = 2
+			};
+
+			await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => repository.Save(accommodationToUpdate));
+		}
 
 		#endregion
 

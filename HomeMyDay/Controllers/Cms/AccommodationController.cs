@@ -59,22 +59,15 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(long id, Accommodation accommodation)
+		public async Task<IActionResult> Edit(Accommodation accommodation)
 		{
 			if (ModelState.IsValid)
 			{
-				bool saved = await _accommodationRepository.Save(id, accommodation);
+				await _accommodationRepository.Save(accommodation);
 
-				if (saved)
-				{
-					return RedirectToAction(
-						actionName: nameof(Index),
-						controllerName: nameof(AccommodationController).TrimControllerName());
-				}
-				else
-				{
-					return new StatusCodeResult(500);
-				}
+				return RedirectToAction(
+					actionName: nameof(Index),
+					controllerName: nameof(AccommodationController).TrimControllerName());
 			}
 
 			return View(accommodation);

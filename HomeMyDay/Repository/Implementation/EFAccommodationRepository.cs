@@ -84,16 +84,14 @@ namespace HomeMyDay.Repository.Implementation
 			return PaginatedList<Accommodation>.CreateAsync(accommodations, page, pageSize);
 		}
 
-		public async Task<bool> Save(long id, Accommodation accommodation)
+		public async Task Save(Accommodation accommodation)
 		{
 			if (accommodation == null)
 			{
 				throw new ArgumentNullException(nameof(accommodation));
 			}
 
-			accommodation.Id = id < 0 ? 0 : id;
-
-			if (id <= 0)
+			if (accommodation.Id <= 0)
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.
@@ -107,8 +105,6 @@ namespace HomeMyDay.Repository.Implementation
 			}
 
 			await _context.SaveChangesAsync();
-
-			return true;
 		}
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)

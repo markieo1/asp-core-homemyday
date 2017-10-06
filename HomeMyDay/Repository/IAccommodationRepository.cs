@@ -51,10 +51,9 @@ namespace HomeMyDay.Repository
 		/// <summary>
 		/// Saves the specified accommodation with the identifier.
 		/// </summary>
-		/// <param name="id">The identifier.</param>
 		/// <param name="accommodation">The accommodation.</param>
 		/// <returns></returns>
-		Task<bool> Save(long id, Accommodation accommodation);
+		Task Save(Accommodation accommodation);
 
 		/// <summary>
 		/// Deletes the specified accommodation.
