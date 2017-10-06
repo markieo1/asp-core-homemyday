@@ -54,6 +54,12 @@ namespace HomeMyDay.Helpers
 		{
 			PageIndex = pageIndex;
 			TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+			if(TotalPages <= 0)
+			{
+				TotalPages = 1;
+			}
+
 			PageSize = pageSize;
 
 			int startPage = PageIndex - 5;
@@ -116,8 +122,8 @@ namespace HomeMyDay.Helpers
 		public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex = 1, int pageSize = 10)
 		{
 			int count = await source.CountAsync();
-
 			int skipAmount = 0;
+
 			do
 			{
 				skipAmount = (pageIndex - 1) * pageSize;
@@ -139,6 +145,11 @@ namespace HomeMyDay.Helpers
 			if (skipAmount < 0)
 			{
 				skipAmount = 0;
+			}
+
+			if (pageIndex <= 0)
+			{
+				pageIndex = 1;
 			}
 
 			List<T> items = await source

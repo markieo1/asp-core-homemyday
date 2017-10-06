@@ -21,7 +21,7 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
-		public async Task<bool> Delete(long id)
+		public async Task Delete(long id)
 		{
 			if (id <= 0)
 			{
@@ -29,19 +29,16 @@ namespace HomeMyDay.Repository.Implementation
 			}
 
 			Accommodation accommodation = await _context.Accommodations
-				.AsNoTracking()
 				.SingleOrDefaultAsync(a => a.Id == id);
 
 			if (accommodation == null)
 			{
-				return false;
+				throw new ArgumentNullException(nameof(id), $"Accommodation with ID: {id} not found!");
 			}
 
 			_context.Accommodations.Remove(accommodation);
 
 			await _context.SaveChangesAsync();
-
-			return true;
 		}
 
 		public Accommodation GetAccommodation(long id)
@@ -94,7 +91,7 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentNullException(nameof(accommodation));
 			}
 
-			accommodation.Id = id;
+			accommodation.Id = id < 0 ? 0 : id;
 
 			if (id <= 0)
 			{

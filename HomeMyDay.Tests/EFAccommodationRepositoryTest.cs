@@ -1,5 +1,6 @@
 ﻿using HomeMyDay.Components;
 using HomeMyDay.Database;
+using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
 using HomeMyDay.Repository.Implementation;
@@ -15,6 +16,8 @@ namespace HomeMyDay.Tests
 {
 	public class EFAccommodationRepositoryTest
 	{
+		private const string DEFAULT_ACCOMMODATION_DESCRIPTION = "Dit is een omschrijving";
+
 		[Fact]
 		public void TestGetIdBelowZeroAccommodation()
 		{
@@ -90,10 +93,10 @@ namespace HomeMyDay.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = true },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = true }
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = true },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = true }
 			);
 			context.SaveChanges();
 
@@ -110,10 +113,10 @@ namespace HomeMyDay.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = true },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = true }
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = true },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = true }
 			);
 			context.SaveChanges();
 
@@ -134,10 +137,10 @@ namespace HomeMyDay.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false },
-				new Accommodation() { Description = "Dit is een omschrijving", Recommended = false }
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
 			);
 			context.SaveChanges();
 
@@ -150,6 +153,7 @@ namespace HomeMyDay.Tests
 			Assert.Empty(accommodations);
 		}
 
+		#region "Search"
 		[Fact]
 		public void TestSearchEmptyLocation()
 		{
@@ -489,5 +493,328 @@ namespace HomeMyDay.Tests
 
 			Assert.NotEmpty(searchResults);
 		}
+
+		#endregion
+
+		#region "List"
+
+		[Fact]
+		public async void TestListWithItemsOnePageSizeTen()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(1, 10);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(4, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(10, paginatedAccommodations.PageSize);
+			Assert.Equal(1, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.False(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestListWithItemsMultiplePagesSizeOne()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(1, 1);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(1, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(1, paginatedAccommodations.PageSize);
+			Assert.Equal(4, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.True(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestListWithItemsMultiplePagesSizeOneWithPreviousPage()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(2, 1);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(1, paginatedAccommodations.Count);
+			Assert.Equal(2, paginatedAccommodations.PageIndex);
+			Assert.Equal(1, paginatedAccommodations.PageSize);
+			Assert.Equal(4, paginatedAccommodations.TotalPages);
+			Assert.True(paginatedAccommodations.HasPreviousPage);
+			Assert.True(paginatedAccommodations.HasNextPage);
+		}
+
+
+		[Fact]
+		public async void TestListWithItemsPageBelowZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-5, 1);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(1, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(1, paginatedAccommodations.PageSize);
+			Assert.Equal(4, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.True(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestListWithItemsPageSizeBelowZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(1, -10);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(4, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(10, paginatedAccommodations.PageSize);
+			Assert.Equal(1, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.False(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestListWithItemsPageBelowZeroPageSizeBelowZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false },
+				new Accommodation() { Description = DEFAULT_ACCOMMODATION_DESCRIPTION, Recommended = false }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-8, -10);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(4, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(10, paginatedAccommodations.PageSize);
+			Assert.Equal(1, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.False(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestEmptyListPageOnePageSizeTen()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(1, 10);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(0, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(10, paginatedAccommodations.PageSize);
+			Assert.Equal(1, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.False(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestEmptyListPageBelowZeroPageSizeTen()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-5, 10);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(0, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(10, paginatedAccommodations.PageSize);
+			Assert.Equal(0, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.False(paginatedAccommodations.HasNextPage);
+		}
+
+		[Fact]
+		public async void TestEmptyListPageBelowZeroPageSizeBelowZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-5, -10);
+
+			Assert.NotNull(paginatedAccommodations);
+			Assert.Equal(0, paginatedAccommodations.Count);
+			Assert.Equal(1, paginatedAccommodations.PageIndex);
+			Assert.Equal(10, paginatedAccommodations.PageSize);
+			Assert.Equal(0, paginatedAccommodations.TotalPages);
+			Assert.False(paginatedAccommodations.HasPreviousPage);
+			Assert.False(paginatedAccommodations.HasNextPage);
+		}
+		#endregion
+
+		#region "Save"
+
+		#endregion
+
+		#region "Delete"
+
+		[Fact]
+		public async void TestDeleteExistingAccommodation()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			await repository.Delete(1);
+
+			Accommodation deletedAccommodation = await context.Accommodations.FindAsync((long)1);
+			Assert.Null(deletedAccommodation);
+		}
+
+		[Fact]
+		public async void TestDeleteNotExistingAccommodation()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentNullException>(() => repository.Delete(2));
+		}
+
+		[Fact]
+		public async void TestDeleteIdBelowZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.Delete(-10));
+		}
+
+		[Fact]
+		public async void TestDeleteIdEqualsZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Accommodations.AddRange(
+				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+			);
+
+			await context.SaveChangesAsync();
+
+			IAccommodationRepository repository = new EFAccommodationRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.Delete(0));
+		}
+
+		#endregion
 	}
 }

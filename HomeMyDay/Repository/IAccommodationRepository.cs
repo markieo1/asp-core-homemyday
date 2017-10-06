@@ -61,6 +61,6 @@ namespace HomeMyDay.Repository
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns></returns>
-		Task<bool> Delete(long id);
+		Task Delete(long id);
 	}
 }

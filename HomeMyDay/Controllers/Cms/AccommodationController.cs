@@ -83,16 +83,11 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmed(long id)
 		{
-			bool deleted = await _accommodationRepository.Delete(id);
+			await _accommodationRepository.Delete(id);
 
-			if (deleted)
-			{
-				return RedirectToAction(
-							actionName: nameof(Index),
-							controllerName: nameof(AccommodationController).TrimControllerName());
-			}
-
-			return new StatusCodeResult(500);
+			return RedirectToAction(
+						actionName: nameof(Index),
+						controllerName: nameof(AccommodationController).TrimControllerName());
 		}
 	}
 }
