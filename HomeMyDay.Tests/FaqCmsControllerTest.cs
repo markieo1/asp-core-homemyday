@@ -24,7 +24,7 @@ namespace HomeMyDay.Tests
 		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options); 
 		    IFaqRepository repository = new EFFaqRepository(context);	 
 
-		    var target = new FaqCmsController(repository);	  
+		    var target = new FaqController(repository);	  
 		    var result = target.Index(1, 10).Result as ViewResult; 
 		    var model = result.Model as IEnumerable<FaqCategory>;
 
@@ -48,7 +48,7 @@ namespace HomeMyDay.Tests
 
 			IFaqRepository repository = new EFFaqRepository(context);
 
-		    var target = new FaqCmsController(repository);
+		    var target = new FaqController(repository);
 		    var result = target.Index(1, 10).Result as ViewResult;
 		    var model = result.Model as IEnumerable<FaqCategory>;
 
@@ -72,7 +72,7 @@ namespace HomeMyDay.Tests
 
 		    IFaqRepository repository = new EFFaqRepository(context);
 
-		    var target = new FaqCmsController(repository);
+		    var target = new FaqController(repository);
 
 		    Assert.Throws<AggregateException>(() => target.Index(0, 10).Result);	
 		}
@@ -93,7 +93,7 @@ namespace HomeMyDay.Tests
 
 		    IFaqRepository repository = new EFFaqRepository(context);
 
-		    var target = new FaqCmsController(repository);
+		    var target = new FaqController(repository);
 
 		    Assert.Throws<AggregateException>(() => target.Index(1, 0).Result);
 	    }
@@ -108,7 +108,7 @@ namespace HomeMyDay.Tests
 			new FaqCategory {Id = 1, CategoryName = "Test2"},cat, new FaqCategory {Id = 3, CategoryName = "Test33"},
 			});
 
-			FaqCmsController target = new FaqCmsController(mock.Object);
+			FaqController target = new FaqController(mock.Object);
 
 			target.DeleteCategory(cat.Id);
 
@@ -120,7 +120,7 @@ namespace HomeMyDay.Tests
 		{
 			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
 
-			FaqCmsController target = new FaqCmsController(mock.Object);
+			FaqController target = new FaqController(mock.Object);
 
 			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
 

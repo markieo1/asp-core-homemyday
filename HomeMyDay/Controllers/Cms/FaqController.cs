@@ -9,12 +9,12 @@ using System.Linq;
 namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
-	//[Authorize(Policy = IdentityPolicies.Administrator)]
-	public class FaqCmsController : Controller
+	[Authorize(Policy = IdentityPolicies.Administrator)]
+	public class FaqController : Controller
 	{
 		private readonly IFaqRepository _faqRepository;
 
-		public FaqCmsController(IFaqRepository repository)
+		public FaqController(IFaqRepository repository)
 		{
 			_faqRepository = repository;
 		}
@@ -47,7 +47,7 @@ namespace HomeMyDay.Controllers.Cms
 			}
 		}
 
-		public IActionResult AddCategory() => View("Edit", new FaqCategory());
+		public IActionResult AddCategory() => View("EditCategory", new FaqCategory());
 
 		public IActionResult DeleteCategory(long id)
 		{
