@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171006085652_AccommodationLatitude")]
+    partial class AccommodationLatitude
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +27,7 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Beds")
-                        .IsRequired();
+                    b.Property<int?>("Beds");
 
                     b.Property<string>("CancellationText");
 
@@ -35,8 +35,7 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("Country");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<decimal>("Latitude");
 
@@ -46,8 +45,7 @@ namespace HomeMyDay.Migrations
 
                     b.Property<int>("MaxPersons");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
                     b.Property<decimal>("Price");
 
@@ -55,8 +53,7 @@ namespace HomeMyDay.Migrations
 
                     b.Property<bool>("Recommended");
 
-                    b.Property<int?>("Rooms")
-                        .IsRequired();
+                    b.Property<int?>("Rooms");
 
                     b.Property<string>("RulesText");
 
@@ -374,7 +371,7 @@ namespace HomeMyDay.Migrations
             modelBuilder.Entity("HomeMyDay.Models.Review", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
-                        .WithMany("Reviews")
+                        .WithMany()
                         .HasForeignKey("AccommodationId");
                 });
 #pragma warning restore 612, 618

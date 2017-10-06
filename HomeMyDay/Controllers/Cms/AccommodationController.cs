@@ -1,4 +1,5 @@
 ﻿using HomeMyDay.Database.Identity;
+using HomeMyDay.Extensions;
 using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
@@ -27,6 +28,59 @@ namespace HomeMyDay.Controllers.Cms
 		{
 			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1, pageSize ?? 5);
 			return View(paginatedResult);
+		}
+
+		[HttpGet]
+		public IActionResult Edit(long id)
+		{
+			Accommodation accommodation;
+
+			try
+			{
+				if (id <= 0)
+				{
+					accommodation = new Accommodation();
+				}
+				else
+				{
+					accommodation = _accommodationRepository.GetAccommodation(id);
+				}
+			}
+			catch (KeyNotFoundException)
+			{
+				return new NotFoundResult();
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return new BadRequestResult();
+			}
+
+			return View(accommodation);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(Accommodation accommodation)
+		{
+			if (ModelState.IsValid)
+			{
+				await _accommodationRepository.Save(accommodation);
+
+				return RedirectToAction(
+					actionName: nameof(Index),
+					controllerName: nameof(AccommodationController).TrimControllerName());
+			}
+
+			return View(accommodation);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteConfirmed(long id)
+		{
+			await _accommodationRepository.Delete(id);
+
+			return RedirectToAction(
+						actionName: nameof(Index),
+						controllerName: nameof(AccommodationController).TrimControllerName());
 		}
 	}
 }
