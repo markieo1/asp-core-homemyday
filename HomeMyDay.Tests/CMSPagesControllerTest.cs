@@ -31,7 +31,7 @@ namespace HomeMyDay.Tests
 
 			// Assert
 			//Check if edit was called
-			repo.Verify(foo => foo.EditPage(1, surprise));
+			repo.Verify(p => p.EditPage(1, surprise));
 		}
 	}
 }
