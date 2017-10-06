@@ -9,20 +9,6 @@ namespace HomeMyDay.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Insertion",
-                table: "BookingPerson",
-                type: "nvarchar(max)",
-                nullable: true,
-                oldClrType: typeof(string));
-
-            migrationBuilder.AddColumn<string>(
-                name: "City",
-                table: "BookingPerson",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
-
             migrationBuilder.CreateTable(
                 name: "Page",
                 columns: table => new
