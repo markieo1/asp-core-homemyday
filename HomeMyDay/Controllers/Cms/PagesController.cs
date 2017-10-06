@@ -33,8 +33,8 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpGet]
 		public IActionResult Edit(long id)
 		{
-			Page _suprise = _pageRepository.GetPage(id);
-			PageViewModel model = new PageViewModel() { Title = _suprise.Title, Content = _suprise.Content };
+			Page _surprise = _pageRepository.GetPage(id);
+			PageViewModel model = new PageViewModel() { Title = _surprise.Title, Content = _surprise.Content };
 
 			return View(model);
 		}
@@ -42,8 +42,8 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpPost]
 		public IActionResult Edit(long id, Page page)
 		{
-			Page _suprise = _pageRepository.GetPage(id);
-			if (_suprise != null)
+			Page _surprise = _pageRepository.GetPage(id);
+			if (_surprise != null)
 			{
 				_pageRepository.EditPage(id, page);
 				return View();

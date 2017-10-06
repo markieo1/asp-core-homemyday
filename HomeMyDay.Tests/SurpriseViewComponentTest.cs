@@ -16,33 +16,33 @@ using Xunit;
 
 namespace HomeMyDay.Tests
 {
-    public class SupriseViewComponentTest
+    public class SurpriseViewComponentTest
     {
 
 		[Fact]
-		public void TestNoSuprise()
+		public void TestNoSurprise()
 		{
-			Page suprise = null;
+			Page surprise = null;
 
 			var repo = new Mock<IPageRepository>();
-			repo.Setup(r=>r.GetPage(1)).Returns(suprise);
-			SuprisePopUpViewComponent target = new SuprisePopUpViewComponent(repo.Object);
+			repo.Setup(r=>r.GetPage(1)).Returns(surprise);
+			SurprisePopUpViewComponent target = new SurprisePopUpViewComponent(repo.Object);
 
 			var result = target.Invoke() as ViewViewComponentResult;
 
-			Assert.Equal("NoSuprise", result.ViewName);
+			Assert.Equal("NoSurprise", result.ViewName);
 
 		}
 
 		[Fact]
-		public void TestSupriseNotNullAndEmpty()
+		public void TestSurpriseNotNullAndEmpty()
 		{
-			Page suprise = new Page {Page_Name = "TheSuprise", Title = "Hallo", Content="Test" };
+			Page surprise = new Page {Page_Name = "TheSurprise", Title = "Hallo", Content="Test" };
 
 			var repo = new Mock<IPageRepository>();
-			repo.Setup(r => r.GetPage(1)).Returns(suprise);
+			repo.Setup(r => r.GetPage(1)).Returns(surprise);
 
-			SuprisePopUpViewComponent target = new SuprisePopUpViewComponent(repo.Object);
+			SurprisePopUpViewComponent target = new SurprisePopUpViewComponent(repo.Object);
 
 			PageViewModel mo = (PageViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 

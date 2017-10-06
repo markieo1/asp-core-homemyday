@@ -10,7 +10,7 @@ namespace HomeMyDay.Repository
     public interface IPageRepository
     {
 		/// <summary>
-		/// Gets the latest suprise.
+		/// Gets the latest surprise.
 		/// </summary>
 		Page GetPage(long id);
 

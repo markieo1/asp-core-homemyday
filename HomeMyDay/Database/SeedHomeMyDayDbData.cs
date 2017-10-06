@@ -24,17 +24,17 @@ namespace HomeMyDay.Database
 				SeedCountries(context);
 			}
 
-			//Seed suprise modal
+			//Seed surprise modal
 			if (!context.Page.Any())
 			{
-				SeedSuprise(context);
+				SeedSurprise(context);
 			}
 		}
 
-		private static void SeedSuprise(HomeMyDayDbContext context)
+		private static void SeedSurprise(HomeMyDayDbContext context)
 		{
 			var generator = new LipsumGenerator();
-			context.Page.Add(new Page() {Page_Name = "TheSuprise", Title = "Suprise", Content = generator.GenerateParagraphs(1)[0] });
+			context.Page.Add(new Page() {Page_Name = "TheSurprise", Title = "Surprise", Content = generator.GenerateParagraphs(1)[0] });
 			context.SaveChanges();
 		}
 
