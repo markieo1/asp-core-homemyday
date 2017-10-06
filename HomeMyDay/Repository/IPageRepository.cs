@@ -21,6 +21,12 @@ namespace HomeMyDay.Repository
 		/// <param name="page">the page model/the data it need to change</param>\
 		void EditPage(long id, Page page);
 
+		/// <summary>
+		/// Lists the Page's for the specific page.
+		/// </summary>
+		/// <param name="page">The page.</param>
+		/// <param name="pageSize">Size of the page.</param>
+		/// <returns></returns>
 		Task<PaginatedList<Page>> List(int page = 1, int pageSize = 10);
 	}
 }
