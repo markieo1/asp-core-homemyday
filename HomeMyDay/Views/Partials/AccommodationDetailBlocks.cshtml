@@ -33,7 +33,7 @@
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade in active" id="reviews">
-            @Html.Partial("../Partials/AddReview.cshtml", new ReviewViewModel(){Accommodation = Model.Accommodation})
+            @Html.Partial("../Partials/AddReview.cshtml", new ReviewViewModel(){AccommodationId = Model.Accommodation.Id})
             @Html.Partial("../Partials/Reviews.cshtml", Model.Reviews)
         </div>
         @if (Model.DetailBlocks != null && Model.DetailBlocks.Any(d => d.CanDisplay))

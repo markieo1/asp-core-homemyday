@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div class="text-danger" asp-validation-summary="All"></div>
 
-                <form asp-action="Login" asp-controller="Account" method="post">
+                <form asp-area="" asp-action="Login" asp-controller="Account" method="post">
                     <input type="hidden" asp-for="ReturnUrl" />
                     <div class="form-group">
                         <label asp-for="Username"></label>
@@ -27,9 +27,9 @@
                 </form>
 
                 <div>
-                    <p><a asp-action="Register" asp-controller="Account">Bent u nog niet geregisteerd?</a></p>
+                    <p><a asp-area="" asp-action="Register" asp-controller="Account">Bent u nog niet geregisteerd?</a></p>
 
-                    <span><a asp-controller="Account" asp-action="ForgetPassword"> Wachtwoord vergeten?</a></span>
+                    <span><a asp-area="" asp-controller="Account" asp-action="ForgetPassword"> Wachtwoord vergeten?</a></span>
                 </div>
             </div>
             <div class="modal-footer">

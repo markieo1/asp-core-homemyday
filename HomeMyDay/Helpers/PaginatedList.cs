@@ -129,6 +129,18 @@ namespace HomeMyDay.Helpers
 			}
 			while (skipAmount >= count);
 
+			// Reset to default value
+			if (pageSize <= 0)
+			{
+				pageSize = 10;
+			}
+
+			// We are not able to skip anything negative
+			if (skipAmount < 0)
+			{
+				skipAmount = 0;
+			}
+
 			List<T> items = await source
 				.Skip(skipAmount)
 				.Take(pageSize).ToListAsync();

@@ -46,14 +46,16 @@ namespace HomeMyDay.Repository.Implementation
 
 		public Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10)
 		{
-			if (page < 1)
+			// Reset to default value
+			if (pageSize <= 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(page));
+				pageSize = 10;
 			}
 
-			if (pageSize < 1)
+			// We are not able to skip before the first page
+			if (page <= 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(pageSize));
+				page = 1;
 			}
 
 			IQueryable<Accommodation> accommodations = _context.Accommodations.OrderBy(x => x.Id).AsNoTracking();
