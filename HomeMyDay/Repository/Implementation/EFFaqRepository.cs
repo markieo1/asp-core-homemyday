@@ -87,24 +87,6 @@ namespace HomeMyDay.Repository.Implementation
 			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
 		}
 
-		public FaqCategory GetCategory(long categoryId)
-		{
-			if (categoryId <= 0)
-			{
-				throw new ArgumentOutOfRangeException(nameof(categoryId));
-			}
-
-			FaqCategory category = _context.FaqCategory
-				.FirstOrDefault(a => a.Id == categoryId);
-
-			if (category == null)
-			{
-				throw new KeyNotFoundException($"Category with ID: {categoryId} is not found");
-			}
-
-			return category;
-		}
-
 		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)
 		{
 			// Reset to default value

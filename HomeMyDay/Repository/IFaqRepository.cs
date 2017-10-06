@@ -43,11 +43,19 @@ namespace HomeMyDay.Repository
 		Task SaveCategory(FaqCategory category);
 
 		/// <summary>
+		/// Lists the FaqQuestions for the specific page.
+		/// </summary>
+		/// <param name="page">The page.</param>
+		/// <param name="pageSize">Size of the page.</param>
+		/// <returns></returns>
+		Task<PaginatedList<FaqQuestion>> ListQuestions(long categoryid, int page = 1, int pageSize = 10);
+
+		/// <summary>
 		/// Lists the FaqCategories for the specific page.
 		/// </summary>
 		/// <param name="page">The page.</param>
 		/// <param name="pageSize">Size of the page.</param>
 		/// <returns></returns>
-		Task<PaginatedList<FaqCategory>> List(int page = 1, int pageSize = 10);
-    }
+		Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10);
+	}
 }
