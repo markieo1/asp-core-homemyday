@@ -46,6 +46,8 @@ namespace HomeMyDay.Controllers
 
 			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation, reviews.Where(x => x.Approved).ToList());
 
+			ViewBag.GoogleClientApiKey = _googleOptions.ClientApiKey;
+
 			return View(viewModel);
 		}
 	}

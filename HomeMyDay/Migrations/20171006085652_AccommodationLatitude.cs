@@ -11,14 +11,14 @@ namespace HomeMyDay.Migrations
             migrationBuilder.AddColumn<decimal>(
                 name: "Latitude",
                 table: "Accommodations",
-                type: "decimal(18, 2)",
+                type: "decimal(9, 6)",
                 nullable: false,
                 defaultValue: 0m);
 
             migrationBuilder.AddColumn<decimal>(
                 name: "Longitude",
                 table: "Accommodations",
-                type: "decimal(18, 2)",
+                type: "decimal(9, 6)",
                 nullable: false,
                 defaultValue: 0m);
         }
