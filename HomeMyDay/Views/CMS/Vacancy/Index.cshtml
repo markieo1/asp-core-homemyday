@@ -1,0 +1,154 @@
+﻿@model PaginatedList<Vacancy>
+
+<div class="container">
+    <div class="row p-t-51 m-b-20">
+        <div class="col-md-12">
+            <div class="dropdown pull-right">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                    @Model.PageSize
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="5"
+                           asp-controller="Vancancy">5</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="10"
+                           asp-controller="Vancancy">10</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="25"
+                           asp-controller="Vancancy">25</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Index"
+                           asp-route-page="@(Model.PageIndex)"
+                           asp-route-pageSize="50"
+                           asp-controller="Vancancy">50</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                JobTitle
+                            </th>
+                            <th>
+                                Company
+                            </th>
+                            <th>
+                                City
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Vacancy vacancy in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(x => vacancy.JobTitle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(x => vacancy.Company)
+                                </td>
+                                <td class="text-right">
+                                    @Html.DisplayFor(x => vacancy.City)
+                                </td>
+                                <td>
+                                    <a asp-area="CMS"
+                                       asp-controller="Vacancy"
+                                       asp-action="Edit"
+                                       asp-route-id="@vacancy.Id"
+                                       class="btn btn-block btn-default">
+                                        <i class="fa fa-pencil-square-o"></i> Edit
+                                    </a>
+                                    <a asp-area="CMS"
+                                       asp-controller="Vacancy"
+                                       asp-action="Delete"
+                                       asp-route-id="@vacancy.Id"
+                                       class="btn btn-block btn-warning">
+                                        <i class="fa fa-trash-o"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>}
+                    </tbody>
+                </table>
+            </div>
+
+            @{  var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+
+            <nav aria-label="Search results pages">
+                <ul class="pagination">
+                    <li class="@prevDisabled">
+                        @if (Model.HasPreviousPage)
+                        {
+                            <a asp-area="CMS"
+                               asp-action="Index"
+                               asp-route-page="@(Model.PageIndex - 1)"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-controller="Vacancy"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>}
+                        else
+                        {
+                            <span aria-hidden="true" aria-label="Previous">&laquo;</span>}
+                    </li>
+
+                    @for (int i = Model.StartPage; i <= Model.EndPage; i++)
+                    {
+                        <li class="@(Model.PageIndex == i ? "active": "")">
+                            <a asp-area="CMS"
+                               asp-action="Index"
+                               asp-route-page="@i"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-controller="Vacancy">
+                                @i
+                                @if (Model.PageIndex == i)
+                                {<span class="sr-only">(current)</span>}
+                            </a>
+                        </li>}
+
+
+                    <li class="@nextDisabled">
+                        @if (Model.HasNextPage)
+                        {
+                            <a asp-area="CMS"
+                               asp-action="Index"
+                               asp-route-page="@(Model.PageIndex + 1)"
+                               asp-route-pageSize="@Model.PageSize"
+                               asp-controller="Vacancy"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>                        }
+                        else
+                        {
+                            <span aria-hidden="true" aria-label="Next">&raquo;</span>}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
