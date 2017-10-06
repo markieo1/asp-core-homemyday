@@ -27,10 +27,10 @@ namespace HomeMyDay.Tests
 
 			context.SaveChanges();
 
-
 			IPageRepository repository = new EFPageRepository(context);
 
-			Assert.Equal("LastSurprise", repository.GetPage(1).Title);
+			Assert.Equal("Surprise", repository.GetPage(1).Title);
+			Assert.Equal("LastSurprise", repository.GetPage(2).Title);
 		}
 
 		[Fact]
@@ -40,7 +40,7 @@ namespace HomeMyDay.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
-			context.Page.Add(new Page() { Page_Name = "TheSurprise", Title = "LastSurprise", Content = "Hallo" });
+			context.Page.Add(new Page() { Id =1, Page_Name = "TheSurprise", Title = "LastSurprise", Content = "Hallo" });
 
 			context.SaveChanges();
 
