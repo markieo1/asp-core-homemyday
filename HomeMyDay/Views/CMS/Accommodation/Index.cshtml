@@ -101,14 +101,13 @@
                                        class="btn btn-block btn-default">
                                         <i class="fa fa-pencil-square-o"></i> Edit
                                     </a>
-                                    <a asp-area="CMS"
-                                       asp-controller="Accommodation"
-                                       asp-action="Delete"
-                                       asp-route-id="@accommodation.Id"
+                                    <a data-toggle="modal"
+                                       data-target="#confirmDeleteAccommodationModal@(accommodation.Id)"
                                        class="btn btn-block btn-warning">
                                         <i class="fa fa-trash-o"></i> Delete
                                     </a>
                                 </td>
+                                @Html.Partial("../../Partials/ConfirmAccommodationDelete.cshtml", accommodation)
                             </tr>}
                     </tbody>
                 </table>

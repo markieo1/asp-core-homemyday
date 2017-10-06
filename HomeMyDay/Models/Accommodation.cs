@@ -13,6 +13,7 @@ namespace HomeMyDay.Models
 		{
 			MediaObjects = new List<MediaObject>();
 			NotAvailableDates = new List<DateEntity>();
+			Reviews = new List<Review>();
 		}
 
 		/// <summary>
@@ -117,5 +118,10 @@ namespace HomeMyDay.Models
 		/// </summary>
 		[Display(Name = "Annulering")]
 		public string CancellationText { get; set; }
+
+		/// <summary>
+		/// Gets or sets the reviews.
+		/// </summary>
+		public List<Review> Reviews { get; set; }
 	}
 }

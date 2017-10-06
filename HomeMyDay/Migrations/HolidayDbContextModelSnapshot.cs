@@ -26,7 +26,8 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Beds");
+                    b.Property<int?>("Beds")
+                        .IsRequired();
 
                     b.Property<string>("CancellationText");
 
@@ -34,13 +35,15 @@ namespace HomeMyDay.Migrations
 
                     b.Property<string>("Country");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
                     b.Property<string>("Location");
 
                     b.Property<int>("MaxPersons");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<decimal>("Price");
 
@@ -48,7 +51,8 @@ namespace HomeMyDay.Migrations
 
                     b.Property<bool>("Recommended");
 
-                    b.Property<int?>("Rooms");
+                    b.Property<int?>("Rooms")
+                        .IsRequired();
 
                     b.Property<string>("RulesText");
 
@@ -118,7 +122,8 @@ namespace HomeMyDay.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired();
 
-                    b.Property<int>("HouseNumber");
+                    b.Property<int?>("HouseNumber")
+                        .IsRequired();
 
                     b.Property<string>("HouseNumberSuffix");
 
@@ -180,6 +185,36 @@ namespace HomeMyDay.Migrations
                     b.HasIndex("AccommodationId");
 
                     b.ToTable("DateEntity");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.FaqCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CategoryName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FaqCategory");
+                });
+
+            modelBuilder.Entity("HomeMyDay.Models.FaqQuestion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Answer");
+
+                    b.Property<long>("CategoryId");
+
+                    b.Property<string>("Question");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("FaqQuestions");
                 });
 
             modelBuilder.Entity("HomeMyDay.Models.MediaObject", b =>
@@ -301,6 +336,14 @@ namespace HomeMyDay.Migrations
                         .HasForeignKey("AccommodationId");
                 });
 
+            modelBuilder.Entity("HomeMyDay.Models.FaqQuestion", b =>
+                {
+                    b.HasOne("HomeMyDay.Models.FaqCategory", "FaqCategory")
+                        .WithMany("FaqQuestions")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("HomeMyDay.Models.MediaObject", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation")
@@ -311,7 +354,7 @@ namespace HomeMyDay.Migrations
             modelBuilder.Entity("HomeMyDay.Models.Review", b =>
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("AccommodationId");
                 });
 #pragma warning restore 612, 618
