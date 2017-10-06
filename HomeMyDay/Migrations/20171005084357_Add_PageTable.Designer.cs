@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171005084357_Add_PageTable")]
+    partial class Add_PageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,9 +274,7 @@ namespace HomeMyDay.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
-
-                    b.Property<bool>("Approved");
+                    b.Property<long>("AccommodationId");
 
                     b.Property<DateTime>("Date");
 
@@ -366,7 +365,8 @@ namespace HomeMyDay.Migrations
                 {
                     b.HasOne("HomeMyDay.Models.Accommodation", "Accommodation")
                         .WithMany()
-                        .HasForeignKey("AccommodationId");
+                        .HasForeignKey("AccommodationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

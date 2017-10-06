@@ -23,6 +23,19 @@ namespace HomeMyDay.Database
 			{
 				SeedCountries(context);
 			}
+
+			//Seed surprise modal
+			if (!context.Page.Any())
+			{
+				SeedSurprise(context);
+			}
+		}
+
+		private static void SeedSurprise(HomeMyDayDbContext context)
+		{
+			var generator = new LipsumGenerator();
+			context.Page.Add(new Page() {Page_Name = "TheSurprise", Title = "Surprise", Content = generator.GenerateParagraphs(1)[0] });
+			context.SaveChanges();
 		}
 
 		private static void SeedAccommodations(HomeMyDayDbContext context)
