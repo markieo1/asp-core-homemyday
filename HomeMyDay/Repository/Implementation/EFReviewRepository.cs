@@ -1,9 +1,11 @@
 ﻿using System;
 using HomeMyDay.Database;
+using HomeMyDay.Helpers;
 using HomeMyDay.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -55,16 +57,43 @@ namespace HomeMyDay.Repository.Implementation
 					Name = name,
 					Text = text,
 					Date = DateTime.Now
-				};
-				_context.Reviews.Add(reviewToAdd);
-				_context.SaveChanges();
-				isAdded = true;
-			}
-			catch (Exception)
-			{
-				isAdded = false;
-			}
-			return isAdded;
-		}
-	}
+			    };
+			    _context.Reviews.Add(reviewToAdd);
+			    _context.SaveChanges();	 
+			    isAdded = true;
+		    }
+		    catch (Exception)
+		    {					
+			    isAdded = false;
+		    }
+		    return isAdded;
+	    }
+
+        public void AcceptReview(long id)
+        {
+            Review dbEntry = _context.Reviews.FirstOrDefault(s => s.Id == id);
+            if (dbEntry.Id >= 1)
+            {
+                dbEntry.Approved = true;
+            }
+            _context.SaveChanges();
+        }
+
+        public Task<PaginatedList<Review>> List(int page = 1, int pageSize = 10)
+        {
+            if (page < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(page));
+            }
+
+            if (pageSize < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(pageSize));
+            }
+
+            IQueryable<Review> reviews = _context.Reviews.Where(a => a.Approved == false).OrderBy(x => x.Id).AsNoTracking();
+
+            return PaginatedList<Review>.CreateAsync(reviews, page, pageSize);
+        }
+    }
 }
