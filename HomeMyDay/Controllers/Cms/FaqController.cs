@@ -26,9 +26,9 @@ namespace HomeMyDay.Controllers.Cms
 		}
 
 		[HttpGet]
-		public IActionResult Edit(long id)
+		public IActionResult Edit()
 		{
-			//var cat = _faqRepository.GetCat(id);
+			return View(_faqRepository.GetCategoriesAndQuestions.);
 		}
 
 		[HttpPost]
