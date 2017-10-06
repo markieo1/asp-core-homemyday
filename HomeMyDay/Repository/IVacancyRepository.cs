@@ -1,6 +1,8 @@
 ﻿using System;
 using HomeMyDay.Models;
 using System.Collections.Generic;
+using HomeMyDay.Helpers;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Repository
 {
@@ -20,5 +22,13 @@ namespace HomeMyDay.Repository
         /// <exception cref="ArgumentOutOfRangeException">id</exception>
         /// <exception cref="KeyNotFoundException"></exception>
         Vacancy GetVacancy(long id);
+
+        /// <summary>
+        /// Lists the Vacancies for the specific page.
+        /// </summary>
+        /// <param name="page">The page.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <returns></returns>
+        Task<PaginatedList<Vacancy>> List(int page = 1, int pageSize = 10);
     }
 }
