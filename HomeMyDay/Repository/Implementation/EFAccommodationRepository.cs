@@ -31,6 +31,7 @@ namespace HomeMyDay.Repository.Implementation
 			Accommodation accommodation = await _context.Accommodations
 				.Include(x => x.MediaObjects)
 				.Include(x => x.Reviews)
+				.Include(x => x.NotAvailableDates)
 				.SingleOrDefaultAsync(a => a.Id == id);
 
 			if (accommodation == null)
