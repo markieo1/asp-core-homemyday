@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Repository.Implementation
 {
-	public class EFVacancyRepository : IVacancyRepository
+    public class EFVacancyRepository : IVacancyRepository
     {
         private readonly HomeMyDayDbContext _context;
 
@@ -52,6 +52,47 @@ namespace HomeMyDay.Repository.Implementation
             IQueryable<Vacancy> vacancies = _context.Vacancies.OrderBy(x => x.Id).AsNoTracking();
 
             return PaginatedList<Vacancy>.CreateAsync(vacancies, page, pageSize);
+        }
+
+        public Vacancy DeleteVacancy(long vacancyId)
+        {
+            Vacancy dbEntry = _context.Vacancies.FirstOrDefault(a => a.Id == vacancyId);
+
+            if (dbEntry != null)
+            {
+                _context.Vacancies.Remove(dbEntry);
+                _context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+        public void SaveVacancy(string JobTitle, string Company, string City, string AboutVacancy, string AboutFunction, string JobRequirements, string WeOffer)
+        {
+            if (string.IsNullOrEmpty(JobTitle))
+            {
+                // do nothing
+            }
+            else
+            {
+                _context.Add(new Vacancy() { JobTitle = JobTitle, Company = Company, City = City, AboutVacancy = AboutVacancy, AboutFunction = AboutFunction, JobRequirements = JobRequirements, WeOffer = WeOffer });
+            }
+            _context.SaveChanges();
+        }
+
+        public void UpdateVacancy(Vacancy vacancy)
+        {
+            Vacancy dbEntry = _context.Vacancies.FirstOrDefault(s => s.Id == vacancy.Id);
+            if (dbEntry != null)
+            {
+                dbEntry.JobTitle = vacancy.JobTitle;
+                dbEntry.Company = vacancy.Company;
+                dbEntry.City = vacancy.City;
+                dbEntry.AboutVacancy = vacancy.AboutVacancy;
+                dbEntry.AboutFunction = vacancy.AboutFunction;
+                dbEntry.JobRequirements = vacancy.JobRequirements;
+                dbEntry.WeOffer = vacancy.WeOffer;
+            }
+            _context.SaveChanges();
         }
     }
 }
