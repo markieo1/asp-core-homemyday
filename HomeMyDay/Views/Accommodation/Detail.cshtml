@@ -51,6 +51,20 @@
         </div>
     }
 
+    <div class="row" id="map-container">
+
+        <h2>Locatie</h2>
+
+        <div id="accommodation-map" class="col-md-6" data-latitude="@Model.Accommodation.Latitude" data-longitude="@Model.Accommodation.Longitude"></div>
+    </div>
+
     <a class="btn btn-primary mtop52" asp-area="" asp-controller="Booking" asp-action="BookingForm" asp-route-id="@Model.Accommodation.Id">Boeken</a>
 
 </div>
+
+<script src="~/js/accommodationdetail.js"></script>
+
+@* Google Maps script *@
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=@(ViewBag.GoogleClientApiKey)&callback=initMap">
+</script>
