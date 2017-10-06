@@ -12,7 +12,7 @@ using HomeMyDay.Extensions;
 namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
-	//[Authorize(Policy = IdentityPolicies.Administrator)]
+	[Authorize(Policy = IdentityPolicies.Administrator)]
 	public class FaqController : Controller
 	{
 		private readonly IFaqRepository _faqRepository;
@@ -25,7 +25,7 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			var paginatedResult = await _faqRepository.List(page ?? 1, pageSize ?? 5);
+			var paginatedResult = await _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
 			return View(paginatedResult);
 		}
 

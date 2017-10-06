@@ -87,21 +87,68 @@ namespace HomeMyDay.Repository.Implementation
 			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
 		}
 
-		public Task<PaginatedList<FaqCategory>> List(int page = 1, int pageSize = 10)
+		public FaqCategory GetCategory(long categoryId)
 		{
-			if (page < 1)
+			if (categoryId <= 0)
 			{
-				throw new ArgumentOutOfRangeException();
+				throw new ArgumentOutOfRangeException(nameof(categoryId));
 			}
 
-			if (pageSize < 1)
+			FaqCategory category = _context.FaqCategory
+				.FirstOrDefault(a => a.Id == categoryId);
+
+			if (category == null)
 			{
-				throw new ArgumentOutOfRangeException();
+				throw new KeyNotFoundException($"Category with ID: {categoryId} is not found");
+			}
+
+			return category;
+		}
+
+		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)
+		{
+			// Reset to default value
+			if (pageSize <= 0)
+			{
+				pageSize = 10;
+			}
+
+			// We are not able to skip before the first page
+			if (page <= 0)
+			{
+				page = 1;
 			}
 
 			var faqCategories = _context.FaqCategory.OrderBy(x => x.Id).AsNoTracking();
 
 			return PaginatedList<FaqCategory>.CreateAsync(faqCategories, page, pageSize);
+		}
+
+		public Task<PaginatedList<FaqQuestion>> ListQuestions(long categoryId, int page = 1, int pageSize = 10)
+		{
+			if (categoryId <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(categoryId));
+			}
+
+			// Reset to default value
+			if (pageSize <= 0)
+			{
+				pageSize = 10;
+			}
+
+			// We are not able to skip before the first page
+			if (page <= 0)
+			{
+				page = 1;
+			}
+
+			var faqQuestions = _context.FaqQuestions
+				.Where(x => x.CategoryId == categoryId)
+				.OrderBy(x => x.Id)
+				.AsNoTracking();
+
+			return PaginatedList<FaqQuestion>.CreateAsync(faqQuestions, page, pageSize);
 		}
 	}
 }

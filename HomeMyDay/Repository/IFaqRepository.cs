@@ -6,12 +6,12 @@ using HomeMyDay.Helpers;
 namespace HomeMyDay.Repository
 {
 	public interface IFaqRepository
-    {
-        /// <summary>
+	{
+		/// <summary>
 		/// Get All Categories and Questions 
 		/// </summary>
 		/// <returns>The categories and the linked questions to a categorie</returns>
-        IEnumerable<FaqCategory> GetCategoriesAndQuestions();
+		IEnumerable<FaqCategory> GetCategoriesAndQuestions();
 
 		/// <summary>
 		/// Get All Categories
