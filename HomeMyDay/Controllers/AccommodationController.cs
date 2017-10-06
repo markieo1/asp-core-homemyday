@@ -1,7 +1,9 @@
 ﻿using HomeMyDay.Models;
 using HomeMyDay.Repository;
+using HomeMyDay.Services;
 using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,13 @@ namespace HomeMyDay.Controllers
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
 		private readonly IReviewRepository _reviewRepository;
+		private readonly GoogleApiServiceOptions _googleOptions;
 
-		public AccommodationController(IAccommodationRepository repository, IReviewRepository repo)
+		public AccommodationController(IAccommodationRepository repository, IReviewRepository repo, IOptions<GoogleApiServiceOptions> googleOpts)
 		{
 			_accommodationRepository = repository;
 			_reviewRepository = repo;
+			_googleOptions = googleOpts.Value;
 		}
 
 		[HttpGet]
