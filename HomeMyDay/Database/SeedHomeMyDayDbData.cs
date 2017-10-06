@@ -29,12 +29,24 @@ namespace HomeMyDay.Database
 			{
 				SeedSurprise(context);
 			}
+
+			//Seed category
+			if (!context.Page.Any())
+			{
+				SeedFaqCategory(context);
+			}
 		}
 
 		private static void SeedSurprise(HomeMyDayDbContext context)
 		{
 			var generator = new LipsumGenerator();
 			context.Page.Add(new Page() {Page_Name = "TheSurprise", Title = "Surprise", Content = generator.GenerateParagraphs(1)[0] });
+			context.SaveChanges();
+		}
+
+		private static void SeedFaqCategory(HomeMyDayDbContext context)
+		{
+			context.FaqCategory.AddRange(new FaqCategory() {CategoryName = "Cat1" }, new FaqCategory() { }, new FaqCategory() { CategoryName = "Cat2" }, new FaqCategory() { CategoryName = "Cat3" });
 			context.SaveChanges();
 		}
 

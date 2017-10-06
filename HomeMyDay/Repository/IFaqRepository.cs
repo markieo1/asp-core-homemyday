@@ -14,11 +14,25 @@ namespace HomeMyDay.Repository
         IEnumerable<FaqCategory> GetCategoriesAndQuestions();
 
 		/// <summary>
+		/// Delete a Categorie
+		/// </summary>
+		/// <param name="id">the identifier for which category to delete</param>
+		/// <returns></returns>
+		FaqCategory DeleteFaqCategory(long id);
+
+		/// <summary>
+		/// Edit or add a Categorie
+		/// </summary>
+		/// <param name="category">the object model given to the methode</param>
+		/// <returns></returns>
+		void SaveFaqCategory(FaqCategory category);
+
+		/// <summary>
 		/// Lists the FaqCategories for the specific page.
 		/// </summary>
 		/// <param name="page">The page.</param>
 		/// <param name="pageSize">Size of the page.</param>
 		/// <returns></returns>
-	    Task<PaginatedList<FaqCategory>> List(int page = 1, int pageSize = 10);
+		Task<PaginatedList<FaqCategory>> List(int page = 1, int pageSize = 10);
     }
 }
