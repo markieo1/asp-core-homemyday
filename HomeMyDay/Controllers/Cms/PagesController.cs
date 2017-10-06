@@ -28,7 +28,6 @@ namespace HomeMyDay.Controllers.Cms
 		{
 				PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
 				return View(paginatedResult);
-
 		}
 
 		[HttpGet]
