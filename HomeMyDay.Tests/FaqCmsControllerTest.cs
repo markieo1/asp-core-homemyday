@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Moq;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Tests
 {
@@ -99,7 +100,7 @@ namespace HomeMyDay.Tests
 	    }
 
 		[Fact]
-		public void TestDeleteFaqCategory()
+		public async Task TestDeleteFaqCategoryCalled()
 		{
 			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
 
@@ -109,14 +110,14 @@ namespace HomeMyDay.Tests
 			});
 
 			FaqController target = new FaqController(mock.Object);
-
-			target.DeleteCategory(cat.Id);
-
-			mock.Verify(m => m.DeleteFaqCategory(cat.Id));
+			//try to delete
+			await target.DeleteCategory(cat.Id);
+			//Check if DeleteCategory is called 
+			mock.Verify(m => m.DeleteCategory(cat.Id));
 		}
 
 		[Fact]
-		public void TestEditCategory()
+		public async Task TestEditCategoryCalled()
 		{
 			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
 
@@ -124,14 +125,202 @@ namespace HomeMyDay.Tests
 
 			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
 
-			// Act - try to save
-			IActionResult result = target.EditCategory(cat);
-			// Assert - check that the repository was called
-			mock.Verify(m => m.SaveFaqCategory(cat));
+			// try to save
+			IActionResult result = await target.EditCategory(cat);
+			//check that the repository was called
+			mock.Verify(m => m.SaveCategory(cat));
 
-			// Assert - check the result type is a redirection
+			//check the result type is a redirection
 			Assert.IsType<RedirectToActionResult>(result);
 			Assert.Equal("Index", (result as RedirectToActionResult).ActionName);
 		}
+
+		#region "Save"
+
+		[Fact]
+		public async void TestSaveNullCategory()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.FaqCategory.AddRange(
+				new FaqCategory() { CategoryName = "Test" }
+			);
+
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentNullException>(() => repository.SaveCategory(null));
+		}
+
+		[Fact]
+		public async void TestSaveNewCategory()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.FaqCategory.AddRange(
+				new FaqCategory() { CategoryName = "Test" }
+			);
+
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			FaqCategory categoryToCreate = new FaqCategory()
+			{
+				CategoryName = "Test"
+			};
+
+			await repository.SaveCategory(categoryToCreate);
+
+			// Check if the item was created
+			FaqCategory foundCat= await context.FaqCategory.FirstOrDefaultAsync(x => x.CategoryName == "Test");
+
+			Assert.NotNull(foundCat);
+			Assert.Equal("Test", foundCat.CategoryName);
+		}
+
+		[Fact]
+		public async void TestSaveUpdatedCategory()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			FaqCategory catToUpdate = new FaqCategory()
+			{
+				Id = 1,
+				CategoryName = "Test",
+			};
+
+			await context.FaqCategory.AddAsync(catToUpdate);
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			// Change some values
+			catToUpdate.CategoryName = "New";
+
+			await repository.SaveCategory(catToUpdate);
+
+			// Check if the item was updated
+			FaqCategory updatedCat = await context.FaqCategory.FindAsync((long)1);
+
+			Assert.NotNull(updatedCat);
+			Assert.Equal("New", updatedCat.CategoryName);
+		}
+
+		[Fact]
+		public async void TestSaveNotExistingCategoryWithNotExistingId()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			FaqCategory ExistingCat = new FaqCategory()
+			{
+				Id = 1,
+				CategoryName = "Test",
+			};
+
+			await context.FaqCategory.AddAsync(ExistingCat);
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			// Change some values
+			FaqCategory catToUpdate = new FaqCategory()
+			{
+				Id = 2,
+				CategoryName = "New",
+			};
+
+			await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => repository.SaveCategory(catToUpdate));
+		}
+
+		#endregion
+
+		#region "Delete"
+
+		[Fact]
+		public async void TestDeleteExistingCategory()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.FaqCategory.AddRange(
+				new FaqCategory() {Id = 1, CategoryName = "Test" }
+			);
+
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			await repository.DeleteCategory(1);
+
+			FaqCategory deletedCat = await context.FaqCategory.FindAsync((long)1);
+			Assert.Null(deletedCat);
+		}
+
+		[Fact]
+		public async void TestDeleteNotExistingCategory()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.FaqCategory.AddRange(
+				new FaqCategory() { Id = 1, CategoryName = "Test" }
+			);
+
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentNullException>(() => repository.DeleteCategory(2));
+		}
+
+		[Fact]
+		public async void TestDeleteIdBelowZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.FaqCategory.AddRange(
+				new FaqCategory() { CategoryName = "Test" }
+			);
+
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.DeleteCategory(-10));
+		}
+
+		[Fact]
+		public async void TestDeleteIdEqualsZero()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.FaqCategory.AddRange(
+				new FaqCategory() { CategoryName = "Test" }
+			);
+
+			await context.SaveChangesAsync();
+
+			IFaqRepository repository = new EFFaqRepository(context);
+
+			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.DeleteCategory(0));
+		}
+
+		#endregion
 	}
 }

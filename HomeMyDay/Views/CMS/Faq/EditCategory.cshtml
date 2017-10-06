@@ -2,13 +2,19 @@
 
 <div class="text-danger" asp-validation-summary="All"></div>
 
-@if (TempData["message"] != null)
-{
-	<div class="alert alert-success">@TempData["message"]</div>
-}
-
 <div class="container">
 	<div class="row">
+		<h2>
+			@if (Model.Id <= 0)
+			{
+				@:Nieuwe category
+            }
+			else
+			{
+				@:Category: @Model.Id
+            }
+		</h2>
+
 		<form asp-action="EditCategory" asp-area="CMS" asp-controller="Faq" method="post">
 			<div class="form-group">
 				<label asp-for="CategoryName"></label>

@@ -20,18 +20,27 @@ namespace HomeMyDay.Repository
 		IEnumerable<FaqCategory> Categories { get; }
 
 		/// <summary>
+		/// Gets one category.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentOutOfRangeException">id</exception>
+		/// <exception cref="KeyNotFoundException"></exception>
+		FaqCategory GetCategory(long id);
+
+		/// <summary>
 		/// Delete a Categorie
 		/// </summary>
 		/// <param name="id">the identifier for which category to delete</param>
 		/// <returns></returns>
-		FaqCategory DeleteFaqCategory(long id);
+		Task DeleteCategory(long id);
 
 		/// <summary>
 		/// Edit or add a Categorie
 		/// </summary>
 		/// <param name="category">the object model given to the methode</param>
 		/// <returns></returns>
-		void SaveFaqCategory(FaqCategory category);
+		Task SaveCategory(FaqCategory category);
 
 		/// <summary>
 		/// Lists the FaqCategories for the specific page.

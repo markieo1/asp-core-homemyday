@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Helpers;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -20,35 +21,65 @@ namespace HomeMyDay.Repository.Implementation
 
 		public IEnumerable<FaqCategory> Categories => _context.FaqCategory;
 
-		public FaqCategory DeleteFaqCategory(long id)
+		public FaqCategory GetCategory(long id)
 		{
-
-			var cat = _context.FaqCategory.FirstOrDefault(c => c.Id == id);
-
-			if (cat != null)
+			if (id <= 0)
 			{
-				_context.FaqCategory.Remove(cat);
-				_context.SaveChanges();
+				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			return cat;
+			FaqCategory category = _context.FaqCategory
+				.FirstOrDefault(a => a.Id == id);
+
+			if (category == null)
+			{
+				throw new KeyNotFoundException($"Category with ID: {id} is not found");
+			}
+
+			return category;
 		}
 
-		public void SaveFaqCategory(FaqCategory category)
+		public async Task DeleteCategory(long id)
 		{
-			if (category.Id == 0)
+			if (id <= 0)
 			{
-				_context.FaqCategory.Add(category);
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			FaqCategory category = await _context.FaqCategory
+				.SingleOrDefaultAsync(a => a.Id == id);
+
+			if (category == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Category with ID: {id} not found!");
+			}
+
+			_context.FaqCategory.Remove(category);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task SaveCategory(FaqCategory category)
+		{
+			if (category == null)
+			{
+				throw new ArgumentNullException(nameof(category));
+			}
+
+			if (category.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				await _context.FaqCategory.AddAsync(category);
 			}
 			else
 			{
-				FaqCategory cat = _context.FaqCategory.FirstOrDefault(c => c.Id == category.Id);
-				if (cat != null)
-				{
-					cat.CategoryName = category.CategoryName;
-				}
+				// Get the tracked accommodation using the ID
+				EntityEntry<FaqCategory> entityEntry = _context.Entry(category);
+				entityEntry.State = EntityState.Modified;
 			}
-			_context.SaveChanges();
+
+			await _context.SaveChangesAsync();
 		}
 
 		public IEnumerable<FaqCategory> GetCategoriesAndQuestions()

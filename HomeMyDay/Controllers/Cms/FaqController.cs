@@ -5,11 +5,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Models;
 using System.Linq;
+using System.Collections.Generic;
+using System;
+using HomeMyDay.Extensions;
 
 namespace HomeMyDay.Controllers.Cms
 {
 	[Area("CMS")]
-	[Authorize(Policy = IdentityPolicies.Administrator)]
+	//[Authorize(Policy = IdentityPolicies.Administrator)]
 	public class FaqController : Controller
 	{
 		private readonly IFaqRepository _faqRepository;
@@ -29,34 +32,55 @@ namespace HomeMyDay.Controllers.Cms
 		[HttpGet]
 		public IActionResult EditCategory(long id)
 		{
-			return View(_faqRepository.Categories.FirstOrDefault(r=>r.Id == id));
+
+			FaqCategory category;
+
+			try
+			{
+				if (id <= 0)
+				{
+					category = new FaqCategory();
+				}
+				else
+				{
+					category = _faqRepository.GetCategory(id);
+				}
+			}
+			catch (KeyNotFoundException)
+			{
+				return new NotFoundResult();
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return new BadRequestResult();
+			}
+
+			return View(category);
 		}
 
 		[HttpPost]
-		public IActionResult EditCategory(FaqCategory cat)
+		public async Task<IActionResult> EditCategory(FaqCategory cat)
 		{
 			if (ModelState.IsValid)
 			{
-				_faqRepository.SaveFaqCategory(cat);
-				return RedirectToAction("Index");
+				await _faqRepository.SaveCategory(cat);
+
+				return RedirectToAction(
+					actionName: nameof(Index),
+					controllerName: nameof(FaqController).TrimControllerName());
 			}
-			else
-			{
-				ModelState.AddModelError(string.Empty, "Error, something went wrong while editing");
-				return View();
-			}
+
+			return View(cat);
 		}
 
-		public IActionResult AddCategory() => View("EditCategory", new FaqCategory());
-
-		public IActionResult DeleteCategory(long id)
+		[HttpPost]
+		public async Task<IActionResult> DeleteCategory(long id)
 		{
-			FaqCategory deletedCat = _faqRepository.DeleteFaqCategory(id);
-			if (deletedCat != null)
-			{
-				TempData["message"] = $"{deletedCat.CategoryName} was deleted";
-			}
-			return RedirectToAction("Index");
+			await _faqRepository.DeleteCategory(id);
+
+			return RedirectToAction(
+						actionName: nameof(Index),
+						controllerName: nameof(FaqController).TrimControllerName());
 		}
 
 	}
