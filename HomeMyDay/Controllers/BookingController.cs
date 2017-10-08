@@ -32,9 +32,12 @@ namespace HomeMyDay.Controllers
 		{
 			var formModel = new BookingFormViewModel();
 
+			Accommodation accommodation;
 			try
 			{
-				formModel.Accommodation = accommodationRepository.GetAccommodation(id);
+				accommodation = accommodationRepository.GetAccommodation(id);
+				formModel.AccommodationId = accommodation.Id;
+				formModel.AccommodationName = accommodation.Name;
 			}
 			catch(KeyNotFoundException)
 			{
@@ -46,19 +49,19 @@ namespace HomeMyDay.Controllers
 			//If an amount of persons was given, use it.
 			//Otherwise, get the maximum persons from the Accommodation.
 			int maxPersons;
-			if(persons.HasValue && persons.Value <= formModel.Accommodation.MaxPersons)
+			if(persons.HasValue && persons.Value <= accommodation.MaxPersons)
 			{
 				maxPersons = persons.Value;
 			}
 			else
 			{
-				maxPersons = formModel.Accommodation.MaxPersons;
+				maxPersons = accommodation.MaxPersons;
 			}
 
 			ViewBag.MaxPersons = maxPersons;
 
 			//Initialize BookingPersons for the form
-			for(int i = 0; i < formModel.Accommodation.MaxPersons; i++)
+			for(int i = 0; i < accommodation.MaxPersons; i++)
 			{
 				formModel.Persons.Add(new BookingPerson());
 			}
@@ -79,14 +82,23 @@ namespace HomeMyDay.Controllers
 			if(!ModelState.IsValid)
 			{
 				//Restore accommodation object from ID
-				formData.Accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
+				Accommodation accommodation;
+				try
+				{
+					accommodation = accommodationRepository.GetAccommodation(formData.AccommodationId);
+					formData.AccommodationName = accommodation.Name;
+				}
+				catch (KeyNotFoundException)
+				{
+					return NotFound();
+				}
 
 				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
 				ViewBag.MaxPersons = formData.Persons.Count();
 
 				//Initialize BookingPersons up to the maximum that the accommodation will support.
 				//Old values entered by the user should be kept.
-				for(int i = 0; i < formData.Accommodation.MaxPersons; i++)
+				for(int i = 0; i < accommodation.MaxPersons; i++)
 				{
 					if(formData.Persons.ElementAtOrDefault(i) == null)
 					{
@@ -102,7 +114,7 @@ namespace HomeMyDay.Controllers
 				Accommodation accommodation;
 				try
 				{
-					accommodation = accommodationRepository.GetAccommodation(formData.Accommodation.Id);
+					accommodation = accommodationRepository.GetAccommodation(formData.AccommodationId);
 				}
 				catch(KeyNotFoundException)
 				{

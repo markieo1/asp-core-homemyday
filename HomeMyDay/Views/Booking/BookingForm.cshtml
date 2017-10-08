@@ -2,7 +2,7 @@
 
 <form id="booking-form" class="container bottom-buffer" asp-action="BookingForm" method="post" data-maxpersons="@ViewBag.MaxPersons">
 
-	<h1>Boeking @Model.Accommodation.Name</h1>
+	<h1>Boeking @Model.AccommodationName</h1>
 
 	<p>Algemene gegevens personen</p>
 
@@ -162,7 +162,7 @@
 
 	<input type="submit" value="Volgende stap" class="btn btn-primary" />
 
-    <input type="hidden" asp-for="@Model.Accommodation.Id" />
+    <input type="hidden" asp-for="@Model.AccommodationId" />
 
 </form>
 
