@@ -60,7 +60,12 @@
 						{
 							<tr>
 								<td>
-									@Html.DisplayFor(x => faqCategory.CategoryName)
+									<a asp-area="CMS"
+									   asp-controller="Faq"
+									   asp-action="Questions"
+									   asp-route-id="@faqCategory.Id">
+										@Html.DisplayFor(x => faqCategory.CategoryName)
+									</a>
 								</td>
 								<td>
 									<a asp-area="CMS"

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using HomeMyDay.Extensions;
+using HomeMyDay.Helpers;
+using HomeMyDay.ViewModels;
 
 namespace HomeMyDay.Controllers.Cms
 {
@@ -27,6 +29,21 @@ namespace HomeMyDay.Controllers.Cms
 		{
 			var paginatedResult = await _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
 			return View(paginatedResult);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Questions(long id, int? page, int? pageSize)
+		{
+			FaqCategory category = _faqRepository.GetCategory(id);
+			PaginatedList<FaqQuestion> paginatedResult = await _faqRepository.ListQuestions(id, page ?? 1, pageSize ?? 5);
+
+			FaqQuestionsViewModel viewModel = new FaqQuestionsViewModel()
+			{
+				Category = category,
+				Questions = paginatedResult
+			};
+
+			return View(viewModel);
 		}
 
 		[HttpGet]
