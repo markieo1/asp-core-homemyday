@@ -57,48 +57,6 @@ namespace HomeMyDay.Tests
 			Assert.True(model.Count() == 3);
 		}
 
-	    [Fact]
-	    public void TestFaqPageArgumentOutOfRangeException()
-	    {
-			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-
-		    context.FaqCategory.AddRange(
-			    new FaqCategory() { CategoryName = "TestA" },
-			    new FaqCategory() { CategoryName = "TestB" },
-			    new FaqCategory() { CategoryName = "TestC" }
-		    );
-		    context.SaveChanges();
-
-		    IFaqRepository repository = new EFFaqRepository(context);
-
-		    var target = new FaqController(repository);
-
-		    Assert.Throws<AggregateException>(() => target.Index(0, 10).Result);	
-		}
-
-	    [Fact]
-	    public void TestFaqPageSizeArgumentOutOfRangeException()
-	    {
-		    var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
-		    optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-		    HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
-
-		    context.FaqCategory.AddRange(
-			    new FaqCategory() { CategoryName = "TestA" },
-			    new FaqCategory() { CategoryName = "TestB" },
-			    new FaqCategory() { CategoryName = "TestC" }
-		    );
-		    context.SaveChanges();
-
-		    IFaqRepository repository = new EFFaqRepository(context);
-
-		    var target = new FaqController(repository);
-
-		    Assert.Throws<AggregateException>(() => target.Index(1, 0).Result);
-	    }
-
 		[Fact]
 		public async Task TestDeleteFaqCategoryCalled()
 		{
