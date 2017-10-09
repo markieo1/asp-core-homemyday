@@ -56,7 +56,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestGetIdBelowZeroAccommodation()
+		public void TestGetIdBelowZeroPage()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -67,7 +67,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestGetIdNotExistingAccommodation()
+		public void TestGetIdNotExistingPage()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
@@ -89,7 +89,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public void TestGetIdExistingAccommodation()
+		public void TestGetIdExistingPage()
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());

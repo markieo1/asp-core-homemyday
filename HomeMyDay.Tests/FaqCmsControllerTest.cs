@@ -58,7 +58,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public async Task TestDeleteFaqCategoryCalled()
+		public async void TestDeleteFaqCategoryCalled()
 		{
 			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
 
@@ -75,7 +75,7 @@ namespace HomeMyDay.Tests
 		}
 
 		[Fact]
-		public async Task TestEditCategoryCalled()
+		public async void TestEditCategoryCalled()
 		{
 			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
 

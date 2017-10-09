@@ -42,7 +42,7 @@ namespace HomeMyDay.Repository.Implementation
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Page page = _context.Page.Where(r => r.Id == id).LastOrDefault();
+			Page page = _context.Page.LastOrDefault(r=>r.Id == id);
 
 			if (page == null)
 			{
