@@ -35,24 +35,12 @@ namespace HomeMyDay.Repository
         /// Delete one vacancie.
         /// </summary>
         /// <param name="vacancyId">The identifier.</param>
-        Vacancy DeleteVacancy(long vacancyId);
+        Task DeleteVacancy(long vacancyId);
 
         /// <summary>
         /// Delete one vacancie.
         /// </summary>
-        /// <param name="JobTitle">The title.</param>
-        /// <param name="Company">The companyName.</param>
-        /// <param name="City">The city.</param>
-        /// <param name="AboutVacancy">The about text of a vacancy.</param>
-        /// <param name="AboutFunction">The about function text of an vacancy.</param>
-        /// <param name="JobRequirements">The about job requirements text of a vacancy</param>
-        /// <param name="WeOffer">The we offer text of an vacancy.</param>
-        void SaveVacancy(string JobTitle, string Company, string City, string AboutVacancy, string AboutFunction, string JobRequirements, string WeOffer);
-
-        /// <summary>
-        /// Update a vacancy Record
-        /// </summary>
-        /// <param name="vacancy">The object identifier.</param>
-        void UpdateVacancy(Vacancy vacancy);
+        /// <param name="vacancy">The Vacancy Object.</param>
+        Task SaveVacancy(Vacancy vacancy);
     }
 }

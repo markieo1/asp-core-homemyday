@@ -6,6 +6,7 @@ using System.Linq;
 using HomeMyDay.Helpers;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -54,45 +55,46 @@ namespace HomeMyDay.Repository.Implementation
             return PaginatedList<Vacancy>.CreateAsync(vacancies, page, pageSize);
         }
 
-        public Vacancy DeleteVacancy(long vacancyId)
+        public async Task DeleteVacancy(long vacancyId)
         {
-            Vacancy dbEntry = _context.Vacancies.FirstOrDefault(a => a.Id == vacancyId);
-
-            if (dbEntry != null)
+            if (vacancyId <= 0)
             {
-                _context.Vacancies.Remove(dbEntry);
-                _context.SaveChanges();
+                throw new ArgumentOutOfRangeException(nameof(vacancyId));
             }
-            return dbEntry;
+
+            Vacancy vacancy = await _context.Vacancies.SingleOrDefaultAsync(a => a.Id == vacancyId);
+
+            if (vacancy == null)
+            {
+                throw new ArgumentNullException(nameof(vacancyId), $"Accommodation with ID: {vacancyId} not found!");
+            }
+
+            _context.Vacancies.Remove(vacancy);
+
+            await _context.SaveChangesAsync();
         }
 
-        public void SaveVacancy(string JobTitle, string Company, string City, string AboutVacancy, string AboutFunction, string JobRequirements, string WeOffer)
+        public async Task SaveVacancy(Vacancy vacancy)
         {
-            if (string.IsNullOrEmpty(JobTitle))
+            if (vacancy == null)
             {
-                // do nothing
+                throw new ArgumentNullException(nameof(vacancy));
+            }
+
+            if (vacancy.Id <= 0)
+            {
+                // We are creating a new one
+                // Only need to adjust the id to be 0 and save it in the db.
+                await _context.Vacancies.AddAsync(vacancy);
             }
             else
             {
-                _context.Add(new Vacancy() { JobTitle = JobTitle, Company = Company, City = City, AboutVacancy = AboutVacancy, AboutFunction = AboutFunction, JobRequirements = JobRequirements, WeOffer = WeOffer });
+                // Get the tracked accommodation using the ID
+                EntityEntry<Vacancy> entityEntry = _context.Entry(vacancy);
+                entityEntry.State = EntityState.Modified;
             }
-            _context.SaveChanges();
-        }
 
-        public void UpdateVacancy(Vacancy vacancy)
-        {
-            Vacancy dbEntry = _context.Vacancies.FirstOrDefault(s => s.Id == vacancy.Id);
-            if (dbEntry != null)
-            {
-                dbEntry.JobTitle = vacancy.JobTitle;
-                dbEntry.Company = vacancy.Company;
-                dbEntry.City = vacancy.City;
-                dbEntry.AboutVacancy = vacancy.AboutVacancy;
-                dbEntry.AboutFunction = vacancy.AboutFunction;
-                dbEntry.JobRequirements = vacancy.JobRequirements;
-                dbEntry.WeOffer = vacancy.WeOffer;
-            }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

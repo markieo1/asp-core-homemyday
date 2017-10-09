@@ -1,56 +1,69 @@
 ﻿@model Vacancy
-<div class="row">
-    <div class="container">
-        <h1>Edit Vacancy</h1>
-        <div class="panel-body">
+<div class="container m-b-20">
+    <div class="row">
 
-            <form asp-area="CMS" asp-action="Edit" asp-controller="Vacancy" method="post">
-                <div class="form-group">
-                    <label asp-for="@Model.JobTitle"></label>
-                    <input asp-for="@Model.JobTitle" class="form-control" />
-                    <span asp-validation-for="JobTitle" class="text-danger"></span>
-                </div>
+        <h2>
+            @if (Model.Id <= 0)
+            {
+                @:Nieuwe Vacature
+            }
+            else
+            {
+                @:Vacature: @Model.Id
+            }
+        </h2>
 
-                <div class="form-group">
-                    <label asp-for="@Model.Company"></label>
-                    <input asp-for="@Model.Company" class="form-control" />
-                    <span asp-validation-for="Company" class="text-danger"></span>
-                </div>
+        <form asp-area="CMS"
+              asp-controller="Vacancy"
+              asp-action="Edit"
+              asp-route-id="@Model.Id"
+              method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.JobTitle"></label>
+                <input asp-for="@Model.JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.City"></label>
-                    <input asp-for="@Model.City" class="form-control" />
-                    <span asp-validation-for="City" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company"></label>
+                <input asp-for="@Model.Company" class="form-control" />
+                <span asp-validation-for="Company" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.AboutVacancy"></label>
-                    <textarea class="form-control" asp-for="@Model.AboutVacancy" rows="5"></textarea>
-                    <span asp-validation-for="AboutVacancy" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="@Model.City"></label>
+                <input asp-for="@Model.City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.AboutFunction"></label>
-                    <textarea class="form-control" asp-for="@Model.AboutFunction" rows="5"></textarea>
-                    <span asp-validation-for="AboutFunction" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="@Model.AboutVacancy"></label>
+                <textarea class="form-control" asp-for="@Model.AboutVacancy" rows="5"></textarea>
+                <span asp-validation-for="AboutVacancy" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.JobRequirements"></label>
-                    <textarea class="form-control" asp-for="@Model.JobRequirements" rows="5" ></textarea>
-                    <span asp-validation-for="JobRequirements" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="@Model.AboutFunction"></label>
+                <textarea class="form-control" asp-for="@Model.AboutFunction" rows="5"></textarea>
+                <span asp-validation-for="AboutFunction" class="text-danger"></span>
+            </div>
 
-                <div class="form-group">
-                    <label asp-for="@Model.WeOffer"></label>
-                    <textarea class="form-control" asp-for="@Model.WeOffer" rows="5"></textarea>
-                    <span asp-validation-for="WeOffer" class="text-danger"></span>
-                </div>
+            <div class="form-group">
+                <label asp-for="@Model.JobRequirements"></label>
+                <textarea class="form-control" asp-for="@Model.JobRequirements" rows="5"></textarea>
+                <span asp-validation-for="JobRequirements" class="text-danger"></span>
+            </div>
 
-                <div class="text-center">
-                    <button class="btn btn-primary" type="submit">Opslaan</button>
-                </div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label asp-for="@Model.WeOffer"></label>
+                <textarea class="form-control" asp-for="@Model.WeOffer" rows="5"></textarea>
+                <span asp-validation-for="WeOffer" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Opslaan</button>
+            </div>
+        </form>
     </div>
 </div>

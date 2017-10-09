@@ -1,10 +1,12 @@
 ﻿using HomeMyDay.Database.Identity;
+using HomeMyDay.Extensions;
 using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using HomeMyDay.Repository;
-using HomeMyDay.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,10 +37,10 @@ namespace HomeMyDay.Controllers.Cms
         }
 
         [HttpPost]
-        public IActionResult Add(VacancyViewModel model)
+        public IActionResult Add(Vacancy model)
         {
             if (ModelState.IsValid) {
-                _vancancyRepository.SaveVacancy(model.JobTitle, model.Company, model.City, model.AboutVacancy, model.AboutFunction, model.JobRequirements, model.WeOffer);
+                _vancancyRepository.SaveVacancy(model);
                 return RedirectToAction(nameof(Index));
             }
             else {
@@ -47,30 +49,56 @@ namespace HomeMyDay.Controllers.Cms
         }
 
         [HttpPost]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            _vancancyRepository.DeleteVacancy(id);
-            return RedirectToAction(nameof(Index));
+            await _vancancyRepository.DeleteVacancy(id);
+
+            return RedirectToAction(
+                        actionName: nameof(Index),
+                        controllerName: nameof(VacancyController).TrimControllerName());
         }
 
         [HttpGet]
-        public ViewResult Edit(long id)
+        public IActionResult Edit(long id)
         {
-            return View(_vancancyRepository.GetVacancy(id));
+            Vacancy vacancy;
+
+            try
+            {
+                if (id <= 0)
+                {
+                    vacancy = new Vacancy();
+                }
+                else
+                {
+                    vacancy = _vancancyRepository.GetVacancy(id);
+                }
+            }
+            catch (KeyNotFoundException)
+            {
+                return new NotFoundResult();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return new BadRequestResult();
+            }
+
+            return View(vacancy);
         }
 
         [HttpPost]
-        public IActionResult Edit(Vacancy vacancy)
+        public async Task<IActionResult> Edit(Vacancy vacancy)
         {
             if(ModelState.IsValid)
             {
-                _vancancyRepository.UpdateVacancy(vacancy);
-                TempData["Message"] = $"{vacancy.JobTitle} has been saved";
-                return RedirectToAction(nameof(Index));
+                await _vancancyRepository.SaveVacancy(vacancy);
+                return RedirectToAction(
+                    actionName: nameof(Index),
+                    controllerName: nameof(VacancyController).TrimControllerName());
             }
             else
             {
-                return View();
+                return View(vacancy);
             }
         }
     }
