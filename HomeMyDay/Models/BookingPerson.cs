@@ -40,7 +40,6 @@ namespace HomeMyDay.Models
 		/// The person's insertion (tussenvoegsel).
 		/// </summary>
 		[DisplayName("Tussenvoegsel")]
-		[Required]
 		public string Insertion { get; set; }
 
 		/// <summary>
@@ -72,6 +71,13 @@ namespace HomeMyDay.Models
 		public Country Country { get; set; }
 
 		/// <summary>
+		/// The city that the person resides in.
+		/// </summary>
+		[DisplayName("Stad")]
+		[Required]
+		public string City { get; set; }
+
+		/// <summary>
 		/// The postal code that the person resides in.
 		/// </summary>
 		[DisplayName("Postcode")]
@@ -83,7 +89,7 @@ namespace HomeMyDay.Models
 		/// </summary>
 		[DisplayName("Huisnummer")]
 		[Required]
-		public int HouseNumber { get; set; }
+		public int? HouseNumber { get; set; }
 
 		/// <summary>
 		/// The house number suffix of the person.

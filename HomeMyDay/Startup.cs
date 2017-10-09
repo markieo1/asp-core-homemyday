@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using HomeMyDay.Database.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace HomeMyDay
 {
@@ -63,6 +65,12 @@ namespace HomeMyDay
 				options.User.RequireUniqueEmail = true;
 			});
 
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy(IdentityPolicies.Administrator, policy => policy.RequireRole(IdentityRoles.Administrator));
+				options.AddPolicy(IdentityPolicies.Booker, policy => policy.RequireRole(IdentityRoles.Booker));
+			});
+
 			services.ConfigureApplicationCookie(options =>
 			{
 				// Cookie settings
@@ -74,6 +82,9 @@ namespace HomeMyDay
 
 			//Mail Services setting
 			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
+
+			//Google API settings
+			services.Configure<GoogleApiServiceOptions>(Configuration.GetSection("GoogleMapsSettings"));
 
 			//Session settings
 			services.AddDistributedMemoryCache();
@@ -88,7 +99,17 @@ namespace HomeMyDay
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
 			services.AddTransient<ICountryRepository, EFCountryRepository>();
 			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();
-			services.AddTransient<IReviewRepository, EFReviewRepository>();
+            services.AddTransient<IVacancyRepository, EFVacancyRepository>();
+            services.AddTransient<IReviewRepository, EFReviewRepository>();
+            services.AddTransient<IFaqRepository, EFFaqRepository>();
+            services.AddTransient<IPageRepository, EFPageRepository>();
+
+			services.Configure<RazorViewEngineOptions>(options =>
+			{
+				options.AreaViewLocationFormats.Clear();
+				options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
+				options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+			});
 
 			services.AddMvc();
 		}
@@ -116,6 +137,10 @@ namespace HomeMyDay
 			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
+					name: "areaRoute",
+					template: "{area:exists}/{controller}/{action=Index}/{id?}");
+
+				routes.MapRoute(
 					name: "default",
 					template: "{controller=Home}/{action=Index}/{id?}");
 			});
@@ -125,6 +150,7 @@ namespace HomeMyDay
 
 			SeedHomeMyDayDbData.Seed(homeMyDayDbContext);
 			SeedReviewDbData.Seed(homeMyDayDbContext);
+			SeedIdentityDbData.Seed(appIdentityDbContext, app.ApplicationServices);
 		}
 	}
 }

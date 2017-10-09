@@ -2,4 +2,8 @@
 @using HomeMyDay.Models
 @using HomeMyDay.ViewModels
 @using HomeMyDay.Extensions
+@using HomeMyDay.Helpers
+@using HomeMyDay.Database.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

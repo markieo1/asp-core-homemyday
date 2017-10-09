@@ -1,18 +1,25 @@
-﻿@model IEnumerable<AccommodationDetailBlockViewModel>
+﻿@model AccommodationViewModel
 
-@if (Model != null && Model.Any(a => a.CanDisplay))
-{
-    <div class="detail-blocks">
-        <ul class="nav nav-tabs" role="tablist">
-            @for (int i = 0; i < Model.Count(); i++)
+
+<div class="detail-blocks">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">
+                <i class="fa fa-comments" aria-hidden="true"></i>
+                Reviews
+            </a>
+        </li>
+        @if (Model.DetailBlocks != null && Model.DetailBlocks.Any(d => d.CanDisplay))
+        {
+            @for (int i = 0; i < Model.DetailBlocks.Count(); i++)
             {
-                AccommodationDetailBlockViewModel blockModel = Model.ElementAt(i);
+                AccommodationDetailBlockViewModel blockModel = Model.DetailBlocks.ElementAt(i);
                 if (!blockModel.CanDisplay)
                 {
                     continue;
                 }
 
-                <li role="presentation" class="@((i == 0) ? "active" : "")">
+                <li role="presentation">
                     <a href="#@blockModel.Title.Dashed()" aria-controls="@blockModel.Title.Dashed()" role="tab" data-toggle="tab">
                         @if (!string.IsNullOrWhiteSpace(blockModel.Icon))
                         {
@@ -22,20 +29,27 @@
                     </a>
                 </li>
 }
-        </ul>
-        <div class="tab-content">
-            @for (int i = 0; i < Model.Count(); i++)
+        }
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="reviews">
+            @Html.Partial("../Partials/AddReview.cshtml", new ReviewViewModel(){AccommodationId = Model.Accommodation.Id})
+            @Html.Partial("../Partials/Reviews.cshtml", Model.Reviews)
+        </div>
+        @if (Model.DetailBlocks != null && Model.DetailBlocks.Any(d => d.CanDisplay))
+        {
+            @for (int i = 0; i < Model.DetailBlocks.Count(); i++)
             {
-                AccommodationDetailBlockViewModel blockModel = Model.ElementAt(i);
+                AccommodationDetailBlockViewModel blockModel = Model.DetailBlocks.ElementAt(i);
                 if (!blockModel.CanDisplay)
                 {
                     continue;
                 }
 
-                <div role="tabpanel" class="tab-pane fade @((i == 0) ? "in active" : "")" id="@blockModel.Title.Dashed()">
+                <div role="tabpanel" class="tab-pane fade" id="@blockModel.Title.Dashed()">
                     <p>@blockModel.Text</p>
                 </div>
-}
-        </div>
+            }
+        }
     </div>
-}
+</div>

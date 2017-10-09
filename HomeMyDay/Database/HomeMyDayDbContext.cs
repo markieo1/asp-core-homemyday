@@ -35,20 +35,40 @@ namespace HomeMyDay.Database
 		public DbSet<Country> Countries { get; set; }
 
 		/// <summary>
+		/// Get or set the page content
+		/// </summary>
+		public DbSet<Page> Page { get; set; }
+
+		/// <summary>
 		/// Gets or sets the newspaper objects.
 		/// </summary>
 		public DbSet<Newspaper> Newspapers { get; set; }
 
-		protected override void OnModelCreating(ModelBuilder builder)
+        /// <summary>
+		/// The Vacancies that have been saved.
+		/// </summary>
+        public DbSet<Vacancy> Vacancies { get; set; }
+
+        /// <summary>
+        /// The Reviews that have been saved.
+        /// </summary>
+        public DbSet<Review> Reviews { get; set; }
+
+        /// <summary>
+        /// The FAQ category items that have been saved.
+        /// </summary>
+        public DbSet<FaqCategory> FaqCategory { get; set; }
+
+        /// <summary>
+        /// The FAQ Questions that have been saved.
+        /// </summary>
+        public DbSet<FaqQuestion> FaqQuestions { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
 		{
 			builder.Entity<Newspaper>()
 				.HasAlternateKey(x => x.Email)
 				.HasName("Alt_Email");
-		}
-
-		/// <summary>
-		/// The Reviews that have been saved.
-		/// </summary>
-		public DbSet<Review> Reviews { get; set; }
-	}
+		}         
+    }
 }

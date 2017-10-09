@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Vacancy>
+
+<div class="container">
+    <h1 class="page-header">Onze Vacatures</h1>
+    <div class="col-md-12">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 vacancy-overview">
+            @foreach (var p in Model)
+            {
+                <div class="panel panel-body vacancy-shadow">
+                    <div class="panel-body">
+                        <h3><a asp-area="" asp-controller="Vacancie" asp-action="Detail" asp-route-id="@p.Id">@p.JobTitle</a></h3>
+                        <h4>@p.Company</h4>
+                        <h4 class="gray">@p.City</h4>
+                    </div>
+                </div>}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
