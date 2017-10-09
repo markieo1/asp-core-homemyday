@@ -37,12 +37,29 @@ namespace HomeMyDay.Repository.Implementation
 
 		public Page GetPage(long id)
 		{
-			return _context.Page.Where(r => r.Id == id).LastOrDefault();
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			Page page = _context.Page.LastOrDefault(r=>r.Id == id);
+
+			if (page == null)
+			{
+				throw new KeyNotFoundException($"Page with ID: {id} is not found");
+			}
+
+			return page;
 		}
 
 		public void EditPage(long id, Page page)
 		{
 			var db = _context.Page.Any(r=>r.Id == id);
+
+			if (page == null)
+			{
+				throw new ArgumentNullException(nameof(page));
+			}
 
 			if (db)
 			{
@@ -50,9 +67,8 @@ namespace HomeMyDay.Repository.Implementation
 
 				db_page.Title = page.Title;
 				db_page.Content = page.Content;
-
-				_context.SaveChanges();
 			}
+				_context.SaveChanges();
 		}
 	}
 }

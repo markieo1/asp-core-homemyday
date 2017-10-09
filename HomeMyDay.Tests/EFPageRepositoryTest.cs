@@ -6,6 +6,7 @@ using HomeMyDay.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace HomeMyDay.Tests
@@ -54,5 +55,62 @@ namespace HomeMyDay.Tests
 			Assert.Equal("NewContent", repository.GetPage(1).Content);
 		}
 
+		[Fact]
+		public void TestGetIdBelowZeroPage()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+			IPageRepository repository = new EFPageRepository(context);
+
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetPage(0));
+		}
+
+		[Fact]
+		public void TestGetIdNotExistingPage()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Page.Add(new Page()
+			{
+				Page_Name = "Test0",
+				Content = "Test1",
+				Title = "Test2",
+				Id = 1
+			});
+
+			context.SaveChanges();
+
+			IPageRepository repository = new EFPageRepository(context);
+
+			Assert.Throws<KeyNotFoundException>(() => repository.GetPage(2));
+		}
+
+		[Fact]
+		public void TestGetIdExistingPage()
+		{
+			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
+			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+
+			context.Page.Add(new Page()
+			{
+				Page_Name = "Test0",
+				Content = "Test1",
+				Title = "Test2",
+				Id = 1
+			});
+
+			context.SaveChanges();
+
+			IPageRepository repository = new EFPageRepository(context);
+
+			Page page = repository.GetPage(1);
+
+			Assert.NotNull(page);
+			Assert.Equal("Test2", page.Title);
+		}
 	}
 }

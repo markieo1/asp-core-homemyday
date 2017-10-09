@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Helpers;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HomeMyDay.Repository.Implementation
 {
@@ -18,27 +19,70 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public IEnumerable<FaqCategory> GetCategoriesAndQuestions()
+		public FaqCategory GetCategory(long id)
 		{
-			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
-		}
-
-		public FaqCategory GetCategory(long categoryId)
-		{
-			if (categoryId <= 0)
+			if (id <= 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(categoryId));
+				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
 			FaqCategory category = _context.FaqCategory
-				.FirstOrDefault(a => a.Id == categoryId);
+				.FirstOrDefault(a => a.Id == id);
 
 			if (category == null)
 			{
-				throw new KeyNotFoundException($"Category with ID: {categoryId} is not found");
+				throw new KeyNotFoundException($"Category with ID: {id} is not found");
 			}
 
 			return category;
+		}
+
+		public async Task DeleteCategory(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			FaqCategory category = await _context.FaqCategory
+				.SingleOrDefaultAsync(a => a.Id == id);
+
+			if (category == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Category with ID: {id} not found!");
+			}
+
+			_context.FaqCategory.Remove(category);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task SaveCategory(FaqCategory category)
+		{
+			if (category == null)
+			{
+				throw new ArgumentNullException(nameof(category));
+			}
+
+			if (category.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				await _context.FaqCategory.AddAsync(category);
+			}
+			else
+			{
+				// Get the tracked accommodation using the ID
+				EntityEntry<FaqCategory> entityEntry = _context.Entry(category);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
+		}
+
+		public IEnumerable<FaqCategory> GetCategoriesAndQuestions()
+		{
+			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
 		}
 
 		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)
