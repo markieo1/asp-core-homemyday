@@ -111,7 +111,6 @@ namespace HomeMyDay.Tests
 			BookingFormViewModel model = result.Model as BookingFormViewModel;
 
 			Assert.Equal("BookingForm", result.ViewName);
-			Assert.Equal(4, model.Accommodation.MaxPersons);
 			Assert.Equal(4, model.Persons.Count);
 		}
 
@@ -123,12 +122,8 @@ namespace HomeMyDay.Tests
 			//Fake post data with missing attributes
 			var formModel = new BookingFormViewModel()
 			{
-				Accommodation = new Accommodation()
-				{
-					Id = 1,
-					MaxPersons = 4,
-					Name = "Test Accommodation"
-				},
+				AccommodationId = 1,
+				AccommodationName = "Test Accommodation",
 				Persons = new List<BookingPerson>()
 				{
 					new BookingPerson()
@@ -161,12 +156,8 @@ namespace HomeMyDay.Tests
 			//Fake post data with a non-existent accommodation
 			var formModel = new BookingFormViewModel()
 			{
-				Accommodation = new Accommodation()
-				{
-					Id = 333,
-					MaxPersons = 4,
-					Name = "Test Accommodation"
-				},
+				AccommodationId = 333,
+				AccommodationName = "Test Accommodation",
 				Persons = new List<BookingPerson>()
 				{
 					new BookingPerson()
@@ -195,12 +186,8 @@ namespace HomeMyDay.Tests
 
 			var formModel = new BookingFormViewModel()
 			{
-				Accommodation = new Accommodation()
-				{
-					Id = 1,
-					MaxPersons = 4,
-					Name = "Test Accommodation"
-				},
+				AccommodationId = 1,
+				AccommodationName = "Test Accommodation",
 				Persons = new List<BookingPerson>()
 				{
 					new BookingPerson()
