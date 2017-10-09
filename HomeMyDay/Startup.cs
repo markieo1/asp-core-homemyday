@@ -99,9 +99,10 @@ namespace HomeMyDay
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
 			services.AddTransient<ICountryRepository, EFCountryRepository>();
 			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();
-			services.AddTransient<IVacancyRepository, EFVacancyRepository>();
-			services.AddTransient<IReviewRepository, EFReviewRepository>();
-			services.AddTransient<IFaqRepository, EFFaqRepository>();
+            services.AddTransient<IVacancyRepository, EFVacancyRepository>();
+            services.AddTransient<IReviewRepository, EFReviewRepository>();
+            services.AddTransient<IFaqRepository, EFFaqRepository>();
+            services.AddTransient<IPageRepository, EFPageRepository>();
 
 			services.Configure<RazorViewEngineOptions>(options =>
 			{

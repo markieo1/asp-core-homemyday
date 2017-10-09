@@ -1,0 +1,137 @@
+﻿@model FaqQuestionsViewModel
+
+<div class="container">
+    <div class="row m-b-20">
+        <div class="col-md-12">
+            <h2>Vragen voor: "@Model.Category.CategoryName"</h2>
+            <div class="dropdown pull-right">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                    @Model.Questions.PageSize
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Questions"
+                           asp-route-id="@Model.Category.Id"
+                           asp-route-page="@(Model.Questions.PageIndex)"
+                           asp-route-pageSize="5"
+                           asp-controller="Faq">5</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Questions"
+                           asp-route-id="@Model.Category.Id"
+                           asp-route-page="@(Model.Questions.PageIndex)"
+                           asp-route-pageSize="10"
+                           asp-controller="Faq">10</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Questions"
+                           asp-route-id="@Model.Category.Id"
+                           asp-route-page="@(Model.Questions.PageIndex)"
+                           asp-route-pageSize="25"
+                           asp-controller="Faq">25</a>
+                    </li>
+                    <li>
+                        <a asp-area="CMS"
+                           asp-action="Questions"
+                           asp-route-id="@Model.Category.Id"
+                           asp-route-page="@(Model.Questions.PageIndex)"
+                           asp-route-pageSize="50"
+                           asp-controller="Faq">50</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Vraag
+                            </th>
+                            <th>
+                                Antwoord
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (FaqQuestion question in Model.Questions)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(x => question.Question)
+                                </td>
+                                <td>
+                                    @question.Answer.Truncate(250)
+                                </td>
+                            </tr>}
+                    </tbody>
+                </table>
+            </div>
+
+            @{  var prevDisabled = !Model.Questions.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.Questions.HasNextPage ? "disabled" : "";
+            }
+
+            <nav aria-label="Search results pages">
+                <ul class="pagination">
+                    <li class="@prevDisabled">
+                        @if (Model.Questions.HasPreviousPage)
+                        {
+                            <a asp-area="CMS"
+                               asp-action="Questions"
+                               asp-route-id="@Model.Category.Id"
+                               asp-route-page="@(Model.Questions.PageIndex - 1)"
+                               asp-route-pageSize="@Model.Questions.PageSize"
+                               asp-controller="Faq"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>}
+                        else
+                        {
+                            <span aria-hidden="true" aria-label="Previous">&laquo;</span>}
+                    </li>
+
+                    @for (int i = Model.Questions.StartPage; i <= Model.Questions.EndPage; i++)
+                    {
+                        <li class="@(Model.Questions.PageIndex == i ? "active": "")">
+                            <a asp-area="CMS"
+                               asp-action="Questions"
+                               asp-route-id="@Model.Category.Id"
+                               asp-route-page="@i"
+                               asp-route-pageSize="@Model.Questions.PageSize"
+                               asp-controller="Faq">
+                                @i
+                                @if (Model.Questions.PageIndex == i)
+                                {<span class="sr-only">(current)</span>}
+                            </a>
+                        </li>}
+
+
+                    <li class="@nextDisabled">
+                        @if (Model.Questions.HasNextPage)
+                        {
+                            <a asp-area="CMS"
+                               asp-action="Questions"
+                               asp-route-id="@Model.Category.Id"
+                               asp-route-page="@(Model.Questions.PageIndex + 1)"
+                               asp-route-pageSize="@Model.Questions.PageSize"
+                               asp-controller="Faq"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>                        }
+                        else
+                        {
+                            <span aria-hidden="true" aria-label="Next">&raquo;</span>}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

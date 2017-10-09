@@ -2,6 +2,7 @@
 using HomeMyDay.Helpers;
 using HomeMyDay.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,29 @@ namespace HomeMyDay.Repository.Implementation
 		}
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
+
+		public async Task Delete(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			Accommodation accommodation = await _context.Accommodations
+				.Include(x => x.MediaObjects)
+				.Include(x => x.Reviews)
+				.Include(x => x.NotAvailableDates)
+				.SingleOrDefaultAsync(a => a.Id == id);
+
+			if (accommodation == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Accommodation with ID: {id} not found!");
+			}
+
+			_context.Accommodations.Remove(accommodation);
+
+			await _context.SaveChangesAsync();
+		}
 
 		public Accommodation GetAccommodation(long id)
 		{
@@ -61,6 +85,29 @@ namespace HomeMyDay.Repository.Implementation
 			IQueryable<Accommodation> accommodations = _context.Accommodations.OrderBy(x => x.Id).AsNoTracking();
 
 			return PaginatedList<Accommodation>.CreateAsync(accommodations, page, pageSize);
+		}
+
+		public async Task Save(Accommodation accommodation)
+		{
+			if (accommodation == null)
+			{
+				throw new ArgumentNullException(nameof(accommodation));
+			}
+
+			if (accommodation.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				await _context.Accommodations.AddAsync(accommodation);
+			}
+			else
+			{
+				// Get the tracked accommodation using the ID
+				EntityEntry<Accommodation> entityEntry = _context.Entry(accommodation);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
 		}
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)

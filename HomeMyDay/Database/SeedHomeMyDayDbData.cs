@@ -23,6 +23,19 @@ namespace HomeMyDay.Database
 			{
 				SeedCountries(context);
 			}
+
+			//Seed surprise modal
+			if (!context.Page.Any())
+			{
+				SeedSurprise(context);
+			}
+		}
+
+		private static void SeedSurprise(HomeMyDayDbContext context)
+		{
+			var generator = new LipsumGenerator();
+			context.Page.Add(new Page() {Page_Name = "TheSurprise", Title = "Surprise", Content = generator.GenerateParagraphs(1)[0] });
+			context.SaveChanges();
 		}
 
 		private static void SeedAccommodations(HomeMyDayDbContext context)
@@ -38,6 +51,8 @@ namespace HomeMyDay.Database
 				Continent = "Europe",
 				Country = "Spain",
 				Location = "Barcelona",
+				Latitude = 51.5891178m,
+				Longitude = 4.7730457m,
 				Beds = 2,
 				MaxPersons = 2,
 				Rooms = 4,
@@ -75,6 +90,8 @@ namespace HomeMyDay.Database
 				Continent = "Europe",
 				Country = "Greece",
 				Location = "Athens",
+				Latitude = 51.5891178m,
+				Longitude = 4.7730457m,
 				Beds = 1,
 				MaxPersons = 2,
 				Rooms = 3,
@@ -112,6 +129,8 @@ namespace HomeMyDay.Database
 				Continent = "Europe",
 				Country = "Germany",
 				Location = "Frankfurt",
+				Latitude = 51.5891178m,
+				Longitude = 4.7730457m,
 				Beds = 4,
 				MaxPersons = 6,
 				Rooms = 7,
