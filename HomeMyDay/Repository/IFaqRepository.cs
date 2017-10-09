@@ -14,12 +14,6 @@ namespace HomeMyDay.Repository
 		IEnumerable<FaqCategory> GetCategoriesAndQuestions();
 
 		/// <summary>
-		/// Get All Categories
-		/// </summary>
-		/// <returns>all categories</returns>
-		IEnumerable<FaqCategory> Categories { get; }
-
-		/// <summary>
 		/// Gets one category.
 		/// </summary>
 		/// <param name="id">The identifier.</param>

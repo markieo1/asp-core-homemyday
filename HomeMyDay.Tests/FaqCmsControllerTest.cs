@@ -63,7 +63,7 @@ namespace HomeMyDay.Tests
 			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
 
 			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
-			mock.Setup(m => m.Categories).Returns(new FaqCategory[] {
+			mock.Setup(m => m.GetCategoriesAndQuestions()).Returns(new FaqCategory[] {
 			new FaqCategory {Id = 1, CategoryName = "Test2"},cat, new FaqCategory {Id = 3, CategoryName = "Test33"},
 			});
 

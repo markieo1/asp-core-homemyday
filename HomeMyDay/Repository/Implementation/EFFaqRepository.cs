@@ -19,8 +19,6 @@ namespace HomeMyDay.Repository.Implementation
 			_context = context;
 		}
 
-		public IEnumerable<FaqCategory> Categories => _context.FaqCategory;
-
 		public FaqCategory GetCategory(long id)
 		{
 			if (id <= 0)
