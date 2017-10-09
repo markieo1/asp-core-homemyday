@@ -30,5 +30,17 @@ namespace HomeMyDay.Repository
         /// <param name="pageSize">Size of the page.</param>
         /// <returns></returns>
         Task<PaginatedList<Vacancy>> List(int page = 1, int pageSize = 10);
+
+        /// <summary>
+        /// Delete one vacancie.
+        /// </summary>
+        /// <param name="vacancyId">The identifier.</param>
+        Task DeleteVacancy(long vacancyId);
+
+        /// <summary>
+        /// Delete one vacancie.
+        /// </summary>
+        /// <param name="vacancy">The Vacancy Object.</param>
+        Task SaveVacancy(Vacancy vacancy);
     }
 }

@@ -6,10 +6,11 @@ using System.Linq;
 using HomeMyDay.Helpers;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HomeMyDay.Repository.Implementation
 {
-	public class EFVacancyRepository : IVacancyRepository
+    public class EFVacancyRepository : IVacancyRepository
     {
         private readonly HomeMyDayDbContext _context;
 
@@ -52,6 +53,48 @@ namespace HomeMyDay.Repository.Implementation
             IQueryable<Vacancy> vacancies = _context.Vacancies.OrderBy(x => x.Id).AsNoTracking();
 
             return PaginatedList<Vacancy>.CreateAsync(vacancies, page, pageSize);
+        }
+
+        public async Task DeleteVacancy(long vacancyId)
+        {
+            if (vacancyId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(vacancyId));
+            }
+
+            Vacancy vacancy = await _context.Vacancies.SingleOrDefaultAsync(a => a.Id == vacancyId);
+
+            if (vacancy == null)
+            {
+                throw new ArgumentNullException(nameof(vacancyId), $"Accommodation with ID: {vacancyId} not found!");
+            }
+
+            _context.Vacancies.Remove(vacancy);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveVacancy(Vacancy vacancy)
+        {
+            if (vacancy == null)
+            {
+                throw new ArgumentNullException(nameof(vacancy));
+            }
+
+            if (vacancy.Id <= 0)
+            {
+                // We are creating a new one
+                // Only need to adjust the id to be 0 and save it in the db.
+                await _context.Vacancies.AddAsync(vacancy);
+            }
+            else
+            {
+                // Get the tracked accommodation using the ID
+                EntityEntry<Vacancy> entityEntry = _context.Entry(vacancy);
+                entityEntry.State = EntityState.Modified;
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }
