@@ -14,28 +14,28 @@
 						   asp-action="Index"
 						   asp-route-page="@(Model.PageIndex)"
 						   asp-route-pageSize="5"
-						   asp-controller="FaqCategory">5</a>
+						   asp-controller="Faq">5</a>
 					</li>
 					<li>
 						<a asp-area="CMS"
 						   asp-action="Index"
 						   asp-route-page="@(Model.PageIndex)"
 						   asp-route-pageSize="10"
-						   asp-controller="FaqCategory">10</a>
+						   asp-controller="Faq">10</a>
 					</li>
 					<li>
 						<a asp-area="CMS"
 						   asp-action="Index"
 						   asp-route-page="@(Model.PageIndex)"
 						   asp-route-pageSize="25"
-						   asp-controller="FaqCategory">25</a>
+						   asp-controller="Faq">25</a>
 					</li>
 					<li>
 						<a asp-area="CMS"
 						   asp-action="Index"
 						   asp-route-page="@(Model.PageIndex)"
 						   asp-route-pageSize="50"
-						   asp-controller="FaqCategory">50</a>
+						   asp-controller="Faq">50</a>
 					</li>
 				</ul>
 			</div>
@@ -108,7 +108,7 @@
 							   asp-action="Index"
 							   asp-route-page="@(Model.PageIndex - 1)"
 							   asp-route-pageSize="@Model.PageSize"
-							   asp-controller="FaqCategory"
+							   asp-controller="Faq"
 							   aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
 							</a>}
@@ -124,7 +124,7 @@
 							   asp-action="Index"
 							   asp-route-page="@i"
 							   asp-route-pageSize="@Model.PageSize"
-							   asp-controller="FaqCategory">
+							   asp-controller="Faq">
 								@i
 								@if (Model.PageIndex == i)
 								{<span class="sr-only">(current)</span>}
@@ -139,7 +139,7 @@
 							   asp-action="Index"
 							   asp-route-page="@(Model.PageIndex + 1)"
 							   asp-route-pageSize="@Model.PageSize"
-							   asp-controller="FaqCategory"
+							   asp-controller="Faq"
 							   aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
 							</a>                        }
