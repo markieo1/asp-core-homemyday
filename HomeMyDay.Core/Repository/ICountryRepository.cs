@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Home.Repository
+namespace HomeMyDay.Core.Repository
 {
     public interface ICountryRepository
     {

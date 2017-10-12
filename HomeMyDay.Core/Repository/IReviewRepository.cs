@@ -1,9 +1,8 @@
-﻿using HomeMyDay.Web.Home.Helpers;
-using HomeMyDay.Core.Models;
+﻿using HomeMyDay.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Home.Repository
+namespace HomeMyDay.Core.Repository
 {
 	public interface IReviewRepository
 	{

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Core", "HomeMyDay
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Web.Identity", "HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj", "{2BD40B1D-2F49-4E0C-AB10-788502E10A4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Infrastructure", "HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj", "{C7E4E231-5C81-41DC-9D00-DDB7790959FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2BD40B1D-2F49-4E0C-AB10-788502E10A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BD40B1D-2F49-4E0C-AB10-788502E10A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BD40B1D-2F49-4E0C-AB10-788502E10A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

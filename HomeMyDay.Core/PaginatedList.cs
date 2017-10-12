@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Home.Helpers
+namespace HomeMyDay.Core
 {
 	/// <summary>
 	/// List with support for pagination.
@@ -121,7 +120,7 @@ namespace HomeMyDay.Web.Home.Helpers
 		/// <returns></returns>
 		public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex = 1, int pageSize = 10)
 		{
-			int count = await source.CountAsync();
+			int count = source.Count();
 			int skipAmount = 0;
 
 			do
@@ -152,9 +151,9 @@ namespace HomeMyDay.Web.Home.Helpers
 				pageIndex = 1;
 			}
 
-			List<T> items = await source
+			List<T> items = source
 				.Skip(skipAmount)
-				.Take(pageSize).ToListAsync();
+				.Take(pageSize).ToList();
 
 			return new PaginatedList<T>(items, count, pageIndex, pageSize);
 		}

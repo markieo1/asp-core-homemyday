@@ -1,7 +1,7 @@
 ﻿using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeMyDay.Web.Home.Database
+namespace HomeMyDay.Infrastructure.Database
 {
 	public class HomeMyDayDbContext : DbContext
 	{
