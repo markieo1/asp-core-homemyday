@@ -20,9 +20,6 @@ namespace HomeMyDay.Web.Site.Home.Extensions
 				typeof(RazorViewEngineOptionsExtensions).GetTypeInfo().Assembly
 			));
 
-			options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
-			options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
-
 			return options;
 		}
 	}
