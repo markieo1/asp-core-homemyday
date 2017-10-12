@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Services
+namespace HomeMyDay.Core.Services
 {
 	/// <summary>
 	/// Email Smtp Setting
