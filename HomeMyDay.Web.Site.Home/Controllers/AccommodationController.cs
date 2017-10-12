@@ -13,13 +13,13 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 	{
 		private readonly IAccommodationRepository _accommodationRepository;
 		private readonly IReviewRepository _reviewRepository;
-		private readonly GoogleApiServiceOptions _googleOptions;
+		/*private readonly GoogleApiServiceOptions _googleOptions;*/
 
-		public AccommodationController(IAccommodationRepository repository, IReviewRepository repo, IOptions<GoogleApiServiceOptions> googleOpts)
+		public AccommodationController(IAccommodationRepository repository, IReviewRepository repo/*, IOptions<GoogleApiServiceOptions> googleOpts*/)
 		{
 			_accommodationRepository = repository;
 			_reviewRepository = repo;
-			_googleOptions = googleOpts.Value;
+			//_googleOptions = googleOpts.Value;
 		}
 
 		[HttpGet]
@@ -45,7 +45,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 
 			AccommodationViewModel viewModel = AccommodationViewModel.FromAccommodation(accommodation, reviews.Where(x => x.Approved).ToList());
 
-			ViewBag.GoogleClientApiKey = _googleOptions.ClientApiKey;
+			//ViewBag.GoogleClientApiKey = _googleOptions.ClientApiKey;
 
 			return View(viewModel);
 		}

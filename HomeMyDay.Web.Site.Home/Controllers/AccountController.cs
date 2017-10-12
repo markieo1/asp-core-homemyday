@@ -12,7 +12,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 	[Authorize]
 	public class AccountController : Controller
 	{
-		private SignInManager<User> _signInManager;
+		/*private SignInManager<User> _signInManager;
 		private UserManager<User> _userManager;
 		private IEmailServices _emailServices;
 
@@ -181,6 +181,6 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			}
 			var result = await _userManager.ConfirmEmailAsync(user, code);
 			return View(result.Succeeded ? "EmailConfirmed" : "Error");
-		}
+		}*/
 	}
 }
