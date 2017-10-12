@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Moq;
-using HomeMyDay.Web.Home.Controllers;
-using HomeMyDay.Web.Home.Repository;
 using HomeMyDay.Core.Models;
+using HomeMyDay.Core.Repository;
+using HomeMyDay.Core.Services;
+using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Site.Home.Controllers;
 using Microsoft.Extensions.Options;
-using HomeMyDay.Web.Home.Services;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
-using HomeMyDay.Web.Home.Extensions;
 
 namespace HomeMyDay.Tests
 {

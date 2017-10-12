@@ -1,14 +1,14 @@
 ﻿using System;
-using HomeMyDay.Controllers;
-using HomeMyDay.Database;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
-using Microsoft.EntityFrameworkCore;
+using HomeMyDay.Core.Repository;
 using Xunit;
+using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Site.Home.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Tests
 {
-    public class VacancyControllerTest
+	public class VacancyControllerTest
     {
         [Fact]
         public void TestEmptyVacancies()

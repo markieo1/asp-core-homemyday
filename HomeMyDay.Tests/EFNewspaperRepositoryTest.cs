@@ -1,9 +1,9 @@
 ﻿using System;
-using HomeMyDay.Database;
-using HomeMyDay.Models;
-using HomeMyDay.Repository.Implementation;
-using Microsoft.EntityFrameworkCore;
+using HomeMyDay.Core.Models;
 using Xunit;
+using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Tests
 {

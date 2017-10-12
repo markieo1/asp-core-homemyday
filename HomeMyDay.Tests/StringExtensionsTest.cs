@@ -1,7 +1,4 @@
-﻿using HomeMyDay.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HomeMyDay.Core.Extensions;
 using Xunit;
 
 namespace HomeMyDay.Tests

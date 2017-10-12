@@ -1,12 +1,12 @@
 ﻿using System;
-using HomeMyDay.Controllers;
-using HomeMyDay.Database;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
-using HomeMyDay.ViewModels;
+using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
+using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Core.Repository;
+using HomeMyDay.Web.Site.Home.Controllers;
+using HomeMyDay.Web.Base.Home.ViewModels;
 
 namespace HomeMyDay.Tests
 {

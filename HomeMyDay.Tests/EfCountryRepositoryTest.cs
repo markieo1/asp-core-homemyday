@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;	   
 using System.Linq;
-using Xunit;
-using Moq;
-using HomeMyDay.Database;
-using Microsoft.EntityFrameworkCore;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Core.Repository;
+using Xunit;			 
+using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;	 
 
 namespace HomeMyDay.Tests
 {

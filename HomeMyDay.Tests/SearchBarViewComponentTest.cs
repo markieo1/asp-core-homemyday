@@ -1,15 +1,13 @@
-﻿using HomeMyDay.Components;
-using HomeMyDay.Database;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
-using HomeMyDay.ViewModels;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
+﻿using System;
+using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
+using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Core.Repository;
+using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Components;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace HomeMyDay.Tests
 {

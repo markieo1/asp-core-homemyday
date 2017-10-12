@@ -1,22 +1,14 @@
-﻿using HomeMyDay.Components;
-using HomeMyDay.Database;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
-using HomeMyDay.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using HomeMyDay.Core.Models;
 using Xunit;
+using HomeMyDay.Core.Repository;
+using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Components;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
+using Moq;
 
 namespace HomeMyDay.Tests
 {
-    public class SurpriseViewComponentTest
+	public class SurpriseViewComponentTest
     {
 
 		[Fact]
