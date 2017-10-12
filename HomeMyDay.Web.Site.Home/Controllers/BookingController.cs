@@ -7,6 +7,7 @@ using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Models;
 using Microsoft.Extensions.Options;
 using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Site.Base.Extensions;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {

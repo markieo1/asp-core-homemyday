@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace HomeMyDay.Web.Extensions
+namespace HomeMyDay.Web.Site.Base.Extensions
 {
 	public static class SessionExtensions
 	{

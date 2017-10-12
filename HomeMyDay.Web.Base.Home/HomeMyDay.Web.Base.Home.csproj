@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Base\HomeMyDay.Web.Base.csproj" />
   </ItemGroup>
 
 </Project>

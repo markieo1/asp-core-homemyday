@@ -5,96 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Views\Accommodation\Detail.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\ConfirmEmail.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\ConfirmPassword.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\EmailConfirmed.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\ForgotPassword.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\Login.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\Logout.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\Register.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\ResetPassword.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Account\ResetPasswordConfirm.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Booking\BookingForm.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Booking\Confirmation.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Booking\InsuranceForm.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Contact\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Faq\FaqCategory.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Faq\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Newspaper\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Newspaper\Result.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Press\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Review\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Search\NoResults.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Search\Results.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Vacancy\Detail.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Vacancy\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Vacancy\NoVacancies.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Warranty\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <EmbeddedResource Include="Views\**" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="2.0.0" />
   </ItemGroup>
 
