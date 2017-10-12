@@ -28,15 +28,14 @@ namespace HomeMyDay.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddInfrastructureServices(Configuration);
 
-			services.AddIdentity<User, IdentityRole>(config =>
+			IdentityBuilder identityBuilder = services.AddIdentity<User, IdentityRole>(config =>
 			{
 				//Require confirmed email to login
 				config.SignIn.RequireConfirmedEmail = true;
-			})
-				.AddEntityFrameworkStores<AppIdentityDbContext>()
-				.AddDefaultTokenProviders();
+			}).AddDefaultTokenProviders();
+
+			services.AddInfrastructureServices(Configuration, identityBuilder);
 
 			services.Configure<IdentityOptions>(options =>
 			{
@@ -49,12 +48,6 @@ namespace HomeMyDay.Web
 
 				// User settings
 				options.User.RequireUniqueEmail = true;
-			});
-
-			services.AddAuthorization(options =>
-			{
-				options.AddPolicy(IdentityPolicies.Administrator, policy => policy.RequireRole(IdentityRoles.Administrator));
-				options.AddPolicy(IdentityPolicies.Booker, policy => policy.RequireRole(IdentityRoles.Booker));
 			});
 
 			services.ConfigureApplicationCookie(options =>

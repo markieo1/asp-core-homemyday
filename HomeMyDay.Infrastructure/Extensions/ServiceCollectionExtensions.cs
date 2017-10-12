@@ -1,8 +1,10 @@
 ﻿using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Services;
 using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Infrastructure.Repository;
 using HomeMyDay.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +21,7 @@ namespace HomeMyDay.Infrastructure.Extensions
 		/// </summary>
 		/// <param name="services">The services.</param>
 		/// <returns></returns>
-		public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+		public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration, IdentityBuilder identityBuilder)
 		{
 			//Add entity framework.
 			services.AddDbContext<HomeMyDayDbContext>(options =>
@@ -33,6 +35,14 @@ namespace HomeMyDay.Infrastructure.Extensions
 			{
 				//This connection string can be changed in appsettings.json.
 				options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"));
+			});
+
+			identityBuilder.AddEntityFrameworkStores<AppIdentityDbContext>();
+			
+			services.AddAuthorization(options =>
+			{
+				options.AddPolicy(IdentityPolicies.Administrator, policy => policy.RequireRole(IdentityRoles.Administrator));
+				options.AddPolicy(IdentityPolicies.Booker, policy => policy.RequireRole(IdentityRoles.Booker));
 			});
 
 			//Mail Services setting
