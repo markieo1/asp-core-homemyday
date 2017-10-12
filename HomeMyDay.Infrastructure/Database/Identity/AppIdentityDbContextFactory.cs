@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace HomeMyDay.Web.Home.Database.Identity
+namespace HomeMyDay.Infrastructure.Database
 {
 	public class AppIdentityDbContextFactory : IDesignTimeDbContextFactory<AppIdentityDbContext>
 	{
