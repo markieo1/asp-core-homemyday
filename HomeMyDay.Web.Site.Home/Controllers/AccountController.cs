@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using HomeMyDay.Core.Models;
-
+using HomeMyDay.Core.Extensions;
+using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Identity;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
-	/*[Authorize]
+	[Authorize]
 	public class AccountController : Controller
 	{
 		private SignInManager<User> _signInManager;
@@ -180,5 +182,5 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			var result = await _userManager.ConfirmEmailAsync(user, code);
 			return View(result.Succeeded ? "EmailConfirmed" : "Error");
 		}
-	}*/
+	}
 }
