@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Extensions;
 using HomeMyDay.Web.Base.Home.ViewModels;
-using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Core.Services;
+using HomeMyDay.Infrastructure.Identity;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
