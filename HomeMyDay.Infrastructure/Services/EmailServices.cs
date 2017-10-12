@@ -6,8 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeMyDay.Core.Services;
 
-namespace HomeMyDay.Web.Services.Implementation
+namespace HomeMyDay.Infrastructure.Services
 {
     public class EmailServices : IEmailServices
     {
