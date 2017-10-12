@@ -36,10 +36,10 @@ namespace HomeMyDay.Infrastructure.Extensions
 			});
 
 			//Mail Services setting
-			services.Configure<MailServiceOptions>(options => configuration.GetSection("SmtpSettings"));
+			services.Configure<MailServiceOptions>(configuration.GetSection("SmtpSettings"));
 
 			//Google API settings
-			services.Configure<GoogleApiServiceOptions>(options => configuration.GetSection("GoogleMapsSettings"));
+			services.Configure<GoogleApiServiceOptions>(configuration.GetSection("GoogleMapsSettings"));
 
 			services.AddTransient<IEmailServices, EmailServices>();
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
