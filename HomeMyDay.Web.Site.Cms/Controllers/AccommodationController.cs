@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Identity;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {

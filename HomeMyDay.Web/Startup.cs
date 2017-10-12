@@ -1,5 +1,4 @@
-﻿using HomeMyDay.Web.Identity;
-using System.Globalization;
+﻿using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +11,7 @@ using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Web.Site.Home.Extensions;
 using HomeMyDay.Core.Services;
 using HomeMyDay.Infrastructure.Extensions;
+using HomeMyDay.Infrastructure.Identity;
 
 namespace HomeMyDay.Web
 {

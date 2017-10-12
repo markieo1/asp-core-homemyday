@@ -1,7 +1,7 @@
 ﻿using HomeMyDay.Core.Models;
+using HomeMyDay.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using HomeMyDay.Web.Identity;
 
 namespace HomeMyDay.Infrastructure.Database
 {
