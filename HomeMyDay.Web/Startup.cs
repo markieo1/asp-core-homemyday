@@ -1,10 +1,4 @@
-﻿using HomeMyDay.Web.Database;
-using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
-using HomeMyDay.Core.Repository.Implementation;
-using HomeMyDay.Web.Services;
-using HomeMyDay.Web.Services.Implementation;
-using HomeMyDay.Web.Identity;
+﻿using HomeMyDay.Web.Identity;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using HomeMyDay.Web.Database.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using HomeMyDay.Infrastructure.Database;
-using HomeMyDay.Web.Home.Database.Identity;
 using HomeMyDay.Web.Site.Home.Extensions;
+using HomeMyDay.Core.Services;
+using HomeMyDay.Infrastructure.Extensions;
 
 namespace HomeMyDay.Web
 {
@@ -33,20 +27,7 @@ namespace HomeMyDay.Web
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//Add entity framework.
-			services.AddDbContext<HomeMyDayDbContext>(options =>
-			{
-
-				//This connection string can be changed in appsettings.json.
-				options.UseSqlServer(Configuration.GetConnectionString("HomeMyDayConnection"));
-
-			});
-
-			services.AddDbContext<AppIdentityDbContext>(options =>
-			{
-				//This connection string can be changed in appsettings.json.
-				options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
-			});
+			services.AddInfrastructureServices(Configuration);
 
 			services.AddIdentity<User, IdentityRole>(config =>
 			{
@@ -84,12 +65,6 @@ namespace HomeMyDay.Web
 				options.SlidingExpiration = true;
 			});
 
-			//Mail Services setting
-			services.Configure<MailServiceOptions>(Configuration.GetSection("SmtpSettings"));
-
-			//Google API settings
-			services.Configure<GoogleApiServiceOptions>(Configuration.GetSection("GoogleMapsSettings"));
-
 			//Session settings
 			services.AddDistributedMemoryCache();
 
@@ -98,15 +73,6 @@ namespace HomeMyDay.Web
 				options.IdleTimeout = TimeSpan.FromMinutes(30);
 				options.Cookie.HttpOnly = true;
 			});
-
-			services.AddTransient<IEmailServices, EmailServices>();
-			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
-			services.AddTransient<ICountryRepository, EFCountryRepository>();
-			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();
-            services.AddTransient<IVacancyRepository, EFVacancyRepository>();
-            services.AddTransient<IReviewRepository, EFReviewRepository>();
-            services.AddTransient<IFaqRepository, EFFaqRepository>();
-            services.AddTransient<IPageRepository, EFPageRepository>();
 
 			services.Configure<RazorViewEngineOptions>(options =>
 			{
