@@ -17,8 +17,7 @@ namespace HomeMyDay.Web.Site.Home.Extensions
 		public static RazorViewEngineOptions AddHomeViews(this RazorViewEngineOptions options)
 		{
 			options.FileProviders.Add(new EmbeddedFileProvider(
-				typeof(RazorViewEngineOptionsExtensions).GetTypeInfo().Assembly,
-				nameof(HomeMyDay.Web.Site.Home)
+				typeof(RazorViewEngineOptionsExtensions).GetTypeInfo().Assembly
 			));
 
 			return options;

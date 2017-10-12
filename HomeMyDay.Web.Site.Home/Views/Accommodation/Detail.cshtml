@@ -21,7 +21,7 @@
     }
 }
 
-@Html.Partial("../Partials/AccommodationCarousel.cshtml", Model.Accommodation.MediaObjects)
+@Html.Partial("~/Views/Shared/Partials/AccommodationCarousel.cshtml", Model.Accommodation.MediaObjects)
 
 <div class="container bottom-buffer">
     <div class="row">
@@ -43,7 +43,7 @@
     {
         <div class="row">
             <div class="col-md-6">
-                @Html.Partial("../Partials/AccommodationDetailBlocks.cshtml", Model)
+                @Html.Partial("~/Views/Shared/Partials/AccommodationDetailBlocks.cshtml", Model)
             </div>
 
             <div class="col-md-6">

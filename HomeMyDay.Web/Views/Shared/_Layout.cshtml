@@ -1,13 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    @Html.Partial("../Partials/Header.cshtml")
+    @Html.Partial("~/Views/Shared/Partials/Header.cshtml")
 
 </head>
 <body data-spy="scroll" data-target="#navbar-navigation">
     <div class="wrapper">
         <div class="header p-t-51">
-            @Html.Partial("../Partials/Navigation.cshtml")
+            @Html.Partial("~/Views/Shared/Partials/Navigation.cshtml")
         </div>
         <div class="content">
             @RenderBody()
@@ -15,7 +15,7 @@
             @await Component.InvokeAsync("SurprisePopUp")
         </div>
         <footer>
-            @Html.Partial("../Partials/Footer.cshtml")
+            @Html.Partial("~/Views/Shared/Partials/Footer.cshtml")
         </footer>
     </div>
     <environment include="Development">
