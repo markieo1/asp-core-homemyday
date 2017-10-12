@@ -24,12 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="NETCore.MailKit" Version="2.0.1" />
-    <PackageReference Include="NLipsum" Version="1.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
@@ -40,9 +34,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
     <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
-    <ProjectReference Include="..\HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Site.Cms\HomeMyDay.Web.Site.Cms.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Site.Home\HomeMyDay.Web.Site.Home.csproj" />
   </ItemGroup>
 
