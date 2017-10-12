@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Home.Database.Identity
+namespace HomeMyDay.Infrastructure.Database
 {
 	/// <summary>
 	/// This class contains all the roles for the identity framework

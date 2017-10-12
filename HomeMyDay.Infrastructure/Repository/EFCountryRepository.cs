@@ -1,11 +1,12 @@
-﻿using HomeMyDay.Web.Database;
+﻿using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeMyDay.Core.Repository;
 
-namespace HomeMyDay.Web.Repository.Implementation
+namespace HomeMyDay.Infrastructure.Repository
 {
     public class EFCountryRepository : ICountryRepository
     {

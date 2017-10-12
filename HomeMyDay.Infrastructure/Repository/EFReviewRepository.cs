@@ -1,13 +1,14 @@
 ﻿using System;
-using HomeMyDay.Web.Database;
-using HomeMyDay.Web.Helpers;
+using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Core;
 using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeMyDay.Core.Repository;
 
-namespace HomeMyDay.Web.Repository.Implementation
+namespace HomeMyDay.Infrastructure.Repository
 {
 	public class EFReviewRepository : IReviewRepository
 	{

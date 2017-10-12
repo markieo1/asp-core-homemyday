@@ -6,7 +6,7 @@ using HomeMyDay.Core.Models;
 using System.Globalization;
 using NLipsum.Core;
 
-namespace HomeMyDay.Web.Home.Database
+namespace HomeMyDay.Infrastructure.Database
 {
 	public static class SeedHomeMyDayDbData
 	{

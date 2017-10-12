@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using HomeMyDay.Web.Identity;
 
-namespace HomeMyDay.Web.Home.Database.Identity
+namespace HomeMyDay.Infrastructure.Database
 {
     public class AppIdentityDbContext : IdentityDbContext<User>
     {

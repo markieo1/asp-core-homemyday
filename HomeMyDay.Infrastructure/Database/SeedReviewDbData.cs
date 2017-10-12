@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace HomeMyDay.Web.Home.Database
+namespace HomeMyDay.Infrastructure.Database
 {
     public class SeedReviewDbData
     {
