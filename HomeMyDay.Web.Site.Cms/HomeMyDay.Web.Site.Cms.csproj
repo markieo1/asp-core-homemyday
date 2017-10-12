@@ -3,61 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <EmbeddedResource Include="Views\**" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="Views\**\*.cshtml" />
   </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Views\Accommodation\Edit.cshtml" />
-    <EmbeddedResource Remove="Views\Accommodation\Index.cshtml" />
-    <EmbeddedResource Remove="Views\Faq\EditCategory.cshtml" />
-    <EmbeddedResource Remove="Views\Faq\Index.cshtml" />
-    <EmbeddedResource Remove="Views\Faq\Questions.cshtml" />
-    <EmbeddedResource Remove="Views\Home\Index.cshtml" />
-    <EmbeddedResource Remove="Views\Pages\Edit.cshtml" />
-    <EmbeddedResource Remove="Views\Pages\Index.cshtml" />
-    <EmbeddedResource Remove="Views\Review\Index.cshtml" />
-    <EmbeddedResource Remove="Views\Vacancy\Edit.cshtml" />
-    <EmbeddedResource Remove="Views\Vacancy\Index.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Views\Accommodation\Edit.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Accommodation\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Faq\EditCategory.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Faq\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Faq\Questions.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Pages\Edit.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Pages\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Review\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Vacancy\Edit.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Vacancy\Index.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
     <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
