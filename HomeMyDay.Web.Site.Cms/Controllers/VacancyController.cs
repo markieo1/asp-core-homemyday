@@ -1,19 +1,17 @@
-﻿using HomeMyDay.Infrastructure.Database;
-using HomeMyDay.Infrastructure.Identity;
-using HomeMyDay.Core.Extensions;
+﻿using HomeMyDay.Core.Extensions;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using HomeMyDay.Core.Authorization;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {
-    [Area("CMS")]
-    [Authorize(Policy = IdentityPolicies.Administrator)]
+	[Area("CMS")]
+    [Authorize(Policy = Policies.Administrator)]
     public class VacancyController : Controller
     {
         private readonly IVacancyRepository _vancancyRepository;

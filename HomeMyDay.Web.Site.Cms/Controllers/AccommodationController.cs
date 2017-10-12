@@ -8,13 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Infrastructure.Database;
-using HomeMyDay.Infrastructure.Identity;
+using HomeMyDay.Core.Authorization;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {
 	[Area("CMS")]
-	[Authorize(Policy = IdentityPolicies.Administrator)]
+	[Authorize(Policy = Policies.Administrator)]
 	public class AccommodationController : Controller
 	{
 		private readonly IAccommodationRepository _accommodationRepository;

@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace HomeMyDay.Infrastructure.Identity
+namespace HomeMyDay.Core.Authorization
 {
 	/// <summary>
 	/// Class that contains all policies
 	/// </summary>
-	public static class IdentityPolicies
+	public static class Policies
 	{
 		/// <summary>
 		/// Requires the user to have the policy administrator

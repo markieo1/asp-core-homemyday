@@ -1,16 +1,13 @@
-﻿using HomeMyDay.Core.Repository;
+﻿using HomeMyDay.Core.Authorization;
+using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Services;
 using HomeMyDay.Infrastructure.Database;
-using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Infrastructure.Repository;
 using HomeMyDay.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HomeMyDay.Infrastructure.Extensions
 {
@@ -41,8 +38,8 @@ namespace HomeMyDay.Infrastructure.Extensions
 			
 			services.AddAuthorization(options =>
 			{
-				options.AddPolicy(IdentityPolicies.Administrator, policy => policy.RequireRole(IdentityRoles.Administrator));
-				options.AddPolicy(IdentityPolicies.Booker, policy => policy.RequireRole(IdentityRoles.Booker));
+				options.AddPolicy(Policies.Administrator, policy => policy.RequireRole(Roles.Administrator));
+				options.AddPolicy(Policies.Booker, policy => policy.RequireRole(Roles.Booker));
 			});
 
 			//Mail Services setting

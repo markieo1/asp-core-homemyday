@@ -1,10 +1,9 @@
-﻿using HomeMyDay.Core.Models;
+﻿using HomeMyDay.Core.Authorization;
 using HomeMyDay.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,21 +47,21 @@ namespace HomeMyDay.Infrastructure.Database
 		{
 			RoleStore<IdentityRole> roleStore = new RoleStore<IdentityRole>(context);
 
-			if (!context.Roles.Any(r => r.NormalizedName == IdentityRoles.Administrator))
+			if (!context.Roles.Any(r => r.NormalizedName == Roles.Administrator))
 			{
 				await roleStore.CreateAsync(new IdentityRole()
 				{
-					Name = IdentityRoles.Administrator,
-					NormalizedName = IdentityRoles.Administrator
+					Name = Roles.Administrator,
+					NormalizedName = Roles.Administrator
 				});
 			}
 
-			if (!context.Roles.Any(r => r.NormalizedName == IdentityRoles.Booker))
+			if (!context.Roles.Any(r => r.NormalizedName == Roles.Booker))
 			{
 				await roleStore.CreateAsync(new IdentityRole()
 				{
-					Name = IdentityRoles.Booker,
-					NormalizedName = IdentityRoles.Booker
+					Name = Roles.Booker,
+					NormalizedName = Roles.Booker
 				});
 			}
 
@@ -97,7 +96,7 @@ namespace HomeMyDay.Infrastructure.Database
 
 			User adminUser = await userManager.FindByNameAsync(AdminUsername);
 
-			await userManager.AddToRoleAsync(adminUser, IdentityRoles.Administrator);
+			await userManager.AddToRoleAsync(adminUser, Roles.Administrator);
 		}
 	}
 }

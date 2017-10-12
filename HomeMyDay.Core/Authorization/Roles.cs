@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace HomeMyDay.Infrastructure.Identity
+namespace HomeMyDay.Core.Authorization
 {
 	/// <summary>
-	/// This class contains all the roles for the identity framework
+	/// This class contains all the roles
 	/// </summary>
-	public static class IdentityRoles
+	public static class Roles
 	{
 		/// <summary>
 		/// The administrator

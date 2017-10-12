@@ -1,5 +1,4 @@
-﻿using HomeMyDay.Infrastructure.Database;
-using HomeMyDay.Infrastructure.Identity;
+﻿using HomeMyDay.Core.Authorization;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {
-    [Area("CMS")]
-    [Authorize(Policy = IdentityPolicies.Administrator)]
+	[Area("CMS")]
+    [Authorize(Policy = Policies.Administrator)]
     public class ReviewController : Controller
     {
         private readonly IReviewRepository _reviewRepository;

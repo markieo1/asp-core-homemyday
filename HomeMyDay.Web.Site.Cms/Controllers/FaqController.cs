@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +8,12 @@ using System.Collections.Generic;
 using System;
 using HomeMyDay.Core.Extensions;
 using HomeMyDay.Web.Base.Home.ViewModels;
-using HomeMyDay.Infrastructure.Identity;
+using HomeMyDay.Core.Authorization;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {
 	[Area("CMS")]
-	[Authorize(Policy = IdentityPolicies.Administrator)]
+	[Authorize(Policy = Policies.Administrator)]
 	public class FaqController : Controller
 	{
 		private readonly IFaqRepository _faqRepository;

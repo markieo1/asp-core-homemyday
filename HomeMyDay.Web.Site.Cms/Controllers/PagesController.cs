@@ -1,5 +1,4 @@
-﻿using HomeMyDay.Infrastructure.Database;
-using HomeMyDay.Infrastructure.Identity;
+﻿using HomeMyDay.Core.Authorization;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Base.Home.ViewModels;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 namespace HomeMyDay.Web.Controllers.Cms
 {
 	[Area("CMS")]
-	[Authorize(Policy = IdentityPolicies.Administrator)]
+	[Authorize(Policy = Policies.Administrator)]
 	public class PagesController : Controller
 	{
 		private readonly IPageRepository _pageRepository;
@@ -26,8 +25,8 @@ namespace HomeMyDay.Web.Controllers.Cms
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-				PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
-				return View(paginatedResult);
+			PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
+			return View(paginatedResult);
 		}
 
 		[HttpGet]
