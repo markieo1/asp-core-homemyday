@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using HomeMyDay.Web.Home.Database.Identity;
-using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Core.Models;

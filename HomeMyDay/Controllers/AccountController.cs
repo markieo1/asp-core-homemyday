@@ -6,7 +6,6 @@ using HomeMyDay.Web.Home.ViewModels;
 using HomeMyDay.Web.Home.Services;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Web.Home.Extensions;
-using HomeMyDay.Web.Home.Database;
 using HomeMyDay.Web.Identity;
 
 namespace HomeMyDay.Web.Home.Controllers

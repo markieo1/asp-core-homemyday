@@ -1,5 +1,5 @@
 ﻿using HomeMyDay.Core.Models;
-using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

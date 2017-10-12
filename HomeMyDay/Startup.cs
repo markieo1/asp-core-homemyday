@@ -1,7 +1,7 @@
 ﻿using HomeMyDay.Web.Home.Database;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Web.Home.Repository;
-using HomeMyDay.Web.Home.Repository.Implementation;
+using HomeMyDay.Core.Repository;
+using HomeMyDay.Core.Repository.Implementation;
 using HomeMyDay.Web.Home.Services;
 using HomeMyDay.Web.Home.Services.Implementation;
 using HomeMyDay.Web.Identity;

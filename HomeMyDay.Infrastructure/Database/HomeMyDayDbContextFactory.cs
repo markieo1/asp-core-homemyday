@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
 
-namespace HomeMyDay.Web.Home.Database
+namespace HomeMyDay.Infrastructure.Database
 {
 	public class HomeMyDayDbContextFactory : IDesignTimeDbContextFactory<HomeMyDayDbContext>
 	{

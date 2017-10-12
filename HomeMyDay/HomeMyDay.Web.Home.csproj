@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj" />
   </ItemGroup>
 

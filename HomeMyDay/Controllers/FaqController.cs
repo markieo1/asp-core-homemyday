@@ -1,4 +1,4 @@
-﻿using HomeMyDay.Web.Home.Repository;
+﻿using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeMyDay.Web.Home.Controllers

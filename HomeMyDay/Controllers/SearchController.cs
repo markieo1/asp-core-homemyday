@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Home.ViewModels;
-using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Repository;
 
 namespace HomeMyDay.Web.Home.Controllers
 {

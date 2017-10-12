@@ -1,8 +1,7 @@
-﻿using HomeMyDay.Web.Home.Database.Identity;
-using HomeMyDay.Web.Home.Extensions;
-using HomeMyDay.Web.Home.Helpers;
+﻿using HomeMyDay.Web.Home.Extensions;
+using HomeMyDay.Core;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

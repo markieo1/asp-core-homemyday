@@ -1,5 +1,5 @@
 ﻿using HomeMyDay.Core.Models;
-using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

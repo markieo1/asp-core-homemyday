@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using HomeMyDay.Web.Home.Extensions;
-using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Core.Models;
