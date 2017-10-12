@@ -1,4 +1,4 @@
-﻿using HomeMyDay.Web.Extensions;
+﻿using HomeMyDay.Core.Extensions;
 using HomeMyDay.Core;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeMyDay.Infrastructure.Database;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {

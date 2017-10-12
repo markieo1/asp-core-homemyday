@@ -1,4 +1,4 @@
-﻿using HomeMyDay.Web.Database.Identity;
+﻿using HomeMyDay.Infrastructure.Database;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

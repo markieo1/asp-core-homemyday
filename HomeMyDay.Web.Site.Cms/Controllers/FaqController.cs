@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using HomeMyDay.Web.Database.Identity;
+using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +7,8 @@ using HomeMyDay.Core.Models;
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using HomeMyDay.Web.Extensions;
-using HomeMyDay.Web.Helpers;
-using HomeMyDay.Web.ViewModels;
+using HomeMyDay.Core.Extensions;
+using HomeMyDay.Web.Base.Home.ViewModels;
 
 namespace HomeMyDay.Web.Controllers.Cms
 {

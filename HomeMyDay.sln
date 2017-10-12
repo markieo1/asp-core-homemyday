@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Tests", "HomeMyDay.Tests\HomeMyDay.Tests.csproj", "{A2BCDBC9-784A-4E0F-8922-6FB01ADE6D68}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Web.Base.Home", "HomeMyDay.Web.Base.Home\HomeMyDay.Web.Base.Home.csproj", "{4E567EFC-388A-4D6E-844F-8658A66B3294}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Web.Base", "HomeMyDay.Web.Base\HomeMyDay.Web.Base.csproj", "{D5822C42-98D9-4743-9DAD-B0FDBB0383C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Web.Site.Cms", "HomeMyDay.Web.Site.Cms\HomeMyDay.Web.Site.Cms.csproj", "{DEEF8508-493C-4694-8DA7-D9EBA8CE5EC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{D5822C42-98D9-4743-9DAD-B0FDBB0383C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5822C42-98D9-4743-9DAD-B0FDBB0383C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5822C42-98D9-4743-9DAD-B0FDBB0383C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEEF8508-493C-4694-8DA7-D9EBA8CE5EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEEF8508-493C-4694-8DA7-D9EBA8CE5EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEEF8508-493C-4694-8DA7-D9EBA8CE5EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEEF8508-493C-4694-8DA7-D9EBA8CE5EC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
