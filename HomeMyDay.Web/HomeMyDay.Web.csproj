@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Database\**" />
     <Compile Remove="Models\**" />
+    <Content Remove="Database\**" />
     <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Database\**" />
     <EmbeddedResource Remove="Models\**" />
+    <None Remove="Database\**" />
     <None Remove="Models\**" />
   </ItemGroup>
 
@@ -26,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Repository\Implementation\" />
     <Folder Include="wwwroot\css\" />
@@ -37,6 +40,7 @@
     <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
     <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Site.Home\HomeMyDay.Web.Site.Home.csproj" />
   </ItemGroup>
 
   <ItemGroup>

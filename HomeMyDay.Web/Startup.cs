@@ -17,6 +17,7 @@ using HomeMyDay.Web.Database.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Web.Home.Database.Identity;
+using HomeMyDay.Web.Site.Home.Extensions;
 
 namespace HomeMyDay.Web
 {
@@ -109,9 +110,7 @@ namespace HomeMyDay.Web
 
 			services.Configure<RazorViewEngineOptions>(options =>
 			{
-				options.AreaViewLocationFormats.Clear();
-				options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
-				options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+				options.AddHomeViews();
 			});
 
 			services.AddMvc();

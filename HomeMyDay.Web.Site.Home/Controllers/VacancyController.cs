@@ -9,8 +9,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	public class VacancyController : Controller
 	{
-		private readonly IVacancyReposi
-			tory _vacancieRepository;
+		private readonly IVacancyRepository _vacancieRepository;
 
 		public VacancyController(IVacancyRepository repo)
 		{
@@ -21,7 +20,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		public IActionResult Index()
 		{
 			var vacancies = _vacancieRepository.Vacancies;
-            
+
 			if (vacancies.Any())
 			{
 				return View(vacancies);
