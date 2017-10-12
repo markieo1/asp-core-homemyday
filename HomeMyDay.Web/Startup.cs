@@ -12,6 +12,7 @@ using HomeMyDay.Web.Site.Home.Extensions;
 using HomeMyDay.Core.Services;
 using HomeMyDay.Infrastructure.Extensions;
 using HomeMyDay.Infrastructure.Identity;
+using HomeMyDay.Web.Site.Cms.Extensions;
 
 namespace HomeMyDay.Web
 {
@@ -76,7 +77,10 @@ namespace HomeMyDay.Web
 
 			services.Configure<RazorViewEngineOptions>(options =>
 			{
+				options.AreaViewLocationFormats.Clear();
+
 				options.AddHomeViews();
+				options.AddCmsViews();
 			});
 
 			services.AddMvc();
