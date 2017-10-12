@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Web.Home", "HomeMyDay\HomeMyDay.Web.Home.csproj", "{A1BF6B3B-FA8D-4973-B4B1-A083CDE6F48B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Tests", "HomeMyDay.Tests\HomeMyDay.Tests.csproj", "{A2BCDBC9-784A-4E0F-8922-6FB01ADE6D68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Core", "HomeMyDay.Core\HomeMyDay.Core.csproj", "{B60DD0B5-415E-44AA-9064-A8AA682CC19E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Core", "HomeMyDay.Core\HomeMyDay.Core.csproj", "{B60DD0B5-415E-44AA-9064-A8AA682CC19E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Web.Identity", "HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj", "{2BD40B1D-2F49-4E0C-AB10-788502E10A4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Web.Identity", "HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj", "{2BD40B1D-2F49-4E0C-AB10-788502E10A4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeMyDay.Infrastructure", "HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj", "{C7E4E231-5C81-41DC-9D00-DDB7790959FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Infrastructure", "HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj", "{C7E4E231-5C81-41DC-9D00-DDB7790959FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeMyDay.Web", "HomeMyDay.Web\HomeMyDay.Web.csproj", "{40F7C8E2-7CFB-4F48-8C9B-5C53A8832E90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A1BF6B3B-FA8D-4973-B4B1-A083CDE6F48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1BF6B3B-FA8D-4973-B4B1-A083CDE6F48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1BF6B3B-FA8D-4973-B4B1-A083CDE6F48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1BF6B3B-FA8D-4973-B4B1-A083CDE6F48B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2BCDBC9-784A-4E0F-8922-6FB01ADE6D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A2BCDBC9-784A-4E0F-8922-6FB01ADE6D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2BCDBC9-784A-4E0F-8922-6FB01ADE6D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7E4E231-5C81-41DC-9D00-DDB7790959FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F7C8E2-7CFB-4F48-8C9B-5C53A8832E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F7C8E2-7CFB-4F48-8C9B-5C53A8832E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F7C8E2-7CFB-4F48-8C9B-5C53A8832E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F7C8E2-7CFB-4F48-8C9B-5C53A8832E90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
