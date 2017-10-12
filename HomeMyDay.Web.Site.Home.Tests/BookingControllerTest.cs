@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using HomeMyDay.Web.Site.Home.Controllers;
+using System.Collections.Generic;
 using System.Text;
-using Xunit;
-using Moq;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Services;
 using HomeMyDay.Web.Base.Home.ViewModels;
-using HomeMyDay.Web.Site.Home.Controllers;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Options;
+using Moq;
+using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Web.Site.Home.Tests
 {
 	public class BookingControllerTest
 	{

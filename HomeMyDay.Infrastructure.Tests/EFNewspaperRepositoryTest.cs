@@ -1,11 +1,11 @@
 ﻿using System;
 using HomeMyDay.Core.Models;
-using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Infrastructure.Tests
 {
 	public class EFNewspaperRepositoryTest
 	{

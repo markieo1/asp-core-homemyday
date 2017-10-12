@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using HomeMyDay.Core.Models;
-using Microsoft.EntityFrameworkCore;
-using Xunit;
+using HomeMyDay.Core.Repository;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
-using HomeMyDay.Core.Repository;
-using HomeMyDay.Web.Site.Home.Controllers;
 using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Site.Home.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.EntityFrameworkCore;
 using Moq;
+using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Web.Site.Home.Tests
 {
 	public class ReviewControllerTest
 	{

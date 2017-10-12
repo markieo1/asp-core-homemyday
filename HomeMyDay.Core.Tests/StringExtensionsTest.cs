@@ -1,7 +1,7 @@
 ﻿using HomeMyDay.Core.Extensions;
 using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Core.Tests
 {
 	public class StringExtensionsTest
 	{

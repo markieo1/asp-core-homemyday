@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Infrastructure.Tests
 {
 	public class EFPageRepositoryTest
 	{

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Web.Site.Cms.Tests
 {
 	public class CMSPagesControllerTest
 	{

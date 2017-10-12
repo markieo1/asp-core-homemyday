@@ -1,16 +1,16 @@
-﻿using HomeMyDay.Core.Models;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
+using Microsoft.EntityFrameworkCore;
+using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
 using HomeMyDay.Web.Components;
-using Xunit;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Infrastructure.Tests
 {
 	public class EFAccommodationRepositoryTest
 	{

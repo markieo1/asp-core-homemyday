@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
 using HomeMyDay.Web.Site.Home.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
-namespace HomeMyDay.Tests
+namespace HomeMyDay.Web.Site.Home.Tests
 {
 	public class FaqControllerTest
     {
