@@ -6,15 +6,16 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Extensions;
 using HomeMyDay.Web.Base.Home.ViewModels;
 using HomeMyDay.Web.Identity;
+using HomeMyDay.Core.Services;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	[Authorize]
 	public class AccountController : Controller
 	{
-		/*private SignInManager<User> _signInManager;
-		private UserManager<User> _userManager;
-		private IEmailServices _emailServices;
+		private readonly SignInManager<User> _signInManager;
+		private readonly UserManager<User> _userManager;
+		private readonly IEmailServices _emailServices;
 
 		public AccountController(IEmailServices emailServices, UserManager<User> userMgr, SignInManager<User> signInMgr)
 		{
@@ -181,6 +182,6 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			}
 			var result = await _userManager.ConfirmEmailAsync(user, code);
 			return View(result.Succeeded ? "EmailConfirmed" : "Error");
-		}*/
+		}
 	}
 }
