@@ -1,7 +1,7 @@
-﻿using HomeMyDay.Controllers.Cms;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.ViewModels;
+﻿using HomeMyDay.Web.Home.Controllers.Cms;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;

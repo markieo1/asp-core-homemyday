@@ -1,8 +1,8 @@
-﻿using HomeMyDay.Repository;
-using HomeMyDay.ViewModels;
+﻿using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class NewspaperController : Controller
 	{

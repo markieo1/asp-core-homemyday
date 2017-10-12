@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
 	public class FaqQuestion : BaseModel
 	{

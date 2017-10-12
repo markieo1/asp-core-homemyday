@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HomeMyDay.Migrations
+namespace HomeMyDay.Web.Home.Migrations
 {
     public partial class Add_FaqCategory : Migration
     {

@@ -1,8 +1,8 @@
-﻿using HomeMyDay.Database.Identity;
-using HomeMyDay.Extensions;
-using HomeMyDay.Helpers;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
+﻿using HomeMyDay.Web.Home.Database.Identity;
+using HomeMyDay.Web.Home.Extensions;
+using HomeMyDay.Web.Home.Helpers;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Controllers.Cms
+namespace HomeMyDay.Web.Home.Controllers.Cms
 {
 	[Area("CMS")]
 	[Authorize(Policy = IdentityPolicies.Administrator)]

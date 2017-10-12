@@ -1,7 +1,7 @@
-﻿using HomeMyDay.Repository;
+﻿using HomeMyDay.Web.Home.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
     public class FaqController : Controller
     {

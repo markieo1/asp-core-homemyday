@@ -1,10 +1,10 @@
 ﻿using System;
-using HomeMyDay.Models;
+using HomeMyDay.Core.Models;
 using System.Collections.Generic;
-using HomeMyDay.Helpers;
+using HomeMyDay.Web.Home.Helpers;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Repository
+namespace HomeMyDay.Web.Home.Repository
 {
 	public interface IVacancyRepository
     {

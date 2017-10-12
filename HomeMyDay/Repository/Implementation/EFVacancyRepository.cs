@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using HomeMyDay.Models;
-using HomeMyDay.Database;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Database;
 using System;
 using System.Linq;
-using HomeMyDay.Helpers;
+using HomeMyDay.Web.Home.Helpers;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace HomeMyDay.Repository.Implementation
+namespace HomeMyDay.Web.Home.Repository.Implementation
 {
     public class EFVacancyRepository : IVacancyRepository
     {

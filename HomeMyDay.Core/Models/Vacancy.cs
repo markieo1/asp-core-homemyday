@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
     public class Vacancy : BaseModel
     {

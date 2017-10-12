@@ -1,7 +1,7 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class HomeController : Controller
     {

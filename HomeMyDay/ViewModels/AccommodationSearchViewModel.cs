@@ -1,4 +1,4 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Core.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.ViewModels
+namespace HomeMyDay.Web.Home.ViewModels
 {
 	public class AccommodationSearchViewModel
 	{

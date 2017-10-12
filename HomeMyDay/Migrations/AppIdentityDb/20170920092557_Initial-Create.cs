@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace HomeMyDay.Migrations.AppIdentityDb
+namespace HomeMyDay.Web.Home.Migrations.AppIdentityDb
 {
     public partial class InitialCreate : Migration
     {

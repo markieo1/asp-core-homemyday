@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Helpers
+namespace HomeMyDay.Web.Home.Helpers
 {
 	/// <summary>
 	/// List with support for pagination.

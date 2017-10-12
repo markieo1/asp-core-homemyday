@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Services
+namespace HomeMyDay.Web.Home.Services
 {
     public class GoogleApiServiceOptions
     {

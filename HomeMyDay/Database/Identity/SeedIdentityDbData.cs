@@ -1,4 +1,5 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Database.Identity
+namespace HomeMyDay.Web.Home.Database.Identity
 {
 	public static class SeedIdentityDbData
 	{

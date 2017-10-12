@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Models;
+using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.ViewModels
+namespace HomeMyDay.Web.Home.ViewModels
 {
 	public class AccommodationSearchResultsViewModel
 	{

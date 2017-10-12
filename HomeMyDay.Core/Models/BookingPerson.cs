@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
     public class BookingPerson : BaseModel
     {

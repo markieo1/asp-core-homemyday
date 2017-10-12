@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using HomeMyDay.Models;
+using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.ViewModels
+namespace HomeMyDay.Web.Home.ViewModels
 {
 	public class ReviewViewModel
 	{

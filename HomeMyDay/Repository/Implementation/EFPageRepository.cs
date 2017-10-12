@@ -1,13 +1,13 @@
-﻿using HomeMyDay.Database;
+﻿using HomeMyDay.Web.Home.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Models;
-using HomeMyDay.Helpers;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Helpers;
 using Microsoft.EntityFrameworkCore;
 
-namespace HomeMyDay.Repository.Implementation
+namespace HomeMyDay.Web.Home.Repository.Implementation
 {
 	public class EFPageRepository : IPageRepository
 	{

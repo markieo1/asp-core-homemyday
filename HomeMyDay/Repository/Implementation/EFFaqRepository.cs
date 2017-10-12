@@ -1,14 +1,14 @@
-﻿using HomeMyDay.Database;
-using HomeMyDay.Models;
+﻿using HomeMyDay.Web.Home.Database;
+using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Helpers;
+using HomeMyDay.Web.Home.Helpers;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace HomeMyDay.Repository.Implementation
+namespace HomeMyDay.Web.Home.Repository.Implementation
 {
 	public class EFFaqRepository : IFaqRepository
 	{

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
     public class Country : BaseModel
     {

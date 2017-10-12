@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Database.Identity
+namespace HomeMyDay.Web.Home.Database.Identity
 {
 	/// <summary>
 	/// Class that contains all policies

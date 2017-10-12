@@ -1,6 +1,6 @@
 using System;
 
-namespace HomeMyDay.ViewModels
+namespace HomeMyDay.Web.Home.ViewModels
 {
     public class ErrorViewModel
     {

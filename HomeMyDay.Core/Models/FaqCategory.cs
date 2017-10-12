@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
     public class FaqCategory : BaseModel
     {

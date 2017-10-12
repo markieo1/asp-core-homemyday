@@ -1,12 +1,12 @@
-﻿using HomeMyDay.Models;
-using HomeMyDay.Repository;
+﻿using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HomeMyDay.ViewModels;
+using HomeMyDay.Web.Home.ViewModels;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class VacancyController : Controller
 	{

@@ -1,9 +1,9 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Core.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HomeMyDay.Helpers;
+using HomeMyDay.Web.Home.Helpers;
 
-namespace HomeMyDay.Repository
+namespace HomeMyDay.Web.Home.Repository
 {
 	public interface IFaqRepository
 	{

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HomeMyDay.Models;
+using HomeMyDay.Core.Models;
 using System.Globalization;
 using NLipsum.Core;
 
-namespace HomeMyDay.Database
+namespace HomeMyDay.Web.Home.Database
 {
 	public static class SeedHomeMyDayDbData
 	{

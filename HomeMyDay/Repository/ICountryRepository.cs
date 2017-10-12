@@ -1,10 +1,10 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Repository
+namespace HomeMyDay.Web.Home.Repository
 {
     public interface ICountryRepository
     {

@@ -1,6 +1,6 @@
-﻿using HomeMyDay.Database;
-using HomeMyDay.Helpers;
-using HomeMyDay.Models;
+﻿using HomeMyDay.Web.Home.Database;
+using HomeMyDay.Web.Home.Helpers;
+using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Repository.Implementation
+namespace HomeMyDay.Web.Home.Repository.Implementation
 {
 	public class EFAccommodationRepository : IAccommodationRepository
 	{

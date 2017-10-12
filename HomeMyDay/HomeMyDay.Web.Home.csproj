@@ -19,9 +19,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\images\logo\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Identity\HomeMyDay.Web.Identity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

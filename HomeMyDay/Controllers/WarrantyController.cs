@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class WarrantyController : Controller
     {

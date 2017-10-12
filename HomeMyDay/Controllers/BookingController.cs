@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.ViewModels;
-using HomeMyDay.Repository;
-using HomeMyDay.Models;
-using HomeMyDay.Extensions;
-using HomeMyDay.Services;
+using HomeMyDay.Web.Home.ViewModels;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Extensions;
+using HomeMyDay.Web.Home.Services;
 using Microsoft.Extensions.Options;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class BookingController : Controller
 	{

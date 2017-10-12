@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
 	public class Review : BaseModel
 	{

@@ -1,11 +1,11 @@
-﻿using HomeMyDay.Helpers;
-using HomeMyDay.Models;
+﻿using HomeMyDay.Web.Home.Helpers;
+using HomeMyDay.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.ViewModels
+namespace HomeMyDay.Web.Home.ViewModels
 {
 	public class FaqQuestionsViewModel
 	{

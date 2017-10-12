@@ -1,6 +1,6 @@
-﻿using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.ViewModels;
+﻿using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Components
+namespace HomeMyDay.Web.Home.Components
 {
 	public class SearchBarViewComponent : ViewComponent
 	{

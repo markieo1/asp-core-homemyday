@@ -1,14 +1,14 @@
-﻿using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Services;
-using HomeMyDay.ViewModels;
+﻿using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.Services;
+using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class AccommodationController : Controller
 	{

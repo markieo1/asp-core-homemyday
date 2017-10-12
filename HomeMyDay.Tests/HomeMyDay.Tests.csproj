@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HomeMyDay\HomeMyDay.csproj" />
+    <ProjectReference Include="..\HomeMyDay\HomeMyDay.Web.Home.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,10 @@
-﻿using HomeMyDay.Database;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
-using HomeMyDay.Services;
-using HomeMyDay.Services.Implementation;
+﻿using HomeMyDay.Web.Home.Database;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.Repository.Implementation;
+using HomeMyDay.Web.Home.Services;
+using HomeMyDay.Web.Home.Services.Implementation;
+using HomeMyDay.Web.Identity;
 using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,10 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using HomeMyDay.Database.Identity;
+using HomeMyDay.Web.Home.Database.Identity;
 using Microsoft.AspNetCore.Mvc.Razor;
 
-namespace HomeMyDay
+namespace HomeMyDay.Web.Home
 {
 	public class Startup
 	{

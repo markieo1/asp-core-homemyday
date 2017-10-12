@@ -1,8 +1,8 @@
 ﻿using System;
-using HomeMyDay.Database;
-using HomeMyDay.Models;
+using HomeMyDay.Web.Home.Database;
+using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.Repository.Implementation
+namespace HomeMyDay.Web.Home.Repository.Implementation
 {
 	public class EFNewspaperRepository : INewspaperRepository
 	{

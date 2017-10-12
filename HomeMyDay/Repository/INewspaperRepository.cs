@@ -1,4 +1,4 @@
-﻿namespace HomeMyDay.Repository
+﻿namespace HomeMyDay.Web.Home.Repository
 {
 	public interface INewspaperRepository
 	{

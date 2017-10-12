@@ -1,8 +1,8 @@
-﻿using HomeMyDay.Models;
+﻿using HomeMyDay.Core.Models;
 using System;
 using System.Linq;
 
-namespace HomeMyDay.Database
+namespace HomeMyDay.Web.Home.Database
 {
     public class SeedReviewDbData
     {

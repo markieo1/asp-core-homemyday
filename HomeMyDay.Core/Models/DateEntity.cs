@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Models
+namespace HomeMyDay.Core.Models
 {
 	public class DateEntity : BaseModel
 	{

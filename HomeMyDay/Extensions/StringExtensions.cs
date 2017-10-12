@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HomeMyDay.Extensions
+namespace HomeMyDay.Web.Home.Extensions
 {
 	public static class StringExtensions
 	{

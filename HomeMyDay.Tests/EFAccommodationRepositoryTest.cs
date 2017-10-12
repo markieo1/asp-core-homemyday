@@ -1,9 +1,9 @@
-﻿using HomeMyDay.Components;
-using HomeMyDay.Database;
-using HomeMyDay.Helpers;
-using HomeMyDay.Models;
-using HomeMyDay.Repository;
-using HomeMyDay.Repository.Implementation;
+﻿using HomeMyDay.Web.Home.Components;
+using HomeMyDay.Web.Home.Database;
+using HomeMyDay.Web.Home.Helpers;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.Repository.Implementation;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace HomeMyDay
+namespace HomeMyDay.Web.Home
 {
     public class Program
     {

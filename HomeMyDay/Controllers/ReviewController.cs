@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using HomeMyDay.Extensions;
-using HomeMyDay.Repository;
-using HomeMyDay.ViewModels;
+using HomeMyDay.Web.Home.Extensions;
+using HomeMyDay.Web.Home.Repository;
+using HomeMyDay.Web.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Models;
+using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class ReviewController : Controller
 	{

@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using HomeMyDay.ViewModels;
-using HomeMyDay.Services;
-using HomeMyDay.Models;
-using HomeMyDay.Extensions;
-using HomeMyDay.Database;
+using HomeMyDay.Web.Home.ViewModels;
+using HomeMyDay.Web.Home.Services;
+using HomeMyDay.Core.Models;
+using HomeMyDay.Web.Home.Extensions;
+using HomeMyDay.Web.Home.Database;
+using HomeMyDay.Web.Identity;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	[Authorize]
 	public class AccountController : Controller

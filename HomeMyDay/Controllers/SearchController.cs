@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.ViewModels;
-using HomeMyDay.Repository;
+using HomeMyDay.Web.Home.ViewModels;
+using HomeMyDay.Web.Home.Repository;
 
-namespace HomeMyDay.Controllers
+namespace HomeMyDay.Web.Home.Controllers
 {
 	public class SearchController : Controller
 	{

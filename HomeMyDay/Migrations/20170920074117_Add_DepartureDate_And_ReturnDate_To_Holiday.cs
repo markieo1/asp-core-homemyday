@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HomeMyDay.Migrations
+namespace HomeMyDay.Web.Home.Migrations
 {
 	public partial class Add_DepartureDate_And_ReturnDate_To_Holiday : Migration
 	{
