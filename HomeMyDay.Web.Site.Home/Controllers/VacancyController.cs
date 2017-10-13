@@ -1,53 +1,42 @@
-﻿using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using HomeMyDay.Web.Base.Managers;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	public class VacancyController : Controller
 	{
-		private readonly IVacancyRepository _vacancieRepository;
+		private readonly IVacancyManager _vacancyManager;
 
-		public VacancyController(IVacancyRepository repo)
+		public VacancyController(IVacancyManager vacancyManager)
 		{
-			_vacancieRepository = repo;
+			_vacancyManager = vacancyManager;
 		}
 
 		[HttpGet]
 		public IActionResult Index()
 		{
-			var vacancies = _vacancieRepository.Vacancies;
-
+			var vacancies = _vacancyManager.GetVacancies();
 			if (vacancies.Any())
 			{
 				return View(vacancies);
 			}
 
-			return View("NoVacancies");
+			return View("NoVacancies");	  
 		}
 
 		[HttpGet]
 		public IActionResult Detail(long id)
-		{
-			Vacancy vacancie = null;
-
+		{							   
 			try
 			{
-				vacancie = _vacancieRepository.GetVacancy(id);
-			}
-			catch (ArgumentOutOfRangeException)
-			{
-				return BadRequest();
-			}
+				return View(_vacancyManager.GetVacancy(id));   
+			}	 
 			catch (KeyNotFoundException)
 			{
 				return NotFound();
-			}
-
-			return View(vacancie);
+			}					  
 		}
 	}
 }

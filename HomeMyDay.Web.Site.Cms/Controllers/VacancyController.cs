@@ -4,100 +4,93 @@ using System.Threading.Tasks;
 using HomeMyDay.Core.Authorization;
 using HomeMyDay.Core.Extensions;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
+using HomeMyDay.Web.Base.Managers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeMyDay.Web.Site.Cms.Controllers
 {
 	[Area("CMS")]
-    [Authorize(Policy = Policies.Administrator)]
-    public class VacancyController : Controller
-    {
-        private readonly IVacancyRepository _vancancyRepository;
+	[Authorize(Policy = Policies.Administrator)]
+	public class VacancyController : Controller
+	{
+		private readonly IVacancyManager _vacancyManager;
 
-        public VacancyController(IVacancyRepository repository)
-        {
-            _vancancyRepository = repository;
-        }
+		public VacancyController(IVacancyManager vacancyManager)
+		{
+			_vacancyManager = vacancyManager;
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> Index(int? page, int? pageSize)
-        {
-            PaginatedList<Vacancy> paginatedResult = await _vancancyRepository.List(page ?? 1, pageSize ?? 5);
-            return View(paginatedResult);
-        }
+		[HttpGet]
+		public async Task<IActionResult> Index(int? page, int? pageSize)
+		{
+			return View(_vacancyManager.GetVacancyPaginatedList(page, pageSize));
+		}
 
-        [HttpGet]
-        public ViewResult Add()
-        {
-            return View();
-        }
+		[HttpGet]
+		public ViewResult Add()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        public IActionResult Add(Vacancy model)
-        {
-            if (ModelState.IsValid) {
-                _vancancyRepository.SaveVacancy(model);
-                return RedirectToAction(nameof(Index));
-            }
-            else {
-                return View();
-            }
-        }
+		[HttpPost]
+		public IActionResult Add(Vacancy vacancy)
+		{
+			if (ModelState.IsValid)
+			{
+				_vacancyManager.Save(vacancy);
+				return RedirectToAction(nameof(Index));
+			}
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(long id)
-        {
-            await _vancancyRepository.DeleteVacancy(id);
+			return View();
+		}
 
-            return RedirectToAction(
-                        actionName: nameof(Index),
-                        controllerName: nameof(VacancyController).TrimControllerName());
-        }
+		[HttpPost]
+		public async Task<IActionResult> Delete(long id)
+		{
+			await _vacancyManager.Delete(id);
 
-        [HttpGet]
-        public IActionResult Edit(long id)
-        {
-            Vacancy vacancy;
+			return RedirectToAction(
+						actionName: nameof(Index),
+						controllerName: nameof(VacancyController).TrimControllerName());
+		}
 
-            try
-            {
-                if (id <= 0)
-                {
-                    vacancy = new Vacancy();
-                }
-                else
-                {
-                    vacancy = _vancancyRepository.GetVacancy(id);
-                }
-            }
-            catch (KeyNotFoundException)
-            {
-                return new NotFoundResult();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return new BadRequestResult();
-            }
+		[HttpGet]
+		public IActionResult Edit(long id)
+		{
+			try
+			{
+				return View(_vacancyManager.GetVacancy(id));
+			}
+			catch (KeyNotFoundException)
+			{
+				return new NotFoundResult();
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return new BadRequestResult();
+			}
+		}
 
-            return View(vacancy);
-        }
+		[HttpPost]
+		public async Task<IActionResult> Edit(Vacancy vacancy)
+		{
+			if (ModelState.IsValid)
+			{
+				try
+				{  
+					await _vacancyManager.Save(vacancy);
+					return RedirectToAction(
+						actionName: nameof(Index),
+						controllerName: nameof(VacancyController).TrimControllerName());
+				}
+				catch (Exception)
+				{
+					ModelState.AddModelError(string.Empty, "Error, something went wrong while saving vacancy.");
+				}
+			}																						 
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(Vacancy vacancy)
-        {
-            if(ModelState.IsValid)
-            {
-                await _vancancyRepository.SaveVacancy(vacancy);
-                return RedirectToAction(
-                    actionName: nameof(Index),
-                    controllerName: nameof(VacancyController).TrimControllerName());
-            }
-            else
-            {
-                return View(vacancy);
-            }
-        }
-    }
+			return View(vacancy);
+		}
+	}
 }
