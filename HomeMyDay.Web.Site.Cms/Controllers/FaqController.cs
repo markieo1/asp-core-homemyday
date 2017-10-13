@@ -29,7 +29,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Questions(long id, int? page, int? pageSize)
 		{
-			return View(await GetFaqQuestionsViewModel(id, page, pageSize)); 
+			return View(await _faqManager.GetFaqQuestionsViewModel(id, page, pageSize)); 
 		}
 
 		[HttpGet]

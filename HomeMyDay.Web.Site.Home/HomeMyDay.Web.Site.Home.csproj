@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Site.Base\HomeMyDay.Web.Site.Base.csproj" />
-    <ProjectReference Include="..\HomeMyDay.Web.Base\HomeMyDay.Web.Base.csproj" />
   </ItemGroup>
 
   <ItemGroup>
