@@ -12,6 +12,7 @@ using HomeMyDay.Web.Site.Home.Extensions;
 using HomeMyDay.Infrastructure.Extensions;
 using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Web.Site.Cms.Extensions;
+using HomeMyDay.Web.Base.Extensions;
 
 namespace HomeMyDay.Web
 {
@@ -35,6 +36,7 @@ namespace HomeMyDay.Web
 			}).AddDefaultTokenProviders();
 
 			services.AddInfrastructureServices(Configuration, identityBuilder);
+			services.AddWebManagers();
 
 			services.Configure<IdentityOptions>(options =>
 			{
