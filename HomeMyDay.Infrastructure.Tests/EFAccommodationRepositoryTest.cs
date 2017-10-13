@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Site.Home.Components;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
@@ -119,8 +121,11 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
+			IReviewRepository reviewRepository = new EFReviewRepository(context, repository);
+			IAccommodationManager manager = new AccommodationManager(repository, reviewRepository);
 
-			RecommendedAccommodationViewComponent component = new RecommendedAccommodationViewComponent(repository);
+
+			RecommendedAccommodationViewComponent component = new RecommendedAccommodationViewComponent(manager);
 
 			IEnumerable<Accommodation> accommodations = ((IEnumerable<Accommodation>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
@@ -143,8 +148,10 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
+			IReviewRepository reviewRepository = new EFReviewRepository(context, repository);
+			IAccommodationManager manager = new AccommodationManager(repository, reviewRepository);
 
-			RecommendedAccommodationViewComponent component = new RecommendedAccommodationViewComponent(repository);
+			RecommendedAccommodationViewComponent component = new RecommendedAccommodationViewComponent(manager);
 
 			IEnumerable<Accommodation> accommodations = ((IEnumerable<Accommodation>)(component.Invoke() as ViewViewComponentResult).ViewData.Model);
 
@@ -604,7 +611,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-5, 1);
 
-			Assert.NotNull(paginatedAccommodations);
+			Assert.NotNull(paginatedAccommodations);	   
 			Assert.Equal(1, paginatedAccommodations.Count);
 			Assert.Equal(1, paginatedAccommodations.PageIndex);
 			Assert.Equal(1, paginatedAccommodations.PageSize);

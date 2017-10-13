@@ -3,6 +3,8 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Base.ViewModels;
 using HomeMyDay.Web.Site.Home.Controllers;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +21,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			INewspaperRepository repository = new EFNewspaperRepository(context);
-			var target = new NewspaperController(repository);
+			INewspaperManager manager = new NewspaperManager(repository);
+			var target = new NewspaperController(manager);
 			var newspaperViewModel = new NewspaperViewModel()
 			{
 				Email = "test@avans.nl"
@@ -39,7 +42,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			INewspaperRepository repository = new EFNewspaperRepository(context);
-			var target = new NewspaperController(repository);
+			INewspaperManager manager = new NewspaperManager(repository);
+			var target = new NewspaperController(manager);
 			var newspaperViewModel = new NewspaperViewModel()
 			{
 				Email = "  test@avans.nl  "
@@ -67,7 +71,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			context.SaveChanges();
 
 			var repository = new EFNewspaperRepository(context);
-			var target = new NewspaperController(repository);
+			INewspaperManager manager = new NewspaperManager(repository);
+			var target = new NewspaperController(manager);
 			var newspaperViewModel = new NewspaperViewModel()
 			{
 				Email = "test@avans.nl"
@@ -88,7 +93,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
-			var target = new NewspaperController(repository);
+			INewspaperManager manager = new NewspaperManager(repository);
+			var target = new NewspaperController(manager);
 
 			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = "" }));
 		}
@@ -100,7 +106,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
-			var target = new NewspaperController(repository);
+			INewspaperManager manager = new NewspaperManager(repository);
+			var target = new NewspaperController(manager);
 
 			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = " " }));
 		}
@@ -112,7 +119,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			var repository = new EFNewspaperRepository(context);
-			var target = new NewspaperController(repository);
+			INewspaperManager manager = new NewspaperManager(repository);
+			var target = new NewspaperController(manager);
 
 			Assert.Throws<ArgumentNullException>(() => target.Index(new NewspaperViewModel() { Email = null }));
 		}

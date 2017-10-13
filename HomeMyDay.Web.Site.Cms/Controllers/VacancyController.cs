@@ -24,7 +24,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			return View(_vacancyManager.GetVacancyPaginatedList(page, pageSize));
+			return View(await _vacancyManager.GetVacancyPaginatedList(page, pageSize));
 		}
 
 		[HttpGet]

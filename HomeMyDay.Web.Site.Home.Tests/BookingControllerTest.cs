@@ -4,6 +4,8 @@ using System.Text;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Services;
+using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Base.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 		{
 			//Mock accommodation repo
 			var accommodationRepo = new Mock<IAccommodationRepository>();
+			var reviewRepo = new EFReviewRepository(null, accommodationRepo.Object);
+			var accommodationManager = new AccommodationManager(accommodationRepo.Object, reviewRepo);
 			if(shouldHaveAccommodations)
 			{
 				//Setup fake accommodation
@@ -52,6 +56,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			//Mock country repo
 			var countryRepo = new Mock<ICountryRepository>();
+			var countryManager = new CountryManager(countryRepo.Object);
 			countryRepo.Setup(r => r.Countries).Returns(countries);
 
 			//Setup fake google API options
@@ -62,6 +67,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			//Mock google api options
 			var googleOpts = new Mock<IOptions<GoogleApiServiceOptions>>();
+			var googleOptsManager = new GoogleApiServiceOptionsManager(googleOpts.Object);
 			googleOpts.Setup(g => g.Value).Returns(fakeApiOptions);
 
 			var sessionMock = new Mock<ISession>();
@@ -75,7 +81,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			httpContext.Session = sessionMock.Object;
 
 			//Setup controller
-			var controller = new BookingController(accommodationRepo.Object, countryRepo.Object, googleOpts.Object);
+			var controller = new BookingController(accommodationManager, countryManager, googleOptsManager);
 			controller.ControllerContext = new ControllerContext()
 			{
 				HttpContext = httpContext,

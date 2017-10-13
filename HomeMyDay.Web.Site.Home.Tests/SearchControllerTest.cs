@@ -5,6 +5,8 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Base.ViewModels;
 using HomeMyDay.Web.Site.Home.Controllers;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +22,12 @@ namespace HomeMyDay.Web.Site.Home.Tests
 		{
 			var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
-			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
+			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);  
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
+			IReviewRepository reviewRepo = new EFReviewRepository(context, repository);
+			IAccommodationManager manager = new AccommodationManager(repository, reviewRepo);
 
-			SearchController target = new SearchController(repository);
+			SearchController target = new SearchController(manager);
 
 			AccommodationSearchViewModel searchModel = new AccommodationSearchViewModel()
 			{
@@ -70,8 +74,10 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			context.SaveChanges();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
+			IReviewRepository reviewRepo = new EFReviewRepository(context, repository);
+			IAccommodationManager manager = new AccommodationManager(repository, reviewRepo);
 
-			SearchController target = new SearchController(repository);
+			SearchController target = new SearchController(manager);
 
 			AccommodationSearchViewModel searchModel = new AccommodationSearchViewModel()
 			{

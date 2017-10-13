@@ -3,6 +3,8 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Base.ViewModels;
 using HomeMyDay.Web.Site.Home.Components;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
@@ -20,8 +22,10 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
+			IReviewRepository reviewRepo = new EFReviewRepository(context, repository);
+			IAccommodationManager manager = new AccommodationManager(repository, reviewRepo);
 
-			SearchBarViewComponent target = new SearchBarViewComponent(repository);
+			SearchBarViewComponent target = new SearchBarViewComponent(manager);
 
 			AccommodationSearchViewModel results = (AccommodationSearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 
@@ -51,8 +55,10 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			context.SaveChanges();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
+			IReviewRepository reviewRepo = new EFReviewRepository(context, repository);
+			IAccommodationManager manager = new AccommodationManager(repository, reviewRepo);
 
-			SearchBarViewComponent target = new SearchBarViewComponent(repository);
+			SearchBarViewComponent target = new SearchBarViewComponent(manager);
 
 			AccommodationSearchViewModel results = (AccommodationSearchViewModel)(target.Invoke() as ViewViewComponentResult).ViewData.Model;
 

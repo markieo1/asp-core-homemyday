@@ -6,6 +6,8 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Base.ViewModels;
 using HomeMyDay.Web.Site.Home.Controllers;
 using Microsoft.AspNetCore.Http;
@@ -26,8 +28,9 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			var context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IReviewRepository reviewRepository = new EFReviewRepository(context, null);
+			IReviewManager reviewManager = new ReviewManager(reviewRepository);	  
 
-			var target = new ReviewController(reviewRepository);
+			var target = new ReviewController(reviewManager);
 
 			var result = target.Index();
 			var model = result.Model as IEnumerable<ReviewViewModel>;
@@ -57,8 +60,9 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			context.SaveChanges();
 
 			IReviewRepository reviewRepository = new EFReviewRepository(context, null);
+			IReviewManager reviewManager = new ReviewManager(reviewRepository);
 
-			var target = new ReviewController(reviewRepository);
+			var target = new ReviewController(reviewManager);
 
 			var result = target.Index();
 			var model = result.Model as IEnumerable<ReviewViewModel>;
@@ -96,7 +100,9 @@ namespace HomeMyDay.Web.Site.Home.Tests
 				Session = sessionMock.Object
 			};
 
-			var target = new ReviewController(reviewRepository)
+			IReviewManager reviewManager = new ReviewManager(reviewRepository);
+
+			var target = new ReviewController(reviewManager)
 			{
 				TempData = new TempDataDictionary(httpContext, new SessionStateTempDataProvider())
 			};

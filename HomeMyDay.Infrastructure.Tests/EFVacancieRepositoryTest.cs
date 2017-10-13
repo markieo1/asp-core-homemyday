@@ -60,6 +60,7 @@ namespace HomeMyDay.Infrastructure.Tests
 		    Assert.Throws<KeyNotFoundException>(() => repository.GetVacancy(2));
 	    }
 
+		[Fact]
 	    public void TestGetIdExistingAccommodation()
 	    {
 		    var optionsBuilder = new DbContextOptionsBuilder<HomeMyDayDbContext>();

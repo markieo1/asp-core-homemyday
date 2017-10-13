@@ -9,6 +9,8 @@ using Moq;
 using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Base.Managers;
+using HomeMyDay.Web.Base.Managers.Implementation;
 using HomeMyDay.Web.Site.Cms.Controllers;
 
 namespace HomeMyDay.Web.Site.Cms.Tests
@@ -22,8 +24,9 @@ namespace HomeMyDay.Web.Site.Cms.Tests
 			optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IFaqRepository repository = new EFFaqRepository(context);
+			IFaqManager manager = new FaqManager(repository);
 
-			var target = new FaqController(repository);
+			var target = new FaqController(manager);
 			var result = target.Index(1, 10).Result as ViewResult;
 			var model = result.Model as IEnumerable<FaqCategory>;
 
@@ -46,8 +49,9 @@ namespace HomeMyDay.Web.Site.Cms.Tests
 			context.SaveChanges();
 
 			IFaqRepository repository = new EFFaqRepository(context);
+			IFaqManager manager = new FaqManager(repository);
 
-			var target = new FaqController(repository);
+			var target = new FaqController(manager);
 			var result = target.Index(1, 10).Result as ViewResult;
 			var model = result.Model as IEnumerable<FaqCategory>;
 
@@ -65,7 +69,9 @@ namespace HomeMyDay.Web.Site.Cms.Tests
 			new FaqCategory {Id = 1, CategoryName = "Test2"},cat, new FaqCategory {Id = 3, CategoryName = "Test33"},
 			});
 
-			FaqController target = new FaqController(mock.Object);
+			IFaqManager manager = new FaqManager(mock.Object);
+
+			FaqController target = new FaqController(manager);
 			//try to delete
 			await target.DeleteCategory(cat.Id);
 			//Check if DeleteCategory is called 
@@ -75,9 +81,10 @@ namespace HomeMyDay.Web.Site.Cms.Tests
 		[Fact]
 		public async void TestEditCategoryCalled()
 		{
-			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();
+			Mock<IFaqRepository> mock = new Mock<IFaqRepository>();	 
+			IFaqManager manager = new FaqManager(mock.Object);
 
-			FaqController target = new FaqController(mock.Object);
+			FaqController target = new FaqController(manager);
 
 			FaqCategory cat = new FaqCategory { Id = 1, CategoryName = "Test" };
 
