@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using HomeMyDay.Core.Authorization;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
-using HomeMyDay.Web.Base.ViewModels;
+using HomeMyDay.Web.Base.Managers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,44 +11,39 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 	[Area("CMS")]
 	[Authorize(Policy = Policies.Administrator)]
 	public class PagesController : Controller
-	{
-		private readonly IPageRepository _pageRepository;
+	{		   
+		private readonly IPageManager _pageManager;
 
-		public PagesController(IPageRepository pageRepository)
+		public PagesController(IPageManager pageManager)
 		{
-			_pageRepository = pageRepository;
+			_pageManager = pageManager;
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			PaginatedList<Page> paginatedResult = await _pageRepository.List(page ?? 1, pageSize ?? 5);
-			return View(paginatedResult);
+			return View(await _pageManager.GetPagePaginatedList(page, pageSize));
 		}
 
 		[HttpGet]
 		public IActionResult Edit(long id)
 		{
-			Page _surprise = _pageRepository.GetPage(id);
-			PageViewModel model = new PageViewModel() { Title = _surprise.Title, Content = _surprise.Content };
-
-			return View(model);
+			return View(_pageManager.GetPageViewModel(id));
 		}
 
 		[HttpPost]
 		public IActionResult Edit(long id, Page page)
 		{
-			Page _surprise = _pageRepository.GetPage(id);
-			if (_surprise != null)
+			try
 			{
-				_pageRepository.EditPage(id, page);
+				_pageManager.EditPage(id, page);
 				return View();
-			}
-			else
+			}  
+			catch (Exception)
 			{
 				ModelState.AddModelError(string.Empty, "Error, something went wrong while editing");
 				return View();
-			}
+			}	
 		}
 	}
 }

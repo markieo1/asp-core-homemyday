@@ -43,7 +43,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Page page = _context.Page.LastOrDefault(r=>r.Id == id);
+			Page page = _context.Page.LastOrDefault(r => r.Id == id);
 
 			if (page == null)
 			{
@@ -55,7 +55,7 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public void EditPage(long id, Page page)
 		{
-			var db = _context.Page.Any(r=>r.Id == id);
+			var db = _context.Page.Any(r => r.Id == id);
 
 			if (page == null)
 			{
@@ -64,12 +64,12 @@ namespace HomeMyDay.Infrastructure.Repository
 
 			if (db)
 			{
-				var db_page = _context.Page.Where(r => r.Id == id).LastOrDefault();
+				var db_page = _context.Page.LastOrDefault(r => r.Id == id);
 
 				db_page.Title = page.Title;
 				db_page.Content = page.Content;
 			}
-				_context.SaveChanges();
+			_context.SaveChanges();
 		}
 	}
 }
