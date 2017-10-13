@@ -22,8 +22,6 @@ namespace HomeMyDay.Web.Base.Managers
 
 		Task Save(Accommodation accommodation);
 
-		IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests);
-
-		string GetClientApiKey();
+		IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests);   
 	}
 }

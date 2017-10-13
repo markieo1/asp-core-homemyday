@@ -7,10 +7,12 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 	public class AccommodationController : Controller
 	{
 		private readonly IAccommodationManager _accommodationManager;
+		private readonly IGoogleApiServiceOptionsManager _googleApiServiceOptionsManager;
 				
-		public AccommodationController(IAccommodationManager accommodationManager)
+		public AccommodationController(IAccommodationManager accommodationManager, IGoogleApiServiceOptionsManager googleApiServiceOptionsManager)
 		{
 			_accommodationManager = accommodationManager;
+			_googleApiServiceOptionsManager = googleApiServiceOptionsManager;
 		}
 
 		[HttpGet]
@@ -18,7 +20,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		{  
 			try
 			{
-				ViewBag.GoogleClientApiKey = _accommodationManager.GetClientApiKey();
+				ViewBag.GoogleClientApiKey = _googleApiServiceOptionsManager.GetClientApiKey();
 				return View(_accommodationManager.GetAccommodationViewModel(id));
 			}  
 			catch (KeyNotFoundException)

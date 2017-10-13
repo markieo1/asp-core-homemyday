@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Models;
-using Microsoft.Extensions.Options;
-using HomeMyDay.Core.Services;
 using HomeMyDay.Web.Base.Extensions;
+using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Web.Base.ViewModels;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
@@ -15,16 +11,16 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 	public class BookingController : Controller
 	{
 		private const string BOOKINGSESSIONKEY = "booking";
+						
+		private readonly IAccommodationManager _accommodationManager;
+		private readonly ICountryManager _countryManager;
+		private readonly IGoogleApiServiceOptionsManager _googleApiServiceOptionsManager;
 
-		private readonly IAccommodationRepository accommodationRepository;
-		private readonly ICountryRepository countryRepository;
-		private readonly GoogleApiServiceOptions googleOptions;
-
-		public BookingController(IAccommodationRepository repo, ICountryRepository countryRepo, IOptions<GoogleApiServiceOptions> googleOpts)
+		public BookingController(IAccommodationManager accommodationManager, ICountryManager countryManager, IGoogleApiServiceOptionsManager googleApiServiceOptionsManager)
 		{
-			this.accommodationRepository = repo;
-			this.countryRepository = countryRepo;
-			this.googleOptions = googleOpts.Value;
+			_accommodationManager = accommodationManager;
+			_countryManager = countryManager;
+			_googleApiServiceOptionsManager = googleApiServiceOptionsManager;
 		}
 
 		[HttpGet]
@@ -35,7 +31,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			Accommodation accommodation;
 			try
 			{
-				accommodation = accommodationRepository.GetAccommodation(id);
+				accommodation = _accommodationManager.GetAccommodation(id);
 				formModel.AccommodationId = accommodation.Id;
 				formModel.AccommodationName = accommodation.Name;
 			}
@@ -67,11 +63,11 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			}
 
 			//Get countries from db
-			IEnumerable<Country> countries = countryRepository.Countries.OrderBy(c => c.Name);
+			var countries = _countryManager.GetCountries();
 			ViewBag.Countries = countries;
 
 			//Get google client API key
-			ViewBag.GoogleClientApiKey = googleOptions.ClientApiKey;
+			ViewBag.GoogleClientApiKey = _googleApiServiceOptionsManager.GetClientApiKey();
 
 			return View("BookingForm", formModel);
 		}
@@ -85,7 +81,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				Accommodation accommodation;
 				try
 				{
-					accommodation = accommodationRepository.GetAccommodation(formData.AccommodationId);
+					accommodation = _accommodationManager.GetAccommodation(formData.AccommodationId);
 					formData.AccommodationName = accommodation.Name;
 				}
 				catch (KeyNotFoundException)
@@ -93,7 +89,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 					return NotFound();
 				}
 
-				ViewBag.Countries = countryRepository.Countries.OrderBy(c => c.Name);
+				ViewBag.Countries = _countryManager.GetCountries();
 				ViewBag.MaxPersons = formData.Persons.Count();
 
 				//Initialize BookingPersons up to the maximum that the accommodation will support.
@@ -114,7 +110,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				Accommodation accommodation;
 				try
 				{
-					accommodation = accommodationRepository.GetAccommodation(formData.AccommodationId);
+					accommodation = _accommodationManager.GetAccommodation(formData.AccommodationId);
 				}
 				catch(KeyNotFoundException)
 				{
@@ -124,8 +120,8 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				//Get country and nationality objects from ID
 				foreach(BookingPerson person in formData.Persons)
 				{
-					person.Country = countryRepository.GetCountry(person.Country.Id);
-					person.Nationality = countryRepository.GetCountry(person.Nationality.Id);
+					person.Country = _countryManager.GetCountry(person.Country.Id);
+					person.Nationality = _countryManager.GetCountry(person.Nationality.Id);
 				}
 
 				//Store model in Session

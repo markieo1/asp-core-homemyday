@@ -4,9 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using HomeMyDay.Core.Services;
 using HomeMyDay.Web.Base.ViewModels;
-using Microsoft.Extensions.Options;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
@@ -14,14 +12,11 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
     {
 	    private readonly IAccommodationRepository _accommodationRepository;
 	    private readonly IReviewRepository _reviewRepository;
-	    private readonly GoogleApiServiceOptions _googleOptions;
 
-	    public AccommodationManager(IAccommodationRepository accommodationRepository, IReviewRepository reviewRepository,
-		    IOptions<GoogleApiServiceOptions> googleOpts)
+	    public AccommodationManager(IAccommodationRepository accommodationRepository, IReviewRepository reviewRepository)
 	    {
 		    _accommodationRepository = accommodationRepository;
-		    _reviewRepository = reviewRepository;
-		    _googleOptions = googleOpts.Value;
+		    _reviewRepository = reviewRepository;	
 	    }
 
 
@@ -56,11 +51,6 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 
 		    return AccommodationViewModel.FromAccommodation(accommodation, reviews.Where(x => x.Approved).ToList());
 		}														
-
-	    public string GetClientApiKey()
-	    {
-		    return _googleOptions.ClientApiKey;
-	    }
 
 		public IEnumerable<Accommodation> GetRecommendedAccommodations()
 		{
