@@ -2,21 +2,19 @@
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Core.Services;
+using HomeMyDay.Infrastructure.Options;
 
 namespace HomeMyDay.Infrastructure.Services
 {
-    public class EmailServices : IEmailServices
+	public class EmailService : IEmailService
     {
         public MimeMessage message;
 
 		private readonly MailServiceOptions _options;
 
-		public EmailServices(IOptions<MailServiceOptions> optionsAccessor)
+		public EmailService(IOptions<MailServiceOptions> optionsAccessor)
         {
             message = new MimeMessage();
 			_options = optionsAccessor.Value;

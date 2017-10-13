@@ -2,6 +2,7 @@
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Services;
 using HomeMyDay.Infrastructure.Database;
+using HomeMyDay.Infrastructure.Options;
 using HomeMyDay.Infrastructure.Repository;
 using HomeMyDay.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,7 @@ namespace HomeMyDay.Infrastructure.Extensions
 			});
 
 			identityBuilder.AddEntityFrameworkStores<AppIdentityDbContext>();
-			
+
 			services.AddAuthorization(options =>
 			{
 				options.AddPolicy(Policies.Administrator, policy => policy.RequireRole(Roles.Administrator));
@@ -48,7 +49,10 @@ namespace HomeMyDay.Infrastructure.Extensions
 			//Google API settings
 			services.Configure<GoogleApiServiceOptions>(configuration.GetSection("GoogleMapsSettings"));
 
-			services.AddTransient<IEmailServices, EmailServices>();
+			services.AddTransient<IEmailService, EmailService>();
+			services.AddTransient<IMapService, GoogleMapService>();
+
+			// Add repositories
 			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
 			services.AddTransient<ICountryRepository, EFCountryRepository>();
 			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();

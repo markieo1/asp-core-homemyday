@@ -14,14 +14,13 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 	{
 		private readonly SignInManager<User> _signInManager;
 		private readonly UserManager<User> _userManager;
-		private readonly IEmailServices _emailServices;
+		private readonly IEmailService _emailService;
 
-		public AccountController(IEmailServices emailServices, UserManager<User> userMgr, SignInManager<User> signInMgr)
+		public AccountController(IEmailService emailServices, UserManager<User> userMgr, SignInManager<User> signInMgr)
 		{
 			_signInManager = signInMgr;
 			_userManager = userMgr;
-			_emailServices = emailServices;
-
+			_emailService = emailServices;
 		}
 
 		[AllowAnonymous]
@@ -95,7 +94,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 						new { userid = user.Id, code = code },
 						protocol: HttpContext.Request.Scheme);
 
-					await _emailServices.SendEmailAsync(user.Email, "Confirm your account",
+					await _emailService.SendEmailAsync(user.Email, "Confirm your account",
 						$"Please confirm your account by clicking this link: {callbackUrl}");
 
 					return View("ConfirmEmail");
@@ -127,7 +126,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 				var callbackUrl = Url.Action(nameof(AccountController.ResetPassword), nameof(AccountController).TrimControllerName(),
 	new { UserId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-				await _emailServices.SendEmailAsync(user.Email, "Reset Password",
+				await _emailService.SendEmailAsync(user.Email, "Reset Password",
 			$"Please reset your password by clicking here: { callbackUrl}");
 				return View("ConfirmPassword");
 			}

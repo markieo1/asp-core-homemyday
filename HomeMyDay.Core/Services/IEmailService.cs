@@ -8,7 +8,7 @@ namespace HomeMyDay.Core.Services
 	/// <summary>
 	/// EmailServices inteface to send mails
 	/// </summary>
-	public interface IEmailServices
+	public interface IEmailService
     {
 		/// <summary>
 		/// Send the mail

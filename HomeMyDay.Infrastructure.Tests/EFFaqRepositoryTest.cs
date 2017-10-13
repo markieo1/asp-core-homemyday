@@ -248,7 +248,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			PaginatedList<FaqCategory> paginatedCategories = await repository.ListCategories(1, 10);
 
 			Assert.NotNull(paginatedCategories);
-			Assert.Equal(0, paginatedCategories.Count);
+			Assert.Empty(paginatedCategories);
 			Assert.Equal(1, paginatedCategories.PageIndex);
 			Assert.Equal(10, paginatedCategories.PageSize);
 			Assert.Equal(1, paginatedCategories.TotalPages);
@@ -268,7 +268,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			PaginatedList<FaqCategory> paginatedCategories = await repository.ListCategories(-5, 10);
 
 			Assert.NotNull(paginatedCategories);
-			Assert.Equal(0, paginatedCategories.Count);
+			Assert.Empty(paginatedCategories);
 			Assert.Equal(1, paginatedCategories.PageIndex);
 			Assert.Equal(10, paginatedCategories.PageSize);
 			Assert.Equal(1, paginatedCategories.TotalPages);
@@ -288,7 +288,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			PaginatedList<FaqCategory> paginatedCategories = await repository.ListCategories(-5, -10);
 
 			Assert.NotNull(paginatedCategories);
-			Assert.Equal(0, paginatedCategories.Count);
+			Assert.Empty(paginatedCategories);
 			Assert.Equal(1, paginatedCategories.PageIndex);
 			Assert.Equal(10, paginatedCategories.PageSize);
 			Assert.Equal(1, paginatedCategories.TotalPages);

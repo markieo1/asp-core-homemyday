@@ -690,7 +690,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(1, 10);
 
 			Assert.NotNull(paginatedAccommodations);
-			Assert.Equal(0, paginatedAccommodations.Count);
+			Assert.Empty(paginatedAccommodations);
 			Assert.Equal(1, paginatedAccommodations.PageIndex);
 			Assert.Equal(10, paginatedAccommodations.PageSize);
 			Assert.Equal(1, paginatedAccommodations.TotalPages);
@@ -710,7 +710,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-5, 10);
 
 			Assert.NotNull(paginatedAccommodations);
-			Assert.Equal(0, paginatedAccommodations.Count);
+			Assert.Empty(paginatedAccommodations);
 			Assert.Equal(1, paginatedAccommodations.PageIndex);
 			Assert.Equal(10, paginatedAccommodations.PageSize);
 			Assert.Equal(1, paginatedAccommodations.TotalPages);
@@ -730,7 +730,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			PaginatedList<Accommodation> paginatedAccommodations = await repository.List(-5, -10);
 
 			Assert.NotNull(paginatedAccommodations);
-			Assert.Equal(0, paginatedAccommodations.Count);
+			Assert.Empty(paginatedAccommodations);
 			Assert.Equal(1, paginatedAccommodations.PageIndex);
 			Assert.Equal(10, paginatedAccommodations.PageSize);
 			Assert.Equal(1, paginatedAccommodations.TotalPages);

@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
+using HomeMyDay.Infrastructure.Options;
+using HomeMyDay.Infrastructure.Services;
 
 namespace HomeMyDay.Web.Site.Home.Tests
 {
@@ -67,7 +69,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			//Mock google api options
 			var googleOpts = new Mock<IOptions<GoogleApiServiceOptions>>();
-			var googleOptsManager = new GoogleApiServiceOptionsManager(googleOpts.Object);
+			var googleOptsManager = new GoogleMapService(googleOpts.Object);
 			googleOpts.Setup(g => g.Value).Returns(fakeApiOptions);
 
 			var sessionMock = new Mock<ISession>();

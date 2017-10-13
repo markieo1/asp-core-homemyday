@@ -42,7 +42,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			Assert.NotNull(model);
 			Assert.NotNull(model.Search);
-			Assert.Equal(0, model.Accommodations.Count());
+			Assert.Empty(model.Accommodations);
 			Assert.Equal(searchModel, model.Search);
 			Assert.Equal("NoResults", result.ViewName);
 		}

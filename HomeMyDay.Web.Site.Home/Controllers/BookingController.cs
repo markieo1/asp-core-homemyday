@@ -5,22 +5,23 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Web.Base.Extensions;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Web.Base.ViewModels;
+using HomeMyDay.Core.Services;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	public class BookingController : Controller
 	{
 		private const string BOOKINGSESSIONKEY = "booking";
-						
+
 		private readonly IAccommodationManager _accommodationManager;
 		private readonly ICountryManager _countryManager;
-		private readonly IGoogleApiServiceOptionsManager _googleApiServiceOptionsManager;
+		private readonly IMapService _mapService;
 
-		public BookingController(IAccommodationManager accommodationManager, ICountryManager countryManager, IGoogleApiServiceOptionsManager googleApiServiceOptionsManager)
+		public BookingController(IAccommodationManager accommodationManager, ICountryManager countryManager, IMapService mapService)
 		{
 			_accommodationManager = accommodationManager;
 			_countryManager = countryManager;
-			_googleApiServiceOptionsManager = googleApiServiceOptionsManager;
+			_mapService = mapService;
 		}
 
 		[HttpGet]
@@ -35,7 +36,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				formModel.AccommodationId = accommodation.Id;
 				formModel.AccommodationName = accommodation.Name;
 			}
-			catch(KeyNotFoundException)
+			catch (KeyNotFoundException)
 			{
 				return NotFound();
 			}
@@ -45,7 +46,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			//If an amount of persons was given, use it.
 			//Otherwise, get the maximum persons from the Accommodation.
 			int maxPersons;
-			if(persons.HasValue && persons.Value <= accommodation.MaxPersons)
+			if (persons.HasValue && persons.Value <= accommodation.MaxPersons)
 			{
 				maxPersons = persons.Value;
 			}
@@ -57,7 +58,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			ViewBag.MaxPersons = maxPersons;
 
 			//Initialize BookingPersons for the form
-			for(int i = 0; i < accommodation.MaxPersons; i++)
+			for (int i = 0; i < accommodation.MaxPersons; i++)
 			{
 				formModel.Persons.Add(new BookingPerson());
 			}
@@ -66,8 +67,8 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 			var countries = _countryManager.GetCountries();
 			ViewBag.Countries = countries;
 
-			//Get google client API key
-			ViewBag.GoogleClientApiKey = _googleApiServiceOptionsManager.GetClientApiKey();
+			//Get client API key
+			ViewBag.MapApiKey = _mapService.GetApiKey();
 
 			return View("BookingForm", formModel);
 		}
@@ -75,7 +76,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		[HttpPost]
 		public IActionResult BookingForm(BookingFormViewModel formData)
 		{
-			if(!ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
 				//Restore accommodation object from ID
 				Accommodation accommodation;
@@ -94,9 +95,9 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 
 				//Initialize BookingPersons up to the maximum that the accommodation will support.
 				//Old values entered by the user should be kept.
-				for(int i = 0; i < accommodation.MaxPersons; i++)
+				for (int i = 0; i < accommodation.MaxPersons; i++)
 				{
-					if(formData.Persons.ElementAtOrDefault(i) == null)
+					if (formData.Persons.ElementAtOrDefault(i) == null)
 					{
 						formData.Persons.Add(new BookingPerson());
 					}
@@ -112,20 +113,21 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				{
 					accommodation = _accommodationManager.GetAccommodation(formData.AccommodationId);
 				}
-				catch(KeyNotFoundException)
+				catch (KeyNotFoundException)
 				{
 					return BadRequest();
 				}
 
 				//Get country and nationality objects from ID
-				foreach(BookingPerson person in formData.Persons)
+				foreach (BookingPerson person in formData.Persons)
 				{
 					person.Country = _countryManager.GetCountry(person.Country.Id);
 					person.Nationality = _countryManager.GetCountry(person.Nationality.Id);
 				}
 
 				//Store model in Session
-				HttpContext.Session.Set(BOOKINGSESSIONKEY, new Booking() {
+				HttpContext.Session.Set(BOOKINGSESSIONKEY, new Booking()
+				{
 					Accommodation = accommodation,
 					Persons = formData.Persons,
 				});
@@ -146,7 +148,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		[HttpPost]
 		public IActionResult InsuranceForm(InsuranceFormViewModel formModel)
 		{
-			if(!ModelState.IsValid)
+			if (!ModelState.IsValid)
 			{
 				return View("InsuranceForm", formModel);
 			}

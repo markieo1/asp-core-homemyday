@@ -46,7 +46,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			ICountryRepository repository = new EFCountryRepository(context);
 
-			Assert.Equal(0, repository.Countries.Count());
+			Assert.Empty(repository.Countries);
 		}
 	}
 }

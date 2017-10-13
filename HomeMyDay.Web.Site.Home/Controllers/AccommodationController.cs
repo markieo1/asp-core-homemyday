@@ -1,4 +1,5 @@
-﻿using HomeMyDay.Web.Base.Managers;
+﻿using HomeMyDay.Core.Services;
+using HomeMyDay.Web.Base.Managers;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -7,26 +8,26 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 	public class AccommodationController : Controller
 	{
 		private readonly IAccommodationManager _accommodationManager;
-		private readonly IGoogleApiServiceOptionsManager _googleApiServiceOptionsManager;
-				
-		public AccommodationController(IAccommodationManager accommodationManager, IGoogleApiServiceOptionsManager googleApiServiceOptionsManager)
+		private readonly IMapService _mapService;
+
+		public AccommodationController(IAccommodationManager accommodationManager, IMapService mapService)
 		{
 			_accommodationManager = accommodationManager;
-			_googleApiServiceOptionsManager = googleApiServiceOptionsManager;
+			_mapService = mapService;
 		}
 
 		[HttpGet]
 		public IActionResult Detail(long id)
-		{  
+		{
 			try
 			{
-				ViewBag.GoogleClientApiKey = _googleApiServiceOptionsManager.GetClientApiKey();
+				ViewBag.MapApiKey = _mapService.GetApiKey();
 				return View(_accommodationManager.GetAccommodationViewModel(id));
-			}  
+			}
 			catch (KeyNotFoundException)
 			{
 				return NotFound();
-			}	
+			}
 		}
 	}
 }
