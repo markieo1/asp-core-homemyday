@@ -9,7 +9,6 @@ using System;
 using Microsoft.AspNetCore.Mvc.Razor;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Web.Site.Home.Extensions;
-using HomeMyDay.Core.Services;
 using HomeMyDay.Infrastructure.Extensions;
 using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Web.Site.Cms.Extensions;
