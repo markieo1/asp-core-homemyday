@@ -15,24 +15,27 @@ namespace HomeMyDay.Web.Site.Cms.Tests
 		public void TestEditPageIsCalled()
 		{
 
-			// Arrange - create the mock repo and manager
-			PageViewModel surprisePageViewModel = new PageViewModel() {Page_Name = "TheSurprise", Title = "Hallo", Content = "Test" };
+			// Arrange - create the mock repo and manager																			   
 			Page suprise = new Page(){Id = 1, Page_Name = "TheSurpriseModified", Title = "Hallo123", Content = "Test321" };	
 
-			var repo = new Mock<IPageRepository>();
-			repo.SetupGet(x => x.GetPage(1)).Returns(suprise);	
+			var repo = new Mock<IPageRepository>();		
+			repo.Setup(x => x.GetPage(1)).Returns(suprise);
+			repo.Setup(x => x.EditPage(1, suprise));
 
 			var manager = new PageManager(repo.Object);							  
 
 			// Arrange - create a controller
 			PagesController target = new PagesController(manager);
 
-			// Action
-			var model = (target.Edit(1) as ViewResult).ViewData.Model;
+			// Modify page
+			suprise.Title = "Testing";
 
-			// Assert
-			//Check if edit was called
-			repo.Verify(p => p.EditPage(1, suprise));
+			// Action	 
+			var model = (target.Edit(1) as ViewResult).ViewData.Model as PageViewModel;
+
+			// Assert				   
+			Assert.NotNull(model);
+			Assert.Equal("Testing", model.Title);
 		}
 	}
 }
