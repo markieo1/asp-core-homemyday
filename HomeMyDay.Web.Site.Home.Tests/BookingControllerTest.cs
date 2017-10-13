@@ -31,7 +31,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			var accommodationRepo = new Mock<IAccommodationRepository>();
 			var reviewRepo = new EFReviewRepository(null, accommodationRepo.Object);
 			var accommodationManager = new AccommodationManager(accommodationRepo.Object, reviewRepo);
-			if(shouldHaveAccommodations)
+			if (shouldHaveAccommodations)
 			{
 				//Setup fake accommodation
 				var accommodation = new Accommodation()
@@ -48,7 +48,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 				//If there are no accommodations, always throw a KeyNotFoundException
 				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<long>())).Throws(new KeyNotFoundException());
 			}
-			
+
 			//Setup fake countries
 			var countries = new List<Country>() {
 				new Country() { Id = 1, CountryCode = "NED", Name = "Netherlands", },
@@ -69,8 +69,8 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			//Mock google api options
 			var googleOpts = new Mock<IOptions<GoogleApiServiceOptions>>();
-			var googleOptsManager = new GoogleMapService(googleOpts.Object);
 			googleOpts.Setup(g => g.Value).Returns(fakeApiOptions);
+			var googleOptsManager = new GoogleMapService(googleOpts.Object);
 
 			var sessionMock = new Mock<ISession>();
 
@@ -113,7 +113,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			BookingController controller = GetController(true);
 
 			ViewResult result = controller.BookingForm(1, null) as ViewResult;
-			
+
 			BookingFormViewModel model = result.Model as BookingFormViewModel;
 
 			Assert.Equal("BookingForm", result.ViewName);
