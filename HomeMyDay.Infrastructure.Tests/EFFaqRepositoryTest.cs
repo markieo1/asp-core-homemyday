@@ -360,7 +360,7 @@ namespace HomeMyDay.Infrastructure.Tests
 					}
 				}
 				},
-				new FaqCategory() { CategoryName = "TestB" }
+				new FaqCategory() { Id = 2, CategoryName = "TestB" }
 			);
 
 			await context.SaveChangesAsync();
@@ -599,7 +599,8 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			context.FaqCategory.AddRange(
 				new FaqCategory()
-				{			
+				{
+					Id = 1,
 					CategoryName = "TestA",
 					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
 				{
@@ -615,7 +616,7 @@ namespace HomeMyDay.Infrastructure.Tests
 					}
 				}
 				},
-				new FaqCategory() { CategoryName = "TestB" }
+				new FaqCategory() { Id = 2, CategoryName = "TestB" }
 			);
 
 			await context.SaveChangesAsync();
