@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
 	public class ReviewViewModel
 	{

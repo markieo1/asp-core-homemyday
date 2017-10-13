@@ -3,7 +3,7 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
-using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Base.ViewModels;
 using HomeMyDay.Web.Components;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.EntityFrameworkCore;

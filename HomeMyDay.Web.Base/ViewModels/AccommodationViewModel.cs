@@ -1,8 +1,8 @@
-﻿using HomeMyDay.Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
 	public class AccommodationViewModel
 	{

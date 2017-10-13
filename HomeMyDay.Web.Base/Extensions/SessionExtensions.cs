@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace HomeMyDay.Web.Site.Base.Extensions
+namespace HomeMyDay.Web.Base.Extensions
 {
 	public static class SessionExtensions
 	{

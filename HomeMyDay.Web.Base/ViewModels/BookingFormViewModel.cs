@@ -1,11 +1,7 @@
-﻿using HomeMyDay.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using HomeMyDay.Core.Models;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
     public class BookingFormViewModel
     {

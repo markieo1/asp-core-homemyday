@@ -1,6 +1,6 @@
 ﻿using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using HomeMyDay.Web.Controllers.Cms;
+using HomeMyDay.Web.Site.Cms.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;

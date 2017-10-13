@@ -1,10 +1,6 @@
 ﻿using HomeMyDay.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
 	public class FaqQuestionsViewModel
 	{

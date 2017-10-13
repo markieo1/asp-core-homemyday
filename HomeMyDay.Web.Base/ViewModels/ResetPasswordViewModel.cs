@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
     public class ResetPasswordViewModel
     {

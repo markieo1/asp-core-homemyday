@@ -1,85 +1,56 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using HomeMyDay.Core.Authorization;
+using HomeMyDay.Core.Extensions;
+using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Core.Models;
-using System.Linq;
-using System.Collections.Generic;
-using System;
-using HomeMyDay.Core.Extensions;
-using HomeMyDay.Web.Base.Home.ViewModels;
-using HomeMyDay.Core.Authorization;
+using HomeMyDay.Web.Base.BaseControllers;
 
-namespace HomeMyDay.Web.Controllers.Cms
+namespace HomeMyDay.Web.Site.Cms.Controllers
 {
 	[Area("CMS")]
 	[Authorize(Policy = Policies.Administrator)]
-	public class FaqController : Controller
+	public class FaqController : FaqBaseController
 	{
-		private readonly IFaqRepository _faqRepository;
-
 		public FaqController(IFaqRepository repository)
+			: base(repository)
 		{
-			_faqRepository = repository;
-		}
+			
+		} 
 
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			var paginatedResult = await _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
-			return View(paginatedResult);
+			return View(await GetFaqCategoryPaginatedList(page, pageSize));
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> Questions(long id, int? page, int? pageSize)
 		{
-			FaqCategory category = _faqRepository.GetCategory(id);
-			PaginatedList<FaqQuestion> paginatedResult = await _faqRepository.ListQuestions(id, page ?? 1, pageSize ?? 5);
-
-			FaqQuestionsViewModel viewModel = new FaqQuestionsViewModel()
-			{
-				Category = category,
-				Questions = paginatedResult
-			};
-
-			return View(viewModel);
+			return View(await GetFaqQuestionsViewModel(id, page, pageSize)); 
 		}
 
 		[HttpGet]
 		public IActionResult EditCategory(long id)
 		{
-
-			FaqCategory category;
-
 			try
 			{
-				if (id <= 0)
-				{
-					category = new FaqCategory();
-				}
-				else
-				{
-					category = _faqRepository.GetCategory(id);
-				}
-			}
+				return View(GetFaqCategory(id));
+			}  
 			catch (KeyNotFoundException)
 			{
 				return new NotFoundResult();
-			}
-			catch (ArgumentOutOfRangeException)
-			{
-				return new BadRequestResult();
-			}
-
-			return View(category);
+			}								 
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> EditCategory(FaqCategory cat)
-		{
+		{  
 			if (ModelState.IsValid)
 			{
-				await _faqRepository.SaveCategory(cat);
+				await SaveCategory(cat);			 
 
 				return RedirectToAction(
 					actionName: nameof(Index),
@@ -90,14 +61,13 @@ namespace HomeMyDay.Web.Controllers.Cms
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> DeleteCategory(long id)
+		public new async Task<IActionResult> DeleteCategory(long id)
 		{
-			await _faqRepository.DeleteCategory(id);
+			await base.DeleteCategory(id);
 
 			return RedirectToAction(
 						actionName: nameof(Index),
 						controllerName: nameof(FaqController).TrimControllerName());
-		}
-
+		}  
 	}
 }

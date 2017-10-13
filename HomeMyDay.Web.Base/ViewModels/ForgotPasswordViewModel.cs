@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
-	public class NewspaperViewModel
-    {
+	public class ForgotPasswordViewModel
+	{
 		/// <summary>
 		/// The email of the user
 		/// </summary>
 		[Required]
 		[EmailAddress]
-		public string Email { get; set; }	
-    }
+		public string Email { get; set; }
+	}
 }

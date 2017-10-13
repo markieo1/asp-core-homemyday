@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Models;
 using Microsoft.Extensions.Options;
-using HomeMyDay.Web.Base.Home.ViewModels;
-using HomeMyDay.Web.Site.Base.Extensions;
 using HomeMyDay.Core.Services;
+using HomeMyDay.Web.Base.Extensions;
+using HomeMyDay.Web.Base.ViewModels;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {

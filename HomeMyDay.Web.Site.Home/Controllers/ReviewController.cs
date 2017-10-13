@@ -2,8 +2,8 @@
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Web.Base.Home.ViewModels;
 using HomeMyDay.Core.Extensions;
+using HomeMyDay.Web.Base.ViewModels;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {

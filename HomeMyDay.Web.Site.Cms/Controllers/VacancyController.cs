@@ -1,14 +1,14 @@
-﻿using HomeMyDay.Core.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using HomeMyDay.Core.Authorization;
+using HomeMyDay.Core.Extensions;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using HomeMyDay.Core.Authorization;
 
-namespace HomeMyDay.Web.Controllers.Cms
+namespace HomeMyDay.Web.Site.Cms.Controllers
 {
 	[Area("CMS")]
     [Authorize(Policy = Policies.Administrator)]

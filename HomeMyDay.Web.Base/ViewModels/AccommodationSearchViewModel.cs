@@ -1,12 +1,10 @@
-﻿using HomeMyDay.Core.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using HomeMyDay.Core.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace HomeMyDay.Web.Base.Home.ViewModels
+namespace HomeMyDay.Web.Base.ViewModels
 {
 	public class AccommodationSearchViewModel
 	{

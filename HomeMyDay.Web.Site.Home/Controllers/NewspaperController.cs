@@ -1,5 +1,5 @@
 ﻿using HomeMyDay.Core.Repository;
-using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Base.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeMyDay.Web.Site.Home.Controllers

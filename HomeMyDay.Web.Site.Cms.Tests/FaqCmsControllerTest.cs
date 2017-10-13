@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using HomeMyDay.Web.Controllers.Cms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
+using HomeMyDay.Web.Site.Cms.Controllers;
 
 namespace HomeMyDay.Web.Site.Cms.Tests
 {

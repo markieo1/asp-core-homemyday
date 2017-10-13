@@ -4,7 +4,7 @@ using System.Text;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Core.Services;
-using HomeMyDay.Web.Base.Home.ViewModels;
+using HomeMyDay.Web.Base.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;

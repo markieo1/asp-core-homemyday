@@ -1,12 +1,12 @@
 ﻿using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using HomeMyDay.Web.Base.Home.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeMyDay.Web.Base.ViewModels;
 
 namespace HomeMyDay.Web.Components
 {
