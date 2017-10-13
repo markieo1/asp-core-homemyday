@@ -1,5 +1,4 @@
-﻿using HomeMyDay.Core.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
