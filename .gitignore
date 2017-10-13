@@ -288,4 +288,4 @@ __pycache__/
 *.xsd.cs
 
 wwwroot/css
-/HomeMyDay/wwwroot/css
+/HomeMyDay.Web/wwwroot/css

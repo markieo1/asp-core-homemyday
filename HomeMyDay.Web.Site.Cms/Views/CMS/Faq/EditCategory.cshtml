@@ -1,0 +1,27 @@
+﻿@model FaqCategory
+
+<div class="text-danger" asp-validation-summary="All"></div>
+
+<div class="container">
+	<div class="row">
+		<h2>
+			@if (Model.Id <= 0)
+			{
+				@:Nieuwe category
+            }
+			else
+			{
+				@:Category: @Model.Id
+            }
+		</h2>
+
+		<form asp-action="EditCategory" asp-area="CMS" asp-controller="Faq" method="post">
+			<div class="form-group">
+				<label asp-for="CategoryName"></label>
+				<div><span asp-validation-for="CategoryName" class="text-danger"></span></div>
+				<input asp-for="CategoryName" class="form-control" />
+			</div>
+			<p><button class="btn btn-primary" type="submit">Save Changes</button></p>
+		</form>
+	</div>
+</div>

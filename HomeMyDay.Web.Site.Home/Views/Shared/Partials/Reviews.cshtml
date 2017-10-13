@@ -1,0 +1,31 @@
+﻿@using HomeMyDay.Web.Base.ViewModels
+@model IEnumerable<HomeMyDay.Web.Base.ViewModels.ReviewViewModel>
+
+@if (Model.Any())
+{
+    @foreach (var p in Model)
+    {
+        <div class="panel panel-default">
+            @if (!string.IsNullOrWhiteSpace(p.Title))
+            {
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        @p.Title
+                    </div>
+                </div>}
+            <div class="panel-body">
+                <p>@p.Text</p>
+                <span>@p.Name</span>
+                <span>@p.Date.ToString("dd MMM yyyy")</span>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2>Er zijn op dit moment geen reviews</h2>
+        </div>
+    </div>
+}

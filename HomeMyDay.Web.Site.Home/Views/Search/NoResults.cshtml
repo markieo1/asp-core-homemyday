@@ -1,0 +1,19 @@
+﻿@using HomeMyDay.Web.Base.ViewModels
+@model HomeMyDay.Web.Base.ViewModels.AccommodationSearchResultsViewModel
+
+@{
+    ViewData["Title"] = "Zoekresultaten";
+}
+
+
+<link rel="stylesheet" type="text/css" href="~/css/search.css" />
+
+<h1>Zoekresultaten</h1>
+
+<div class="container">
+    <div class="row">
+        @await Component.InvokeAsync("SearchBar", Model.Search)
+    </div>
+</div>
+
+<p>Uw zoekopdracht heeft geen resultaten opgeleverd.</p>

@@ -1,0 +1,175 @@
+﻿@using HomeMyDay.Web.Base.ViewModels
+@model HomeMyDay.Web.Base.ViewModels.BookingFormViewModel
+
+<form id="booking-form" class="container bottom-buffer" asp-action="BookingForm" method="post" data-maxpersons="@ViewBag.MaxPersons">
+
+	<h1>Boeking @Model.AccommodationName</h1>
+
+	<p>Algemene gegevens personen</p>
+
+	@for (int i = 0; i < Model.Persons.Count; i++)
+    {
+        @* Generate form fields up to the maximum amount of people, but only show the amount that the user has chosen. *@
+        string personClass;
+        @if(i < ViewBag.MaxPersons)
+        {
+            personClass = "bookingperson";
+        }
+        else
+        {
+            personClass = "bookingperson hidden";
+        }
+		<div class="@personClass" data-person-index="@i">
+			@if (i == 0)
+			{
+				<h2>Hoofdboeker</h2>
+			}
+			else
+			{
+				<h2>Boeker nummer @i</h2>
+			}
+
+            <div class="row">
+                <div class="form-input-group col-lg-1">
+                    <label asp-for="@Model.Persons[i].Salutation"></label>
+                    <select asp-for="@Model.Persons[i].Salutation">
+                        <option>Dhr.</option>
+                        <option>Mevr.</option>
+                    </select>
+                </div>
+
+                <div class="form-input-group col-lg-1">
+                    <label asp-for="@Model.Persons[i].Initials"></label>
+                    <input class="form-control" asp-for="@Model.Persons[i].Initials" />
+                    <span asp-validation-for="@Model.Persons[i].Initials"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].FirstName"></label>
+                    <input class="form-control" asp-for="@Model.Persons[i].FirstName" />
+                    <span asp-validation-for="@Model.Persons[i].FirstName"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].Insertion"></label>
+                    <input class="form-control" asp-for="@Model.Persons[i].Insertion" />
+                    <span asp-validation-for="@Model.Persons[i].Insertion"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].LastName"></label>
+                    <input class="form-control" asp-for="@Model.Persons[i].LastName" />
+                    <span asp-validation-for="@Model.Persons[i].LastName"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-input-group birthdate col-lg-2">
+                    <label asp-for="@Model.Persons[i].BirthDate"></label>
+                    <input class="form-control date" type="text" asp-for="@Model.Persons[i].BirthDate" />
+                    <span asp-validation-for="@Model.Persons[i].BirthDate"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].Email"></label>
+                    <input class="form-control" asp-for="@Model.Persons[i].Email" />
+                    <span asp-validation-for="@Model.Persons[i].Email"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].Country"></label>
+                    <select class="country form-control" asp-for="@Model.Persons[i].Country.Id" asp-items="@(new SelectList(ViewBag.Countries, "Id", "Name"))"></select>
+                    <span asp-validation-for="@Model.Persons[i].Country"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].PostalCode"></label>
+                    <input class="form-control postalcode" asp-for="@Model.Persons[i].PostalCode" />
+                    <span asp-validation-for="@Model.Persons[i].PostalCode"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].HouseNumber">Huisnummer + toev.</label>
+                    <input type="text" class="form-control housenumber" asp-for="@Model.Persons[i].HouseNumber" />
+                    <input class="form-control housenumbersuffix" asp-for="@Model.Persons[i].HouseNumberSuffix" />
+                    <span asp-validation-for="@Model.Persons[i].HouseNumber"></span>
+                    <span asp-validation-for="@Model.Persons[i].HouseNumberSuffix"></span>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].City"></label>
+                    <input class="form-control city" asp-for="@Model.Persons[i].City" readonly="readonly" />
+                    <span asp-validation-for="@Model.Persons[i].City"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].PhoneNumber"></label>
+                    <input class="form-control" asp-for="@Model.Persons[i].PhoneNumber" />
+                    <span asp-validation-for="@Model.Persons[i].PhoneNumber"></span>
+                </div>
+
+                <div class="form-input-group col-lg-2">
+                    <label asp-for="@Model.Persons[i].Nationality"></label>
+                    <select class="country form-control" asp-for="@Model.Persons[i].Nationality.Id" asp-items="@(new SelectList(ViewBag.Countries, "Id", "Name"))"></select>
+                    <span asp-validation-for="@Model.Persons[i].Nationality"></span>
+                </div>
+            </div>
+
+            @if(i > 0)
+            {
+                <button type="button" class="remove-booker btn btn-danger">Boeker verwijderen</button>
+            }
+
+            <hr />
+		</div>
+	}
+
+    <button type="button" id="add-booker-button" class="btn btn-success">Boeker Toevoegen</button>
+
+    <h2>Bagage</h2>
+
+    <p>Handbagage is inbegrepen. Wil je meer meenemen, kies dan hier je ruimbagage!</p>
+
+    <div class="baggage">
+        @for (int i = 0; i < Model.Persons.Count; i++)
+        {
+            @* Generate form fields up to the maximum amount of people, but only show the amount of people that the user has selected. *@
+            string baggageClass;
+            @if(i < ViewBag.MaxPersons)
+            {
+                baggageClass = "person-baggage";
+            }
+            else
+            {
+                baggageClass = "person-baggage hidden";
+            }
+
+            <div class="@baggageClass" data-person-index="@i">
+                @if (i == 0)
+                {
+                    <label for="@Model.Persons[i].Baggage">Hoofdboeker</label>
+                }
+                else
+                {
+                    <label for="@Model.Persons[i].Baggage">Boeker nummer @i</label>
+                }
+
+                <input asp-for="@Model.Persons[i].Baggage" class="form-control" />
+            </div>
+        }
+    </div>
+
+	<input type="submit" value="Volgende stap" class="btn btn-primary" />
+
+    <input type="hidden" asp-for="@Model.AccommodationId" />
+
+</form>
+
+@* Google Maps script *@
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=@(ViewBag.MapApiKey)">
+</script>
+
+<script defer src="~/js/bookingform.js"></script>

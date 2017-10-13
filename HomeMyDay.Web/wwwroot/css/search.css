@@ -1,0 +1,24 @@
+#search-results > div .search-result {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px; }
+  #search-results > div .search-result .accommodation-preview, #search-results > div .search-result .accommodation-info {
+    width: 49%;
+    border-collapse: collapse;
+    position: relative; }
+  #search-results > div .search-result .accommodation-preview > img {
+    width: 100%; }
+  #search-results > div .search-result .accommodation-info {
+    text-align: center; }
+    #search-results > div .search-result .accommodation-info .price {
+      font-weight: bold;
+      bottom: 5px;
+      right: 0px;
+      margin: 0 auto; }
+    #search-results > div .search-result .accommodation-info .planecar {
+      display: flex;
+      align-items: center;
+      bottom: 5px;
+      margin: 0 auto; }
+      #search-results > div .search-result .accommodation-info .planecar > i {
+        margin-right: 10px; }
