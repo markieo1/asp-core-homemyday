@@ -3,27 +3,27 @@ using System.Threading.Tasks;
 using HomeMyDay.Core.Authorization;
 using HomeMyDay.Core.Extensions;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Web.Base.BaseControllers;
+using HomeMyDay.Web.Base.Managers;
 
 namespace HomeMyDay.Web.Site.Cms.Controllers
 {
 	[Area("CMS")]
 	[Authorize(Policy = Policies.Administrator)]
-	public class FaqController : FaqBaseController
+	public class FaqController : Controller
 	{
-		public FaqController(IFaqRepository repository)
-			: base(repository)
+		private readonly IFaqManager _faqManager;
+
+		public FaqController(IFaqManager faqManager)
 		{
-			
+			_faqManager = faqManager;
 		} 
 
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			return View(await GetFaqCategoryPaginatedList(page, pageSize));
+			return View(await _faqManager.GetFaqCategoryPaginatedList(page, pageSize));
 		}
 
 		[HttpGet]
@@ -37,7 +37,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		{
 			try
 			{
-				return View(GetFaqCategory(id));
+				return View(_faqManager.GetFaqCategory(id));
 			}  
 			catch (KeyNotFoundException)
 			{
@@ -50,7 +50,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		{  
 			if (ModelState.IsValid)
 			{
-				await SaveCategory(cat);			 
+				await _faqManager.SaveCategory(cat);			 
 
 				return RedirectToAction(
 					actionName: nameof(Index),
@@ -61,9 +61,9 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		}
 
 		[HttpPost]
-		public new async Task<IActionResult> DeleteCategory(long id)
+		public async Task<IActionResult> DeleteCategory(long id)
 		{
-			await base.DeleteCategory(id);
+			await _faqManager.DeleteCategory(id);
 
 			return RedirectToAction(
 						actionName: nameof(Index),
