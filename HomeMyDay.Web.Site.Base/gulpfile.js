@@ -4,7 +4,7 @@ var sass = require("gulp-sass");
 var rimraf = require("rimraf");
 
 var paths = {
-    webroot: "./wwwroot/"
+    webroot: "../HomeMyDay.Web/wwwroot/"
 };
 
 paths.cssFolder = paths.webroot + 'css';

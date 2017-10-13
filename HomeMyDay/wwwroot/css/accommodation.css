@@ -1,0 +1,29 @@
+.carousel .item img, .video, video {
+  margin: auto; }
+  @media (max-width: 767px) {
+    .carousel .item img, .video, video {
+      height: 200px;
+      max-height: 200px; } }
+  @media (min-width: 768px) {
+    .carousel .item img, .video, video {
+      height: 300px;
+      max-height: 300px; } }
+  @media (min-width: 992px) {
+    .carousel .item img, .video, video {
+      height: 400px;
+      max-height: 400px; } }
+
+.detail-blocks .nav-tabs {
+  margin-bottom: 0; }
+
+.detail-blocks .tab-pane {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0px 0px 5px 5px;
+  padding: 10px;
+  overflow-y: auto;
+  height: 400px; }
+
+#accommodation-map {
+  height: 400px; }
