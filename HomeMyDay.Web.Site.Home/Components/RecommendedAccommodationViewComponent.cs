@@ -1,27 +1,20 @@
-﻿using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
+﻿using HomeMyDay.Web.Base.Managers;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace HomeMyDay.Web.Components
+namespace HomeMyDay.Web.Site.Home.Components
 {
     public class RecommendedAccommodationViewComponent : ViewComponent
     {
-        private IAccommodationRepository repository;
+        private readonly IAccommodationManager _accommodationManager;
 
-        public RecommendedAccommodationViewComponent(IAccommodationRepository repository)
+        public RecommendedAccommodationViewComponent(IAccommodationManager accommodationManager)
         {
-            this.repository = repository;
+	        _accommodationManager = accommodationManager;
         }
 
         public IViewComponentResult Invoke()
-        {
-            var model = repository.GetRecommendedAccommodations();
-
-            return View(model);
+        {																	 
+            return View(_accommodationManager.GetRecommendedAccommodations());
         }
     }
 }

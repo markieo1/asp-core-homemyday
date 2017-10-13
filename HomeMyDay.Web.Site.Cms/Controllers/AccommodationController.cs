@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Authorization;
 using HomeMyDay.Core.Extensions;
 using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HomeMyDay.Web.Site.Cms.Controllers
 {
@@ -14,46 +13,30 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 	[Authorize(Policy = Policies.Administrator)]
 	public class AccommodationController : Controller
 	{
-		private readonly IAccommodationRepository _accommodationRepository;
+		private readonly IAccommodationManager _accommodationManager;
 
-		public AccommodationController(IAccommodationRepository accommodationRepository)
+		public AccommodationController(IAccommodationManager accommodationManager)
 		{
-			_accommodationRepository = accommodationRepository;
+			_accommodationManager = accommodationManager;
 		}
-
+				
 		[HttpGet]
 		public async Task<IActionResult> Index(int? page, int? pageSize)
 		{
-			PaginatedList<Accommodation> paginatedResult = await _accommodationRepository.List(page ?? 1, pageSize ?? 5);
-			return View(paginatedResult);
+			return View(await _accommodationManager.GetAccommodationPaginatedList(page, pageSize));
 		}
 
 		[HttpGet]
 		public IActionResult Edit(long id)
-		{
-			Accommodation accommodation;
-
+		{								
 			try
 			{
-				if (id <= 0)
-				{
-					accommodation = new Accommodation();
-				}
-				else
-				{
-					accommodation = _accommodationRepository.GetAccommodation(id);
-				}
+				return View(_accommodationManager.GetAccommodation(id));
 			}
 			catch (KeyNotFoundException)
 			{
 				return new NotFoundResult();
-			}
-			catch (ArgumentOutOfRangeException)
-			{
-				return new BadRequestResult();
-			}
-
-			return View(accommodation);
+			}	
 		}
 
 		[HttpPost]
@@ -61,7 +44,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				await _accommodationRepository.Save(accommodation);
+				await _accommodationManager.Save(accommodation);
 
 				return RedirectToAction(
 					actionName: nameof(Index),
@@ -74,7 +57,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		[HttpPost]
 		public async Task<IActionResult> DeleteConfirmed(long id)
 		{
-			await _accommodationRepository.Delete(id);
+			await _accommodationManager.Delete(id);
 
 			return RedirectToAction(
 						actionName: nameof(Index),

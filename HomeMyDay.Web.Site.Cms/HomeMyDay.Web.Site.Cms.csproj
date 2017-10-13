@@ -7,6 +7,8 @@
     <EmbeddedResource Include="Views\**\*.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Base\HomeMyDay.Web.Base.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Site.Base\HomeMyDay.Web.Site.Base.csproj" />
   </ItemGroup>
 

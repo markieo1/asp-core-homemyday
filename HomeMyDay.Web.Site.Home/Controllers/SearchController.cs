@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Core.Repository;
+using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Web.Base.ViewModels;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	public class SearchController : Controller
 	{
-		private readonly IAccommodationRepository _accommodationRepo;
+		private readonly IAccommodationManager _accommodationManager;
 
-		public SearchController(IAccommodationRepository repo)
+		public SearchController(IAccommodationManager accommodationManager)
 		{
-			this._accommodationRepo = repo;
+			_accommodationManager = accommodationManager;
 		}
 
 		[HttpPost]
@@ -26,7 +24,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 				Search = search,
 
 				//Perform search
-				Accommodations = _accommodationRepo.Search(search.Location, search.StartDate ?? DateTime.Now, search.EndDate ?? DateTime.Now.AddDays(1), search.Persons)
+				Accommodations = _accommodationManager.Search(search.Location, search.StartDate ?? DateTime.Now, search.EndDate ?? DateTime.Now.AddDays(1), search.Persons)
 			};
 
 			if (searchResultsModel.Accommodations.Any())

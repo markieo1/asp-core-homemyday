@@ -1,13 +1,9 @@
 ﻿using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HomeMyDay.Web.Base.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace HomeMyDay.Web.Components
+namespace HomeMyDay.Web.Site.Home.Components
 {
 	public class SurprisePopUpViewComponent : ViewComponent
 	{

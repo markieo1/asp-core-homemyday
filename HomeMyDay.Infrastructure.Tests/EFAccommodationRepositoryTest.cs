@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Xunit;
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Infrastructure.Repository;
-using HomeMyDay.Web.Components;
+using HomeMyDay.Web.Site.Home.Components;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace HomeMyDay.Infrastructure.Tests

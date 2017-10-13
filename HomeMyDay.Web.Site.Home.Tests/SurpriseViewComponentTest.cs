@@ -1,7 +1,7 @@
 ﻿using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Base.ViewModels;
-using HomeMyDay.Web.Components;
+using HomeMyDay.Web.Site.Home.Components;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Moq;
 using Xunit;

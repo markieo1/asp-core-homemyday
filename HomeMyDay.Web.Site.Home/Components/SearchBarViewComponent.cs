@@ -1,29 +1,23 @@
-﻿using HomeMyDay.Core.Models;
-using HomeMyDay.Core.Repository;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Web.Base.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace HomeMyDay.Web.Components
+namespace HomeMyDay.Web.Site.Home.Components
 {
 	public class SearchBarViewComponent : ViewComponent
 	{
-		private readonly IAccommodationRepository _accommodationRepository;
+		private readonly IAccommodationManager _accommodationManager;
 
-		public SearchBarViewComponent(IAccommodationRepository repository)
+		public SearchBarViewComponent(IAccommodationManager accommodationManager)
 		{
-			_accommodationRepository = repository;
+			_accommodationManager = accommodationManager;
 		}
 
 		public IViewComponentResult Invoke()
-		{
-			IEnumerable<Accommodation> accommodations = _accommodationRepository.Accommodations;
+		{	  
+			var accommodations = _accommodationManager.GetAccommodations();
 
-			AccommodationSearchViewModel viewModel = new AccommodationSearchViewModel
+			var viewModel = new AccommodationSearchViewModel
 			{
 				Accommodations = accommodations
 			};
