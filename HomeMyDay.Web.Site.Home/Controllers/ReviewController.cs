@@ -1,30 +1,28 @@
-﻿using System.Linq;
-using HomeMyDay.Core.Repository;
+﻿using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
-using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Extensions;
+using HomeMyDay.Web.Base.BaseControllers;
 using HomeMyDay.Web.Base.ViewModels;
 
 namespace HomeMyDay.Web.Site.Home.Controllers
 {
-	public class ReviewController : Controller
-	{
-		private readonly IReviewRepository _repository;
+	public class ReviewController : ReviewBaseController
+	{													
+		public ReviewController(IReviewRepository repository)
+			:base(repository)
+		{					   
 
-		public ReviewController(IReviewRepository repo)
-		{
-			_repository = repo;
 		}
 
 		public ViewResult Index()
 		{
-			return View(_repository.Reviews.Select(ReviewViewModel.FromReview).Where(x => x.Approved));
+			return View(GetReviews());
 		}
 
 		[HttpPost]
 		public IActionResult AddReview(ReviewViewModel reviewViewModel)
 		{
-			if (_repository.AddReview(reviewViewModel.AccommodationId, reviewViewModel.Title,
+			if (AddReview(reviewViewModel.AccommodationId, reviewViewModel.Title,
 				reviewViewModel.Name, reviewViewModel.Text))
 			{
 				TempData["Succeeded"] = true;

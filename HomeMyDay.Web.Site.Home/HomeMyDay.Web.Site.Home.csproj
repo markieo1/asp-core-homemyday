@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Base\HomeMyDay.Web.Base.csproj" />
   </ItemGroup>
 
   <ItemGroup>
