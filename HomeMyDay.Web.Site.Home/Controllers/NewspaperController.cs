@@ -1,4 +1,4 @@
-﻿using HomeMyDay.Core.Repository;
+﻿using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Web.Base.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +6,11 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	public class NewspaperController : Controller
 	{
-		private readonly INewspaperRepository _newspaperRepository;
+		private readonly INewspaperManager _newspaperManager;
 
-		public NewspaperController(INewspaperRepository newspaperRepository)
+		public NewspaperController(INewspaperManager newspaperManager)
 		{
-			_newspaperRepository = newspaperRepository;
+			_newspaperManager = newspaperManager;
 		}
 
 		[HttpGet]
@@ -24,7 +24,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				if (_newspaperRepository.Subscribe(newspaperViewModel.Email))
+				if (_newspaperManager.Subscribe(newspaperViewModel.Email))
 				{
 					return View("Result");
 				}
