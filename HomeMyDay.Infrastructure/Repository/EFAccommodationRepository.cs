@@ -99,7 +99,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.
-				await _context.Accommodations.AddAsync(accommodation);
+				_context.Accommodations.Add(accommodation);
 			}
 			else
 			{
