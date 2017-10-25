@@ -22,7 +22,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet]
 		public IEnumerable<Review> Get()
 		{
-			return ReviewManager.GetReviews2();
+			return ReviewManager.GetAllReviews();
 		}
 
 		// GET api/values
@@ -69,7 +69,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Review> Reviews = ReviewManager.GetReviews2();
+			IEnumerable<Review> Reviews = ReviewManager.GetAllReviews();
 			foreach(Review Review in Reviews)
 			{
 				ReviewManager.Delete(Review.Id);

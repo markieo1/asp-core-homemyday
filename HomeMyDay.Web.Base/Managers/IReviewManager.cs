@@ -9,7 +9,7 @@ namespace HomeMyDay.Web.Base.Managers
     {
 	    IEnumerable<ReviewViewModel> GetReviews();
 
-	    IEnumerable<Review> GetReviews2();
+	    IEnumerable<Review> GetAllReviews();
 
 		bool AddReview(long accommodationId, string title, string name, string text);
 
