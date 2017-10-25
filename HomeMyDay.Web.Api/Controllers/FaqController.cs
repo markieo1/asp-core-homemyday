@@ -58,7 +58,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPost("category/{id}/questions")]
 		public IActionResult Post(long id, [FromBody] FaqQuestion faqquestion)
 		{
-			faqManager.SaveQuestion(id, faqquestion);
+			faqManager.SaveQuestion(faqquestion);
 
 			return CreatedAtAction(nameof(Get), new { id = faqquestion.CategoryId, questionid = faqquestion.Id }, faqquestion);
 		}
@@ -79,7 +79,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		{
 			foreach (FaqQuestion faqquestion in faqquestions)
 			{
-				faqManager.SaveQuestion(id, faqquestion);
+				faqManager.SaveQuestion(faqquestion);
 			}
 
 			return Accepted();
@@ -108,7 +108,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest();
 			}
 
-			faqManager.SaveQuestion(id, faqQuestion);
+			faqManager.SaveQuestion(faqQuestion);
 
 			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.CategoryId, questionid = faqQuestion.Id }, faqQuestion);
 		}
@@ -131,7 +131,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			IEnumerable<FaqQuestion> faqQuestions = faqManager.GetFaqQuestions(id);
 			foreach (FaqQuestion faqQuestion in faqQuestions)
 			{
-				await faqManager.DeleteQuestion(id, faqQuestion.Id);
+				await faqManager.DeleteQuestion(faqQuestion.Id);
 			}
 
 			return Accepted();
@@ -150,7 +150,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("category/{id}/questions/{questionid}")]
 		public IActionResult Delete(int id, int questionid)
 		{
-			faqManager.DeleteQuestion(id, questionid);
+			faqManager.DeleteQuestion(questionid);
 
 			return AcceptedAtAction(nameof(Get));
 		}
