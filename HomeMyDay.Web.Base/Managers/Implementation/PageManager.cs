@@ -25,6 +25,11 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 			}
 		}
 
+		public void AddPage(Page page)
+		{
+			_pageRepository.AddPage(page);
+		}
+
 		public PageViewModel GetPageViewModel(long id)
 		{
 			var suprise = _pageRepository.GetPage(id);

@@ -74,6 +74,17 @@ namespace HomeMyDay.Infrastructure.Repository
 			_context.SaveChanges();
 		}
 
+		public void AddPage(Page page)
+		{
+			if (page == null)
+			{
+				throw new ArgumentNullException(nameof(page));
+			}
+				_context.Page.Add(page);
+
+			_context.SaveChanges();
+		}
+
 		public void DeletePage(long id)
 		{
 			Page page = _context.Page.FirstOrDefault(p => p.Id == id);

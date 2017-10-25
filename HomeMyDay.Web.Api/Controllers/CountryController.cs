@@ -36,7 +36,7 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Country Country)
         {
-			//CountryManager.(Country);
+			CountryManager.Save(Country);
 
 			return CreatedAtAction(nameof(Get), new { id = Country.Id }, Country);
         }

@@ -36,7 +36,7 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Page Page)
         {
-			//PageManager.(Page);
+			PageManager.AddPage(Page);
 
 			return CreatedAtAction(nameof(Get), new { id = Page.Id }, Page);
         }
