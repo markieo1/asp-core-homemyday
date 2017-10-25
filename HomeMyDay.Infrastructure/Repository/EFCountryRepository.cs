@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Core.Repository;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
 
 namespace HomeMyDay.Infrastructure.Repository
 {
@@ -24,6 +26,49 @@ namespace HomeMyDay.Infrastructure.Repository
 			var country = _context.Countries.First(c => c.Id == id);
 
 			return country;
+		}
+
+		public async Task Save(Country country)
+		{
+			if (country == null)
+			{
+				throw new ArgumentNullException(nameof(country));
+			}
+
+			if (country.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				_context.Countries.Add(country);
+			}
+			else
+			{
+				// Get the tracked accommodation using the ID
+				EntityEntry<Country> entityEntry = _context.Entry(country);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task Delete(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			Country country = await _context.Countries
+				.SingleOrDefaultAsync(a => a.Id == id);
+
+			if (country == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Country with ID: {id} not found!");
+			}
+
+			_context.Countries.Remove(country);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

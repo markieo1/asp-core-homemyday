@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Models;
 
-namespace TempApp.Controllers
+namespace HomeMyDay.Web.Api.Controllers
 {
 	[Produces("application/json")]
     [Route("api/accommodations")]
@@ -67,12 +67,12 @@ namespace TempApp.Controllers
         }
 
 		[HttpDelete]
-		public IActionResult Delete()
+		public async Task<IActionResult> DeleteAsync()
 		{
 			IEnumerable<Accommodation> accommodations = accommodationManager.GetAccommodations();
 			foreach(Accommodation accommodation in accommodations)
 			{
-				accommodationManager.Delete(accommodation.Id);
+				await accommodationManager.Delete(accommodation.Id);
 			}
 
 			return Accepted();

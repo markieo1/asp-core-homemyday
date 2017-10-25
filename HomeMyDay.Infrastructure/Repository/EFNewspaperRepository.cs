@@ -2,6 +2,8 @@
 using HomeMyDay.Infrastructure.Database;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeMyDay.Infrastructure.Repository
 {
@@ -13,6 +15,8 @@ namespace HomeMyDay.Infrastructure.Repository
 		{
 			_context = context;
 		}
+
+		public IEnumerable<Newspaper> Newspapers => _context.Newspapers;
 
 		public bool Subscribe(string email)
 		{
@@ -38,6 +42,20 @@ namespace HomeMyDay.Infrastructure.Repository
 			}
 
 			return isSaved;
+		}
+
+		public void Unsubscribe(string email)
+		{
+			Newspaper newspaper = _context.Newspapers.FirstOrDefault(n => n.Email == email);
+
+			if(newspaper == null)
+			{
+				throw new KeyNotFoundException($"Newspaper with email {email} not found");
+			}
+
+			_context.Newspapers.Remove(newspaper);
+
+			_context.SaveChanges();
 		}
 	}
 }
