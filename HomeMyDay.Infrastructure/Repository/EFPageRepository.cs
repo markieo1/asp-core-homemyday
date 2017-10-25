@@ -19,6 +19,8 @@ namespace HomeMyDay.Infrastructure.Repository
 			_context = context;
 		}
 
+		public IEnumerable<Page> Pages => _context.Page;
+
 		public Task<PaginatedList<Page>> List(int page = 1, int pageSize = 10)
 		{
 			if (page < 1)
@@ -69,6 +71,20 @@ namespace HomeMyDay.Infrastructure.Repository
 				db_page.Title = page.Title;
 				db_page.Content = page.Content;
 			}
+			_context.SaveChanges();
+		}
+
+		public void DeletePage(long id)
+		{
+			Page page = _context.Page.FirstOrDefault(p => p.Id == id);
+
+			if (page == null)
+			{
+				throw new KeyNotFoundException($"Page with id {id} not found");
+			}
+
+			_context.Page.Remove(page);
+
 			_context.SaveChanges();
 		}
 	}

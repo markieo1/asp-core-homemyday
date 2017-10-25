@@ -8,6 +8,8 @@ namespace HomeMyDay.Core.Repository
 {
     public interface IPageRepository
     {
+		IEnumerable<Page> Pages { get; }
+
 		/// <summary>
 		/// Gets the latest surprise.
 		/// </summary>
@@ -19,6 +21,12 @@ namespace HomeMyDay.Core.Repository
 		/// <param name="pageid">the page identifier.</param>
 		/// <param name="page">the page model/the data it need to change</param>\
 		void EditPage(long id, Page page);
+
+		/// <summary>
+		/// Delte the given page
+		/// </summary>
+		/// <param name="pageid">the page identifier.</param>
+		void DeletePage(long id);
 
 		/// <summary>
 		/// Lists the Page's for the specific page.

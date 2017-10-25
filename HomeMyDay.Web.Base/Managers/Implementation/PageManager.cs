@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Base.ViewModels;
+using System.Linq;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
@@ -36,6 +38,28 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		public Task<PaginatedList<Page>> GetPagePaginatedList(int? page, int? pageSize)
 		{
 			return _pageRepository.List(page ?? 1, pageSize ?? 5);
+		}
+
+		public IEnumerable<Page> GetPages()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public Page GetPage(long id)
+		{
+			var page = _pageRepository.Pages.FirstOrDefault(p => p.Id == id);
+
+			if (page == null)
+			{
+				throw new KeyNotFoundException($"Page with ID {id} not found");
+			}
+
+			return page;
+		}
+
+		public void DeletePage(long id)
+		{
+			 _pageRepository.DeletePage(id);
 		}
 	}
 }
