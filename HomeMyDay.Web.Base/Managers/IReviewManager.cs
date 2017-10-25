@@ -9,10 +9,18 @@ namespace HomeMyDay.Web.Base.Managers
     {
 	    IEnumerable<ReviewViewModel> GetReviews();
 
-	    bool AddReview(long accommodationId, string title, string name, string text);
+	    IEnumerable<Review> GetAllReviews();
+
+		bool AddReview(long accommodationId, string title, string name, string text);
 
 	    Task<PaginatedList<Review>> GetPaginatedReview(int? page, int? pageSize);
 
 	    void AcceptReview(long id);
-    }
+
+		Review GetReview(long id);
+
+		Task Save(Review review);
+
+		Task Delete(long id);
+	}
 }

@@ -22,7 +22,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet]
 		public IEnumerable<Review> Get()
 		{
-			return ReviewManager.GetReviews();
+			return ReviewManager.GetAllReviews();
 		}
 
 		// GET api/values
@@ -34,11 +34,11 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Review Review)
+        public IActionResult Post([FromBody]Review review)
         {
-			//ReviewManager.(Review);
+			ReviewManager.AddReview(review.Accommodation.Id, review.Title, review.Name, review.Text);
 
-			return CreatedAtAction(nameof(Get), new { id = Review.Id }, Review);
+			return CreatedAtAction(nameof(Get), new { id = review.Id }, review);
         }
 
 		[HttpPut]
@@ -69,7 +69,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Review> Reviews = ReviewManager.GetReviews();
+			IEnumerable<Review> Reviews = ReviewManager.GetAllReviews();
 			foreach(Review Review in Reviews)
 			{
 				ReviewManager.Delete(Review.Id);
