@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Models;
+using HomeMyDay.Infrastructure.Identity;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
@@ -27,23 +28,23 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// POST api/values
 		[HttpPost("login")]
-        public IActionResult Post([FromBody]Auth Auth)
+        public IActionResult Post(string username, string password)
         {
-			
-        }
+			return null;
+		}
 
 		// POST api/values
 		[HttpPost("register")]
-		public IActionResult Post([FromBody]Auth Auth)
+		public IActionResult Post(User user)
 		{
-			
+			return null;
 		}
 
 		// POST api/values
 		[HttpPost("forgotPassword")]
-		public IActionResult Post([FromBody]Auth Auth)
+		public IActionResult Post(string email)
 		{
-			
+			return null;
 		}
 
 		[HttpPut]

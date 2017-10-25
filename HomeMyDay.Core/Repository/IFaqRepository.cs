@@ -13,6 +13,13 @@ namespace HomeMyDay.Core.Repository
 		IEnumerable<FaqCategory> GetCategoriesAndQuestions();
 
 		/// <summary>
+		/// Get All Questions of given category id
+		/// </summary>
+		/// <param name="id">The identifier of the category.</param>
+		/// <returns>questions to a categorie</returns>
+		IEnumerable<FaqQuestion> GetQuestions(long id);
+
+		/// <summary>
 		/// Gets one category.
 		/// </summary>
 		/// <param name="id">The identifier.</param>
@@ -22,6 +29,15 @@ namespace HomeMyDay.Core.Repository
 		FaqCategory GetCategory(long id);
 
 		/// <summary>
+		/// Gets one question.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns></returns>
+		/// <exception cref="ArgumentOutOfRangeException">id</exception>
+		/// <exception cref="KeyNotFoundException"></exception>
+		FaqQuestion GetQuestion(long id);
+
+		/// <summary>
 		/// Delete a Categorie
 		/// </summary>
 		/// <param name="id">the identifier for which category to delete</param>
@@ -29,11 +45,25 @@ namespace HomeMyDay.Core.Repository
 		Task DeleteCategory(long id);
 
 		/// <summary>
+		/// Delete a question
+		/// </summary>
+		/// <param name="id">the identifier for which category to delete</param>
+		/// <returns></returns>
+		Task DeleteQuestion(long id);
+
+		/// <summary>
 		/// Edit or add a Categorie
 		/// </summary>
 		/// <param name="category">the object model given to the methode</param>
 		/// <returns></returns>
 		Task SaveCategory(FaqCategory category);
+
+		/// <summary>
+		/// Edit or add a Question
+		/// </summary>
+		/// <param name="faqQuestion">the object model given to the methode</param>
+		/// <returns></returns>
+		Task SaveQuestion(FaqQuestion faqQuestion);
 
 		/// <summary>
 		/// Lists the FaqQuestions for the specific page.

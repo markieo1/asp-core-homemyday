@@ -38,6 +38,24 @@ namespace HomeMyDay.Infrastructure.Repository
 			return category;
 		}
 
+		public FaqQuestion GetQuestion(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			FaqQuestion question = _context.FaqQuestions
+				.FirstOrDefault(a => a.Id == id);
+
+			if (question == null)
+			{
+				throw new KeyNotFoundException($"Question with ID: {id} is not found");
+			}
+
+			return question;
+		}
+
 		public async Task DeleteCategory(long id)
 		{
 			if (id <= 0)
@@ -54,6 +72,26 @@ namespace HomeMyDay.Infrastructure.Repository
 			}
 
 			_context.FaqCategory.Remove(category);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task DeleteQuestion(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			FaqQuestion question = await _context.FaqQuestions
+				.SingleOrDefaultAsync(a => a.Id == id);
+
+			if (question == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Question with ID: {id} not found!");
+			}
+
+			_context.FaqQuestions.Remove(question);
 
 			await _context.SaveChangesAsync();
 		}
@@ -81,9 +119,37 @@ namespace HomeMyDay.Infrastructure.Repository
 			await _context.SaveChangesAsync();
 		}
 
+		public async Task SaveQuestion(FaqQuestion faqQuestion)
+		{
+			if (faqQuestion == null)
+			{
+				throw new ArgumentNullException(nameof(faqQuestion));
+			}
+
+			if (faqQuestion.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				await _context.FaqQuestions.AddAsync(faqQuestion);
+			}
+			else
+			{
+				// Get the tracked faqQuestion using the ID
+				EntityEntry<FaqQuestion> entityEntry = _context.Entry(faqQuestion);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
+		}
+
 		public IEnumerable<FaqCategory> GetCategoriesAndQuestions()
 		{
 			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
+		}
+
+		public IEnumerable<FaqQuestion> GetQuestions(long id)
+		{
+			return _context.FaqQuestions.Where(q=>q.CategoryId == id);
 		}
 
 		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)

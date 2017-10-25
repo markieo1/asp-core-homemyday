@@ -21,10 +21,10 @@ namespace HomeMyDay.Web.Base.Managers
 
 		Task DeleteCategory(long id);
 
-		FaqQuestion GetFaqQuestion(long id, long questionid);
+		FaqQuestion GetFaqQuestion(long id);
 
-		Task SaveQuestion(long id, FaqQuestion question);
+		Task SaveQuestion(FaqQuestion question);
 
-		Task DeleteQuestion(long id, long questionid);
+		Task DeleteQuestion(long id);
 	}
 }

@@ -66,5 +66,25 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 	    {
 		    return _faqRepository.DeleteCategory(id);
 	    }
+
+		IEnumerable<FaqQuestion> IFaqManager.GetFaqQuestions(long id)
+		{
+			return _faqRepository.GetQuestions(id);
+		}
+
+		public FaqQuestion GetFaqQuestion(long id)
+		{
+			return _faqRepository.GetQuestion(id);
+		}
+
+		public Task SaveQuestion(FaqQuestion question)
+		{
+			return _faqRepository.SaveQuestion(question);
+		}
+
+		public Task DeleteQuestion(long id)
+		{
+			return _faqRepository.DeleteQuestion(id);
+		}
 	}
 }
