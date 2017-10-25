@@ -47,7 +47,7 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 
 		public IEnumerable<Page> GetPages()
 		{
-			throw new System.NotImplementedException();
+			return _pageRepository.Pages;
 		}
 
 		public Page GetPage(long id)
