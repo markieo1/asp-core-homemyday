@@ -43,5 +43,26 @@ namespace HomeMyDay.Core.Repository
         /// <param name="id"></param>
         /// <returns></returns>
         void AcceptReview(long id);
-    }
+
+		/// <summary>
+		/// Saves the specified review with the identifier.
+		/// </summary>
+		/// <param name="review">The review.</param>
+		/// <returns></returns>
+		Task Save(Review review);
+
+		/// <summary>
+		/// Retrieve the specified review.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns></returns>
+		Review GetReview(long id);
+
+		/// <summary>
+		/// Deletes the specified review.
+		/// </summary>
+		/// <param name="id">The identifier.</param>
+		/// <returns></returns>
+		Task Delete(long id);
+	}
 }

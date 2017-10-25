@@ -35,5 +35,25 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 	    {
 		    _reviewRepository.AcceptReview(id);
 	    }
+
+		public IEnumerable<Review> GetReviews2()
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public Review GetReview(long id)
+		{
+			return _reviewRepository.GetReview(id);
+		}
+
+		public Task Save(Review review)
+		{
+			return _reviewRepository.Save(review);
+		}
+
+		public Task Delete(long id)
+		{
+			return _reviewRepository.Delete(id);
+		}
 	}
 }
