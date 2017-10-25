@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Base.ViewModels;
+using System.Linq;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
@@ -20,7 +21,12 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		    return _faqRepository.GetCategoriesAndQuestions();
 	    }
 
-	    public Task<PaginatedList<FaqCategory>> GetFaqCategoryPaginatedList(int? page, int? pageSize)
+		public IEnumerable<FaqCategory> GetFaqQuestions(long id)
+		{
+			return _faqRepository.GetCategoriesAndQuestions().Where(q=>q.Id == id);
+		}
+
+		public Task<PaginatedList<FaqCategory>> GetFaqCategoryPaginatedList(int? page, int? pageSize)
 	    {
 		    var paginatedResult = _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
 		    return paginatedResult;
