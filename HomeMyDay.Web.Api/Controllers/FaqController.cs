@@ -42,7 +42,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("category/{id}/questions/{questionid}")]
 		public FaqQuestion Get(int id, int questionid)
 		{
-			return faqManager.GetFaqQuestion(id, questionid);
+			return faqManager.GetFaqQuestion(questionid);
 		}
 
 		// POST api/values
