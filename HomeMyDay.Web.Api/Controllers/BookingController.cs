@@ -23,7 +23,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		public IEnumerable<Booking> Get()
 		{
 			//return BookingManager.GetCountries();
-
+			return null;
 		}
 
 		// GET api/values
