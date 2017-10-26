@@ -13,6 +13,7 @@ using HomeMyDay.Infrastructure.Extensions;
 using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Web.Site.Cms.Extensions;
 using HomeMyDay.Web.Base.Extensions;
+using Newtonsoft.Json.Serialization;
 
 namespace HomeMyDay.Web
 {
@@ -79,6 +80,7 @@ namespace HomeMyDay.Web
 
 			services.AddMvc().AddJsonOptions(options => {
 				options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+				options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			});
 		}
 
