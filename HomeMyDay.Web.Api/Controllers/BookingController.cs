@@ -12,60 +12,53 @@ namespace HomeMyDay.Web.Api.Controllers
     [Route("api/bookings")]
     public class BookingController : Controller
     {
-		//private readonly IBookingManager BookingManager;
+		private readonly IBookingManager bookingManager;
 
-		//public BookingController(IBookingManager BookingMgr)
-		//{
-			//BookingyManager = BookingMgr;
-		//}
+		public BookingController(IBookingManager bookingMgr)
+		{
+			bookingManager = bookingMgr;
+		}
 
 		[HttpGet]
 		public IEnumerable<Booking> Get()
 		{
-			//return BookingManager.GetCountries();
-
+			return bookingManager.GetBookings();
 		}
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Booking Get(int id)
+		public Booking Get(long id)
         {
-			//return BookingManager.GetBooking(id);
-			return new Booking();
+			return bookingManager.GetBooking(id);
 		}
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Booking Booking)
+        public IActionResult Post([FromBody]Booking booking)
         {
-			//BookingManager.Save(Booking);
+			bookingManager.Save(booking);
 
-			return CreatedAtAction(nameof(Get), new { id = Booking.Id }, Booking);
+			return CreatedAtAction(nameof(Get), new { id = booking.Id }, booking);
         }
 
-		public IActionResult Put([FromBody]Booking[] bookings)
+		public async Task<IActionResult> Put([FromBody]Booking[] bookings)
 		{
-			return BadRequest();
+			foreach(Booking booking in bookings)
+			{
+				await bookingManager.Save(booking);
+			}
+
+			return Accepted();
 		}
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Booking booking)
+        public IActionResult Put(long id, [FromBody]Booking booking)
         {
-			return BadRequest();
-		}
+			booking.Id = id;
+			bookingManager.Save(booking);
 
-		[HttpDelete]
-		public IActionResult Delete()
-		{
-			return BadRequest();
+			return AcceptedAtAction(nameof(Get), new { id = booking.Id }, booking);
 		}
-
-		// DELETE api/values/5
-		[HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-			return BadRequest();
-        }
     }
 }

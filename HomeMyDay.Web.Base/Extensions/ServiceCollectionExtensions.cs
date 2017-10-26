@@ -16,6 +16,7 @@ namespace HomeMyDay.Web.Base.Extensions
 		public static IServiceCollection AddWebManagers(this IServiceCollection services)
 		{
 			services.AddTransient<IAccommodationManager, AccommodationManager>();
+			services.AddTransient<IBookingManager, BookingManager>();
 			services.AddTransient<ICountryManager, CountryManager>();
 			services.AddTransient<IFaqManager, FaqManager>();
 			services.AddTransient<INewspaperManager, NewspaperManager>();

@@ -25,17 +25,17 @@ namespace HomeMyDay.Web.Api.Controllers
 			return faqManager.GetFaqCategories();
 		}
 
-		[HttpGet("category/{id}/questions")]
-		public IEnumerable<FaqQuestion> Get(long id)
-		{
-			return faqManager.GetFaqQuestions(id);
-		}
-
 		// GET api/values
 		[HttpGet("category/{id}")]
 		public FaqCategory Get(int id)
 		{
 			return faqManager.GetFaqCategory(id);
+		}
+
+		[HttpGet("category/{id}/questions")]
+		public IEnumerable<FaqQuestion> Get(long id)
+		{
+			return faqManager.GetFaqQuestions(id);
 		}
 
 		// GET api/values
