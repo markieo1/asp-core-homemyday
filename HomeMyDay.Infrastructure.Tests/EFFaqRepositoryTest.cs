@@ -310,7 +310,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -346,7 +346,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -382,7 +382,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -426,7 +426,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -470,7 +470,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -514,7 +514,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -558,7 +558,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{
@@ -602,7 +602,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					CategoryName = "TestA",
-					FaqQuestions = new System.Collections.Generic.List<FaqQuestion>()
+					Questions = new System.Collections.Generic.List<FaqQuestion>()
 				{
 					new FaqQuestion()
 					{

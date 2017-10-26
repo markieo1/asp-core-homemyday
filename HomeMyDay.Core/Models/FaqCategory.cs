@@ -4,11 +4,6 @@ namespace HomeMyDay.Core.Models
 {
     public class FaqCategory : BaseModel
     {
-        public FaqCategory()
-        {
-            FaqQuestions = new List<FaqQuestion>();
-        }
-
         /// <summary>
         /// The categrory of faq which saved in the database.
         /// </summary>
@@ -17,6 +12,6 @@ namespace HomeMyDay.Core.Models
         /// <summary>
         /// List of questions which belongs to a category
         /// </summary>
-        public List<FaqQuestion> FaqQuestions {get; set;}
+        public List<FaqQuestion> Questions {get; set;}
     }
 }

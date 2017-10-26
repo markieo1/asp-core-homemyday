@@ -144,12 +144,12 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<FaqCategory> GetCategoriesAndQuestions()
 		{
-			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
+			return _context.FaqCategory.Include(nameof(FaqCategory.Questions));
 		}
 
 		public IEnumerable<FaqQuestion> GetQuestions(long id)
 		{
-			return _context.FaqQuestions.Where(q=>q.CategoryId == id);
+			return _context.FaqCategory.First(c => c.Id == id).Questions;
 		}
 
 		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)
@@ -190,10 +190,11 @@ namespace HomeMyDay.Infrastructure.Repository
 				page = 1;
 			}
 
-			var faqQuestions = _context.FaqQuestions
-				.Where(x => x.CategoryId == categoryId)
-				.OrderBy(x => x.Id)
-				.AsNoTracking();
+			var faqQuestions = _context.FaqCategory
+				.Where(x => x.Id == categoryId)
+				.First()
+				.Questions
+				.AsQueryable();
 
 			return PaginatedList<FaqQuestion>.CreateAsync(faqQuestions, page, pageSize);
 		}

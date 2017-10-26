@@ -22,7 +22,9 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet]
 		public IEnumerable<FaqCategory> Get()
 		{
-			return faqManager.GetFaqCategories();
+			var result = faqManager.GetFaqCategories();
+
+			return result;
 		}
 
 		// GET api/values
@@ -60,7 +62,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		{
 			faqManager.SaveQuestion(faqquestion);
 
-			return CreatedAtAction(nameof(Get), new { id = faqquestion.CategoryId, questionid = faqquestion.Id }, faqquestion);
+			return CreatedAtAction(nameof(Get), new { id = faqquestion.Category.Id, questionid = faqquestion.Id }, faqquestion);
 		}
 
 		[HttpPut("category")]
@@ -103,14 +105,14 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut("category/{id}/questions/{questionid}")]
 		public IActionResult Put(int id, int questionid, [FromBody]FaqQuestion faqQuestion)
 		{
-			if (faqQuestion.CategoryId != id && faqQuestion.Id != questionid)
+			if (faqQuestion.Category.Id != id && faqQuestion.Id != questionid)
 			{
 				return BadRequest();
 			}
 
 			faqManager.SaveQuestion(faqQuestion);
 
-			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.CategoryId, questionid = faqQuestion.Id }, faqQuestion);
+			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.Category.Id, questionid = faqQuestion.Id }, faqQuestion);
 		}
 		
 		[HttpDelete("category")]
