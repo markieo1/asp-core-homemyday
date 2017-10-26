@@ -12,31 +12,31 @@ namespace HomeMyDay.Web.Api.Controllers
     [Route("api/reviews")]
     public class ReviewController : Controller
     {
-		private readonly IReviewManager ReviewManager;
+		private readonly IReviewManager reviewManager;
 
-		public ReviewController(IReviewManager ReviewMgr)
+		public ReviewController(IReviewManager reviewMgr)
 		{
-			ReviewManager = ReviewMgr;
+			reviewManager = reviewMgr;
 		}
 
 		[HttpGet]
 		public IEnumerable<Review> Get()
 		{
-			return ReviewManager.GetAllReviews();
+			return reviewManager.GetAllReviews();
 		}
 
 		// GET api/values
 		[HttpGet("{id}")]
 		public Review Get(int id)
         {
-			return ReviewManager.GetReview(id);
+			return reviewManager.GetReview(id);
         }
 
         // POST api/values
         [HttpPost]
         public IActionResult Post([FromBody]Review review)
         {
-			ReviewManager.AddReview(review.Accommodation.Id, review.Title, review.Name, review.Text);
+			reviewManager.AddReview(review.Accommodation.Id, review.Title, review.Name, review.Text);
 
 			return CreatedAtAction(nameof(Get), new { id = review.Id }, review);
         }
@@ -46,7 +46,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		{
 			foreach(Review review in countries)
 			{
-				ReviewManager.Save(review);
+				reviewManager.Save(review);
 			}
 
 			return Accepted();
@@ -61,7 +61,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest();
 			}
 
-			ReviewManager.Save(review);
+			reviewManager.Save(review);
 
 			return AcceptedAtAction(nameof(Get), new { id = review.Id }, review);
         }
@@ -69,10 +69,10 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Review> Reviews = ReviewManager.GetAllReviews();
-			foreach(Review Review in Reviews)
+			IEnumerable<Review> reviews = reviewManager.GetAllReviews();
+			foreach(Review review in reviews)
 			{
-				ReviewManager.Delete(Review.Id);
+				reviewManager.Delete(review.Id);
 			}
 
 			return Accepted();
@@ -82,7 +82,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-			ReviewManager.Delete(id);
+			reviewManager.Delete(id);
 
 			return AcceptedAtAction(nameof(Get));
         }

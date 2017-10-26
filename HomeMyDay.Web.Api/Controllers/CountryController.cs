@@ -12,31 +12,31 @@ namespace HomeMyDay.Web.Api.Controllers
     [Route("api/countries")]
     public class CountryController : Controller
     {
-		private readonly ICountryManager CountryManager;
+		private readonly ICountryManager countryManager;
 
-		public CountryController(ICountryManager CountryMgr)
+		public CountryController(ICountryManager countryMgr)
 		{
-			CountryManager = CountryMgr;
+			countryManager = countryMgr;
 		}
 
 		[HttpGet]
 		public IEnumerable<Country> Get()
 		{
-			return CountryManager.GetCountries();
+			return countryManager.GetCountries();
 		}
 
 		// GET api/values
 		[HttpGet("{id}")]
 		public Country Get(int id)
         {
-			return CountryManager.GetCountry(id);
+			return countryManager.GetCountry(id);
         }
 
         // POST api/values
         [HttpPost]
         public IActionResult Post([FromBody]Country Country)
         {
-			CountryManager.Save(Country);
+			countryManager.Save(Country);
 
 			return CreatedAtAction(nameof(Get), new { id = Country.Id }, Country);
         }
@@ -46,7 +46,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		{
 			foreach(Country country in countries)
 			{
-				CountryManager.Save(country);
+				countryManager.Save(country);
 			}
 
 			return Accepted();
@@ -61,7 +61,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest();
 			}
 
-			CountryManager.Save(country);
+			countryManager.Save(country);
 
 			return AcceptedAtAction(nameof(Get), new { id = country.Id }, country);
         }
@@ -69,10 +69,10 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Country> Countrys = CountryManager.GetCountries();
+			IEnumerable<Country> Countrys = countryManager.GetCountries();
 			foreach(Country Country in Countrys)
 			{
-				CountryManager.Delete(Country.Id);
+				countryManager.Delete(Country.Id);
 			}
 
 			return Accepted();
@@ -82,7 +82,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-			CountryManager.Delete(id);
+			countryManager.Delete(id);
 
 			return AcceptedAtAction(nameof(Get));
         }

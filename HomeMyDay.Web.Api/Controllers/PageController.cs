@@ -12,31 +12,31 @@ namespace HomeMyDay.Web.Api.Controllers
     [Route("api/pages")]
     public class PageController : Controller
     {
-		private readonly IPageManager PageManager;
+		private readonly IPageManager pageManager;
 
-		public PageController(IPageManager PageMgr)
+		public PageController(IPageManager pageMgr)
 		{
-			PageManager = PageMgr;
+			pageManager = pageMgr;
 		}
 
 		[HttpGet]
 		public IEnumerable<Page> Get()
 		{
-			return PageManager.GetPages();
+			return pageManager.GetPages();
 		}
 
 		// GET api/values
 		[HttpGet("{id}")]
 		public Page Get(int id)
         {
-			return PageManager.GetPage(id);
+			return pageManager.GetPage(id);
         }
 
         // POST api/values
         [HttpPost]
         public IActionResult Post([FromBody]Page Page)
         {
-			PageManager.AddPage(Page);
+			pageManager.AddPage(Page);
 
 			return CreatedAtAction(nameof(Get), new { id = Page.Id }, Page);
         }
@@ -46,7 +46,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		{
 			foreach(Page page in pages)
 			{
-				PageManager.EditPage(page.Id, page);
+				pageManager.EditPage(page.Id, page);
 			}
 
 			return Accepted();
@@ -61,7 +61,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest();
 			}
 
-			PageManager.EditPage(id, page);
+			pageManager.EditPage(id, page);
 
 			return AcceptedAtAction(nameof(Get), new { id = page.Id }, page);
         }
@@ -69,10 +69,10 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Page> Pages = PageManager.GetPages();
+			IEnumerable<Page> Pages = pageManager.GetPages();
 			foreach(Page Page in Pages)
 			{
-				PageManager.DeletePage(Page.Id);
+				pageManager.DeletePage(Page.Id);
 			}
 
 			return Accepted();
@@ -82,7 +82,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-			PageManager.DeletePage(id);
+			pageManager.DeletePage(id);
 
 			return AcceptedAtAction(nameof(Get));
         }
