@@ -36,6 +36,11 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Newspaper newspaper)
         {
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			newspaperManager.Subscribe(newspaper.Email);
 
 			return CreatedAtAction(nameof(Get), new { id = newspaper.Id }, newspaper);

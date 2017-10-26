@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
@@ -13,24 +14,31 @@ namespace HomeMyDay.Web.Api.Controllers
 	[Route("api/authentication")]
 	public class AuthController : Controller
 	{
-		//private readonly IAuthManager AuthManager;
+		private readonly SignInManager<User> _signInManager;
+		private readonly UserManager<User> _userManager;
 
-		//public AuthController(IAuthManager AuthMgr)
-		//{
-			//AuthManager = AuthMgr;
-		//}
-
-		[HttpGet]
-		public IActionResult Get()
+		public AuthController(UserManager<User> userMgr, SignInManager<User> signInMgr)
 		{
-			return BadRequest();
+			_signInManager = signInMgr;
+			_userManager = userMgr;
 		}
 
 		// POST api/values
 		[HttpPost("login")]
-        public IActionResult Post(string username, string password)
+        public async Task<IActionResult> Post(string username, string password)
         {
-			return null;
+			var user = await _userManager.FindByNameAsync(username);
+			if(user == null)
+			{
+				return BadRequest();
+			}
+
+			if((await _signInManager.PasswordSignInAsync(username, password, false, false)).Succeeded)
+			{
+				return Ok();
+			}
+
+			return BadRequest();
 		}
 
 		// POST api/values

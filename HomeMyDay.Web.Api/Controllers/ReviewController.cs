@@ -36,6 +36,11 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Review review)
         {
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			reviewManager.AddReview(review.Accommodation.Id, review.Title, review.Name, review.Text);
 
 			return CreatedAtAction(nameof(Get), new { id = review.Id }, review);
@@ -44,7 +49,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut]
 		public IActionResult Put([FromBody]Review[] countries)
 		{
-			foreach(Review review in countries)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			foreach (Review review in countries)
 			{
 				reviewManager.Save(review);
 			}
@@ -56,7 +66,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Review review)
         {
-			if(review.Id != id)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (review.Id != id)
 			{
 				return BadRequest();
 			}

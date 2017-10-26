@@ -51,6 +51,11 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPost("category")]
 		public IActionResult Post([FromBody]FaqCategory faqcategory)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			faqManager.SaveCategory(faqcategory);
 
 			return CreatedAtAction(nameof(Get), new { id = faqcategory.Id }, faqcategory);
@@ -60,6 +65,11 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPost("category/{id}/questions")]
 		public IActionResult Post(long id, [FromBody] FaqQuestion faqquestion)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			faqManager.SaveQuestion(faqquestion);
 
 			return CreatedAtAction(nameof(Get), new { id = faqquestion.Category.Id, questionid = faqquestion.Id }, faqquestion);
@@ -68,6 +78,11 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut("category")]
 		public IActionResult Put([FromBody]FaqCategory[] faqcategories)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			foreach (FaqCategory faqcategory in faqcategories)
 			{
 				faqManager.SaveCategory(faqcategory);
@@ -79,6 +94,11 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut("category/{id}/questions")]
 		public IActionResult Put(long id, [FromBody] FaqQuestion[] faqquestions)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			foreach (FaqQuestion faqquestion in faqquestions)
 			{
 				faqManager.SaveQuestion(faqquestion);
@@ -91,7 +111,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut("category/{id}")]
         public IActionResult Put(int id, [FromBody]FaqCategory faqcategory)
         {
-			if(faqcategory.Id != id)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (faqcategory.Id != id)
 			{
 				return BadRequest();
 			}
@@ -105,6 +130,11 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut("category/{id}/questions/{questionid}")]
 		public IActionResult Put(int id, int questionid, [FromBody]FaqQuestion faqQuestion)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			if (faqQuestion.Category.Id != id && faqQuestion.Id != questionid)
 			{
 				return BadRequest();

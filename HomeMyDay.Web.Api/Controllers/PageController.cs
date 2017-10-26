@@ -36,6 +36,11 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Page Page)
         {
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			pageManager.AddPage(Page);
 
 			return CreatedAtAction(nameof(Get), new { id = Page.Id }, Page);
@@ -44,7 +49,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut]
 		public IActionResult Put([FromBody]Page[] pages)
 		{
-			foreach(Page page in pages)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			foreach (Page page in pages)
 			{
 				pageManager.EditPage(page.Id, page);
 			}
@@ -56,7 +66,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Page page)
         {
-			if(page.Id != id)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (page.Id != id)
 			{
 				return BadRequest();
 			}

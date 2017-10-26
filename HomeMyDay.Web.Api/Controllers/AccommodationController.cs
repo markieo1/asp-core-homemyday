@@ -36,6 +36,11 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Accommodation accommodation)
         {
+			if(!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			accommodationManager.Save(accommodation);
 
 			return CreatedAtAction(nameof(Get), new { id = accommodation.Id }, accommodation);
@@ -44,7 +49,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut]
 		public IActionResult Put([FromBody]Accommodation[] accommodations)
 		{
-			foreach(Accommodation accommodation in accommodations)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			foreach (Accommodation accommodation in accommodations)
 			{
 				accommodationManager.Save(accommodation);
 			}
@@ -56,7 +66,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Accommodation accommodation)
         {
-			if(accommodation.Id != id)
+			if(!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (accommodation.Id != id)
 			{
 				return BadRequest();
 			}

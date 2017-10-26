@@ -37,7 +37,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Vacancy vacancy)
         {
-            vacancyManager.Save(vacancy);
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			vacancyManager.Save(vacancy);
 
             return CreatedAtAction(nameof(Get), new { id = vacancy.Id }, vacancy);
         }
@@ -45,7 +50,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut]
         public IActionResult Put([FromBody]Vacancy[] vacancies)
         {
-            foreach (Vacancy vacancy in vacancies)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			foreach (Vacancy vacancy in vacancies)
             {
                 vacancyManager.Save(vacancy);
             }
@@ -57,7 +67,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody]Vacancy vacancy)
         {
-            if (vacancy.Id != id)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (vacancy.Id != id)
             {
                 return BadRequest();
             }

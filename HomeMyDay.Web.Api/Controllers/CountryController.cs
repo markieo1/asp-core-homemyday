@@ -36,6 +36,11 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Country Country)
         {
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			countryManager.Save(Country);
 
 			return CreatedAtAction(nameof(Get), new { id = Country.Id }, Country);
@@ -44,7 +49,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpPut]
 		public IActionResult Put([FromBody]Country[] countries)
 		{
-			foreach(Country country in countries)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			foreach (Country country in countries)
 			{
 				countryManager.Save(country);
 			}
@@ -56,7 +66,12 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Country country)
         {
-			if(country.Id != id)
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (country.Id != id)
 			{
 				return BadRequest();
 			}
