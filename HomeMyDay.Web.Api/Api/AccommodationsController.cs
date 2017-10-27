@@ -22,10 +22,10 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet]
 		public IActionResult Get()
 		{
-			List<Accommodation> accommodations = accommodationManager.GetAccommodations().ToList();
+			IEnumerable<Accommodation> accommodations = accommodationManager.GetAccommodations();
 
 			//Generate a list of HALResponses
-			var response = new List<HALResponse>(accommodations.Count);
+			var response = new List<HALResponse>();
 			foreach(Accommodation accommodation in accommodations)
 			{
 				response.Add(

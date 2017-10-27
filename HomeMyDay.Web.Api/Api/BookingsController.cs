@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Models;
+using Halcyon.HAL;
+using Halcyon.Web.HAL;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
@@ -18,16 +20,33 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpGet]
-		public IEnumerable<Booking> Get()
+		public IActionResult Get()
 		{
-			return bookingManager.GetBookings();
+			IEnumerable<Booking> bookings = bookingManager.GetBookings();
+
+			//Generate a list of HALResponses
+			var response = new List<HALResponse>();
+			foreach (Booking booking in bookings)
+			{
+				response.Add(
+					new HALResponse(booking)
+					.AddLinks(new Link[] {
+						new Link(Link.RelForSelf, $"/api/v1/bookings/{booking.Id}")
+					})
+				);
+			}
+
+			return this.Ok(response);
 		}
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Booking Get(long id)
+		public IActionResult Get(long id)
         {
-			return bookingManager.GetBooking(id);
+			return this.HAL(bookingManager.GetBooking(id), new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/bookings/{id}"),
+				new Link("bookingsList", "/api/v1/bookings", "Bookings list"),
+			});
 		}
 
         // POST api/values
@@ -41,8 +60,10 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			bookingManager.Save(booking);
 
-			return CreatedAtAction(nameof(Get), new { id = booking.Id }, booking);
-        }
+			return CreatedAtAction(nameof(Get), new { id = booking.Id }, new HALResponse(booking).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/bookings/{booking.Id}")
+			}));
+		}
 
 		public async Task<IActionResult> Put([FromBody]Booking[] bookings)
 		{
@@ -56,7 +77,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await bookingManager.Save(booking);
 			}
 
-			return Accepted();
+			return AcceptedAtAction(nameof(Get));
 		}
 
         // PUT api/values/5
@@ -71,7 +92,9 @@ namespace HomeMyDay.Web.Api.Controllers
 			booking.Id = id;
 			bookingManager.Save(booking);
 
-			return AcceptedAtAction(nameof(Get), new { id = booking.Id }, booking);
+			return AcceptedAtAction(nameof(Get), new { id = booking.Id }, new HALResponse(booking).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/bookings/{booking.Id}")
+			}));
 		}
     }
 }
