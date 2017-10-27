@@ -26,7 +26,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			//Generate a list of HALResponses
 			var response = new List<HALResponse>();
-			foreach (Country country in countries)
+			foreach (Country country in countries.ToList())
 			{
 				response.Add(
 					new HALResponse(country)
@@ -91,7 +91,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest(ModelState);
 			}
 
-			foreach (Country country in countries)
+			foreach (Country country in countries.ToList())
 			{
 				countryManager.Save(country);
 			}
@@ -121,13 +121,13 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpDelete]
-		public async Task<IActionResult> Delete()
+		public IActionResult Delete()
 		{
-			IEnumerable<Country> Countrys = countryManager.GetCountries();
+			IEnumerable<Country> countrys = countryManager.GetCountries();
 
-			foreach (Country Country in Countrys.ToList())
+			foreach (Country country in countrys.ToList())
 			{
-				await countryManager.Delete(country.Id);
+				countryManager.Delete(country.Id);
 			}
 
 			return NoContent();

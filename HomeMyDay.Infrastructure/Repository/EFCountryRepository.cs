@@ -58,8 +58,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Country country = await _context.Countries
-				.SingleOrDefaultAsync(a => a.Id == id);
+			Country country = _context.Countries.SingleOrDefault(a => a.Id == id);
 
 			if (country == null)
 			{

@@ -64,7 +64,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest(ModelState);
 			}
 
-			foreach (Review review in countries)
+			foreach (Review review in countries.ToList())
 			{
 				reviewManager.Save(review);
 			}

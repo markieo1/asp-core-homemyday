@@ -63,8 +63,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			FaqCategory category = await _context.FaqCategory
-				.SingleOrDefaultAsync(a => a.Id == id);
+			FaqCategory category = _context.FaqCategory.SingleOrDefault(a => a.Id == id);
 
 			if (category == null)
 			{
@@ -83,8 +82,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			FaqQuestion question = await _context.FaqQuestions
-				.SingleOrDefaultAsync(a => a.Id == id);
+			FaqQuestion question = _context.FaqQuestions.SingleOrDefault(a => a.Id == id);
 
 			if (question == null)
 			{
@@ -107,7 +105,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.
-				await _context.FaqCategory.AddAsync(category);
+				_context.FaqCategory.Add(category);
 			}
 			else
 			{
@@ -130,7 +128,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.
-				await _context.FaqQuestions.AddAsync(faqQuestion);
+				_context.FaqQuestions.Add(faqQuestion);
 			}
 			else
 			{

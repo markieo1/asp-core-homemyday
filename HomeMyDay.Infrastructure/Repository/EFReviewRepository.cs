@@ -128,8 +128,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Review review = _context.Reviews
-				.SingleOrDefault(r => r.Id == id);
+			Review review = _context.Reviews.SingleOrDefault(r => r.Id == id);
 
 			if (review == null)
 			{

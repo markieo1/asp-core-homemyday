@@ -26,7 +26,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			//Generate a list of HALResponses
 			var response = new List<HALResponse>();
-			foreach(Accommodation accommodation in accommodations)
+			foreach(Accommodation accommodation in accommodations.ToList())
 			{
 				response.Add(
 					new HALResponse(accommodation)
@@ -82,16 +82,16 @@ namespace HomeMyDay.Web.Api.Controllers
         }
 
 		[HttpPut]
-		public async Task<IActionResult> Put([FromBody]Accommodation[] accommodations)
+		public IActionResult Put([FromBody]Accommodation[] accommodations)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (Accommodation accommodation in accommodations)
+			foreach (Accommodation accommodation in accommodations.ToList())
 			{
-				await accommodationManager.Save(accommodation);
+				accommodationManager.Save(accommodation);
 			}
 
 			return Ok(accommodations);
@@ -119,13 +119,13 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpDelete]
-		public async Task<IActionResult> Delete()
+		public IActionResult Delete()
 		{
 			IEnumerable<Accommodation> accommodations = accommodationManager.GetAccommodations();
 
 			foreach(Accommodation accommodation in accommodations.ToList())
 			{
-				await accommodationManager.Delete(accommodation.Id);
+				accommodationManager.Delete(accommodation.Id);
 			}
 
 			return NoContent();

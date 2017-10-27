@@ -31,7 +31,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			//Generate a list of HALResponses
 			var response = new List<HALResponse>();
-			foreach (FaqCategory category in categories)
+			foreach (FaqCategory category in categories.ToList())
 			{
 				response.Add(
 					new HALResponse(category)
@@ -87,7 +87,8 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			IEnumerable<FaqQuestion> questions = faqManager.GetFaqQuestions(categoryId);
 			var response = new List<HALResponse>();
-			foreach (FaqQuestion question in questions)
+
+			foreach (FaqQuestion question in questions.ToList())
 			{
 				response.Add(new HALResponse(question)
 					.AddLinks(new Link[] {
@@ -166,32 +167,32 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpPut("categories")]
-		public async Task<IActionResult> Put([FromBody]FaqCategory[] faqCategories)
+		public IActionResult Put([FromBody]FaqCategory[] faqCategories)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (FaqCategory faqcategory in faqCategories)
+			foreach (FaqCategory faqcategory in faqCategories.ToList())
 			{
-				await faqManager.SaveCategory(faqcategory);
+				faqManager.SaveCategory(faqcategory);
 			}
 
 			return Ok(faqCategories);
 		}
 
 		[HttpPut("categories/{categoryId}/questions")]
-		public async Task<IActionResult> Put(long categoryId, [FromBody] FaqQuestion[] faqQuestions)
+		public IActionResult Put(long categoryId, [FromBody] FaqQuestion[] faqQuestions)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (FaqQuestion faqquestion in faqQuestions)
+			foreach (FaqQuestion faqquestion in faqQuestions.ToList())
 			{
-				await faqManager.SaveQuestion(faqquestion);
+				faqManager.SaveQuestion(faqquestion);
 			}
 
 			return Ok(faqQuestions);
@@ -241,26 +242,26 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpDelete("categories")]
-		public async Task<IActionResult> Delete()
+		public IActionResult Delete()
 		{
 			IEnumerable<FaqCategory> faqcategories = faqManager.GetFaqCategories();
 
 			foreach (FaqCategory faqcategory in faqcategories.ToList())
 			{
-				await faqManager.DeleteCategory(faqcategory.Id);
+				faqManager.DeleteCategory(faqcategory.Id);
 			}
 
 			return NoContent();
 		}
 
 		[HttpDelete("categories/{categoryId}/questions")]
-		public async Task<IActionResult> Delete(long categoryId)
+		public IActionResult Delete(long categoryId)
 		{
 			IEnumerable<FaqQuestion> faqQuestions = faqManager.GetFaqQuestions(categoryId);
 
 			foreach (FaqQuestion faqQuestion in faqQuestions.ToList())
 			{
-				await faqManager.DeleteQuestion(faqQuestion.Id);
+				faqManager.DeleteQuestion(faqQuestion.Id);
 			}
 
 			var category = faqManager.GetFaqCategory(categoryId);

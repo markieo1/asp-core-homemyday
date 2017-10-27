@@ -64,7 +64,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				return BadRequest(ModelState);
 			}
 
-			foreach (Page page in pages)
+			foreach (Page page in pages.ToList())
 			{
 				pageManager.EditPage(page.Id, page);
 			}

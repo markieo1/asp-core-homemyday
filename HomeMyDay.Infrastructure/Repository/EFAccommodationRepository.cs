@@ -29,11 +29,11 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Accommodation accommodation = await _context.Accommodations
+			Accommodation accommodation = _context.Accommodations
 				.Include(x => x.MediaObjects)
 				.Include(x => x.Reviews)
 				.Include(x => x.NotAvailableDates)
-				.SingleOrDefaultAsync(a => a.Id == id);
+				.SingleOrDefault(a => a.Id == id);
 
 			if (accommodation == null)
 			{
