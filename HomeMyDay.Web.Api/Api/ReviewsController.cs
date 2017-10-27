@@ -111,7 +111,6 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-			reviewManager.Delete(id);
 
 	        if (reviewManager.GetReview(id) == null)
 	        {
@@ -123,7 +122,9 @@ namespace HomeMyDay.Web.Api.Controllers
 		        return BadRequest(ModelState);
 	        }
 
-	        return NoContent();
+	        reviewManager.Delete(id);
+
+			return NoContent();
 		}
     }
 }

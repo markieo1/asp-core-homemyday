@@ -48,9 +48,6 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			var result = accommodationManager.GetAccommodation(id);
 
-			//check if id is a integer
-			//var isNum = int.TryParse(id.ToString(), out var n);
-
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -138,14 +135,15 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-			accommodationManager.Delete(id);
 
 	        if (accommodationManager.GetAccommodation(id) == null)
 	        {
 		        return NotFound(id);
 	        }
 
-	        if (!ModelState.IsValid)
+			accommodationManager.Delete(id);
+
+			if (!ModelState.IsValid)
 	        {
 		        return BadRequest(ModelState);
 	        }

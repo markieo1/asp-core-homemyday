@@ -206,7 +206,6 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("categories/{categoryId}")]
 		public IActionResult DeleteCategories(long categoryId)
 		{
-			faqManager.DeleteCategory(categoryId);
 
 	        if (faqManager.GetFaqCategory(categoryId) == null)
 	        {
@@ -218,19 +217,22 @@ namespace HomeMyDay.Web.Api.Controllers
 		        return BadRequest(ModelState);
 	        }
 
-	        return NoContent();
+			faqManager.DeleteCategory(categoryId);
+
+			return NoContent();
         }
 
 		// PUT api/values/5
 		[HttpDelete("categories/{categoryId}/questions/{questionId}")]
 		public IActionResult Delete(long categoryId, long questionId)
 		{
-			faqManager.DeleteQuestion(categoryId);
 
 			if (faqManager.GetFaqQuestion(questionId) == null)
 			{
 				return NotFound(questionId);
 			}
+
+			faqManager.DeleteQuestion(categoryId);
 
 			if (!ModelState.IsValid)
 			{

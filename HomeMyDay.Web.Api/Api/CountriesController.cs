@@ -136,7 +136,6 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
 		public IActionResult Delete(long id)
 		{
-			countryManager.Delete(id);
 
 			if (countryManager.GetCountry(id) == null)
 			{
@@ -148,6 +147,8 @@ namespace HomeMyDay.Web.Api.Controllers
 				//return 400
 				return BadRequest(ModelState);
 			}
+
+			countryManager.Delete(id);
 
 			return NoContent();
 		}

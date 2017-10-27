@@ -107,14 +107,15 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-			pageManager.DeletePage(id);
 
 	        if (pageManager.GetPage(id) == null)
 	        {
 		        return NotFound(id);
 	        }
 
-	        if (!ModelState.IsValid)
+	        pageManager.DeletePage(id);
+
+			if (!ModelState.IsValid)
 	        {
 		        return BadRequest(ModelState);
 	        }

@@ -110,7 +110,6 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            vacancyManager.Delete(id);
 
 	        if (vacancyManager.GetVacancy(id) == null)
 	        {
@@ -121,6 +120,8 @@ namespace HomeMyDay.Web.Api.Controllers
 	        {
 		        return BadRequest(ModelState);
 	        }
+
+	        vacancyManager.Delete(id);
 
 			return NoContent();
         }
