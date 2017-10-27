@@ -8,8 +8,8 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    public class NewspaperSubscriptionsController : BaseApiController
-    {
+	public class NewspaperSubscriptionsController : BaseApiController
+	{
 		private readonly INewspaperManager newspaperManager;
 
 		public NewspaperSubscriptionsController(INewspaperManager newspaperMgr)
@@ -26,26 +26,26 @@ namespace HomeMyDay.Web.Api.Controllers
 		// GET api/values
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
-        {
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			var result = newspaperManager.GetNewspaper(id);
 
-	        if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
+			if (result == null)
+			{
+				return NotFound(id);
+			}
 
-	        if (result == null)
-	        {
-		        return NotFound(id);
-	        }
-
-	        return Ok(result);
+			return Ok(result);
 		}
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]Newspaper newspaper)
-        {
+		// POST api/values
+		[HttpPost]
+		public IActionResult Post([FromBody]Newspaper newspaper)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -54,7 +54,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			newspaperManager.Subscribe(newspaper.Email);
 
 			return CreatedAtAction(nameof(Get), new { id = newspaper.Id }, newspaper);
-        }
+		}
 
 		[HttpDelete]
 		public IActionResult Delete()
@@ -72,22 +72,22 @@ namespace HomeMyDay.Web.Api.Controllers
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
 		public IActionResult Delete(long id)
-        {
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			var newspaper = newspaperManager.GetNewspaper(id);
 
-	        if (newspaper == null)
-	        {
-		        return NotFound(id);
-	        }
+			if (newspaper == null)
+			{
+				return NotFound(id);
+			}
 
 			newspaperManager.Unsubscribe(newspaper.Email);
 
-	        if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
-
 			return NoContent();
-        }
-    }
+		}
+	}
 }

@@ -8,8 +8,8 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    public class PagesController : BaseApiController
-    {
+	public class PagesController : BaseApiController
+	{
 		private readonly IPageManager pageManager;
 
 		public PagesController(IPageManager pageMgr)
@@ -25,27 +25,27 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public IActionResult Get(int id)
-        {
-	        var result = pageManager.GetPage(id);
-
+		public IActionResult Get(long id)
+		{
 			if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
+			{
+				return BadRequest(ModelState);
+			}
 
-	        if (result == null)
-	        {
-		        return NotFound(id);
-	        }
+			var result = pageManager.GetPage(id);
 
-	        return Ok(result);
-        }
+			if (result == null)
+			{
+				return NotFound(id);
+			}
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]Page page)
-        {
+			return Ok(result);
+		}
+
+		// POST api/values
+		[HttpPost]
+		public IActionResult Post([FromBody]Page page)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -54,7 +54,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			pageManager.AddPage(page);
 
 			return CreatedAtAction(nameof(Get), new { id = page.Id }, page);
-        }
+		}
 
 		[HttpPut]
 		public IActionResult Put([FromBody]Page[] pages)
@@ -72,10 +72,10 @@ namespace HomeMyDay.Web.Api.Controllers
 			return Ok(pages);
 		}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]Page page)
-        {
+		// PUT api/values/5
+		[HttpPut("{id}")]
+		public IActionResult Put(long id, [FromBody]Page page)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -89,7 +89,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			pageManager.EditPage(id, page);
 
 			return Ok(page);
-        }
+		}
 
 		[HttpDelete]
 		public IActionResult Delete()
@@ -106,22 +106,21 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
-
-	        if (pageManager.GetPage(id) == null)
-	        {
-		        return NotFound(id);
-	        }
-
-	        pageManager.DeletePage(id);
-
+		public IActionResult Delete(long id)
+		{
 			if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (pageManager.GetPage(id) == null)
+			{
+				return NotFound(id);
+			}
+
+			pageManager.DeletePage(id);
 
 			return NoContent();
-        }
-    }
+		}
+	}
 }

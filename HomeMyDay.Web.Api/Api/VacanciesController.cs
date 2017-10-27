@@ -8,46 +8,45 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    public class VacanciesController : BaseApiController
+	public class VacanciesController : BaseApiController
 	{
-        private readonly IVacancyManager vacancyManager;
+		private readonly IVacancyManager vacancyManager;
 
-        public VacanciesController(IVacancyManager vacancyMgr)
-        {
-            vacancyManager = vacancyMgr;
-        }
+		public VacanciesController(IVacancyManager vacancyMgr)
+		{
+			vacancyManager = vacancyMgr;
+		}
 
-        // EGT api/values
-        [HttpGet]
-        public IEnumerable<Vacancy> Get()
-        {
-            return vacancyManager.GetVacancies();
-        }
+		// EGT api/values
+		[HttpGet]
+		public IEnumerable<Vacancy> Get()
+		{
+			return vacancyManager.GetVacancies();
+		}
 
-        // GET api/values
-        [HttpGet("{id}")]
-        public IActionResult Get(long id)
-        {
+		// GET api/values
+		[HttpGet("{id}")]
+		public IActionResult Get(long id)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
 			var result = vacancyManager.GetVacancy(id);
 
-			if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
+			if (result == null)
+			{
+				return NotFound(id);
+			}
 
-	        if (result == null)
-	        {
-		        return NotFound(id);
-	        }
-
-	        return Ok(result);
+			return Ok(result);
 		}
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]Vacancy vacancy)
-        {
+		// POST api/values
+		[HttpPost]
+		public IActionResult Post([FromBody]Vacancy vacancy)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -55,14 +54,12 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			vacancyManager.Save(vacancy);
 
-            return CreatedAtAction(nameof(Get), new { id = vacancy.Id }, vacancy);
-        }
+			return CreatedAtAction(nameof(Get), new { id = vacancy.Id }, vacancy);
+		}
 
-        [HttpPut]
-        public IActionResult Put([FromBody]Vacancy[] vacancies)
-        {
-            Delete();
-
+		[HttpPut]
+		public IActionResult Put([FromBody]Vacancy[] vacancies)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -73,27 +70,27 @@ namespace HomeMyDay.Web.Api.Controllers
                 vacancyManager.Save(vacancy);
             }
 
-            return Ok(vacancies);
-        }
+			return Ok(vacancies);
+		}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]Vacancy vacancy)
-        {
+		// PUT api/values/5
+		[HttpPut("{id}")]
+		public IActionResult Put(long id, [FromBody]Vacancy vacancy)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
 			if (vacancy.Id != id)
-            {
-                return BadRequest();
-            }
+			{
+				return BadRequest();
+			}
 
-            vacancyManager.Save(vacancy);
+			vacancyManager.Save(vacancy);
 
-	        return Ok(vacancy);
-        }
+			return Ok(vacancy);
+		}
 
         [HttpDelete]
         public IActionResult Delete()
@@ -105,28 +102,27 @@ namespace HomeMyDay.Web.Api.Controllers
                 vacancyManager.Delete(vacancy.Id);
             }
 
-            return NoContent();
-        }
+			return NoContent();
+		}
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
+		// DELETE api/values/5
+		[HttpDelete("{id}")]
+		public IActionResult Delete(long id)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-	        if (vacancyManager.GetVacancy(id) == null)
-	        {
-		        return NotFound(id);
-	        }
+			if (vacancyManager.GetVacancy(id) == null)
+			{
+				return NotFound(id);
+			}
 
-	        if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
-
-	        vacancyManager.Delete(id);
+			vacancyManager.Delete(id);
 
 			return NoContent();
-        }
+		}
 
-    }
+	}
 }
