@@ -26,8 +26,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// GET api/values
-		[HttpGet("categories/{id}")]
-		public IActionResult Get(int id)
+		[HttpGet("categories/{categoryId}")]
+		public IActionResult Get(long categoryId)
 		{
 			var result = faqManager.GetFaqCategory(id);
 
@@ -47,12 +47,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("categories/{id}/questions")]
 		public IEnumerable<FaqQuestion> Get(long id)
 		{
-			return faqManager.GetFaqQuestions(id);
+			return faqManager.GetFaqQuestions(categoryId) ?? Enumerable.Empty<FaqQuestion>();
 		}
 
 		// GET api/values
-		[HttpGet("categories/{id}/questions/{questionid}")]
-		public IActionResult Get(int id, int questionid)
+		[HttpGet("categories/{categoryId}/questions/{questionId}")]
+		public IActionResult Get(long categoryId, long questionId)
 		{
 			var result = faqManager.GetFaqQuestion(questionid);
 
@@ -71,41 +71,41 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// POST api/values
 		[HttpPost("categories")]
-		public IActionResult Post([FromBody]FaqCategory faqcategory)
+		public IActionResult Post([FromBody]FaqCategory faqCategory)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			faqManager.SaveCategory(faqcategory);
+			faqManager.SaveCategory(faqCategory);
 
-			return CreatedAtAction(nameof(Get), new { id = faqcategory.Id }, faqcategory);
+			return CreatedAtAction(nameof(Get), new { id = faqCategory.Id }, faqCategory);
 		}
 
 		// POST api/values
-		[HttpPost("categories/{id}/questions")]
-		public IActionResult Post(long id, [FromBody] FaqQuestion faqquestion)
+		[HttpPost("categories/{categoryId}/questions")]
+		public IActionResult Post(long id, [FromBody] FaqQuestion faqQuestion)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			faqManager.SaveQuestion(faqquestion);
+			faqManager.SaveQuestion(faqQuestion);
 
 			return CreatedAtRoute(nameof(Get), new { id = faqquestion.Category.Id, questionid = faqquestion.Id }, faqquestion);
 		}
 
 		[HttpPut("categories")]
-		public IActionResult Put([FromBody]FaqCategory[] faqcategories)
+		public IActionResult Put([FromBody]FaqCategory[] faqCategories)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (FaqCategory faqcategory in faqcategories)
+			foreach (FaqCategory faqcategory in faqCategories)
 			{
 				faqManager.SaveCategory(faqcategory);
 			}
@@ -113,15 +113,15 @@ namespace HomeMyDay.Web.Api.Controllers
 			return Ok(faqcategories);
 		}
 
-		[HttpPut("categories/{id}/questions")]
-		public IActionResult Put(long id, [FromBody] FaqQuestion[] faqquestions)
+		[HttpPut("categories/{categoryId}/questions")]
+		public IActionResult Put(long id, [FromBody] FaqQuestion[] faqQuestions)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (FaqQuestion faqquestion in faqquestions)
+			foreach (FaqQuestion faqquestion in faqQuestions)
 			{
 				faqManager.SaveQuestion(faqquestion);
 			}
@@ -130,34 +130,34 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// PUT api/values/5
-		[HttpPut("categories/{id}")]
-        public IActionResult Put(int id, [FromBody]FaqCategory faqcategory)
-        {
-			if (!ModelState.IsValid)
-			{
-				return BadRequest(ModelState);
-			}
-
-			if (faqcategory.Id != id)
-			{
-				return BadRequest();
-			}
-
-			faqManager.SaveCategory(faqcategory);
-
-	        return Ok(faqcategory);
-        }
-
-		// PUT api/values/5
-		[HttpPut("categories/{id}/questions/{questionid}")]
-		public IActionResult Put(int id, int questionid, [FromBody]FaqQuestion faqQuestion)
+		[HttpPut("categories/{categoryId}")]
+		public IActionResult Put(long categoryId, [FromBody]FaqCategory faqCategory)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			if (faqQuestion.Category.Id != id && faqQuestion.Id != questionid)
+			if (faqCategory.Id != categoryId)
+			{
+				return BadRequest();
+			}
+
+			faqManager.SaveCategory(faqCategory);
+
+	        return Ok(faqcategory);
+        }
+
+		// PUT api/values/5
+		[HttpPut("categories/{categoryId}/questions/{questionId}")]
+		public IActionResult Put(long categoryId, long questionId, [FromBody]FaqQuestion faqQuestion)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (faqQuestion.Category.Id != categoryId && faqQuestion.Id != questionId)
 			{
 				return BadRequest();
 			}
@@ -166,12 +166,12 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			return Ok(faqQuestion);
 		}
-		
+
 		[HttpDelete("categories")]
 		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<FaqCategory> faqcategories = faqManager.GetFaqCategories();
-			foreach(FaqCategory faqcategory in faqcategories)
+			foreach (FaqCategory faqcategory in faqcategories)
 			{
 				await faqManager.DeleteCategory(faqcategory.Id);
 			}
@@ -179,10 +179,10 @@ namespace HomeMyDay.Web.Api.Controllers
 			return NoContent();
 		}
 
-		[HttpDelete("categories/{id}/questions")]
-		public async Task<IActionResult> Delete(long id)
+		[HttpDelete("categories/{categoryId}/questions")]
+		public async Task<IActionResult> Delete(long categoryId)
 		{
-			IEnumerable<FaqQuestion> faqQuestions = faqManager.GetFaqQuestions(id);
+			IEnumerable<FaqQuestion> faqQuestions = faqManager.GetFaqQuestions(categoryId);
 			foreach (FaqQuestion faqQuestion in faqQuestions)
 			{
 				await faqManager.DeleteQuestion(faqQuestion.Id);
@@ -192,10 +192,10 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// DELETE api/values/5
-		[HttpDelete("categories/{id}")]
-        public IActionResult Delete(int id)
-        {
-			faqManager.DeleteCategory(id);
+		[HttpDelete("categories/{categoryId}")]
+		public IActionResult DeleteCategories(long categoryId)
+		{
+			faqManager.DeleteCategory(categoryId);
 
 	        if (faqManager.GetFaqCategory(id) == null)
 	        {
@@ -211,10 +211,10 @@ namespace HomeMyDay.Web.Api.Controllers
         }
 
 		// PUT api/values/5
-		[HttpDelete("categories/{id}/questions/{questionid}")]
-		public IActionResult Delete(int id, int questionid)
+		[HttpDelete("categories/{categoryId}/questions/{questionId}")]
+		public IActionResult Delete(long categoryId, long questionId)
 		{
-			faqManager.DeleteQuestion(questionid);
+			faqManager.DeleteQuestion(categoryId);
 
 			if (faqManager.GetFaqQuestion(id) == null)
 			{

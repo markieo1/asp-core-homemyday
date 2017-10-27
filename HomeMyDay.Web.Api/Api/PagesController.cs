@@ -74,7 +74,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Page page)
+        public IActionResult Put(long id, [FromBody]Page page)
         {
 			if (!ModelState.IsValid)
 			{
@@ -105,7 +105,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
 			pageManager.DeletePage(id);
 
