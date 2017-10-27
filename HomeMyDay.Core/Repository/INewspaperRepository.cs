@@ -20,6 +20,6 @@ namespace HomeMyDay.Core.Repository
 		/// </summary>
 		/// <param name="email">The email of the user to unsubscribe</param>
 		/// <returns></returns>
-		void Unsubscribe(string email);
+		Task Unsubscribe(string email);
 	}
 }

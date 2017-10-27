@@ -15,9 +15,9 @@ namespace HomeMyDay.Web.Base.Managers
 
 		Page GetPage(long id);
 						
-	    void EditPage(long id, Page page);
+	    Task EditPage(long id, Page page);
 
-		void DeletePage(long id);
+		Task DeletePage(long id);
 
 		void AddPage(Page page);
 	}

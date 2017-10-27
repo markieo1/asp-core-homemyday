@@ -57,7 +57,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpPut]
-		public IActionResult Put([FromBody]Page[] pages)
+		public async Task<IActionResult> Put([FromBody]Page[] pages)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -66,7 +66,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			foreach (Page page in pages.ToList())
 			{
-				pageManager.EditPage(page.Id, page);
+				await pageManager.EditPage(page.Id, page);
 			}
 
 			return Ok(pages);
@@ -92,13 +92,13 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpDelete]
-		public IActionResult Delete()
+		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Page> pages = pageManager.GetPages();
 
 			foreach(Page page in pages.ToList())
 			{
-				pageManager.DeletePage(page.Id);
+				await pageManager.DeletePage(page.Id);
 			}
 
 			return NoContent();

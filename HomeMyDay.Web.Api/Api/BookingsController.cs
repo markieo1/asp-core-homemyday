@@ -26,7 +26,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			//Generate a list of HALResponses
 			var response = new List<HALResponse>();
-			foreach (Booking booking in bookings.ToList())
+			foreach (Booking booking in bookings)
 			{
 				response.Add(
 					new HALResponse(booking)
@@ -77,7 +77,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			}));
 		}
 
-		public IActionResult Put([FromBody]Booking[] bookings)
+		public async Task<IActionResult> Put([FromBody]Booking[] bookings)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -86,7 +86,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			foreach (Booking booking in bookings.ToList())
 			{
-				bookingManager.Save(booking);
+				await bookingManager.Save(booking);
 			}
 
 			return Ok(bookings);

@@ -30,10 +30,10 @@ namespace HomeMyDay.Infrastructure.Repository
 			}
 
 			Accommodation accommodation = _context.Accommodations
-				.Include(x => x.MediaObjects)
-				.Include(x => x.Reviews)
-				.Include(x => x.NotAvailableDates)
-				.SingleOrDefault(a => a.Id == id);
+                .Include(x => x.MediaObjects)
+                .Include(x => x.Reviews)
+                .Include(x => x.NotAvailableDates)
+                .SingleOrDefault(a => a.Id == id);
 
 			if (accommodation == null)
 			{

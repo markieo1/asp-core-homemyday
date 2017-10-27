@@ -2,6 +2,7 @@
 using HomeMyDay.Core.Repository;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
@@ -36,9 +37,9 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		    return _newspaperRepository.Subscribe(email);
 	    }
 
-		public void Unsubscribe(string email)
+		public Task Unsubscribe(string email)
 		{
-			_newspaperRepository.Unsubscribe(email);
+			return _newspaperRepository.Unsubscribe(email);
 		}
     }
 }

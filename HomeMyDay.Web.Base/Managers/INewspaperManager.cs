@@ -13,6 +13,6 @@ namespace HomeMyDay.Web.Base.Managers
 
 		bool Subscribe(string email);
 
-		void Unsubscribe(string email);
+		Task Unsubscribe(string email);
 	}
 }

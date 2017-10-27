@@ -57,13 +57,13 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpDelete]
-		public IActionResult Delete()
+		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Newspaper> newspapers = newspaperManager.GetNewspapers();
 
 			foreach(Newspaper newspaper in newspapers.ToList())
 			{
-				newspaperManager.Unsubscribe(newspaper.Email);
+				await newspaperManager.Unsubscribe(newspaper.Email);
 			}
 
 			return NoContent();

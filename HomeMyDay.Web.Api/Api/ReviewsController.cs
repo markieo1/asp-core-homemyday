@@ -57,7 +57,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpPut]
-		public IActionResult Put([FromBody]Review[] countries)
+		public async Task<IActionResult> Put([FromBody]Review[] countries)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -66,7 +66,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			foreach (Review review in countries.ToList())
 			{
-				reviewManager.Save(review);
+				await reviewManager.Save(review);
 			}
 
 			return Ok(countries);
@@ -92,13 +92,13 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpDelete]
-		public IActionResult Delete()
+		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Review> reviews = reviewManager.GetAllReviews();
 
 			foreach(Review review in reviews.ToList())
 			{
-				reviewManager.Delete(review.Id);
+				await reviewManager.Delete(review.Id);
 			}
 
 			return NoContent();

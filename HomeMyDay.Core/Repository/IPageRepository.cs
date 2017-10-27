@@ -20,13 +20,13 @@ namespace HomeMyDay.Core.Repository
 		/// </summary>
 		/// <param name="id">the page identifier.</param>
 		/// <param name="page">the page model/the data it need to change</param>\
-		void EditPage(long id, Page page);
+		Task EditPage(long id, Page page);
 
 		/// <summary>
 		/// Delete the given page
 		/// </summary>
 		/// <param name="id">the page identifier.</param>
-		void DeletePage(long id);
+		Task DeletePage(long id);
 
 		/// <summary>
 		/// Add a new page

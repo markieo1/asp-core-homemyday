@@ -93,13 +93,13 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
         [HttpDelete]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
             IEnumerable<Vacancy> vacancies = vacancyManager.GetVacancies();
 
             foreach (Vacancy vacancy in vacancies.ToList())
             {
-                vacancyManager.Delete(vacancy.Id);
+                await vacancyManager.Delete(vacancy.Id);
             }
 
 			return NoContent();

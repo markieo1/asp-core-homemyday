@@ -55,7 +55,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			return page;
 		}
 
-		public void EditPage(long id, Page page)
+		public async Task EditPage(long id, Page page)
 		{
 			var db = _context.Page.Any(r => r.Id == id);
 
@@ -71,7 +71,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				db_page.Title = page.Title;
 				db_page.Content = page.Content;
 			}
-			_context.SaveChanges();
+			await _context.SaveChangesAsync();
 		}
 
 		public void AddPage(Page page)
@@ -85,7 +85,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			_context.SaveChanges();
 		}
 
-		public void DeletePage(long id)
+		public async Task DeletePage(long id)
 		{
 			Page page = _context.Page.FirstOrDefault(p => p.Id == id);
 
@@ -96,7 +96,7 @@ namespace HomeMyDay.Infrastructure.Repository
 
 			_context.Page.Remove(page);
 
-			_context.SaveChanges();
+			await _context.SaveChangesAsync();
 		}
 	}
 }

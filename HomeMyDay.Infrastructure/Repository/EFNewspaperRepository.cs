@@ -4,6 +4,7 @@ using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Infrastructure.Repository
 {
@@ -44,7 +45,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			return isSaved;
 		}
 
-		public void Unsubscribe(string email)
+		public async Task Unsubscribe(string email)
 		{
 			Newspaper newspaper = _context.Newspapers.FirstOrDefault(n => n.Email == email);
 
@@ -55,7 +56,7 @@ namespace HomeMyDay.Infrastructure.Repository
 
 			_context.Newspapers.Remove(newspaper);
 
-			_context.SaveChanges();
+			await _context.SaveChangesAsync();
 		}
 	}
 }

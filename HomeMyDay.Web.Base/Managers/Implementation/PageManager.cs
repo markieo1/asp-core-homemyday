@@ -16,13 +16,11 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 			_pageRepository = pageRepository;
 		}	 
 
-		public void EditPage(long id, Page page)
+		public Task EditPage(long id, Page page)
 		{
 			var suprise = _pageRepository.GetPage(id);
-			if (suprise != null)
-			{
-				_pageRepository.EditPage(id, page);
-			}
+			
+			return _pageRepository.EditPage(id, page);
 		}
 
 		public void AddPage(Page page)
@@ -62,9 +60,9 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 			return page;
 		}
 
-		public void DeletePage(long id)
+		public Task DeletePage(long id)
 		{
-			 _pageRepository.DeletePage(id);
+			return _pageRepository.DeletePage(id);
 		}
 	}
 }
