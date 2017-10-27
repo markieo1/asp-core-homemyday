@@ -17,7 +17,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			faqManager = faqMgr;
 		}
 
-		[HttpGet]
+		[HttpGet("categories")]
 		public IEnumerable<FaqCategory> Get()
 		{
 			var result = faqManager.GetFaqCategories();
@@ -60,7 +60,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// POST api/values
-		[HttpPost("category/{id}/questions")]
+		[HttpPost("categories/{id}/questions")]
 		public IActionResult Post(long id, [FromBody] FaqQuestion faqquestion)
 		{
 			if (!ModelState.IsValid)
@@ -73,7 +73,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			return CreatedAtAction(nameof(Get), new { id = faqquestion.Category.Id, questionid = faqquestion.Id }, faqquestion);
 		}
 
-		[HttpPut("category")]
+		[HttpPut("categories")]
 		public IActionResult Put([FromBody]FaqCategory[] faqcategories)
 		{
 			if (!ModelState.IsValid)
@@ -89,7 +89,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			return Accepted();
 		}
 
-		[HttpPut("category/{id}/questions")]
+		[HttpPut("categories/{id}/questions")]
 		public IActionResult Put(long id, [FromBody] FaqQuestion[] faqquestions)
 		{
 			if (!ModelState.IsValid)
@@ -106,7 +106,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// PUT api/values/5
-		[HttpPut("category/{id}")]
+		[HttpPut("categories/{id}")]
         public IActionResult Put(int id, [FromBody]FaqCategory faqcategory)
         {
 			if (!ModelState.IsValid)
@@ -125,7 +125,7 @@ namespace HomeMyDay.Web.Api.Controllers
         }
 
 		// PUT api/values/5
-		[HttpPut("category/{id}/questions/{questionid}")]
+		[HttpPut("categories/{id}/questions/{questionid}")]
 		public IActionResult Put(int id, int questionid, [FromBody]FaqQuestion faqQuestion)
 		{
 			if (!ModelState.IsValid)
@@ -143,7 +143,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.Category.Id, questionid = faqQuestion.Id }, faqQuestion);
 		}
 		
-		[HttpDelete("category")]
+		[HttpDelete("categories")]
 		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<FaqCategory> faqcategories = faqManager.GetFaqCategories();
@@ -155,7 +155,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			return Accepted();
 		}
 
-		[HttpDelete("category/{id}/questions")]
+		[HttpDelete("categories/{id}/questions")]
 		public async Task<IActionResult> Delete(long id)
 		{
 			IEnumerable<FaqQuestion> faqQuestions = faqManager.GetFaqQuestions(id);
@@ -168,7 +168,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// DELETE api/values/5
-		[HttpDelete("category/{id}")]
+		[HttpDelete("categories/{id}")]
         public IActionResult Delete(int id)
         {
 			faqManager.DeleteCategory(id);
@@ -177,7 +177,7 @@ namespace HomeMyDay.Web.Api.Controllers
         }
 
 		// PUT api/values/5
-		[HttpDelete("category/{id}/questions/{questionid}")]
+		[HttpDelete("categories/{id}/questions/{questionid}")]
 		public IActionResult Delete(int id, int questionid)
 		{
 			faqManager.DeleteQuestion(questionid);
