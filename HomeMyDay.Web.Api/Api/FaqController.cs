@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Models;
+using Halcyon.HAL;
+using Halcyon.Web.HAL;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
@@ -18,31 +20,76 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpGet("categories")]
-		public IEnumerable<FaqCategory> Get()
+		public IActionResult Get()
 		{
-			var result = faqManager.GetFaqCategories();
+			IEnumerable<FaqCategory> categories = faqManager.GetFaqCategories();
 
-			return result;
+			//Generate a list of HALResponses
+			var response = new List<HALResponse>();
+			foreach (FaqCategory category in categories)
+			{
+				response.Add(
+					new HALResponse(category)
+					.AddLinks(new Link[] {
+						new Link(Link.RelForSelf, $"/api/v1/faq/categories/{category.Id}"),
+						new Link("questions", $"/api/v1/faq/categories/{category.Id}/questions", "Category Questions"),
+						new Link("updateCategory", $"/api/v1/faq/categories/{category.Id}", "Update Category", "PUT"),
+						new Link("deleteCategory", $"/api/v1/faq/categories/{category.Id}", "Delete Category", "DELETE")
+					})
+					.AddEmbeddedCollection("questions", category.Questions)
+				);
+			}
+
+			return this.Ok(response);
 		}
 
 		// GET api/values
 		[HttpGet("categories/{categoryId}")]
-		public FaqCategory Get(long categoryId)
+		public IActionResult Get(long categoryId)
 		{
-			return faqManager.GetFaqCategory(categoryId);
+			return this.HAL(faqManager.GetFaqCategory(categoryId), new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/faq/categories/{categoryId}"),
+				new Link("questions", $"/api/v1/faq/categories/{categoryId}/questions", "Category Questions"),
+				new Link("updateCategory", $"/api/v1/faq/categories/{categoryId}", "Update Category", "PUT"),
+				new Link("deleteCategory", $"/api/v1/faq/categories/{categoryId}", "Delete Category", "DELETE"),
+				new Link("createQuestion", $"api/v1/faq/categories/{categoryId}/questions", "Create Question", "POST")
+			});
 		}
 
 		[HttpGet("categories/{categoryId}/questions")]
-		public IEnumerable<FaqQuestion> GetQuestions(long categoryId)
+		public IActionResult GetQuestions(long categoryId)
 		{
-			return faqManager.GetFaqQuestions(categoryId) ?? Enumerable.Empty<FaqQuestion>();
+			IEnumerable<FaqQuestion> questions = faqManager.GetFaqQuestions(categoryId);
+			var response = new List<HALResponse>();
+			foreach(FaqQuestion question in questions)
+			{
+				response.Add(new HALResponse(question)
+					.AddLinks(new Link[] {
+						new Link(Link.RelForSelf, $"api/v1/faq/categories/{categoryId}/questions/{question.Id}"),
+						new Link("createQuestion", $"api/v1/faq/categories/{categoryId}/questions", "Create Question", "POST"),
+						new Link("updateQuestion", $"api/v1/faq/categories/{categoryId}/questions/{question.Id}", "Update Question", "PUT"),
+						new Link("deleteQuestion", $"api/v1/faq/categories/{categoryId}/questions/{question.Id}", "Delete Question", "DELETE")
+				}));
+			}
+
+			return this.Ok(response);
 		}
 
 		// GET api/values
 		[HttpGet("categories/{categoryId}/questions/{questionId}")]
-		public FaqQuestion Get(long categoryId, long questionId)
+		public IActionResult Get(long categoryId, long questionId)
 		{
-			return faqManager.GetFaqQuestion(questionId);
+			var question = faqManager.GetFaqQuestion(questionId);
+			if(question.Category.Id != categoryId)
+			{
+				return NotFound();
+			}
+
+			return this.HAL(question, new Link[] {
+				new Link(Link.RelForSelf, $"api/v1/faq/categories/{categoryId}/questions/{question.Id}"),
+				new Link("updateQuestion", $"api/v1/faq/categories/{categoryId}/questions/{question.Id}", "Update Question", "PUT"),
+				new Link("deleteQuestion", $"api/v1/faq/categories/{categoryId}/questions/{question.Id}", "Delete Question", "DELETE")
+			});
 		}
 
 		// POST api/values
@@ -56,7 +103,9 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			faqManager.SaveCategory(faqCategory);
 
-			return CreatedAtAction(nameof(Get), new { id = faqCategory.Id }, faqCategory);
+			return CreatedAtAction(nameof(Get), new { id = faqCategory.Id }, new HALResponse(faqCategory).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"api/v1/faq/categories/{faqCategory.Id}")
+			}));
 		}
 
 		// POST api/values
@@ -70,11 +119,13 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			faqManager.SaveQuestion(faqQuestion);
 
-			return CreatedAtAction(nameof(Get), new { id = faqQuestion.Category.Id, questionId = faqQuestion.Id }, faqQuestion);
+			return CreatedAtAction(nameof(Get), new { categoryId = faqQuestion.Category.Id, questionId = faqQuestion.Id }, new HALResponse(faqQuestion).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"api/v1/faq/categories/{faqQuestion.Category.Id}/questions/{faqQuestion.Id}")
+			}));
 		}
 
 		[HttpPut("categories")]
-		public IActionResult Put([FromBody]FaqCategory[] faqCategories)
+		public async Task<IActionResult> Put([FromBody]FaqCategory[] faqCategories)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -83,14 +134,14 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			foreach (FaqCategory faqcategory in faqCategories)
 			{
-				faqManager.SaveCategory(faqcategory);
+				await faqManager.SaveCategory(faqcategory);
 			}
 
-			return Accepted();
+			return AcceptedAtAction(nameof(Get));
 		}
 
 		[HttpPut("categories/{categoryId}/questions")]
-		public IActionResult Put(long id, [FromBody] FaqQuestion[] faqQuestions)
+		public async Task<IActionResult> Put(long categoryId, [FromBody] FaqQuestion[] faqQuestions)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -99,10 +150,10 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			foreach (FaqQuestion faqquestion in faqQuestions)
 			{
-				faqManager.SaveQuestion(faqquestion);
+				await faqManager.SaveQuestion(faqquestion);
 			}
 
-			return Accepted();
+			return AcceptedAtAction(nameof(Get), new { categoryId = categoryId });
 		}
 
 		// PUT api/values/5
@@ -116,12 +167,15 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			if (faqCategory.Id != categoryId)
 			{
-				return BadRequest();
+				ModelState.AddModelError("idmismatch", "ID of category in request body does not match the requested ID.");
+				return BadRequest(ModelState);
 			}
 
 			faqManager.SaveCategory(faqCategory);
 
-			return AcceptedAtAction(nameof(Get), new { id = faqCategory.Id }, faqCategory);
+			return AcceptedAtAction(nameof(Get), new { id = faqCategory.Id }, new HALResponse(faqCategory).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"api/v1/faq/categories/{faqCategory.Id}")
+			}));
 		}
 
 		// PUT api/values/5
@@ -140,7 +194,9 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			faqManager.SaveQuestion(faqQuestion);
 
-			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.Category.Id, questionId = faqQuestion.Id }, faqQuestion);
+			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.Category.Id, questionId = faqQuestion.Id }, new HALResponse(faqQuestion).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"api/v1/faq/categories/{faqQuestion.Category.Id}/questions/{faqQuestion.Id}")
+			}));
 		}
 
 		[HttpDelete("categories")]
@@ -152,7 +208,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await faqManager.DeleteCategory(faqcategory.Id);
 			}
 
-			return Accepted();
+			return AcceptedAtAction(nameof(Get));
 		}
 
 		[HttpDelete("categories/{categoryId}/questions")]
@@ -164,7 +220,15 @@ namespace HomeMyDay.Web.Api.Controllers
 				await faqManager.DeleteQuestion(faqQuestion.Id);
 			}
 
-			return Accepted();
+			var category = faqManager.GetFaqCategory(categoryId);
+
+			return AcceptedAtAction(nameof(Get), new { categoryId = categoryId }, new HALResponse(category).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/faq/categories/{categoryId}"),
+				new Link("questions", $"/api/v1/faq/categories/{categoryId}/questions", "Category Questions"),
+				new Link("updateCategory", $"/api/v1/faq/categories/{categoryId}", "Update Category", "PUT"),
+				new Link("deleteCategory", $"/api/v1/faq/categories/{categoryId}", "Delete Category", "DELETE"),
+				new Link("createQuestion", $"api/v1/faq/categories/{categoryId}/questions", "Create Question", "POST")
+			}));
 		}
 
 		// DELETE api/values/5
@@ -176,13 +240,20 @@ namespace HomeMyDay.Web.Api.Controllers
 			return AcceptedAtAction(nameof(Get));
 		}
 
-		// PUT api/values/5
 		[HttpDelete("categories/{categoryId}/questions/{questionId}")]
 		public IActionResult Delete(long categoryId, long questionId)
 		{
-			faqManager.DeleteQuestion(categoryId);
+			faqManager.DeleteQuestion(questionId);
 
-			return AcceptedAtAction(nameof(Get));
+			var category = faqManager.GetFaqCategory(categoryId);
+
+			return AcceptedAtAction(nameof(Get), new { categoryId = categoryId }, new HALResponse(category).AddLinks(new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/faq/categories/{categoryId}"),
+				new Link("questions", $"/api/v1/faq/categories/{categoryId}/questions", "Category Questions"),
+				new Link("updateCategory", $"/api/v1/faq/categories/{categoryId}", "Update Category", "PUT"),
+				new Link("deleteCategory", $"/api/v1/faq/categories/{categoryId}", "Delete Category", "DELETE"),
+				new Link("createQuestion", $"api/v1/faq/categories/{categoryId}/questions", "Create Question", "POST")
+			}));
 		}
 	}
 }
