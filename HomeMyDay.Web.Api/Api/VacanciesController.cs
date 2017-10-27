@@ -8,13 +8,11 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/vacancies")]
-    public class VacancyController : Controller
-    {
+    public class VacanciesController : BaseApiController
+	{
         private readonly IVacancyManager vacancyManager;
 
-        public VacancyController(IVacancyManager vacancyMgr)
+        public VacanciesController(IVacancyManager vacancyMgr)
         {
             vacancyManager = vacancyMgr;
         }

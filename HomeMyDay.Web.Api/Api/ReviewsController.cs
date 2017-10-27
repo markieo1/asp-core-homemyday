@@ -8,55 +8,53 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-	[Produces("application/json")]
-    [Route("api/pages")]
-    public class PageController : Controller
+    public class ReviewsController : BaseApiController
     {
-		private readonly IPageManager pageManager;
+		private readonly IReviewManager reviewManager;
 
-		public PageController(IPageManager pageMgr)
+		public ReviewsController(IReviewManager reviewMgr)
 		{
-			pageManager = pageMgr;
+			reviewManager = reviewMgr;
 		}
 
 		[HttpGet]
-		public IEnumerable<Page> Get()
+		public IEnumerable<Review> Get()
 		{
-			return pageManager.GetPages();
+			return reviewManager.GetAllReviews();
 		}
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Page Get(int id)
+		public Review Get(int id)
         {
-			return pageManager.GetPage(id);
+			return reviewManager.GetReview(id);
         }
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Page Page)
+        public IActionResult Post([FromBody]Review review)
         {
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			pageManager.AddPage(Page);
+			reviewManager.AddReview(review.Accommodation.Id, review.Title, review.Name, review.Text);
 
-			return CreatedAtAction(nameof(Get), new { id = Page.Id }, Page);
+			return CreatedAtAction(nameof(Get), new { id = review.Id }, review);
         }
 
 		[HttpPut]
-		public IActionResult Put([FromBody]Page[] pages)
+		public IActionResult Put([FromBody]Review[] countries)
 		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (Page page in pages)
+			foreach (Review review in countries)
 			{
-				pageManager.EditPage(page.Id, page);
+				reviewManager.Save(review);
 			}
 
 			return Accepted();
@@ -64,30 +62,30 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Page page)
+        public IActionResult Put(int id, [FromBody]Review review)
         {
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			if (page.Id != id)
+			if (review.Id != id)
 			{
 				return BadRequest();
 			}
 
-			pageManager.EditPage(id, page);
+			reviewManager.Save(review);
 
-			return AcceptedAtAction(nameof(Get), new { id = page.Id }, page);
+			return AcceptedAtAction(nameof(Get), new { id = review.Id }, review);
         }
 
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Page> Pages = pageManager.GetPages();
-			foreach(Page Page in Pages)
+			IEnumerable<Review> reviews = reviewManager.GetAllReviews();
+			foreach(Review review in reviews)
 			{
-				pageManager.DeletePage(Page.Id);
+				reviewManager.Delete(review.Id);
 			}
 
 			return Accepted();
@@ -97,7 +95,7 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-			pageManager.DeletePage(id);
+			reviewManager.Delete(id);
 
 			return AcceptedAtAction(nameof(Get));
         }

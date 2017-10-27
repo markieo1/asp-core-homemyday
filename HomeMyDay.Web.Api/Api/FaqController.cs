@@ -8,9 +8,7 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-	[Produces("application/json")]
-	[Route("api/faq")]
-	public class FaqController : Controller
+	public class FaqController : BaseApiController
 	{
 		private readonly IFaqManager faqManager;
 
@@ -28,27 +26,27 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		// GET api/values
-		[HttpGet("category/{id}")]
+		[HttpGet("categories/{id}")]
 		public FaqCategory Get(int id)
 		{
 			return faqManager.GetFaqCategory(id);
 		}
 
-		[HttpGet("category/{id}/questions")]
+		[HttpGet("categories/{id}/questions")]
 		public IEnumerable<FaqQuestion> Get(long id)
 		{
 			return faqManager.GetFaqQuestions(id);
 		}
 
 		// GET api/values
-		[HttpGet("category/{id}/questions/{questionid}")]
+		[HttpGet("categories/{id}/questions/{questionid}")]
 		public FaqQuestion Get(int id, int questionid)
 		{
 			return faqManager.GetFaqQuestion(questionid);
 		}
 
 		// POST api/values
-		[HttpPost("category")]
+		[HttpPost("categories")]
 		public IActionResult Post([FromBody]FaqCategory faqcategory)
 		{
 			if (!ModelState.IsValid)

@@ -8,13 +8,11 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-	[Produces("application/json")]
-    [Route("api/countries")]
-    public class CountryController : Controller
+    public class CountriesController : BaseApiController
     {
 		private readonly ICountryManager countryManager;
 
-		public CountryController(ICountryManager countryMgr)
+		public CountriesController(ICountryManager countryMgr)
 		{
 			countryManager = countryMgr;
 		}

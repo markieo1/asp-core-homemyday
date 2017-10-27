@@ -8,13 +8,11 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-	[Produces("application/json")]
-    [Route("api/newspapers")]
-    public class NewspaperController : Controller
+    public class NewspaperSubscriptionsController : BaseApiController
     {
 		private readonly INewspaperManager newspaperManager;
 
-		public NewspaperController(INewspaperManager newspaperMgr)
+		public NewspaperSubscriptionsController(INewspaperManager newspaperMgr)
 		{
 			newspaperManager = newspaperMgr;
 		}

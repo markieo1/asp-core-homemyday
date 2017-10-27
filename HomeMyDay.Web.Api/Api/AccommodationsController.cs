@@ -8,13 +8,11 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-	[Produces("application/json")]
-    [Route("api/accommodations")]
-    public class AccommodationController : Controller
+    public class AccommodationsController : BaseApiController
     {
 		private readonly IAccommodationManager accommodationManager;
 
-		public AccommodationController(IAccommodationManager accommodationMgr)
+		public AccommodationsController(IAccommodationManager accommodationMgr)
 		{
 			accommodationManager = accommodationMgr;
 		}
