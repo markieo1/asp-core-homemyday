@@ -123,7 +123,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Accommodation> accommodations = accommodationManager.GetAccommodations();
-			foreach(Accommodation accommodation in accommodations)
+
+			foreach(Accommodation accommodation in accommodations.ToList())
 			{
 				await accommodationManager.Delete(accommodation.Id);
 			}

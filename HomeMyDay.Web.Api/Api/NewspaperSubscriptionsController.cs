@@ -60,7 +60,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public IActionResult Delete()
 		{
 			IEnumerable<Newspaper> newspapers = newspaperManager.GetNewspapers();
-			foreach(Newspaper newspaper in newspapers)
+
+			foreach(Newspaper newspaper in newspapers.ToList())
 			{
 				newspaperManager.Unsubscribe(newspaper.Email);
 			}

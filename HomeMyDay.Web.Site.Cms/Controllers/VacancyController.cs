@@ -45,17 +45,17 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Delete(long id)
-		{
-			await _vacancyManager.Delete(id);
+        [HttpPost]
+        public async Task<IActionResult> Delete(long id)
+        {
+            await _vacancyManager.Delete(id);
 
-			return RedirectToAction(
-						actionName: nameof(Index),
-						controllerName: nameof(VacancyController).TrimControllerName());
-		}
+            return RedirectToAction(
+                        actionName: nameof(Index),
+                        controllerName: nameof(VacancyController).TrimControllerName());
+        }
 
-		[HttpGet]
+        [HttpGet]
 		public IActionResult Edit(long id)
 		{
 			try

@@ -95,7 +95,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public IActionResult Delete()
 		{
 			IEnumerable<Page> pages = pageManager.GetPages();
-			foreach(Page page in pages)
+
+			foreach(Page page in pages.ToList())
 			{
 				pageManager.DeletePage(page.Id);
 			}

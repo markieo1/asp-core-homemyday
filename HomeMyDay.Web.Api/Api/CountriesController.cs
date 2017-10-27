@@ -124,7 +124,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Country> Countrys = countryManager.GetCountries();
-			foreach (Country Country in Countrys)
+
+			foreach (Country Country in Countrys.ToList())
 			{
 				await countryManager.Delete(Country.Id);
 			}

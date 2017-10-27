@@ -99,7 +99,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public IActionResult Delete()
 		{
 			IEnumerable<Review> reviews = reviewManager.GetAllReviews();
-			foreach(Review review in reviews)
+
+			foreach(Review review in reviews.ToList())
 			{
 				reviewManager.Delete(review.Id);
 			}

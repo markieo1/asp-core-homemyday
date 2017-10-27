@@ -224,7 +224,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<FaqCategory> faqcategories = faqManager.GetFaqCategories();
-			foreach (FaqCategory faqcategory in faqcategories)
+
+			foreach (FaqCategory faqcategory in faqcategories.ToList())
 			{
 				await faqManager.DeleteCategory(faqcategory.Id);
 			}
@@ -236,7 +237,8 @@ namespace HomeMyDay.Web.Api.Controllers
 		public async Task<IActionResult> Delete(long categoryId)
 		{
 			IEnumerable<FaqQuestion> faqQuestions = faqManager.GetFaqQuestions(categoryId);
-			foreach (FaqQuestion faqQuestion in faqQuestions)
+
+			foreach (FaqQuestion faqQuestion in faqQuestions.ToList())
 			{
 				await faqManager.DeleteQuestion(faqQuestion.Id);
 			}

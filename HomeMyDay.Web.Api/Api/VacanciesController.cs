@@ -61,12 +61,14 @@ namespace HomeMyDay.Web.Api.Controllers
         [HttpPut]
         public IActionResult Put([FromBody]Vacancy[] vacancies)
         {
+            Delete();
+
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			foreach (Vacancy vacancy in vacancies)
+			foreach (Vacancy vacancy in vacancies.ToList())
             {
                 vacancyManager.Save(vacancy);
             }
@@ -94,13 +96,13 @@ namespace HomeMyDay.Web.Api.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAsync()
+        public IActionResult Delete()
         {
             IEnumerable<Vacancy> vacancies = vacancyManager.GetVacancies();
 
-            foreach (Vacancy vacancy in vacancies)
+            foreach (Vacancy vacancy in vacancies.ToList())
             {
-                await vacancyManager.Delete(vacancy.Id);
+                vacancyManager.Delete(vacancy.Id);
             }
 
             return NoContent();
