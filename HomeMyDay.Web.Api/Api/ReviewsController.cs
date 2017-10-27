@@ -25,13 +25,29 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Review Get(long id)
+		public IActionResult Get(int id)
         {
-			return reviewManager.GetReview(id);
-        }
 
-        // POST api/values
-        [HttpPost]
+	        var result = reviewManager.GetReview(id);
+
+			//check if id is a integer
+			//var isNum = int.TryParse(id.ToString(), out var n);
+
+			if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        return Ok(result);
+		}
+
+		// POST api/values
+		[HttpPost]
         public IActionResult Post([FromBody]Review review)
         {
 			if (!ModelState.IsValid)
@@ -57,7 +73,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				reviewManager.Save(review);
 			}
 
-			return Accepted();
+			return Ok(countries);
 		}
 
         // PUT api/values/5
@@ -76,7 +92,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			reviewManager.Save(review);
 
-			return AcceptedAtAction(nameof(Get), new { id = review.Id }, review);
+			return Ok(review);
         }
 
 		[HttpDelete]
@@ -88,16 +104,27 @@ namespace HomeMyDay.Web.Api.Controllers
 				reviewManager.Delete(review.Id);
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-			reviewManager.Delete(id);
 
-			return AcceptedAtAction(nameof(Get));
-        }
+	        if (reviewManager.GetReview(id) == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        reviewManager.Delete(id);
+
+			return NoContent();
+		}
     }
 }

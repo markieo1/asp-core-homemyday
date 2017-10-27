@@ -45,12 +45,25 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
         {
-			return this.HAL(accommodationManager.GetAccommodation(id), new Link[] {
-				new Link(Link.RelForSelf, $"/api/v1/accommodations/{id}"),
-				new Link("accommodationsList", "/api/v1/accommodations", "Accommodations list"),
-				new Link("updateAccommodation", $"/api/v1/accommodations/{id}", "Update Accommodation", "PUT"),
-				new Link("deleteAccommodation", $"/api/v1/accommodations/{id}", "Delete Accommodation", "DELETE")
-			});
+
+			var result = accommodationManager.GetAccommodation(id);
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        return Ok(this.HAL(result, new Link[] {
+		        new Link(Link.RelForSelf, $"/api/v1/accommodations/{id}"),
+		        new Link("accommodationsList", "/api/v1/accommodations", "Accommodations list"),
+		        new Link("updateAccommodation", $"/api/v1/accommodations/{id}", "Update Accommodation", "PUT"),
+		        new Link("deleteAccommodation", $"/api/v1/accommodations/{id}", "Delete Accommodation", "DELETE")
+	        }));
         }
 
         // POST api/values
@@ -82,7 +95,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await accommodationManager.Save(accommodation);
 			}
 
-			return AcceptedAtAction(nameof(Get));
+			return Ok(accommodations);
 		}
 
         // PUT api/values/5
@@ -101,13 +114,13 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			accommodationManager.Save(accommodation);
 
-			return AcceptedAtAction(nameof(Get), new { id = accommodation.Id }, new HALResponse(accommodation).AddLinks(new Link[] {
+			return Ok(new HALResponse(accommodation).AddLinks(new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/accommodations/{accommodation.Id}")
 			}));
 		}
 
 		[HttpDelete]
-		public async Task<IActionResult> DeleteAsync()
+		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Accommodation> accommodations = accommodationManager.GetAccommodations();
 			foreach(Accommodation accommodation in accommodations)
@@ -115,16 +128,27 @@ namespace HomeMyDay.Web.Api.Controllers
 				await accommodationManager.Delete(accommodation.Id);
 			}
 
-			return AcceptedAtAction(nameof(Get));
+			return NoContent();
 		}
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
+
+	        if (accommodationManager.GetAccommodation(id) == null)
+	        {
+		        return NotFound(id);
+	        }
+
 			accommodationManager.Delete(id);
 
-			return AcceptedAtAction(nameof(Get));
+			if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+			return NoContent();
         }
     }
 }

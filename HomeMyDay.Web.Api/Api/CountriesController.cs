@@ -10,8 +10,8 @@ using Halcyon.Web.HAL;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    public class CountriesController : BaseApiController
-    {
+	public class CountriesController : BaseApiController
+	{
 		private readonly ICountryManager countryManager;
 
 		public CountriesController(ICountryManager countryMgr)
@@ -44,20 +44,33 @@ namespace HomeMyDay.Web.Api.Controllers
 		// GET api/values
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
-        {
-			return this.HAL(countryManager.GetCountry(id), new Link[] {
-				new Link(Link.RelForSelf, $"/api/v1/countries/{id}"),
-				new Link("updateCountry", $"/api/v1/countries/{id}", "Update Country", "PUT"),
-				new Link("deleteCountry", $"/api/v1/countries/{id}", "Delete Country", "DELETE")
-			});
+		{
 
-			//return countryManager.GetCountry(id);
-        }
+			var result = countryManager.GetCountry(id); ;
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]Country country)
-        {
+			if (!ModelState.IsValid)
+			{
+				//return 400
+				return BadRequest(ModelState);
+			}
+
+			if (result == null)
+			{
+				//return 404
+				return NotFound(id);
+			}
+			//return 200
+			return Ok(this.HAL(result, new Link[] {
+			new Link(Link.RelForSelf, $"/api/v1/countries/{id}"),
+			new Link("updateCountry", $"/api/v1/countries/{id}", "Update Country", "PUT"),
+			new Link("deleteCountry", $"/api/v1/countries/{id}", "Delete Country", "DELETE")
+			}));
+		}
+
+		// POST api/values
+		[HttpPost]
+		public IActionResult Post([FromBody]Country country)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -68,7 +81,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			return CreatedAtAction(nameof(Get), new { id = country.Id }, new HALResponse(country).AddLinks(new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/countries/{country.Id}"),
 			}));
-        }
+		}
 
 		[HttpPut]
 		public IActionResult Put([FromBody]Country[] countries)
@@ -83,13 +96,13 @@ namespace HomeMyDay.Web.Api.Controllers
 				countryManager.Save(country);
 			}
 
-			return AcceptedAtAction(nameof(Get));
+			return Ok(countries);
 		}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]Country country)
-        {
+		// PUT api/values/5
+		[HttpPut("{id}")]
+		public IActionResult Put(long id, [FromBody]Country country)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -102,30 +115,42 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			countryManager.Save(country);
 
-			return AcceptedAtAction(nameof(Get), new { id = country.Id }, new HALResponse(country).AddLinks(new Link[] {
+			return Ok(new HALResponse(country).AddLinks(new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/countries/{country.Id}")
 			}));
-        }
+		}
 
 		[HttpDelete]
 		public async Task<IActionResult> Delete()
 		{
 			IEnumerable<Country> Countrys = countryManager.GetCountries();
-			foreach(Country Country in Countrys)
+			foreach (Country Country in Countrys)
 			{
 				await countryManager.Delete(Country.Id);
 			}
 
-			return AcceptedAtAction(nameof(Get));
+			return NoContent();
 		}
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
+		public IActionResult Delete(long id)
+		{
+
+			if (countryManager.GetCountry(id) == null)
+			{
+				return NotFound(id);
+			}
+
+			if (!ModelState.IsValid)
+			{
+				//return 400
+				return BadRequest(ModelState);
+			}
+
 			countryManager.Delete(id);
 
-			return AcceptedAtAction(nameof(Get));
-        }
-    }
+			return NoContent();
+		}
+	}
 }

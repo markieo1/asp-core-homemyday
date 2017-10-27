@@ -26,10 +26,23 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // GET api/values
         [HttpGet("{id}")]
-        public Vacancy Get(long id)
+        public IActionResult Get(long id)
         {
-            return vacancyManager.GetVacancy(id);
-        }
+
+			var result = vacancyManager.GetVacancy(id);
+
+			if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        return Ok(result);
+		}
 
         // POST api/values
         [HttpPost]
@@ -58,7 +71,7 @@ namespace HomeMyDay.Web.Api.Controllers
                 vacancyManager.Save(vacancy);
             }
 
-            return Accepted();
+            return Ok(vacancies);
         }
 
         // PUT api/values/5
@@ -77,7 +90,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
             vacancyManager.Save(vacancy);
 
-            return AcceptedAtAction(nameof(Get), new { id = vacancy.Id }, vacancy);
+	        return Ok(vacancy);
         }
 
         [HttpDelete]
@@ -90,16 +103,27 @@ namespace HomeMyDay.Web.Api.Controllers
                 await vacancyManager.Delete(vacancy.Id);
             }
 
-            return Accepted();
+            return NoContent();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            vacancyManager.Delete(id);
 
-            return AcceptedAtAction(nameof(Get));
+	        if (vacancyManager.GetVacancy(id) == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        vacancyManager.Delete(id);
+
+			return NoContent();
         }
 
     }

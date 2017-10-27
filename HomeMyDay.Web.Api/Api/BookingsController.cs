@@ -43,10 +43,21 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
         {
-			return this.HAL(bookingManager.GetBooking(id), new Link[] {
-				new Link(Link.RelForSelf, $"/api/v1/bookings/{id}"),
-				new Link("bookingsList", "/api/v1/bookings", "Bookings list"),
-			});
+			var result = bookingManager.GetBooking(id);
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+	        return Ok(this.HAL(result, new Link[] {
+		        new Link(Link.RelForSelf, $"/api/v1/bookings/{id}"),
+		        new Link("bookingsList", "/api/v1/bookings", "Bookings list"),
+	        }));
 		}
 
         // POST api/values
@@ -77,7 +88,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await bookingManager.Save(booking);
 			}
 
-			return AcceptedAtAction(nameof(Get));
+			return Ok(bookings);
 		}
 
         // PUT api/values/5
@@ -92,7 +103,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			booking.Id = id;
 			bookingManager.Save(booking);
 
-			return AcceptedAtAction(nameof(Get), new { id = booking.Id }, new HALResponse(booking).AddLinks(new Link[] {
+			return Ok(new HALResponse(booking).AddLinks(new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/bookings/{booking.Id}")
 			}));
 		}
