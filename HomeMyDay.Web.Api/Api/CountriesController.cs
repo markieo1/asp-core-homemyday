@@ -123,10 +123,10 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete]
 		public async Task<IActionResult> Delete()
 		{
-			IEnumerable<Country> Countrys = countryManager.GetCountries();
-			foreach (Country Country in Countrys)
+			IEnumerable<Country> countries = countryManager.GetCountries();
+			foreach (Country country in countries)
 			{
-				await countryManager.Delete(Country.Id);
+				await countryManager.Delete(country.Id);
 			}
 
 			return NoContent();
