@@ -40,7 +40,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("categories/{categoryId}/questions/{questionId}")]
-		public FaqQuestion Get(long categoryId, int questionId)
+		public FaqQuestion Get(long categoryId, long questionId)
 		{
 			return faqManager.GetFaqQuestion(questionId);
 		}
@@ -126,7 +126,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// PUT api/values/5
 		[HttpPut("categories/{categoryId}/questions/{questionId}")]
-		public IActionResult Put(long categoryId, int questionId, [FromBody]FaqQuestion faqQuestion)
+		public IActionResult Put(long categoryId, long questionId, [FromBody]FaqQuestion faqQuestion)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -178,7 +178,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// PUT api/values/5
 		[HttpDelete("categories/{categoryId}/questions/{questionId}")]
-		public IActionResult Delete(long categoryId, int questionId)
+		public IActionResult Delete(long categoryId, long questionId)
 		{
 			faqManager.DeleteQuestion(categoryId);
 
