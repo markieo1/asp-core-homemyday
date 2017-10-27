@@ -45,25 +45,25 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
 		{
-
-			var result = countryManager.GetCountry(id); ;
-
 			if (!ModelState.IsValid)
 			{
 				//return 400
 				return BadRequest(ModelState);
 			}
 
+			var result = countryManager.GetCountry(id);
+
 			if (result == null)
 			{
 				//return 404
 				return NotFound(id);
 			}
+
 			//return 200
 			return Ok(this.HAL(result, new Link[] {
-			new Link(Link.RelForSelf, $"/api/v1/countries/{id}"),
-			new Link("updateCountry", $"/api/v1/countries/{id}", "Update Country", "PUT"),
-			new Link("deleteCountry", $"/api/v1/countries/{id}", "Delete Country", "DELETE")
+				new Link(Link.RelForSelf, $"/api/v1/countries/{id}"),
+				new Link("updateCountry", $"/api/v1/countries/{id}", "Update Country", "PUT"),
+				new Link("deleteCountry", $"/api/v1/countries/{id}", "Delete Country", "DELETE")
 			}));
 		}
 
@@ -136,16 +136,15 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
 		public IActionResult Delete(long id)
 		{
-
-			if (countryManager.GetCountry(id) == null)
-			{
-				return NotFound(id);
-			}
-
 			if (!ModelState.IsValid)
 			{
 				//return 400
 				return BadRequest(ModelState);
+			}
+
+			if (countryManager.GetCountry(id) == null)
+			{
+				return NotFound(id);
 			}
 
 			countryManager.Delete(id);

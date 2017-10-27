@@ -8,8 +8,8 @@ using HomeMyDay.Core.Models;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    public class ReviewsController : BaseApiController
-    {
+	public class ReviewsController : BaseApiController
+	{
 		private readonly IReviewManager reviewManager;
 
 		public ReviewsController(IReviewManager reviewMgr)
@@ -25,31 +25,27 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public IActionResult Get(int id)
-        {
-
-	        var result = reviewManager.GetReview(id);
-
-			//check if id is a integer
-			//var isNum = int.TryParse(id.ToString(), out var n);
-
+		public IActionResult Get(long id)
+		{
 			if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
+			{
+				return BadRequest(ModelState);
+			}
 
-	        if (result == null)
-	        {
-		        return NotFound(id);
-	        }
+			var result = reviewManager.GetReview(id);
 
-	        return Ok(result);
+			if (result == null)
+			{
+				return NotFound(id);
+			}
+
+			return Ok(result);
 		}
 
 		// POST api/values
 		[HttpPost]
-        public IActionResult Post([FromBody]Review review)
-        {
+		public IActionResult Post([FromBody]Review review)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -58,7 +54,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			reviewManager.AddReview(review.Accommodation.Id, review.Title, review.Name, review.Text);
 
 			return CreatedAtAction(nameof(Get), new { id = review.Id }, review);
-        }
+		}
 
 		[HttpPut]
 		public IActionResult Put([FromBody]Review[] countries)
@@ -76,10 +72,10 @@ namespace HomeMyDay.Web.Api.Controllers
 			return Ok(countries);
 		}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]Review review)
-        {
+		// PUT api/values/5
+		[HttpPut("{id}")]
+		public IActionResult Put(long id, [FromBody]Review review)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -93,13 +89,13 @@ namespace HomeMyDay.Web.Api.Controllers
 			reviewManager.Save(review);
 
 			return Ok(review);
-        }
+		}
 
 		[HttpDelete]
 		public IActionResult Delete()
 		{
 			IEnumerable<Review> reviews = reviewManager.GetAllReviews();
-			foreach(Review review in reviews)
+			foreach (Review review in reviews)
 			{
 				reviewManager.Delete(review.Id);
 			}
@@ -109,22 +105,21 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
+		public IActionResult Delete(long id)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-	        if (reviewManager.GetReview(id) == null)
-	        {
-		        return NotFound(id);
-	        }
+			if (reviewManager.GetReview(id) == null)
+			{
+				return NotFound(id);
+			}
 
-	        if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
-
-	        reviewManager.Delete(id);
+			reviewManager.Delete(id);
 
 			return NoContent();
 		}
-    }
+	}
 }

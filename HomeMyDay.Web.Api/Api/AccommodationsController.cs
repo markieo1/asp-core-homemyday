@@ -45,13 +45,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
         {
-
-			var result = accommodationManager.GetAccommodation(id);
-
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
+
+			var result = accommodationManager.GetAccommodation(id);
 
 			if (result == null)
 	        {
@@ -135,18 +134,17 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-	        if (accommodationManager.GetAccommodation(id) == null)
+			if (accommodationManager.GetAccommodation(id) == null)
 	        {
 		        return NotFound(id);
 	        }
 
 			accommodationManager.Delete(id);
-
-			if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
 
 			return NoContent();
         }

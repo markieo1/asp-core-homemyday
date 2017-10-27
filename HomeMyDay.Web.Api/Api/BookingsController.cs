@@ -10,8 +10,8 @@ using Halcyon.Web.HAL;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
-    public class BookingsController : BaseApiController
-    {
+	public class BookingsController : BaseApiController
+	{
 		private readonly IBookingManager bookingManager;
 
 		public BookingsController(IBookingManager bookingMgr)
@@ -42,28 +42,29 @@ namespace HomeMyDay.Web.Api.Controllers
 		// GET api/values
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
-        {
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
 			var result = bookingManager.GetBooking(id);
 
-	        if (!ModelState.IsValid)
-	        {
-		        return BadRequest(ModelState);
-	        }
+			if (result == null)
+			{
+				return NotFound(id);
+			}
 
-	        if (result == null)
-	        {
-		        return NotFound(id);
-	        }
-	        return Ok(this.HAL(result, new Link[] {
-		        new Link(Link.RelForSelf, $"/api/v1/bookings/{id}"),
-		        new Link("bookingsList", "/api/v1/bookings", "Bookings list"),
-	        }));
+			return Ok(this.HAL(result, new Link[] {
+				new Link(Link.RelForSelf, $"/api/v1/bookings/{id}"),
+				new Link("bookingsList", "/api/v1/bookings", "Bookings list"),
+			}));
 		}
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]Booking booking)
-        {
+		// POST api/values
+		[HttpPost]
+		public IActionResult Post([FromBody]Booking booking)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -91,10 +92,10 @@ namespace HomeMyDay.Web.Api.Controllers
 			return Ok(bookings);
 		}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]Booking booking)
-        {
+		// PUT api/values/5
+		[HttpPut("{id}")]
+		public IActionResult Put(long id, [FromBody]Booking booking)
+		{
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
@@ -107,5 +108,5 @@ namespace HomeMyDay.Web.Api.Controllers
 				new Link(Link.RelForSelf, $"/api/v1/bookings/{booking.Id}")
 			}));
 		}
-    }
+	}
 }
