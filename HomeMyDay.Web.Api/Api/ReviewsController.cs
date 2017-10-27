@@ -25,7 +25,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Review Get(int id)
+		public Review Get(long id)
         {
 			return reviewManager.GetReview(id);
         }
@@ -62,7 +62,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Review review)
+        public IActionResult Put(long id, [FromBody]Review review)
         {
 			if (!ModelState.IsValid)
 			{
@@ -93,7 +93,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
 			reviewManager.Delete(id);
 

@@ -149,7 +149,7 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<FaqQuestion> GetQuestions(long id)
 		{
-			return _context.FaqCategory.First(c => c.Id == id).Questions;
+			return _context.FaqCategory.FirstOrDefault(c => c.Id == id)?.Questions;
 		}
 
 		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)

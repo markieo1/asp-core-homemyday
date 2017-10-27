@@ -25,7 +25,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Country Get(int id)
+		public Country Get(long id)
         {
 			return countryManager.GetCountry(id);
         }
@@ -62,7 +62,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Country country)
+        public IActionResult Put(long id, [FromBody]Country country)
         {
 			if (!ModelState.IsValid)
 			{
@@ -93,7 +93,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// DELETE api/values/5
 		[HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
 			countryManager.Delete(id);
 
