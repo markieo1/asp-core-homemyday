@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeMyDay.Web.Base.Managers;
 using HomeMyDay.Core.Models;
+using Halcyon.HAL;
+using Halcyon.Web.HAL;
 
 namespace HomeMyDay.Web.Api.Controllers
 {
@@ -18,9 +20,23 @@ namespace HomeMyDay.Web.Api.Controllers
 		}
 
 		[HttpGet]
-		public IEnumerable<Accommodation> Get()
+		public IActionResult Get()
 		{
-			return accommodationManager.GetAccommodations();
+			List<Accommodation> accommodations = accommodationManager.GetAccommodations().ToList();
+
+			//Generate a list of HALResponses
+			var response = new List<HALResponse>(accommodations.Count);
+			foreach(Accommodation accommodation in accommodations)
+			{
+				response.Add(
+					new HALResponse(accommodation)
+					.AddLinks(new Link[] {
+						new Link(Link.RelForSelf, $"api/v1/accommodations/{accommodation.Id}")
+					})
+				);
+			}
+
+			return this.Ok(response);
 		}
 
 		// GET api/values
