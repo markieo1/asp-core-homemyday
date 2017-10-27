@@ -68,7 +68,6 @@ namespace HomeMyDay.Web.Api.Controllers
 		        new Link("deleteAccommodation", $"/api/v1/accommodations/{id}", "Delete Accommodation", "DELETE")
 	        }));
         }
-		}
 
         // POST api/values
         [HttpPost]
@@ -118,7 +117,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			accommodationManager.Save(accommodation);
 
-			return Ok(accommodation, new HALResponse(accommodation).AddLinks(new Link[] {
+			return Ok(new HALResponse(accommodation).AddLinks(new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/accommodations/{accommodation.Id}")
 			}));
 		}

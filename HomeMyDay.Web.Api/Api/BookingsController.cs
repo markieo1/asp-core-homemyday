@@ -43,9 +43,6 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("{id}")]
 		public IActionResult Get(long id)
         {
-
-		public IActionResult Get(long id)
-        {
 			var result = bookingManager.GetBooking(id);
 
 	        if (!ModelState.IsValid)
@@ -106,7 +103,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			booking.Id = id;
 			bookingManager.Save(booking);
 
-			return Ok(booking, new HALResponse(booking).AddLinks(new Link[] {
+			return Ok(new HALResponse(booking).AddLinks(new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/bookings/{booking.Id}")
 			}));
 		}
