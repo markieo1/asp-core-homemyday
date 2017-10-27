@@ -57,12 +57,12 @@ namespace HomeMyDay.Web.Api.Controllers
 		        return NotFound(id);
 	        }
 
-	        return Ok(this.HAL(result, new Link[] {
+	        return this.HAL(result, new Link[] {
 		        new Link(Link.RelForSelf, $"/api/v1/accommodations/{id}"),
 		        new Link("accommodationsList", "/api/v1/accommodations", "Accommodations list"),
 		        new Link("updateAccommodation", $"/api/v1/accommodations/{id}", "Update Accommodation", "PUT"),
 		        new Link("deleteAccommodation", $"/api/v1/accommodations/{id}", "Delete Accommodation", "DELETE")
-	        }));
+	        });
         }
 
         // POST api/values

@@ -55,10 +55,10 @@ namespace HomeMyDay.Web.Api.Controllers
 				return NotFound(id);
 			}
 
-			return Ok(this.HAL(result, new Link[] {
+			return this.HAL(result, new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/bookings/{id}"),
 				new Link("bookingsList", "/api/v1/bookings", "Bookings list"),
-			}));
+			});
 		}
 
 		// POST api/values

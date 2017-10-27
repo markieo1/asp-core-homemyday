@@ -60,11 +60,11 @@ namespace HomeMyDay.Web.Api.Controllers
 			}
 
 			//return 200
-			return Ok(this.HAL(result, new Link[] {
+			return this.HAL(result, new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/countries/{id}"),
 				new Link("updateCountry", $"/api/v1/countries/{id}", "Update Country", "PUT"),
 				new Link("deleteCountry", $"/api/v1/countries/{id}", "Delete Country", "DELETE")
-			}));
+			});
 		}
 
 		// POST api/values
