@@ -47,7 +47,18 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("categories/{categoryId}")]
 		public IActionResult Get(long categoryId)
 		{
-			return this.HAL(faqManager.GetFaqCategory(categoryId), new Link[] {
+			FaqCategory category;
+
+			try
+			{
+				category = faqManager.GetFaqCategory(categoryId);
+			}
+			catch(KeyNotFoundException)
+			{
+				return NotFound();
+			}
+
+			return this.HAL(category, new Link[] {
 				new Link(Link.RelForSelf, $"/api/v1/faq/categories/{categoryId}"),
 				new Link("questions", $"/api/v1/faq/categories/{categoryId}/questions", "Category Questions"),
 				new Link("updateCategory", $"/api/v1/faq/categories/{categoryId}", "Update Category", "PUT"),
@@ -79,7 +90,17 @@ namespace HomeMyDay.Web.Api.Controllers
 		[HttpGet("categories/{categoryId}/questions/{questionId}")]
 		public IActionResult Get(long categoryId, long questionId)
 		{
-			var question = faqManager.GetFaqQuestion(questionId);
+			FaqQuestion question;
+
+			try
+			{
+				question = faqManager.GetFaqQuestion(questionId);
+			}
+			catch (KeyNotFoundException)
+			{
+				return NotFound();
+			}
+
 			if(question.Category.Id != categoryId)
 			{
 				return NotFound();
