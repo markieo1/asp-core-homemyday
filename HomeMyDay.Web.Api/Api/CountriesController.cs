@@ -25,10 +25,25 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Country Get(int id)
+		public IActionResult Get(int id)
         {
-			return countryManager.GetCountry(id);
-        }
+
+	        var result = countryManager.GetCountry(id); ;
+
+	        if (!ModelState.IsValid)
+	        {
+		        //return 400
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        //return 404
+		        return NotFound(id);
+	        }
+	        //return 200
+	        return Ok(result);
+		}
 
         // POST api/values
         [HttpPost]
@@ -57,7 +72,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				countryManager.Save(country);
 			}
 
-			return Accepted();
+			return Ok(countries);
 		}
 
         // PUT api/values/5
@@ -76,7 +91,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			countryManager.Save(country);
 
-			return AcceptedAtAction(nameof(Get), new { id = country.Id }, country);
+			return Ok(country);
         }
 
 		[HttpDelete]
@@ -88,7 +103,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				countryManager.Delete(Country.Id);
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 
 		// DELETE api/values/5
@@ -97,7 +112,18 @@ namespace HomeMyDay.Web.Api.Controllers
         {
 			countryManager.Delete(id);
 
-			return AcceptedAtAction(nameof(Get));
+	        if (countryManager.GetCountry(id) == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        if (!ModelState.IsValid)
+	        {
+		        //return 400
+		        return BadRequest(ModelState);
+	        }
+
+			return NoContent();
         }
     }
 }

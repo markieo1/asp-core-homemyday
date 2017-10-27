@@ -27,9 +27,21 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("categories/{id}")]
-		public FaqCategory Get(int id)
+		public IActionResult Get(int id)
 		{
-			return faqManager.GetFaqCategory(id);
+			var result = faqManager.GetFaqCategory(id);
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (result == null)
+			{
+				return NotFound(id);
+			}
+
+			return Ok(result);
 		}
 
 		[HttpGet("categories/{id}/questions")]
@@ -40,9 +52,21 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("categories/{id}/questions/{questionid}")]
-		public FaqQuestion Get(int id, int questionid)
+		public IActionResult Get(int id, int questionid)
 		{
-			return faqManager.GetFaqQuestion(questionid);
+			var result = faqManager.GetFaqQuestion(questionid);
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (result == null)
+			{
+				return NotFound(id);
+			}
+
+			return Ok(result);
 		}
 
 		// POST api/values
@@ -70,7 +94,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			faqManager.SaveQuestion(faqquestion);
 
-			return CreatedAtAction(nameof(Get), new { id = faqquestion.Category.Id, questionid = faqquestion.Id }, faqquestion);
+			return CreatedAtRoute(nameof(Get), new { id = faqquestion.Category.Id, questionid = faqquestion.Id }, faqquestion);
 		}
 
 		[HttpPut("categories")]
@@ -86,7 +110,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				faqManager.SaveCategory(faqcategory);
 			}
 
-			return Accepted();
+			return Ok(faqcategories);
 		}
 
 		[HttpPut("categories/{id}/questions")]
@@ -102,7 +126,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				faqManager.SaveQuestion(faqquestion);
 			}
 
-			return Accepted();
+			return Ok(faqquestions);
 		}
 
 		// PUT api/values/5
@@ -121,7 +145,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			faqManager.SaveCategory(faqcategory);
 
-			return AcceptedAtAction(nameof(Get), new { id = faqcategory.Id }, faqcategory);
+	        return Ok(faqcategory);
         }
 
 		// PUT api/values/5
@@ -140,7 +164,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			faqManager.SaveQuestion(faqQuestion);
 
-			return AcceptedAtAction(nameof(Get), new { id = faqQuestion.Category.Id, questionid = faqQuestion.Id }, faqQuestion);
+			return Ok(faqQuestion);
 		}
 		
 		[HttpDelete("categories")]
@@ -152,7 +176,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await faqManager.DeleteCategory(faqcategory.Id);
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 
 		[HttpDelete("categories/{id}/questions")]
@@ -164,7 +188,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await faqManager.DeleteQuestion(faqQuestion.Id);
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 
 		// DELETE api/values/5
@@ -173,7 +197,17 @@ namespace HomeMyDay.Web.Api.Controllers
         {
 			faqManager.DeleteCategory(id);
 
-			return AcceptedAtAction(nameof(Get));
+	        if (faqManager.GetFaqCategory(id) == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        return NoContent();
         }
 
 		// PUT api/values/5
@@ -182,7 +216,17 @@ namespace HomeMyDay.Web.Api.Controllers
 		{
 			faqManager.DeleteQuestion(questionid);
 
-			return AcceptedAtAction(nameof(Get));
+			if (faqManager.GetFaqQuestion(id) == null)
+			{
+				return NotFound(id);
+			}
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			return NoContent();
 		}
 	}
 }

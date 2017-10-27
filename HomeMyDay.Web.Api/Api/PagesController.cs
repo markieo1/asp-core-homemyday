@@ -25,23 +25,35 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Page Get(int id)
+		public IActionResult Get(int id)
         {
-			return pageManager.GetPage(id);
+	        var result = pageManager.GetPage(id);
+
+			if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        return Ok(result);
         }
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody]Page Page)
+        public IActionResult Post([FromBody]Page page)
         {
 			if (!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			pageManager.AddPage(Page);
+			pageManager.AddPage(page);
 
-			return CreatedAtAction(nameof(Get), new { id = Page.Id }, Page);
+			return CreatedAtAction(nameof(Get), new { id = page.Id }, page);
         }
 
 		[HttpPut]
@@ -57,7 +69,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				pageManager.EditPage(page.Id, page);
 			}
 
-			return Accepted();
+			return Ok(pages);
 		}
 
         // PUT api/values/5
@@ -76,19 +88,19 @@ namespace HomeMyDay.Web.Api.Controllers
 
 			pageManager.EditPage(id, page);
 
-			return AcceptedAtAction(nameof(Get), new { id = page.Id }, page);
+			return Ok(page);
         }
 
 		[HttpDelete]
 		public IActionResult Delete()
 		{
-			IEnumerable<Page> Pages = pageManager.GetPages();
-			foreach(Page Page in Pages)
+			IEnumerable<Page> pages = pageManager.GetPages();
+			foreach(Page page in pages)
 			{
-				pageManager.DeletePage(Page.Id);
+				pageManager.DeletePage(page.Id);
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 
 		// DELETE api/values/5
@@ -97,7 +109,17 @@ namespace HomeMyDay.Web.Api.Controllers
         {
 			pageManager.DeletePage(id);
 
-			return AcceptedAtAction(nameof(Get));
+	        if (pageManager.GetPage(id) == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+			return NoContent();
         }
     }
 }

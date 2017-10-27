@@ -25,10 +25,22 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Newspaper Get(long id)
+		public IActionResult Get(long id)
         {
-			return newspaperManager.GetNewspaper(id);
-        }
+			var result = newspaperManager.GetNewspaper(id);
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        return Ok(result);
+		}
 
         // POST api/values
         [HttpPost]
@@ -53,7 +65,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				newspaperManager.Unsubscribe(newspaper.Email);
 			}
 
-			return Accepted();
+			return NoContent();
 		}
 
 		// DELETE api/values/5
@@ -62,9 +74,19 @@ namespace HomeMyDay.Web.Api.Controllers
         {
 			var newspaper = newspaperManager.GetNewspaper(id);
 
+	        if (newspaper == null)
+	        {
+		        return NotFound(id);
+	        }
+
 			newspaperManager.Unsubscribe(newspaper.Email);
 
-			return AcceptedAtAction(nameof(Get));
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+			return NoContent();
         }
     }
 }

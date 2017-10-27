@@ -25,9 +25,21 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public Booking Get(long id)
+		public IActionResult Get(long id)
         {
-			return bookingManager.GetBooking(id);
+			var result = bookingManager.GetBooking(id);
+
+	        if (!ModelState.IsValid)
+	        {
+		        return BadRequest(ModelState);
+	        }
+
+	        if (result == null)
+	        {
+		        return NotFound(id);
+	        }
+
+	        return Ok(result);
 		}
 
         // POST api/values
@@ -56,7 +68,7 @@ namespace HomeMyDay.Web.Api.Controllers
 				await bookingManager.Save(booking);
 			}
 
-			return Accepted();
+			return Ok(bookings);
 		}
 
         // PUT api/values/5
@@ -71,7 +83,7 @@ namespace HomeMyDay.Web.Api.Controllers
 			booking.Id = id;
 			bookingManager.Save(booking);
 
-			return AcceptedAtAction(nameof(Get), new { id = booking.Id }, booking);
+			return Ok(booking);
 		}
     }
 }
