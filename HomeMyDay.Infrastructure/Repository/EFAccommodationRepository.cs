@@ -29,11 +29,11 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			Accommodation accommodation = await _context.Accommodations
-				.Include(x => x.MediaObjects)
-				.Include(x => x.Reviews)
-				.Include(x => x.NotAvailableDates)
-				.SingleOrDefaultAsync(a => a.Id == id);
+			Accommodation accommodation = _context.Accommodations
+                .Include(x => x.MediaObjects)
+                .Include(x => x.Reviews)
+                .Include(x => x.NotAvailableDates)
+                .SingleOrDefault(a => a.Id == id);
 
 			if (accommodation == null)
 			{
@@ -99,7 +99,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.
-				await _context.Accommodations.AddAsync(accommodation);
+				_context.Accommodations.Add(accommodation);
 			}
 			else
 			{

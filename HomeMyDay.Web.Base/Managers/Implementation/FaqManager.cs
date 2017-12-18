@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using HomeMyDay.Web.Base.ViewModels;
+using System.Linq;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
@@ -20,7 +21,7 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		    return _faqRepository.GetCategoriesAndQuestions();
 	    }
 
-	    public Task<PaginatedList<FaqCategory>> GetFaqCategoryPaginatedList(int? page, int? pageSize)
+		public Task<PaginatedList<FaqCategory>> GetFaqCategoryPaginatedList(int? page, int? pageSize)
 	    {
 		    var paginatedResult = _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
 		    return paginatedResult;
@@ -60,5 +61,25 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 	    {
 		    return _faqRepository.DeleteCategory(id);
 	    }
+
+		IEnumerable<FaqQuestion> IFaqManager.GetFaqQuestions(long id)
+		{
+			return _faqRepository.GetQuestions(id);
+		}
+
+		public FaqQuestion GetFaqQuestion(long id)
+		{
+			return _faqRepository.GetQuestion(id);
+		}
+
+		public Task SaveQuestion(FaqQuestion question)
+		{
+			return _faqRepository.SaveQuestion(question);
+		}
+
+		public Task DeleteQuestion(long id)
+		{
+			return _faqRepository.DeleteQuestion(id);
+		}
 	}
 }

@@ -19,6 +19,8 @@ namespace HomeMyDay.Infrastructure.Repository
 			_context = context;
 		}
 
+		public IEnumerable<Page> Pages => _context.Page;
+
 		public Task<PaginatedList<Page>> List(int page = 1, int pageSize = 10)
 		{
 			if (page < 1)
@@ -53,7 +55,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			return page;
 		}
 
-		public void EditPage(long id, Page page)
+		public async Task EditPage(long id, Page page)
 		{
 			var db = _context.Page.Any(r => r.Id == id);
 
@@ -69,7 +71,32 @@ namespace HomeMyDay.Infrastructure.Repository
 				db_page.Title = page.Title;
 				db_page.Content = page.Content;
 			}
+			await _context.SaveChangesAsync();
+		}
+
+		public void AddPage(Page page)
+		{
+			if (page == null)
+			{
+				throw new ArgumentNullException(nameof(page));
+			}
+				_context.Page.Add(page);
+
 			_context.SaveChanges();
+		}
+
+		public async Task DeletePage(long id)
+		{
+			Page page = _context.Page.FirstOrDefault(p => p.Id == id);
+
+			if (page == null)
+			{
+				throw new KeyNotFoundException($"Page with id {id} not found");
+			}
+
+			_context.Page.Remove(page);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

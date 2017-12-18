@@ -9,6 +9,8 @@ namespace HomeMyDay.Web.Base.Managers
 	{
 		IEnumerable<FaqCategory> GetFaqCategories();
 
+		IEnumerable<FaqQuestion> GetFaqQuestions(long id);
+
 		Task<PaginatedList<FaqCategory>> GetFaqCategoryPaginatedList(int? page, int? pageSize);
 
 		Task<FaqQuestionsViewModel> GetFaqQuestionsViewModel(long id, int? page, int? pageSize);
@@ -18,5 +20,11 @@ namespace HomeMyDay.Web.Base.Managers
 		Task SaveCategory(FaqCategory category);
 
 		Task DeleteCategory(long id);
+
+		FaqQuestion GetFaqQuestion(long id);
+
+		Task SaveQuestion(FaqQuestion question);
+
+		Task DeleteQuestion(long id);
 	}
 }

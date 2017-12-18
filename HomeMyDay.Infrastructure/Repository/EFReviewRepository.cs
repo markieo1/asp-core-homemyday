@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HomeMyDay.Core.Repository;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HomeMyDay.Infrastructure.Repository
 {
@@ -96,5 +97,52 @@ namespace HomeMyDay.Infrastructure.Repository
 
             return PaginatedList<Review>.CreateAsync(reviews, page, pageSize);
         }
-    }
+
+		public async Task Save(Review review)
+		{
+			if (review == null)
+			{
+				throw new ArgumentNullException(nameof(review));
+			}
+
+			if (review.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				_context.Reviews.Add(review);
+			}
+			else
+			{
+				// Get the tracked review using the ID
+				EntityEntry<Review> entityEntry = _context.Entry(review);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task Delete(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			Review review = _context.Reviews.SingleOrDefault(r => r.Id == id);
+
+			if (review == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Review with ID: {id} not found!");
+			}
+
+			_context.Reviews.Remove(review);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public Review GetReview(long id)
+		{
+			return _context.Reviews.FirstOrDefault(r=>r.Id == id);
+		}
+	}
 }

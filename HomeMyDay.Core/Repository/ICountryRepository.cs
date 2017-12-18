@@ -19,5 +19,19 @@ namespace HomeMyDay.Core.Repository
 		/// <param name="id">The ID to search by.</param>
 		/// <returns>The country.</returns>
 		Country GetCountry(long id);
+
+		/// <summary>
+		/// Insert or update a country.
+		/// </summary>
+		/// <param name="country">The country to insert or update. If Id is 0, inserts. Otherwise, updates.</param>
+		/// <returns></returns>
+		Task Save(Country country);
+
+		/// <summary>
+		/// Deletes a country by ID.
+		/// </summary>
+		/// <param name="id">The ID of the country to delete.</param>
+		/// <returns></returns>
+		Task Delete(long id);
     }
 }

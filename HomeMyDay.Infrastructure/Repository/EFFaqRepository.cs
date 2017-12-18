@@ -38,6 +38,24 @@ namespace HomeMyDay.Infrastructure.Repository
 			return category;
 		}
 
+		public FaqQuestion GetQuestion(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			FaqQuestion question = _context.FaqQuestions
+				.FirstOrDefault(a => a.Id == id);
+
+			if (question == null)
+			{
+				throw new KeyNotFoundException($"Question with ID: {id} is not found");
+			}
+
+			return question;
+		}
+
 		public async Task DeleteCategory(long id)
 		{
 			if (id <= 0)
@@ -45,8 +63,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
 
-			FaqCategory category = await _context.FaqCategory
-				.SingleOrDefaultAsync(a => a.Id == id);
+			FaqCategory category = _context.FaqCategory.SingleOrDefault(a => a.Id == id);
 
 			if (category == null)
 			{
@@ -54,6 +71,25 @@ namespace HomeMyDay.Infrastructure.Repository
 			}
 
 			_context.FaqCategory.Remove(category);
+
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task DeleteQuestion(long id)
+		{
+			if (id <= 0)
+			{
+				throw new ArgumentOutOfRangeException(nameof(id));
+			}
+
+			FaqQuestion question = _context.FaqQuestions.SingleOrDefault(a => a.Id == id);
+
+			if (question == null)
+			{
+				throw new ArgumentNullException(nameof(id), $"Question with ID: {id} not found!");
+			}
+
+			_context.FaqQuestions.Remove(question);
 
 			await _context.SaveChangesAsync();
 		}
@@ -69,7 +105,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.
-				await _context.FaqCategory.AddAsync(category);
+				_context.FaqCategory.Add(category);
 			}
 			else
 			{
@@ -81,9 +117,37 @@ namespace HomeMyDay.Infrastructure.Repository
 			await _context.SaveChangesAsync();
 		}
 
+		public async Task SaveQuestion(FaqQuestion faqQuestion)
+		{
+			if (faqQuestion == null)
+			{
+				throw new ArgumentNullException(nameof(faqQuestion));
+			}
+
+			if (faqQuestion.Id <= 0)
+			{
+				// We are creating a new one
+				// Only need to adjust the id to be 0 and save it in the db.
+				_context.FaqQuestions.Add(faqQuestion);
+			}
+			else
+			{
+				// Get the tracked faqQuestion using the ID
+				EntityEntry<FaqQuestion> entityEntry = _context.Entry(faqQuestion);
+				entityEntry.State = EntityState.Modified;
+			}
+
+			await _context.SaveChangesAsync();
+		}
+
 		public IEnumerable<FaqCategory> GetCategoriesAndQuestions()
 		{
-			return _context.FaqCategory.Include(nameof(FaqCategory.FaqQuestions));
+			return _context.FaqCategory.Include(nameof(FaqCategory.Questions));
+		}
+
+		public IEnumerable<FaqQuestion> GetQuestions(long id)
+		{
+			return _context.FaqCategory.FirstOrDefault(c => c.Id == id)?.Questions;
 		}
 
 		public Task<PaginatedList<FaqCategory>> ListCategories(int page = 1, int pageSize = 10)
@@ -124,10 +188,11 @@ namespace HomeMyDay.Infrastructure.Repository
 				page = 1;
 			}
 
-			var faqQuestions = _context.FaqQuestions
-				.Where(x => x.CategoryId == categoryId)
-				.OrderBy(x => x.Id)
-				.AsNoTracking();
+			var faqQuestions = _context.FaqCategory
+				.Where(x => x.Id == categoryId)
+				.First()
+				.Questions
+				.AsQueryable();
 
 			return PaginatedList<FaqQuestion>.CreateAsync(faqQuestions, page, pageSize);
 		}

@@ -13,6 +13,10 @@ using HomeMyDay.Infrastructure.Extensions;
 using HomeMyDay.Infrastructure.Identity;
 using HomeMyDay.Web.Site.Cms.Extensions;
 using HomeMyDay.Web.Base.Extensions;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Halcyon.Web.HAL.Json;
+using System.Buffers;
 
 namespace HomeMyDay.Web
 {
@@ -77,7 +81,15 @@ namespace HomeMyDay.Web
 				options.AddCmsViews();
 			});
 
-			services.AddMvc();
+			services.AddMvc()
+			.AddJsonOptions(options => {
+				options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+				options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+			})
+			.AddMvcOptions(c => {
+				var jsonOutputFormatter = new JsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<Char>.Shared);
+				c.OutputFormatters.Add(new JsonHalOutputFormatter(new string[] { "application/hal+json", "application/vnd.example.hal+json", "application/vnd.example.hal.v1+json" }));
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

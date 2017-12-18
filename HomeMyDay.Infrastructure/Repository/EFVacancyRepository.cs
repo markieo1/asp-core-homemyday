@@ -63,7 +63,7 @@ namespace HomeMyDay.Infrastructure.Repository
                 throw new ArgumentOutOfRangeException(nameof(vacancyId));
             }
 
-            Vacancy vacancy = await _context.Vacancies.SingleOrDefaultAsync(a => a.Id == vacancyId);
+            Vacancy vacancy = _context.Vacancies.SingleOrDefault(a => a.Id == vacancyId);
 
             if (vacancy == null)
             {

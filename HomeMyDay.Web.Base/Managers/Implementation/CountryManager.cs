@@ -2,6 +2,7 @@
 using System.Linq;
 using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
+using System.Threading.Tasks;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
@@ -23,5 +24,15 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 	    {
 		    return _countryRepository.GetCountry(id);
 	    }
+
+		public Task Save(Country country)
+		{
+			return _countryRepository.Save(country);
+		}
+
+		public Task Delete(long id)
+		{
+			return _countryRepository.Delete(id);
+		}
     }
 }

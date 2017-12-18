@@ -5,11 +5,6 @@ namespace HomeMyDay.Core.Models
 	public class FaqQuestion : BaseModel
 	{
 		/// <summary>
-		/// The id of the Category which is linked in the database.
-		/// </summary>
-		public long CategoryId { get; set; }
-
-		/// <summary>
 		/// The Question string of the FAQ
 		/// </summary>
 		public string Question { get; set; }
@@ -22,7 +17,6 @@ namespace HomeMyDay.Core.Models
 		/// <summary>
 		/// The forgein key constraint on the FaqCategory object
 		/// </summary>
-		[ForeignKey("CategoryId")]
-		public virtual FaqCategory FaqCategory { get; set; }
+		public FaqCategory Category { get; set; }
 	}
 }

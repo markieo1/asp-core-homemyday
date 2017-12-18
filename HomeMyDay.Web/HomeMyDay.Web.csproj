@@ -44,6 +44,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HomeMyDay.Core\HomeMyDay.Core.csproj" />
     <ProjectReference Include="..\HomeMyDay.Infrastructure\HomeMyDay.Infrastructure.csproj" />
+    <ProjectReference Include="..\HomeMyDay.Web.Api\HomeMyDay.Web.Api.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Site.Cms\HomeMyDay.Web.Site.Cms.csproj" />
     <ProjectReference Include="..\HomeMyDay.Web.Site.Home\HomeMyDay.Web.Site.Home.csproj" />
   </ItemGroup>
