@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using HomeMyDay.Core.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -50,10 +51,16 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 									  "You must have a confirmed email to log in.");
 						return View();
 					}
-				}
+				}  
 
 				if ((await _signInManager.PasswordSignInAsync(loginModel.Username, loginModel.Password, false, false)).Succeeded)
 				{
+					var roles = await _userManager.GetRolesAsync(user);
+					if (roles.Contains(Roles.Administrator))
+					{
+						return Redirect(Url.RouteUrl("areaRoute", new { area = "CMS", controller = nameof(Cms.Controllers.HomeController).TrimControllerName()}));	
+					}	
+
 					return Redirect(loginModel?.ReturnUrl ?? Url.Action(nameof(HomeController)).TrimControllerName());
 				}
 			}
