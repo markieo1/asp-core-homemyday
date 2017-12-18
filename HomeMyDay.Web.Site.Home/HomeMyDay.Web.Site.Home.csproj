@@ -12,4 +12,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\**\*.cshtml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Info\Index.cshtml" />
+  </ItemGroup>
 </Project>
