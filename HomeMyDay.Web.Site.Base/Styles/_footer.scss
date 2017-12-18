@@ -18,3 +18,11 @@ footer {
         color: $text-color;
     }
 }
+
+@media screen and (max-width: 480px) {
+
+    footer {
+        position: relative;
+        height: auto;        
+    }
+}
