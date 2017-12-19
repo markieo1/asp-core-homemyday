@@ -4,3 +4,61 @@
     <iframe class="embed-responsive-item" src=@Model allowfullscreen frameborder="0"> </iframe>
 </div>
 
+@* If the JS api is enabled, load some scripts *@
+@if (Model.Contains("jsapi=1")) {
+    <script type="text/javascript">
+
+        //Add iframe API if it isn't already loaded
+        if(!window.youtubeApiLoaded)
+        {
+            var scriptElement = document.createElement("script");
+            scriptElement.src = "http://www.youtube.com/iframe_api";
+            var firstScriptElement = document.getElementsByTagName("script")[0];
+            firstScriptElement.parentNode.insertBefore(scriptElement, firstScriptElement);
+        }
+
+        //Since this is the script tag currently being executed,
+        //The last script element is this one.
+        let currentScriptTag = $('script').last();
+
+        let iframeNode = currentScriptTag.prev().children('iframe')[0];
+
+        //Once the video has loaded, this function will be executed.
+        //An event handler for onReady will be registered.
+        let player;
+        function onYouTubeIframeAPIReady() {
+            window.youtubeApiLoaded = true;
+
+            player = new YT.Player(iframeNode, {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function playVideo()
+        {
+            if(typeof player !== 'undefined')
+            {
+                player.playVideo();
+            }
+        }
+
+        function onPlayerReady()
+        {
+            //Play video once user scrolls to it
+            $(window).scroll(function() {
+
+                let frameTop = $(iframeNode).offset().top,
+                    frameHeight = $(iframeNode).outerHeight(),
+                    windowHeight = $(window).height(),
+                    windowScroll = $(this).scrollTop();
+
+                if(windowScroll > (frameTop + frameHeight - windowHeight))
+                {
+                    playVideo();
+                }
+            });
+        }
+    </script>
+}
