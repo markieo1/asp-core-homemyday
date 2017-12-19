@@ -1,9 +1,9 @@
-﻿@import 'buttons';
-@import 'footer';
-@import 'navbar';
-@import 'colors';
-@import 'mixins';
+﻿@import 'colors';
+@import 'buttons';
 @import 'bootstrap-sass/bootstrap';
+@import 'mixins';
+@import 'navbar';
+@import 'footer';
 
 p {
     white-space: pre-wrap;
