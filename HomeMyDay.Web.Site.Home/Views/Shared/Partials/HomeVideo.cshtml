@@ -8,21 +8,11 @@
 @if (Model.Contains("jsapi=1")) {
     <script type="text/javascript">
 
-        //Add iframe API if it isn't already loaded
-        if(!window.youtubeApiLoaded)
-        {
-            window.youtubeApiLoaded = true;
-
-            var scriptElement = document.createElement("script");
-            scriptElement.src = "http://www.youtube.com/iframe_api";
-            var firstScriptElement = document.getElementsByTagName("script")[0];
-            firstScriptElement.parentNode.insertBefore(scriptElement, firstScriptElement);
-        }
-
         //Since this is the script tag currently being executed,
         //The last script element is this one.
         let currentScriptTag = $('script').last();
 
+        //Select preceding iframe
         let iframeNode = currentScriptTag.prev().children('iframe')[0];
 
         //Once the video has loaded, this function will be executed.
