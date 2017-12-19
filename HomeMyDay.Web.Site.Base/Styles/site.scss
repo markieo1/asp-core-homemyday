@@ -1,10 +1,12 @@
-﻿$icon-font-path: "../lib/bootstrap/fonts/";
+﻿@import url('https://fonts.googleapis.com/css?family=Coda');
+$font-family-base: Coda;
 
 @import 'colors';
 @import 'bootstrap-sass/bootstrap';
-@import 'footer';
-@import 'navbar';
 @import 'mixins';
+@import 'navbar';
+@import 'footer';
+
 
 p {
     white-space: pre-wrap;
