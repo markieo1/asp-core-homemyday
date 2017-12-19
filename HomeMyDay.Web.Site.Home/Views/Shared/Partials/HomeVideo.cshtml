@@ -11,6 +11,8 @@
         //Add iframe API if it isn't already loaded
         if(!window.youtubeApiLoaded)
         {
+            window.youtubeApiLoaded = true;
+
             var scriptElement = document.createElement("script");
             scriptElement.src = "http://www.youtube.com/iframe_api";
             var firstScriptElement = document.getElementsByTagName("script")[0];
@@ -27,8 +29,6 @@
         //An event handler for onReady will be registered.
         let player;
         function onYouTubeIframeAPIReady() {
-            window.youtubeApiLoaded = true;
-
             player = new YT.Player(iframeNode, {
                 events: {
                     'onReady': onPlayerReady
