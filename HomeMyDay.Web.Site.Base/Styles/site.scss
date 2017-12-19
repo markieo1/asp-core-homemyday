@@ -1,14 +1,12 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Coda');
-@import 'footer';
-@import 'navbar';
-@import 'colors';
-@import 'mixins';
-@import 'bootstrap-sass/bootstrap';
-$font-family-base: 'Coda' cursive;
+$font-family-base: Coda;
 
-body {
-    font-family: 'Coda', cursive;
-}
+@import 'colors';
+@import 'bootstrap-sass/bootstrap';
+@import 'mixins';
+@import 'navbar';
+@import 'footer';
+
 
 p {
     white-space: pre-wrap;
