@@ -1,0 +1,8 @@
+﻿.btn-reservation {
+    padding: 14px 24px;
+    letter-spacing: 1px;
+
+    &:active, &:focus {
+        outline: 0 none;
+    }
+}
