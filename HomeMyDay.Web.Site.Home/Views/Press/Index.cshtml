@@ -1,4 +1,6 @@
-﻿<div>
+﻿@using HomeMyDay.Web.Base.ViewModels
+@model HomeMyDay.Web.Base.ViewModels.PressViewModel
+<div>
     <img class="header-image img-responsive" src="~/images/pers.png" />
 </div>
 
@@ -46,6 +48,15 @@
             <div class="col-md-9 col-sm-4 col-xs-10">
                 <strong>Adresstraat 46</strong>
             </div>
+        </div>
+
+        <div class="rss-feed">
+            <h3 class="m-b-25">RSS Feed</h3>            
+            @{ 
+                var data = ViewData["reader"];
+            }
+            <h4>@data</h4>
+            <span>@data</span>
         </div>
     </div>
 </div>
