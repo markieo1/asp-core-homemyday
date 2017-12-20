@@ -97,8 +97,12 @@ textarea {
 .searchbarContainer {
     z-index: 2;
     margin-top: 25px;
-    position: absolute;
     width: 100%;
+
+    @include for-desktop-up {
+        position: absolute;
+        top: 5em;
+    }
 }
 
 .videoWrapper {
@@ -308,6 +312,10 @@ html, body {
 
 .content {
     padding-bottom: 200px;
+
+    @include for-phone-only {
+        padding-bottom: 0px;
+    }
 }
 
 #rss-feeds > ul {
@@ -317,5 +325,9 @@ html, body {
 div#rss-feeds > ul > div {
     border-bottom: 1px solid black;
     margin-bottom: 10px;
+}
+
+#map {
+    height: 600px;
 }
 
