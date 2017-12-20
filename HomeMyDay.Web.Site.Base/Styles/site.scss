@@ -129,26 +129,30 @@ textarea {
     padding-top: 20px;
 }
 
-#theprocess > .process-visual {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    font-size: 1.2em;
+#theprocess > .process-visual > div {
+    @include for-desktop-up {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        font-size: 1.2em;
 
-    > div {
-        width: 10%;
-        text-align: center;
-        flex-shrink: 0;
+        > div {
+            width: 10%;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        > div.line {
+            width: 96%;
+            flex-shrink: 1;
+            margin: 2px;
+            border: 2px solid $theprocess-line-color;
+            border-radius: 2px;
+        }
     }
 
-    > div.line {
-        width: 100%;
-        flex-shrink: 1;
-        margin: 2px;
-        border: 2px solid $theprocess-line-color;
-        border-radius: 2px;
-    }
+    text-align: center;
 }
 
 #process-text > .the-text {
@@ -162,6 +166,9 @@ textarea {
         @include for-desktop-up {
             height: 240px;
             margin-bottom: 35px;
+        }
+        > .panel-body {
+            padding: 10px 0px 0px 0px;
         }
     }
 }
