@@ -324,6 +324,16 @@ html, body {
     }
 }
 
+#rss-feeds > ul {
+    padding-left: 0;
+}
+
+div#rss-feeds > ul > div {
+    border-bottom: 1px solid $theprocess-line-color;
+    margin-bottom: 10px;
+}
+
 #map {
     height: 600px;
 }
+
