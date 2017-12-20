@@ -308,10 +308,8 @@ html, body {
 
 .content {
     padding-bottom: 200px;
-}
 
-@media screen and (max-width: 480px) {
-    .content {
+    @include for-phone-only {
         padding-bottom: 0px;
     }
 }
