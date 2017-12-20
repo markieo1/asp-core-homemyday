@@ -309,3 +309,13 @@ html, body {
 .content {
     padding-bottom: 200px;
 }
+
+#rss-feeds > ul {
+    padding-left: 0;
+}
+
+div#rss-feeds > ul > div {
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
