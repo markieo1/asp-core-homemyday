@@ -308,4 +308,12 @@ html, body {
 
 .content {
     padding-bottom: 200px;
+
+    @include for-phone-only {
+        padding-bottom: 0px;
+    }
+}
+
+#map {
+    height: 600px;
 }
