@@ -22,6 +22,10 @@ footer {
         position: relative;
         height: auto;
     }
+
+    > div.container {
+        background-color: $secondary-color;
+    }
 }
 
 
