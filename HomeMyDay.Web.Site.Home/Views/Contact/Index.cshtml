@@ -5,7 +5,7 @@
             <div class="row">
                 <a href="callto:0612345678">
                     <div class="col-md-1">
-                        <i class="fa fa-phone fa-lg icon-color"></i>
+                        <i class="fa fa-phone fa-lg fa-2x icon-color"></i>
                     </div>
                     <div class="col-md-11">
                         <strong>06-17964966</strong>
@@ -15,7 +15,7 @@
             <div class="row">
                 <a href="mailto:info@locallife.nl">
                     <div class="col-md-1">
-                        <i class="fa fa-envelope fa-lg icon-color"></i>
+                        <i class="fa fa-envelope fa-lg fa-2x icon-color"></i>
                     </div>
                     <div class="col-md-11">
                         <strong>M.Lataster1998@gmail.com</strong>
@@ -24,7 +24,7 @@
             </div>
             <div class="row">
                 <div class="col-md-1">
-                    <i class="fa fa-map-pin fa-lg icon-color"></i>
+                    <i class="fa fa-map-pin fa-lg fa-2x icon-color"></i>
                 </div>
                 <div class="col-md-11">
                     <strong>Lijsterbesstraat 46</strong>
@@ -32,7 +32,7 @@
             </div>
             <div class="row">
                 <div class="col-md-1">
-                    <i class="fa fa-commenting fa-lg icon-color"></i>
+                    <i class="fa fa-commenting fa-lg fa-2x icon-color"></i>
                 </div>
                 <div class="col-md-11">
                     <strong>Chat nu live <a href="#">Hier</a></strong>
@@ -44,7 +44,7 @@
             <div class="row p-b-20">
                 <strong>
                     Heb jij een vraag?<br/>
-                    Klik op onze <a href="/faq">FAQ</a> pagina
+                    Klik op onze <a asp-controller="Faq" asp-action="Index">FAQ</a> pagina
                 </strong>
             </div>
             <div class="row p-b-20">
@@ -56,7 +56,7 @@
             <div class="row p-b-20">
                 <strong>
                     Ben jij van de pers?<br/> 
-                    Kijk dan eens op onze <a href="/press">Pers</a> pagina
+                    Klik op onze <a asp-controller="Press" asp-action="Index">FAQ</a> pagina
                 </strong>
             </div>
         </div>
@@ -74,7 +74,7 @@
     </div>
 </div>
 
-<div id="map" style="height:600px;"></div>
+<div id="map"></div>
 <script>
     function initMap() {
         var dordrecht = { lat: 51.8058692, lng: 4.7086096};
