@@ -5,9 +5,8 @@ footer {
     position: absolute;
     bottom: 0;
     height: 200px;
-
-    background-color: $primary-color;
-    color: $text-color;
+    background-color: $secondary-color;
+    color: $home-link-color;
 
     ul {
         list-style: none;
@@ -15,7 +14,7 @@ footer {
     }
 
     a {
-        color: $text-color;
+        color: $home-link-color;
     }
 }
 

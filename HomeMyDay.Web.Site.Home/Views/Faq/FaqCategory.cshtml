@@ -18,7 +18,7 @@
             var item = Model.ElementAt(i);
             <div role="tabpanel" class="tab-pane fade @((i == 0) ? "in active" : "")" id="@item.CategoryName.Dashed()">
                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    @foreach (var question in item.FaqQuestions)
+                    @foreach (var question in item.Questions)
                     {
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="heading@(@question.Id)">

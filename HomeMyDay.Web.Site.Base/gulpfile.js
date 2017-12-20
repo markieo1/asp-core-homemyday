@@ -2,6 +2,8 @@
 var gulp = require('gulp');
 var sass = require("gulp-sass");
 var rimraf = require("rimraf");
+var tildeImporter = require('node-sass-tilde-importer');
+var eyeglass = require("eyeglass");
 
 var paths = {
     webroot: "../HomeMyDay.Web/wwwroot/"
@@ -15,7 +17,9 @@ gulp.task("clean:css", function (cb) {
 
 gulp.task("sass", ['clean:css'], function () {
     return gulp.src("./Styles/**/*.scss")
-        .pipe(sass())
+        .pipe(sass(eyeglass({
+            importer: tildeImporter
+        })))
         .pipe(gulp.dest(paths.cssFolder));
 });
 
