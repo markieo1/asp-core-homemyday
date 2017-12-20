@@ -96,8 +96,12 @@ textarea {
 .searchbarContainer {
     z-index: 2;
     margin-top: 25px;
-    position: absolute;
     width: 100%;
+
+    @include for-desktop-up {
+        position: absolute;
+        top: 5em;
+    }
 }
 
 .videoWrapper {
