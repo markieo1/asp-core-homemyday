@@ -1,0 +1,85 @@
+﻿@using HomeMyDay.Web.Base.ViewModels
+@model HomeMyDay.Web.Base.ViewModels.AccommodationViewModel
+
+@{
+    var reviewSucceedAdded = (bool?)TempData["Succeeded"];
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/accommodation.css" />
+@if (reviewSucceedAdded != null)
+{
+    if (reviewSucceedAdded == true)
+    {
+        <div class="alert alert-success">
+            <strong>Review is in behandeling genomen.</strong> Indien de review wordt goedgekeurd wordt hij zichtbaar.
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Er is een fout opgetreden bij het toevoegen van de review.</strong> Neem contact op met de klantenservice.
+        </div>
+    }
+}
+
+@Html.Partial("~/Views/Shared/Partials/AccommodationCarousel.cshtml", Model.Accommodation.MediaObjects)
+
+<div class="container bottom-buffer">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>
+                    @Model.Accommodation.Name
+                    <small>
+                        <em>@Model.Accommodation.Location, @Model.Accommodation.Country</em>
+                    </small>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>@Model.Accommodation.Description</p>
+            </div>
+        </div>
+        @if (Model.DetailBlocks != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Partial("~/Views/Shared/Partials/AccommodationDetailBlocks.cshtml", Model)
+                </div>
+
+                <div class="col-md-12">
+                </div>
+            </div>
+        }
+
+        <div class="row" id="map-container">
+
+            <h2>Locatie</h2>
+
+            <div id="accommodation-map" class="col-md-12" data-latitude="@Model.Accommodation.Latitude" data-longitude="@Model.Accommodation.Longitude"></div>
+        </div>
+
+        <div class="pull-right">
+            <a class="btn btn-primary btn-reservation mtop52 text-uppercase" asp-area="" asp-controller="Booking" asp-action="BookingForm" asp-route-id="@Model.Accommodation.Id"><strong>Reserveren</strong></a>
+        </div>
+
+    </div>
+    <div class="col-md-6" id="accommodation-summary-container">
+        <div id="accommodation-summary" class="panel panel-default fixed-panel">
+            <div class="panel-heading">
+                <h3 class="text-center">Jouw complete reissom</h3>
+            </div>
+            <div class="panel-body max-height">
+                <p>Uw reis: &euro;<span class="total-price">@Model.Accommodation.Price</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/accommodationdetail.js"></script>
+
+@* Google Maps script *@
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=@(ViewBag.MapApiKey)&callback=initMap">
+</script>

@@ -1,0 +1,31 @@
+﻿@import 'bootstrap-sass/bootstrap/variables';
+
+@mixin for-phone-only {
+    @media (max-width: $screen-xs-max) {
+        @content;
+    }
+}
+
+@mixin for-tablet-up {
+    @media (min-width: $screen-sm) {
+        @content;
+    }
+}
+
+@mixin for-desktop-down {
+	@media (max-width: $screen-sm-max) {
+		@content;
+	}
+}
+
+@mixin for-desktop-up {
+    @media (min-width: $screen-md) {
+        @content;
+    }
+}
+
+@mixin for-big-desktop-up {
+    @media (min-width: $screen-lg) {
+        @content;
+    }
+}

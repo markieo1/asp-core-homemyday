@@ -1,0 +1,56 @@
+﻿@using HomeMyDay.Web.Base.ViewModels
+@model HomeMyDay.Web.Base.ViewModels.AccommodationViewModel
+
+
+<div class="detail-blocks">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">
+                <i class="fa fa-comments" aria-hidden="true"></i>
+                Reviews
+            </a>
+        </li>
+        @if (Model.DetailBlocks != null && Model.DetailBlocks.Any(d => d.CanDisplay))
+        {
+            @for (int i = 0; i < Model.DetailBlocks.Count(); i++)
+            {
+                AccommodationDetailBlockViewModel blockModel = Model.DetailBlocks.ElementAt(i);
+                if (!blockModel.CanDisplay)
+                {
+                    continue;
+                }
+
+                <li role="presentation">
+                    <a href="#@blockModel.Title.Dashed()" aria-controls="@blockModel.Title.Dashed()" role="tab" data-toggle="tab">
+                        @if (!string.IsNullOrWhiteSpace(blockModel.Icon))
+                        {
+                            @:<i class="fa @blockModel.Icon" aria-hidden="true"></i>
+                    }
+                        @blockModel.Title
+                    </a>
+                </li>
+}
+        }
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="reviews">
+            @Html.Partial("~/Views/Shared/Partials/AddReview.cshtml", new ReviewViewModel(){AccommodationId = Model.Accommodation.Id})
+            @Html.Partial("~/Views/Shared/Partials/Reviews.cshtml", Model.Reviews)
+        </div>
+        @if (Model.DetailBlocks != null && Model.DetailBlocks.Any(d => d.CanDisplay))
+        {
+            @for (int i = 0; i < Model.DetailBlocks.Count(); i++)
+            {
+                AccommodationDetailBlockViewModel blockModel = Model.DetailBlocks.ElementAt(i);
+                if (!blockModel.CanDisplay)
+                {
+                    continue;
+                }
+
+                <div role="tabpanel" class="tab-pane fade" id="@blockModel.Title.Dashed()">
+                    <p>@blockModel.Text</p>
+                </div>
+            }
+        }
+    </div>
+</div>
