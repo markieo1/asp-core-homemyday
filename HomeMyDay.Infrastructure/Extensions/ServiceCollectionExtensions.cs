@@ -53,7 +53,9 @@ namespace HomeMyDay.Infrastructure.Extensions
 			services.AddTransient<IMapService, GoogleMapService>();
 
 			// Add repositories
-			services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
+			//services.AddTransient<IAccommodationRepository, EFAccommodationRepository>();
+			services.AddTransient<IAccommodationRepository, MDBAccommodationRepository>();
+
 			services.AddTransient<IBookingRepository, EFBookingRepository>();
 			services.AddTransient<ICountryRepository, EFCountryRepository>();
 			services.AddTransient<INewspaperRepository, EFNewspaperRepository>();

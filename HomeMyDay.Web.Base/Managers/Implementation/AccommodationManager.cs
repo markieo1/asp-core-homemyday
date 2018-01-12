@@ -30,21 +30,21 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		    return _accommodationRepository.Accommodations;
 	    }
 
-	    public Task Delete(long id)
+	    public Task Delete(string id)
 	    {
 		    return _accommodationRepository.Delete(id);
 	    }
 
-	    public Accommodation GetAccommodation(long id)
+	    public Accommodation GetAccommodation(string id)
 	    {
-		    if (id <= 0)
+		    if (string.IsNullOrWhiteSpace(id))
 		    {
 				return new Accommodation();
 		    }
 		    return _accommodationRepository.GetAccommodation(id);
 	    }
 
-	    public AccommodationViewModel GetAccommodationViewModel(long id)
+	    public AccommodationViewModel GetAccommodationViewModel(string id)
 	    {	  
 		    var accommodation = _accommodationRepository.GetAccommodation(id);
 		    var reviews = _reviewRepository.GetAccomodationReviews(id);

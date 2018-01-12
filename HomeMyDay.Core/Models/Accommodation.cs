@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Core.Models
 {
-	public class Accommodation : BaseModel
+	public class Accommodation
 	{
 		public Accommodation()
 		{
@@ -15,6 +15,12 @@ namespace HomeMyDay.Core.Models
 			NotAvailableDates = new List<DateEntity>();
 			Reviews = new List<Review>();
 		}
+
+		/// <summary>
+		/// The ID of the model.
+		/// </summary>
+		[Key]
+		public string Id { get; set; }
 
 		/// <summary>
 		/// The user-friendly name of the accommodation.

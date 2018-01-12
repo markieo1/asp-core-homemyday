@@ -8,7 +8,7 @@ namespace HomeMyDay.Web.Base.ViewModels
 		/// <summary>
 		/// The ID of the accommodation that the user wants to book.
 		/// </summary>
-		public long AccommodationId { get; set; }
+		public string AccommodationId { get; set; }
 
 		/// <summary>
 		/// The name of the accommodation that the user wants to book.

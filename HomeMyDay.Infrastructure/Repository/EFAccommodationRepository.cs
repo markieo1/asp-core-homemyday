@@ -22,9 +22,9 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<Accommodation> Accommodations => _context.Accommodations;
 
-		public async Task Delete(long id)
+		public async Task Delete(string id)
 		{
-			if (id <= 0)
+			if (string.IsNullOrWhiteSpace(id))
 			{
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
@@ -45,9 +45,9 @@ namespace HomeMyDay.Infrastructure.Repository
 			await _context.SaveChangesAsync();
 		}
 
-		public Accommodation GetAccommodation(long id)
+		public Accommodation GetAccommodation(string id)
 		{
-			if (id <= 0)
+			if (string.IsNullOrWhiteSpace(id))
 			{
 				throw new ArgumentOutOfRangeException(nameof(id));
 			}
@@ -95,7 +95,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				throw new ArgumentNullException(nameof(accommodation));
 			}
 
-			if (accommodation.Id <= 0)
+			if (string.IsNullOrWhiteSpace(accommodation.Id))
 			{
 				// We are creating a new one
 				// Only need to adjust the id to be 0 and save it in the db.

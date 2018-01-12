@@ -43,7 +43,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
 		// GET api/values
 		[HttpGet("{id}")]
-		public IActionResult Get(long id)
+		public IActionResult Get(string id)
         {
 			if (!ModelState.IsValid)
 			{
@@ -99,7 +99,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody]Accommodation accommodation)
+        public IActionResult Put(string id, [FromBody]Accommodation accommodation)
         {
 			if(!ModelState.IsValid)
 			{
@@ -133,7 +133,7 @@ namespace HomeMyDay.Web.Api.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(string id)
         {
 			if (!ModelState.IsValid)
 			{

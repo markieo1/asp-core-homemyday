@@ -21,7 +21,7 @@ namespace HomeMyDay.Core.Repository
 		/// <returns></returns>
 		/// <exception cref="ArgumentOutOfRangeException">id</exception>
 		/// <exception cref="KeyNotFoundException"></exception>
-		Accommodation GetAccommodation(long id);
+		Accommodation GetAccommodation(string id);
 
 		/// <summary>
 		/// Get all recommended accommodations from repository
@@ -59,6 +59,6 @@ namespace HomeMyDay.Core.Repository
 		/// </summary>
 		/// <param name="id">The identifier.</param>
 		/// <returns></returns>
-		Task Delete(long id);
+		Task Delete(string id);
 	}
 }

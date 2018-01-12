@@ -37,7 +37,7 @@ namespace HomeMyDay.Web.Base.ViewModels
 		/// <summary>
 		/// The id of the accommodation
 		/// </summary>
-		public long AccommodationId { get; set; }
+		public string AccommodationId { get; set; }
 
 		/// <summary>
 		/// Creates an instance of <see cref="ReviewViewModel"/> by using the <paramref name="review"/>

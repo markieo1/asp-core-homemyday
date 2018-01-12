@@ -27,7 +27,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Edit(long id)
+		public IActionResult Edit(string id)
 		{								
 			try
 			{
@@ -55,7 +55,7 @@ namespace HomeMyDay.Web.Site.Cms.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> DeleteConfirmed(long id)
+		public async Task<IActionResult> DeleteConfirmed(string id)
 		{
 			await _accommodationManager.Delete(id);
 

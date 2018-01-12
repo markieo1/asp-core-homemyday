@@ -17,7 +17,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Detail(long id)
+		public IActionResult Detail(string id)
 		{
 			try
 			{
