@@ -13,4 +13,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\**\*.cshtml" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Rent\" />
+  </ItemGroup>
 </Project>
