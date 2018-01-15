@@ -1,5 +1,6 @@
 ﻿using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HomeMyDay.Infrastructure.Database
 {
@@ -66,6 +67,7 @@ namespace HomeMyDay.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder builder)
 		{
+			//builder.Entity<Accommodation>().Property(t => t.Id).ValueGeneratedNever();
 			builder.Entity<Newspaper>()
 				.HasAlternateKey(x => x.Email)
 				.HasName("Alt_Email");

@@ -50,7 +50,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			{
 				Id = 1,
 				Name = "TestReview",
-				Accommodation = new Accommodation() { Id = 1, Name = "TestAccommodation" },
+				Accommodation = new Accommodation() { Id = "1", Name = "TestAccommodation" },
 				Approved = true,
 				Date = DateTime.Now,
 				Title = "Test",
@@ -80,7 +80,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			var accommodation = new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAccommodation"
 			};
 

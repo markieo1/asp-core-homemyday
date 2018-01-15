@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeMyDay.Core.Models
 {
+	[NotMapped]
 	public class Accommodation
 	{
 		public Accommodation()

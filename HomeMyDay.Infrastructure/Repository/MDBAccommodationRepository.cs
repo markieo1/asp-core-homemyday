@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +36,16 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public Accommodation GetAccommodation(string id)
 		{
-			throw new NotImplementedException();
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri + id);
+			request.Method = WebRequestMethods.Http.Get;
+
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream dataStream = response.GetResponseStream();
+			StreamReader reader = new StreamReader(dataStream);
+
+			var json = reader.ReadToEnd();
+
+			return JsonConvert.DeserializeObject<Accommodation>(json);
 		}
 
 		public IEnumerable<Accommodation> GetRecommendedAccommodations()
@@ -49,7 +59,8 @@ namespace HomeMyDay.Infrastructure.Repository
 
 			var json = reader.ReadToEnd();
 
-			return JsonConvert.DeserializeObject<IEnumerable<Accommodation>>(json);
+			return JsonConvert.DeserializeObject<IEnumerable<Accommodation>>(json)
+				.Where(m => m.Recommended == true);
 		}
 
 		public Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10)

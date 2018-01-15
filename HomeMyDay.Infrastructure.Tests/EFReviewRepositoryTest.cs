@@ -24,7 +24,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			{
 				new Accommodation()
 				{
-					Id = 1,
+					Id = "1",
 					Name = "Test",
 					Beds = 2,
 					Country = "Breda",
@@ -32,7 +32,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				},
 				new Accommodation()
 				{
-					Id = 2,
+					Id = "2",
 					Name = "Test2",
 					Beds = 4,
 					Country = "Tilburg",
@@ -41,7 +41,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			});
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository.Object);
-			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccomodationReviews(-2));
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccomodationReviews("-2"));
 		}
 
 		[Fact]
@@ -55,7 +55,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			{
 				new Accommodation()
 				{
-					Id = 1,
+					Id = "1",
 					Name = "Test",
 					Beds = 2,
 					Country = "Breda",
@@ -63,7 +63,7 @@ namespace HomeMyDay.Infrastructure.Tests
 				},
 				new Accommodation()
 				{
-					Id = 2,
+					Id = "2",
 					Name = "Test2",
 					Beds = 4,
 					Country = "Tilburg",
@@ -72,7 +72,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			});
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository.Object);
-			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccomodationReviews(0));
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccomodationReviews("0"));
 
 		}
 
@@ -87,14 +87,14 @@ namespace HomeMyDay.Infrastructure.Tests
 				{
 					Id = 1,
 					Accommodation = new Accommodation()
-					{ Id = 1, Name = "Test" },
+					{ Id = "1", Name = "Test" },
 					Name = "TestReview",
 					Approved = true
 				});
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			var reviews = repository.GetAccomodationReviews(1);
+			var reviews = repository.GetAccomodationReviews("1");
 			Assert.NotNull(reviews.FirstOrDefault());
 			Assert.Equal("Test", reviews.FirstOrDefault().Accommodation.Name);
 			Assert.Equal("TestReview", reviews.FirstOrDefault().Name);
@@ -111,13 +111,13 @@ namespace HomeMyDay.Infrastructure.Tests
 			{
 				Id = 1,
 				Accommodation = new Accommodation()
-				{ Id = 1, Name = "Test" },
+				{ Id = "1", Name = "Test" },
 				Name = "TestReview",
 				Approved = true
 			});
 			context.SaveChanges();
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			var reviews = repository.GetAccomodationReviews(2);
+			var reviews = repository.GetAccomodationReviews("2");
 			Assert.Empty(reviews);
 		}
 
@@ -131,13 +131,13 @@ namespace HomeMyDay.Infrastructure.Tests
 			{
 				Id = 1,
 				Accommodation = new Accommodation()
-				{ Id = 1, Name = "Test" },
+				{ Id = "1", Name = "Test" },
 				Name = "TestReview",
 				Approved = true
 			});
 			context.SaveChanges();
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			var reviews = repository.GetAccomodationReviews(2);
+			var reviews = repository.GetAccomodationReviews("2");
 			Assert.Empty(reviews);
 		}
 
@@ -150,7 +150,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			var accommodation = new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAcco",
 				Location = "Breda",
 				Beds = 6
@@ -173,10 +173,10 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			var reviews = repository.GetAccomodationReviews(1);
+			var reviews = repository.GetAccomodationReviews("1");
 			Assert.NotEmpty(reviews);
 			Assert.True(reviews.Count() == 2);
-			Assert.True(reviews.All(x => x.Accommodation.Id == 1));
+			Assert.True(reviews.All(x => x.Accommodation.Id == "1"));
 		}
 
 		[Fact]
@@ -188,7 +188,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			var accommodation = new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAcco",
 				Location = "Breda",
 				Beds = 6
@@ -211,7 +211,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccomodationReviews(0));
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccomodationReviews("0"));
 		}
 
 		[Fact]
@@ -222,8 +222,8 @@ namespace HomeMyDay.Infrastructure.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			Assert.Empty(repository.GetAccomodationReviews(1));
-			Assert.True(!repository.GetAccomodationReviews(1).Any());
+			Assert.Empty(repository.GetAccomodationReviews("1"));
+			Assert.True(!repository.GetAccomodationReviews("1").Any());
 		}
 
 		[Fact]
@@ -235,7 +235,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			var accommodation = new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAcco",
 				Location = "Breda",
 				Beds = 6
@@ -258,8 +258,8 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, null);
-			Assert.NotEmpty(repository.GetAccomodationReviews(1));
-			Assert.True(repository.GetAccomodationReviews(1).Count() == 2);
+			Assert.NotEmpty(repository.GetAccomodationReviews("1"));
+			Assert.True(repository.GetAccomodationReviews("1").Count() == 2);
 		}
 
 		[Fact]
@@ -273,7 +273,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			context.Accommodations.Add(new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAccommodation",
 				Beds = 6,
 				Country = "Amsterdam",
@@ -283,8 +283,8 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.True(repository.AddReview(1, "Review Holiday 001", "TestReview", "De vakantie was goed!"));
-			Assert.True(repository.GetAccomodationReviews(1).Count() == 1);
+			Assert.True(repository.AddReview("1", "Review Holiday 001", "TestReview", "De vakantie was goed!"));
+			Assert.True(repository.GetAccomodationReviews("1").Count() == 1);
 		}
 
 		[Fact]
@@ -298,7 +298,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			context.Accommodations.Add(new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAccommodation",
 				Beds = 6,
 				Country = "Amsterdam",
@@ -308,7 +308,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.Throws<KeyNotFoundException>(() => repository.AddReview(2, null, null, null));
+			Assert.Throws<KeyNotFoundException>(() => repository.AddReview("2", null, null, null));
 		}
 		  
 		[Fact]
@@ -322,7 +322,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			context.Accommodations.Add(new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Name = "TestAccommodation",
 				Beds = 6,
 				Country = "Amsterdam",
@@ -332,7 +332,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			context.SaveChanges();
 
 			IReviewRepository repository = new EFReviewRepository(context, accommodationRepository);
-			Assert.Throws<ArgumentOutOfRangeException>(() => repository.AddReview(0, null, null, null));
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.AddReview("0", null, null, null));
 		}
 	}
 }

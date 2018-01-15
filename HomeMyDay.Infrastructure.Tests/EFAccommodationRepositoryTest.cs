@@ -26,7 +26,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccommodation(0));
+			Assert.Throws<ArgumentOutOfRangeException>(() => repository.GetAccommodation("0"));
 		}
 
 		[Fact]
@@ -40,14 +40,14 @@ namespace HomeMyDay.Infrastructure.Tests
 			{
 				Location = "Amsterdam",
 				MaxPersons = 4,
-				Id = 1
+				Id = "1"
 			});
 
 			context.SaveChanges();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			Assert.Throws<KeyNotFoundException>(() => repository.GetAccommodation(2));
+			Assert.Throws<KeyNotFoundException>(() => repository.GetAccommodation("2"));
 		}
 
 		[Fact]
@@ -61,14 +61,14 @@ namespace HomeMyDay.Infrastructure.Tests
 			{
 				Location = "Amsterdam",
 				MaxPersons = 4,
-				Id = 1
+				Id = "1"
 			});
 
 			context.SaveChanges();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			Accommodation accommodation = repository.GetAccommodation(1);
+			Accommodation accommodation = repository.GetAccommodation("1");
 
 			Assert.NotNull(accommodation);
 			Assert.Equal("Amsterdam", accommodation.Location);
@@ -788,7 +788,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			Assert.NotNull(foundAccommodation);
 			Assert.Equal("Example Name", foundAccommodation.Name);
-			Assert.NotEqual(0, foundAccommodation.Id);
+			Assert.NotEqual("0", foundAccommodation.Id);
 			Assert.Equal("Unknown", foundAccommodation.Country);
 			Assert.Equal(DEFAULT_ACCOMMODATION_DESCRIPTION, foundAccommodation.Description);
 		}
@@ -802,7 +802,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			Accommodation accommodationToUpdate = new Accommodation()
 			{
-				Id = 1,
+				Id = "1",
 				Description = DEFAULT_ACCOMMODATION_DESCRIPTION,
 				Name = "Example Name",
 				Country = "Unknown",
@@ -840,7 +840,7 @@ namespace HomeMyDay.Infrastructure.Tests
 
 			Accommodation existingAccommodation = new Accommodation()
 			{
-				Id = 2,
+				Id = "2",
 				Description = DEFAULT_ACCOMMODATION_DESCRIPTION,
 				Name = "Example Name",
 				Country = "Unknown",
@@ -855,7 +855,7 @@ namespace HomeMyDay.Infrastructure.Tests
 			// Change some values
 			Accommodation accommodationToUpdate = new Accommodation()
 			{
-				Id = 3,
+				Id = "3",
 				Country = "The Netherlands",
 				Name = "Updated name",
 				Description = "Updated description",
@@ -877,14 +877,14 @@ namespace HomeMyDay.Infrastructure.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+				new Accommodation() { Id = "1", Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
 			);
 
 			await context.SaveChangesAsync();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			await repository.Delete(1);
+			await repository.Delete("1");
 
 			Accommodation deletedAccommodation = await context.Accommodations.FindAsync((long)1);
 			Assert.Null(deletedAccommodation);
@@ -898,14 +898,14 @@ namespace HomeMyDay.Infrastructure.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+				new Accommodation() { Id = "1", Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
 			);
 
 			await context.SaveChangesAsync();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			await Assert.ThrowsAsync<ArgumentNullException>(() => repository.Delete(2));
+			await Assert.ThrowsAsync<ArgumentNullException>(() => repository.Delete("2"));
 		}
 
 		[Fact]
@@ -916,14 +916,14 @@ namespace HomeMyDay.Infrastructure.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+				new Accommodation() { Id = "1", Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
 			);
 
 			await context.SaveChangesAsync();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.Delete(-10));
+			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.Delete("-10"));
 		}
 
 		[Fact]
@@ -934,14 +934,14 @@ namespace HomeMyDay.Infrastructure.Tests
 			HomeMyDayDbContext context = new HomeMyDayDbContext(optionsBuilder.Options);
 
 			context.Accommodations.AddRange(
-				new Accommodation() { Id = 1, Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
+				new Accommodation() { Id = "1", Description = DEFAULT_ACCOMMODATION_DESCRIPTION }
 			);
 
 			await context.SaveChangesAsync();
 
 			IAccommodationRepository repository = new EFAccommodationRepository(context);
 
-			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.Delete(0));
+			await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => repository.Delete("0"));
 		}
 
 		#endregion

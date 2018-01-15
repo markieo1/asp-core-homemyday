@@ -36,17 +36,17 @@ namespace HomeMyDay.Web.Site.Home.Tests
 				//Setup fake accommodation
 				var accommodation = new Accommodation()
 				{
-					Id = 1,
+					Id = "1",
 					MaxPersons = 4,
 					Name = "Test Accommodation"
 				};
 
-				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<long>())).Returns(accommodation);
+				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<string>())).Returns(accommodation);
 			}
 			else
 			{
 				//If there are no accommodations, always throw a KeyNotFoundException
-				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<long>())).Throws(new KeyNotFoundException());
+				accommodationRepo.Setup(r => r.GetAccommodation(It.IsAny<string>())).Throws(new KeyNotFoundException());
 			}
 
 			//Setup fake countries
@@ -99,7 +99,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			//Initialize controller and excute action.
 			//No accommodations are in the repository.
 			BookingController controller = GetController(false);
-			IActionResult result = controller.BookingForm(1, null);
+			IActionResult result = controller.BookingForm("1", null);
 
 			//Test if controller returned a NotFoundResult.
 			Assert.IsType<NotFoundResult>(result);
@@ -112,7 +112,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			//There are accommodations in the repository.
 			BookingController controller = GetController(true);
 
-			ViewResult result = controller.BookingForm(1, null) as ViewResult;
+			ViewResult result = controller.BookingForm("1", null) as ViewResult;
 
 			BookingFormViewModel model = result.Model as BookingFormViewModel;
 
@@ -128,7 +128,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			//Fake post data with missing attributes
 			var formModel = new BookingFormViewModel()
 			{
-				AccommodationId = 1,
+				AccommodationId = "1",
 				AccommodationName = "Test Accommodation",
 				Persons = new List<BookingPerson>()
 				{
@@ -162,7 +162,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 			//Fake post data with a non-existent accommodation
 			var formModel = new BookingFormViewModel()
 			{
-				AccommodationId = 333,
+				AccommodationId = "333",
 				AccommodationName = "Test Accommodation",
 				Persons = new List<BookingPerson>()
 				{
@@ -192,7 +192,7 @@ namespace HomeMyDay.Web.Site.Home.Tests
 
 			var formModel = new BookingFormViewModel()
 			{
-				AccommodationId = 1,
+				AccommodationId = "1",
 				AccommodationName = "Test Accommodation",
 				Persons = new List<BookingPerson>()
 				{
