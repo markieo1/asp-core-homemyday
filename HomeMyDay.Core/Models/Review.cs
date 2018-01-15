@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeMyDay.Core.Models
 {
@@ -28,6 +29,9 @@ namespace HomeMyDay.Core.Models
 		/// The approve status of the review
 		/// </summary>
 		public bool Approved { get; set; }
+
+		[ForeignKey("Accommodation")]
+		public string AccommodationId { get; set; }
 
 		/// <summary>
 		/// The accommodation of the review

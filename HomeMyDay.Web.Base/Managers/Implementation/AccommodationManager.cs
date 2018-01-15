@@ -48,7 +48,7 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 	    {	  
 		    var accommodation = _accommodationRepository.GetAccommodation(id);
 		    var reviews = _reviewRepository.GetAccomodationReviews(id);
-
+				
 			if (reviews != null && reviews.Any())
 			{
 				return AccommodationViewModel.FromAccommodation(accommodation, reviews.Where(x => x.Approved).ToList());

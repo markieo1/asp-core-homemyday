@@ -29,9 +29,9 @@ namespace HomeMyDay.Infrastructure.Repository
 			if (string.IsNullOrWhiteSpace(accommodationId))
 			{
 				throw new ArgumentOutOfRangeException();
-			}
+			}	
 
-			return _context.Reviews.Where(a => a.Accommodation.Id == accommodationId);
+			return _context.Reviews.Where(a => a.AccommodationId == accommodationId);
 		}
 
 		public bool AddReview(string accommodationId, string title, string name, string text)
