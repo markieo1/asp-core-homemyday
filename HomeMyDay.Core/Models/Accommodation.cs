@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HomeMyDay.Core.Models
 {
-	[NotMapped]
 	public class Accommodation
 	{
 		public Accommodation()
@@ -20,7 +17,7 @@ namespace HomeMyDay.Core.Models
 		/// <summary>
 		/// The ID of the model.
 		/// </summary>
-		[Key]
+		[Key]	   
 		public string Id { get; set; }
 
 		/// <summary>
