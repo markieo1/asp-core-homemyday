@@ -11,7 +11,7 @@ namespace HomeMyDay.Web.Base.Managers
 
 	    IEnumerable<Review> GetAllReviews();
 
-		bool AddReview(long accommodationId, string title, string name, string text);
+		bool AddReview(string accommodationId, string title, string name, string text);
 
 	    Task<PaginatedList<Review>> GetPaginatedReview(int? page, int? pageSize);
 

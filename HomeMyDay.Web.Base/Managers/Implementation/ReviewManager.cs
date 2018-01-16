@@ -21,7 +21,7 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		    return _reviewRepository.Reviews.Select(ReviewViewModel.FromReview).Where(x => x.Approved);
 	    }
 
-	    public bool AddReview(long accommodationId, string title, string name, string text)
+	    public bool AddReview(string accommodationId, string title, string name, string text)
 	    {
 		    return _reviewRepository.AddReview(accommodationId, title, name, text);
 	    }

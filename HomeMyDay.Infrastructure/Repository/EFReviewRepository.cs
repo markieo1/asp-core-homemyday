@@ -24,21 +24,21 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<Review> Reviews => _context.Reviews;
 
-		public IEnumerable<Review> GetAccomodationReviews(long accommodationId)
+		public IEnumerable<Review> GetAccomodationReviews(string accommodationId)
 		{
-			if (accommodationId <= 0)
+			if (string.IsNullOrWhiteSpace(accommodationId))
 			{
 				throw new ArgumentOutOfRangeException();
-			}
+			}	
 
-			return _context.Reviews.Where(a => a.Accommodation.Id == accommodationId);
+			return _context.Reviews.Where(a => a.AccommodationId == accommodationId);
 		}
 
-		public bool AddReview(long accommodationId, string title, string name, string text)
+		public bool AddReview(string accommodationId, string title, string name, string text)
 		{
 			bool isAdded;
 
-			if (accommodationId <= 0)
+			if (string.IsNullOrWhiteSpace(accommodationId))
 			{
 				throw new ArgumentOutOfRangeException();
 			}

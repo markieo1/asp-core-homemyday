@@ -12,9 +12,10 @@ using System;
 namespace HomeMyDay.Infrastructure.Migrations
 {
     [DbContext(typeof(HomeMyDayDbContext))]
-    partial class HolidayDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180115145224_update_accommodation")]
+    partial class update_accommodation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

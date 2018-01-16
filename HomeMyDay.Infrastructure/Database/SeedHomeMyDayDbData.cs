@@ -13,10 +13,10 @@ namespace HomeMyDay.Infrastructure.Database
 		public static void Seed(HomeMyDayDbContext context)
 		{
 			//Seed accommodations
-			if (!context.Accommodations.Any())
-			{
-				SeedAccommodations(context);
-			}
+			//if (!context.Accommodations.Any())
+			//{
+			//	SeedAccommodations(context);
+			//}
 
 			//Seed countries
 			if (!context.Countries.Any())

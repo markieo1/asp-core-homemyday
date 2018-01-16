@@ -25,7 +25,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult BookingForm(int id, int? persons)
+		public IActionResult BookingForm(string id, int? persons)
 		{
 			var formModel = new BookingFormViewModel();
 
