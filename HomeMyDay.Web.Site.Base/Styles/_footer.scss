@@ -1,13 +1,13 @@
 ﻿@import 'colors';
+@import 'mixins';
 
 footer {
     width: 100%;
     position: absolute;
     bottom: 0;
     height: 200px;
-
-    background-color: $primary-color;
-    color: $text-color;
+    background-color: $secondary-color;
+    color: $home-link-color;
 
     ul {
         list-style: none;
@@ -15,6 +15,17 @@ footer {
     }
 
     a {
-        color: $text-color;
+        color: $home-link-color;
+    }
+
+    @include for-phone-only {
+        position: relative;
+        height: auto;
+    }
+
+    > div.container {
+        background-color: $secondary-color;
     }
 }
+
+

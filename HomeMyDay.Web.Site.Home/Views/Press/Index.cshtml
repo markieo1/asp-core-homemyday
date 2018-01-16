@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="col-md-3 col-sm-12 col-xs-12 text-center">
+    <div class="col-md-3 col-sm-12 col-xs-12">
         <h3 class="m-b-25">Wil je contact met ons?</h3>
 
         <div class="row col-md-offset-1 col-sm-offset-4 col-xs-offset-1">
@@ -25,17 +25,17 @@
                     <i class="fa fa-phone icon-color fa-lg"></i>
                 </div>
                 <div class="col-md-9 col-sm-4 col-xs-10">
-                    <strong>06-12345678</strong>
+                    <strong>06-17964966</strong>
                 </div>
             </a>
         </div>
         <div class="row col-md-offset-1 col-sm-offset-4 col-xs-offset-1">
-            <a href="mailto:testemail@gmail.com">
+            <a href="mailto:info@homemyday.nl">
                 <div class="col-md-2 col-sm-2 col-xs-2">
                     <i class="fa fa-envelope icon-color fa-lg"></i>
                 </div>
                 <div class="col-md-9 col-sm-4 col-xs-10">
-                    <strong>testemail@gmail.com</strong>
+                    <strong>info@homemyday.nl</strong>
                 </div>
             </a>
         </div>
@@ -44,8 +44,21 @@
                 <i class="fa fa-map-marker icon-color fa-2x"></i>
             </div>
             <div class="col-md-9 col-sm-4 col-xs-10">
-                <strong>Adresstraat 46</strong>
+                <strong>Lijsterbesstraat 46</strong>
             </div>
+        </div>
+
+        <div class="rss-feed">
+            <script>
+                jQuery(function($) {
+                  $("#rss-feeds").rss("https://www.nu.nl/rss/Algemeen",
+                  {
+                      entryTemplate:'<div><a href="{url}">{title}</a><p>{shortBodyPlain}<p><span>{date}</span></div>'
+                  })
+                })
+            </script>
+            <h3 class="m-b-25">RSS Feed</h3>
+            <div id="rss-feeds"></div>        
         </div>
     </div>
 </div>
