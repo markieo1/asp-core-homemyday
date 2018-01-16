@@ -1,6 +1,7 @@
 ﻿using HomeMyDay.Core.Models;
 using HomeMyDay.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,7 +17,15 @@ namespace HomeMyDay.Infrastructure.Repository
 {
 	public class MDBAccommodationRepository : IAccommodationRepository
 	{
-		private string uri = "http://localhost:3000/api/v1/accommodations";
+		private readonly IConfiguration _configuration;
+
+		private string uri;
+
+		public MDBAccommodationRepository(IConfiguration config)
+		{
+			this._configuration = config;
+			this.uri = _configuration.GetSection("ExternalAddresses").GetSection("SPA-IP").Value + "/api/v1/accommodations";
+		}
 
 		public IEnumerable<Accommodation> Accommodations => this.GetAccommodations();
 
@@ -80,7 +89,10 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
-			var url = $"{uri}?search={location}&dateFrom={departure.ToString()}&dateTo={returnDate.ToString()}&persons={amountOfGuests}";
+			string dateFrom = departure.ToString("yyyy/MM/dd");
+			string dateTo = departure.ToString("yyyy/MM/dd");
+
+			var url = $"{uri}?search={location}&dateFrom={dateFrom}&dateTo={dateTo}&persons={amountOfGuests}";
 
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.Method = WebRequestMethods.Http.Get;
