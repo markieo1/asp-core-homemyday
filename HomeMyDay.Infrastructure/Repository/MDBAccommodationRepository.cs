@@ -16,7 +16,7 @@ namespace HomeMyDay.Infrastructure.Repository
 {
 	public class MDBAccommodationRepository : IAccommodationRepository
 	{
-		private string uri = "http://localhost:3000/api/v1/accommodations/";
+		private string uri = "http://localhost:3000/api/v1/accommodations";
 
 		public IEnumerable<Accommodation> Accommodations => this.GetAccommodations();
 
@@ -36,7 +36,7 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public Accommodation GetAccommodation(string id)
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri + id);
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri + "/" + id);
 			request.Method = WebRequestMethods.Http.Get;
 
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -80,7 +80,18 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
-			throw new NotImplementedException();
+			var url = $"{uri}?search={location}&dateFrom={departure.ToString()}&dateTo={returnDate.ToString()}&persons={amountOfGuests}";
+
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.Method = WebRequestMethods.Http.Get;
+			
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream dataStream = response.GetResponseStream();
+			StreamReader reader = new StreamReader(dataStream);
+
+			var json = reader.ReadToEnd();
+
+			return JsonConvert.DeserializeObject<IEnumerable<Accommodation>>(json);
 		}
 	}
 }
