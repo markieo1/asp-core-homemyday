@@ -120,7 +120,6 @@ namespace HomeMyDay.Core.Models
 		/// <returns></returns>
 		public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex = 1, int pageSize = 10)
 		{
-			// NOTE: ER WORDT HIER GEEN AWAIT GEZET VOOR DEZE ASYNCHRONOUS TASK
 			int count = source.Count();
 			int skipAmount = 0;
 
