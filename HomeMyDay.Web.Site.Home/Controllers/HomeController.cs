@@ -5,7 +5,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
 {
 	public class HomeController : Controller
     {
-        IConfiguration _iconfiguration;
+        private readonly IConfiguration _iconfiguration;
         public HomeController(IConfiguration iconfiguration)
         {
             _iconfiguration = iconfiguration;
