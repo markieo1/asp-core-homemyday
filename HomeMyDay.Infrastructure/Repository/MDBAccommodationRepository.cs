@@ -65,7 +65,31 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10)
 		{
-			throw new NotImplementedException();
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+			request.Method = WebRequestMethods.Http.Get;
+
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream dataStream = response.GetResponseStream();
+			StreamReader reader = new StreamReader(dataStream);
+
+			// Reset to default value
+			if (pageSize <= 0)
+			{
+				pageSize = 10;
+			}
+
+			// We are not able to skip before the first page
+			if (page <= 0)
+			{
+				page = 1;
+			}
+
+			var json = reader.ReadToEnd();
+
+			IQueryable<Accommodation> accommodations = JsonConvert.DeserializeObject<IQueryable<Accommodation>>(json)
+				.OrderBy(x => x.Id);
+
+			return PaginatedList<Accommodation>.CreateAsync(accommodations, page, pageSize);
 		}
 
 		public Task Save(Accommodation accommodation)
