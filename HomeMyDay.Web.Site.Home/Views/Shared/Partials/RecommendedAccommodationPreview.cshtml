@@ -3,17 +3,23 @@
 <div class="col-sm-3">
     <a asp-area="" asp-controller="Accommodation" asp-action="Detail" asp-route-id="@Model.Id">
         <div class="thumbnail">
-            @{  MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
+        @{
+            @*MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
 
-                if (primaryObject != null && primaryObject.Type == MediaType.Image)
-                {
-                    <img src="@primaryObject.Url" alt="@primaryObject.Description">}
-            }
-            @if (!string.IsNullOrWhiteSpace(Model.Description))
+            if (primaryObject != null && primaryObject.Type == MediaType.Image)
             {
-                <div class="caption">
-                    <p>@Model.Description.Truncate(75)</p>
-                </div>}
+                <img src="@primaryObject.Url" alt="@primaryObject.Description">
+            }*@
+
+            <img src="http://localhost:3000/api/v1/images/@Model.Images[0].Filename">
+
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+        <div class="caption">
+            <p>@Model.Description.Truncate(75)</p>
+        </div>
+        }
         </div>
     </a>
 </div>
