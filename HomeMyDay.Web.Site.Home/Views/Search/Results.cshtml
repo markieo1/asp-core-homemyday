@@ -33,9 +33,10 @@
                     </a>
                     <div class="search-result">
                         <div class="accommodation-preview">
-                            @{
-
-                                <img src="@OptionsApplicationConfiguration.Value.NodeIp/api/v1/images/@accommodation.Images[0].Filename" />
+                            @{  if (accommodation.Images.Count > 0)
+                                {
+                                    <img src="@OptionsApplicationConfiguration.Value.NodeIp/api/v1/images/@accommodation.Images[0].Filename" />
+                                }
                             }
                         </div>
                         <div class="accommodation-info">
