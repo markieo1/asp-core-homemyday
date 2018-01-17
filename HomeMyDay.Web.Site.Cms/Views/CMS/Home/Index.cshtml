@@ -1,12 +1,14 @@
-﻿<div class="container">
+﻿@using Microsoft.Extensions.Options;
+@using HomeMyDay.Web.Base.Extensions;
+@inject IOptions<RedirectExtension> OptionsApplicationConfiguration
+
+<div class="container">
     <div class="row p-t-51 m-b-20">
         <div class="col-md-12">
             <ul>
-                @*<li>
-                    <a asp-area="CMS"
-                       asp-action="Index"
-                       asp-controller="Accommodation">Accommodaties</a>
-                </li>*@
+                <li>
+                    <a href="@OptionsApplicationConfiguration.Value.SpaIp" _blank>Accommodaties</a>
+                </li>
                 <li>
                     <a asp-area="CMS"
                        asp-action="Index"

@@ -1,5 +1,5 @@
 ﻿@using Microsoft.Extensions.Options;
-@using HomeMyDay.Web.Site.Home.Extensions;
+@using HomeMyDay.Web.Base.Extensions;
 
 @inject IOptions<RedirectExtension> OptionsApplicationConfiguration
 
@@ -50,7 +50,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a asp-area="CMS" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><a asp-area="CMS" asp-controller="Accommodation" asp-action="Index">Accommodaties</a></li>
+                            <li><a href="@OptionsApplicationConfiguration.Value.SpaIp" _blank>Accommodaties</a></li>
                             <li>
                                 <a asp-area="CMS"
                                    asp-action="Index"
