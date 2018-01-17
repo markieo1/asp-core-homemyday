@@ -1,19 +1,30 @@
-﻿@model Accommodation
+﻿@using Microsoft.Extensions.Options;
+@using HomeMyDay.Web.Site.Home.Extensions;
+@using HomeMyDay.Web.Site.Home.Extensions
+@model Accommodation
+
+@inject IOptions<RedirectExtension> OptionsApplicationConfiguration
 
 <div class="col-sm-3">
     <a asp-area="" asp-controller="Accommodation" asp-action="Detail" asp-route-id="@Model.Id">
         <div class="thumbnail">
-            @{  MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
+            @{
+                @*MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
 
-                if (primaryObject != null && primaryObject.Type == MediaType.Image)
-                {
-                    <img src="@primaryObject.Url" alt="@primaryObject.Description">}
+                    if (primaryObject != null && primaryObject.Type == MediaType.Image)
+                    {
+                        <img src="@primaryObject.Url" alt="@primaryObject.Description">
+                    }*@
+
+                <img src="@OptionsApplicationConfiguration.Value.NodeIp/api/v1/images/@Model.Images[0].Filename">
+
             }
             @if (!string.IsNullOrWhiteSpace(Model.Description))
             {
                 <div class="caption">
                     <p>@Model.Description.Truncate(75)</p>
-                </div>}
+                </div>
+            }
         </div>
     </a>
 </div>

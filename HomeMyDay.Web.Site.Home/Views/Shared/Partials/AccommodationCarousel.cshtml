@@ -1,4 +1,9 @@
-﻿@model IEnumerable<MediaObject>
+﻿@using Microsoft.Extensions.Options;
+@using HomeMyDay.Web.Site.Home.Extensions;
+@using HomeMyDay.Web.Site.Home.Extensions
+@model IEnumerable<Image>
+
+@inject IOptions<RedirectExtension> OptionsApplicationConfiguration
 
 @if (Model.Any())
 {
@@ -8,45 +13,58 @@
             @for (int i = 0; i < Model.Count(); i++)
             {
                 <li data-target="#accommodation-carousel" data-slide-to="@i" class="@((i == 0) ?  "active" : "")"></li>
-}
+            }
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
+            @*@for (int i = 0; i < Model.Count(); i++)
+                {
+                    Image mediaObject = Model.ElementAt(i);
+
+                    <div class="item @((i == 0) ?  "active" : "")">
+                        @switch (mediaObject.Type)
+                        {
+                            case MediaType.Image:
+                                {
+                                    @:<img src="@mediaObject.Url" alt="@mediaObject.Description" />
+                                        break;
+                                }
+                            case MediaType.Video:
+                                {
+                                    <div class="video text-center">
+                                        <video src="@mediaObject.Url" autoplay loop></video>
+                                    </div>break;
+                                }
+
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(mediaObject.Title) || !string.IsNullOrWhiteSpace(mediaObject.Description))
+                        {
+                            <div class="carousel-caption">
+                                @if (!string.IsNullOrWhiteSpace(mediaObject.Title))
+                                {
+                                    <h1>@mediaObject.Title</h1>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(mediaObject.Description))
+                                {
+                                    <p>@mediaObject.Description</p>
+                                }
+                            </div>}
+                    </div>}*@
+
             @for (int i = 0; i < Model.Count(); i++)
             {
-                MediaObject mediaObject = Model.ElementAt(i);
+                Image mediaObject = Model.ElementAt(i);
 
                 <div class="item @((i == 0) ?  "active" : "")">
-                    @switch (mediaObject.Type)
-                    {
-                        case MediaType.Image:
-                            {
-                                @:<img src="@mediaObject.Url" alt="@mediaObject.Description" />
-                                    break;
-                            }
-                        case MediaType.Video:
-                            {
-                                <div class="video text-center">
-                                    <video src="@mediaObject.Url" autoplay loop></video>
-                                </div>break;
-                            }
+                    <img src="@OptionsApplicationConfiguration.Value.NodeIp/api/v1/images/@mediaObject.Filename" />
+                </div>
 
-                    }
-
-                    @if (!string.IsNullOrWhiteSpace(mediaObject.Title) || !string.IsNullOrWhiteSpace(mediaObject.Description))
-                    {
-                        <div class="carousel-caption">
-                            @if (!string.IsNullOrWhiteSpace(mediaObject.Title))
-                            {
-                                <h1>@mediaObject.Title</h1>
-}
-                            @if (!string.IsNullOrWhiteSpace(mediaObject.Description))
-                            {
-                                <p>@mediaObject.Description</p>
-}
-                        </div>}
-                </div>}
+                <div class="carousel-caption">
+                    <h1>@mediaObject.Title</h1>
+                </div>
+            }
         </div>
 
         <!-- Controls -->
