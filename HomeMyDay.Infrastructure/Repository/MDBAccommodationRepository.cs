@@ -20,7 +20,7 @@ namespace HomeMyDay.Infrastructure.Repository
 		public MDBAccommodationRepository(IConfiguration config)
 		{
 			this._configuration = config;
-			this.uri = _configuration.GetSection("ExternalAddresses").GetSection("SPA-IP").Value + "/api/v1/accommodations";
+			this.uri = _configuration.GetSection("ExternalAddresses").GetSection("NodeIp").Value + "/api/v1/accommodations";
 		}
 
 		public IEnumerable<Accommodation> Accommodations => this.GetAccommodations();

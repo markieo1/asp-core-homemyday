@@ -138,6 +138,9 @@ namespace HomeMyDay.Core.Models
 		/// </summary>
 		public List<Review> Reviews { get; set; }
 
+		/// <summary>
+		/// Gets or sets the images
+		/// </summary>
 		public List<Image> Images { get; set; }
 	}
 }
