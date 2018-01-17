@@ -33,7 +33,9 @@ namespace HomeMyDay.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 
-			IdentityBuilder identityBuilder = services.AddIdentity<User, IdentityRole>(config =>
+            services.Configure<RedirectExtension>(Configuration.GetSection("ExternalAddresses"));
+
+            IdentityBuilder identityBuilder = services.AddIdentity<User, IdentityRole>(config =>
 			{
 				//Require confirmed email to login
 				config.SignIn.RequireConfirmedEmail = true;
