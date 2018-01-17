@@ -30,45 +30,87 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<Accommodation> GetAccommodations()
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-			request.Method = WebRequestMethods.Http.Get;
+			try
+			{
+				var accommodations = new List<Accommodation>();
 
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Stream dataStream = response.GetResponseStream();
-			StreamReader reader = new StreamReader(dataStream);
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+				request.Method = WebRequestMethods.Http.Get;
 
-			var json = reader.ReadToEnd();
+				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+				Stream dataStream = response.GetResponseStream();
+				StreamReader reader = new StreamReader(dataStream);
 
-			return JsonConvert.DeserializeObject<IEnumerable<Accommodation>>(json);
+				var json = reader.ReadToEnd();
+
+				if (!string.IsNullOrWhiteSpace(json))
+				{
+					accommodations = JsonConvert.DeserializeObject<List<Accommodation>>(json);	  
+				}
+
+				return accommodations;								
+			}
+			catch(Exception)
+			{
+				throw new Exception("An error has occurred while retrieving accommodations");
+			}				
 		}
 
 		public Accommodation GetAccommodation(string id)
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri + "/" + id);
-			request.Method = WebRequestMethods.Http.Get;
+			try
+			{
+				var accommodation = new Accommodation();
 
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Stream dataStream = response.GetResponseStream();
-			StreamReader reader = new StreamReader(dataStream);
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri + "/" + id);
+				request.Method = WebRequestMethods.Http.Get;
 
-			var json = reader.ReadToEnd();
+				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+				Stream dataStream = response.GetResponseStream();
+				StreamReader reader = new StreamReader(dataStream);
 
-			return JsonConvert.DeserializeObject<Accommodation>(json);
+				var json = reader.ReadToEnd();
+
+				if (!string.IsNullOrWhiteSpace(json))
+				{
+					accommodation = JsonConvert.DeserializeObject<Accommodation>(json);
+				}
+
+				return accommodation;
+			}
+			catch(Exception)
+			{
+				throw new Exception($"An error has occurred while retrieving accommodation with id: {id}");
+			} 
 		}
 
 		public IEnumerable<Accommodation> GetRecommendedAccommodations()
 		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-			request.Method = WebRequestMethods.Http.Get;
+			try
+			{
+				var accommodations = new List<Accommodation>();
 
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Stream dataStream = response.GetResponseStream();
-			StreamReader reader = new StreamReader(dataStream);
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+				request.Method = WebRequestMethods.Http.Get;
 
-			var json = reader.ReadToEnd();
+				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+				Stream dataStream = response.GetResponseStream();
+				StreamReader reader = new StreamReader(dataStream);
 
-			return JsonConvert.DeserializeObject<IEnumerable<Accommodation>>(json)
-				.Where(m => m.Recommended == true);
+				var json = reader.ReadToEnd();
+				if (string.IsNullOrWhiteSpace(json))
+				{
+					accommodations = JsonConvert.DeserializeObject<List<Accommodation>>(json).Where(x => x.Recommended == true).ToList();
+				}
+
+				return accommodations;
+			}
+			catch (Exception)
+			{
+				throw new Exception("An error has occurred while retrieving recommended accommodations");
+			}
+
+			
 		}
 
 		public Task<PaginatedList<Accommodation>> List(int page = 1, int pageSize = 10)
@@ -88,21 +130,34 @@ namespace HomeMyDay.Infrastructure.Repository
 
 		public IEnumerable<Accommodation> Search(string location, DateTime departure, DateTime returnDate, int amountOfGuests)
 		{
-			string dateFrom = departure.ToString("yyyy/MM/dd");
-			string dateTo = departure.ToString("yyyy/MM/dd");
+			try
+			{
+				var accommodations = new List<Accommodation>();
 
-			var url = $"{uri}?search={location}&dateFrom={dateFrom}&dateTo={dateTo}&persons={amountOfGuests}";
+				string dateFrom = departure.ToString("yyyy/MM/dd");
+				string dateTo = departure.ToString("yyyy/MM/dd");
 
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-			request.Method = WebRequestMethods.Http.Get;
-			
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-			Stream dataStream = response.GetResponseStream();
-			StreamReader reader = new StreamReader(dataStream);
+				var url = $"{uri}?search={location}&dateFrom={dateFrom}&dateTo={dateTo}&persons={amountOfGuests}"; 
 
-			var json = reader.ReadToEnd();
+				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+				request.Method = WebRequestMethods.Http.Get;
 
-			return JsonConvert.DeserializeObject<IEnumerable<Accommodation>>(json);
+				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+				Stream dataStream = response.GetResponseStream();
+				StreamReader reader = new StreamReader(dataStream);
+
+				var json = reader.ReadToEnd();
+				if(!string.IsNullOrWhiteSpace(json))
+				{
+					accommodations = JsonConvert.DeserializeObject<List<Accommodation>>(json);
+				}
+
+				return accommodations;
+			}
+			catch(Exception)
+			{
+				throw new Exception("An error has occurred while searching for accommodations");
+			} 			
 		}
 	}
 }
