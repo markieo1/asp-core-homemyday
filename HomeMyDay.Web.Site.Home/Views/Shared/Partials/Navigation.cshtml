@@ -1,4 +1,10 @@
-﻿<nav id="navbar-navigation" class="navbar navbar-inverse navbar-fixed-top">
+﻿@using Microsoft.Extensions.Options;
+@using HomeMyDay.Web.Site.Home.Extensions;
+
+@inject IOptions<RedirectExtension> OptionsApplicationConfiguration
+
+
+<nav id="navbar-navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,7 +40,7 @@
                         <li><a asp-area="" asp-controller="Press" asp-action="Index">Pers</a></li>
                     </ul>
                 </li>
-                <li><a href="@ViewData["url"]" _blank>Accomodatie toevoegen</a></li>
+                <li><a href="@OptionsApplicationConfiguration.Value.SpaIp" _blank>Accomodatie toevoegen</a></li>
                 @if ((await AuthorizationService.AuthorizeAsync(User, Policies.Administrator)).Succeeded)
                 {
                     <li class="dropdown">
