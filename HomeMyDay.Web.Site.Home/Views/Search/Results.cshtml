@@ -1,9 +1,13 @@
-﻿@using HomeMyDay.Web.Base.ViewModels
+﻿@using Microsoft.Extensions.Options;
+@using HomeMyDay.Web.Site.Home.Extensions;
+@using HomeMyDay.Web.Base.ViewModels
 @model HomeMyDay.Web.Base.ViewModels.AccommodationSearchResultsViewModel
 
 @{
     ViewData["Title"] = "Zoekresultaten";
 }
+
+@inject IOptions<RedirectExtension> OptionsApplicationConfiguration
 
 <link rel="stylesheet" type="text/css" href="~/css/search.css" />
 
@@ -29,7 +33,10 @@
                     </a>
                     <div class="search-result">
                         <div class="accommodation-preview">
-                            <img src="http://localhost:3000/api/v1/images/@accommodation.Images[0].Filename" />
+                            @{
+
+                                <img src="@OptionsApplicationConfiguration.Value.NodeIp/api/v1/images/@accommodation.Images[0].Filename" />
+                            }
                         </div>
                         <div class="accommodation-info">
                             <p>@accommodation.Description.Truncate(1200)</p>
