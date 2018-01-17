@@ -9,6 +9,6 @@ namespace HomeMyDay.Core.Models
 		public string Uuid { get; set; }
 		public string Filename { get; set; }
 		public int FileSize { get; set; }
-		public string title { get; set; }
+		public string Title { get; set; }
     }
 }
