@@ -47,7 +47,7 @@ namespace HomeMyDay.Infrastructure.Repository
 
 				return accommodations;								
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
 				throw new Exception("An error has occurred while retrieving accommodations");
 			}				
