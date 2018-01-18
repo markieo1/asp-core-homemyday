@@ -7,60 +7,60 @@ using System.Linq;
 
 namespace HomeMyDay.Web.Base.Managers.Implementation
 {
-	public class FaqManager	: IFaqManager
-    {
-	    private readonly IFaqRepository _faqRepository;
+	public class FaqManager : IFaqManager
+	{
+		private readonly IFaqRepository _faqRepository;
 
-	    public FaqManager(IFaqRepository repository)
-	    {
-		    _faqRepository = repository;
-	    }
+		public FaqManager(IFaqRepository repository)
+		{
+			_faqRepository = repository;
+		}
 
 		public IEnumerable<FaqCategory> GetFaqCategories()
-	    {
-		    return _faqRepository.GetCategoriesAndQuestions();
-	    }
+		{
+			return _faqRepository.GetCategoriesAndQuestions();
+		}
 
 		public Task<PaginatedList<FaqCategory>> GetFaqCategoryPaginatedList(int? page, int? pageSize)
-	    {
-		    var paginatedResult = _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
-		    return paginatedResult;
-	    }
+		{
+			var paginatedResult = _faqRepository.ListCategories(page ?? 1, pageSize ?? 5);
+			return paginatedResult;
+		}
 
-	    public async Task<FaqQuestionsViewModel> GetFaqQuestionsViewModel(long id, int? page, int? pageSize)
-	    {
-		    return new FaqQuestionsViewModel()
-		    {
-			    Category = _faqRepository.GetCategory(id),
-			    Questions = await _faqRepository.ListQuestions(id, page ?? 1, pageSize ?? 5)
-		    };
-	    }
+		public async Task<FaqQuestionsViewModel> GetFaqQuestionsViewModel(long id, int? page, int? pageSize)
+		{
+			return new FaqQuestionsViewModel()
+			{
+				Category = _faqRepository.GetCategory(id),
+				Questions = await _faqRepository.ListQuestions(id, page ?? 1, pageSize ?? 5)
+			};
+		}
 
-	    public FaqCategory GetFaqCategory(long id)
-	    {
-		    FaqCategory category;
+		public FaqCategory GetFaqCategory(long id)
+		{
+			FaqCategory category;
 
-		    if (id <= 0)
-		    {
-			    category = new FaqCategory();
-		    }
-		    else
-		    {
-			    category = _faqRepository.GetCategory(id);
-		    }
+			if (id <= 0)
+			{
+				category = new FaqCategory();
+			}
+			else
+			{
+				category = _faqRepository.GetCategory(id);
+			}
 
-		    return category;
-	    }
+			return category;
+		}
 
-	    public Task SaveCategory(FaqCategory category)
-	    {
-		    return _faqRepository.SaveCategory(category);
-	    }
+		public Task SaveCategory(FaqCategory category)
+		{
+			return _faqRepository.SaveCategory(category);
+		}
 
-	    public Task DeleteCategory(long id)
-	    {
-		    return _faqRepository.DeleteCategory(id);
-	    }
+		public Task DeleteCategory(long id)
+		{
+			return _faqRepository.DeleteCategory(id);
+		}
 
 		IEnumerable<FaqQuestion> IFaqManager.GetFaqQuestions(long id)
 		{
@@ -80,6 +80,28 @@ namespace HomeMyDay.Web.Base.Managers.Implementation
 		public Task DeleteQuestion(long id)
 		{
 			return _faqRepository.DeleteQuestion(id);
+		}
+
+		public FaqQuestionEditViewModel GetFaqQuestionEditViewModel(long categoryId, long id)
+		{
+			FaqQuestion question = null;
+			FaqCategory category = null;
+
+			if (id > 0)
+			{
+				question = GetFaqQuestion(id);
+			}
+
+			category = question?.Category ?? GetFaqCategory(categoryId);
+
+			return new FaqQuestionEditViewModel()
+			{
+				Category = category,
+				Id = category.Id,
+				QuestionId = id,
+				Question = question?.Question,
+				Answer = question?.Answer
+			};
 		}
 	}
 }
