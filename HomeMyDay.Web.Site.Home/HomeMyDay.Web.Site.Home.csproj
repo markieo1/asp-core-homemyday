@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\Shared\Partials\HomeImage.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Rent\" />
   </ItemGroup>
 </Project>
