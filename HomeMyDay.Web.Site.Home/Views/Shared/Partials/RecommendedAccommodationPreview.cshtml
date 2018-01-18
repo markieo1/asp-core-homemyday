@@ -5,20 +5,13 @@
 @inject IOptions<RedirectExtension> OptionsApplicationConfiguration
 
 <div class="col-sm-3">
-	<h2 class="text-center">Populaire vakanties</h2>
     <a asp-area="" asp-controller="Accommodation" asp-action="Detail" asp-route-id="@Model.Id">
         <div class="thumbnail">
-            @{
-                @*MediaObject primaryObject = Model.MediaObjects.FirstOrDefault(m => m.Primary);
-
-                    if (primaryObject != null && primaryObject.Type == MediaType.Image)
-                    {
-                        <img src="@primaryObject.Url" alt="@primaryObject.Description">
-                    }*@
-
+            @if (Model.Images.Count > 0)
+            {
                 <img src="@OptionsApplicationConfiguration.Value.NodeIp/api/v1/images/@Model.Images[0].Filename">
-
             }
+
             @if (!string.IsNullOrWhiteSpace(Model.Description))
             {
                 <div class="caption">
