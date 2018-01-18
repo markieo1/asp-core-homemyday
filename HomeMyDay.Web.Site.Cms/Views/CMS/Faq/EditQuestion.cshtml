@@ -1,0 +1,33 @@
+﻿@model FaqQuestionEditViewModel
+
+<div class="text-danger" asp-validation-summary="All"></div>
+
+<div class="container">
+    <div class="row">
+        <h2>Categorie: @Model.Category.CategoryName</h2>
+        <h2>
+            @if (Model.QuestionId <= 0)
+			{
+                @:Nieuwe vraag
+            }
+			else
+			{
+                @:Vraag: @Model.QuestionId
+            }
+        </h2>
+
+        <form asp-action="EditQuestion" asp-area="CMS" asp-controller="Faq" asp-route-id="@Model.Category.Id" asp-route-questionId="@Model.QuestionId" method="post">
+            <div class="form-group">
+                <label asp-for="Question"></label>
+                <div><span asp-validation-for="Question" class="text-danger"></span></div>
+                <input asp-for="Question" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Answer"></label>
+                <div><span asp-validation-for="Answer" class="text-danger"></span></div>
+                <input asp-for="Answer" class="form-control" />
+            </div>
+            <p><button class="btn btn-primary" type="submit">Save Changes</button></p>
+        </form>
+    </div>
+</div>
