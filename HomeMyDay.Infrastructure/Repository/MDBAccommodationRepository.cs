@@ -95,7 +95,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				StreamReader reader = new StreamReader(dataStream);
 
 				var json = reader.ReadToEnd();
-				if (string.IsNullOrWhiteSpace(json))
+				if (!string.IsNullOrWhiteSpace(json))
 				{
 					accommodations = JsonConvert.DeserializeObject<List<Accommodation>>(json).Where(x => x.Recommended == true).ToList();
 				}
