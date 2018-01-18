@@ -1,7 +1,7 @@
 ﻿//Load YouTube script API
 //This method is necessary to load the script asynchronously.
 let scriptElement = document.createElement("script");
-scriptElement.src = "http://www.youtube.com/iframe_api";
+scriptElement.src = "//www.youtube.com/iframe_api";
 let firstScriptElement = document.getElementsByTagName("script")[0];
 firstScriptElement.parentNode.insertBefore(scriptElement, firstScriptElement);
 
