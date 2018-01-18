@@ -129,7 +129,7 @@ textarea {
 
 
 .row.search-bar {
-    padding-top: 20px;
+    padding-top: 275px;
 }
 
 #theprocess > .process-visual > div {
@@ -336,9 +336,7 @@ div#rss-feeds > ul > div {
     height: 600px;
 }
 
-.carousel-item {
-    height: 100vh;
-    min-height: 300px;
-    background: no-repeat center center scroll;
-    background-size: cover;
+.home-image {
+    width: 100%;
+    height: 750px;
 }
