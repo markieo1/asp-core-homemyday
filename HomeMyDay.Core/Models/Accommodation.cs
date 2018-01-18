@@ -59,12 +59,12 @@ namespace HomeMyDay.Core.Models
 		/// <summary>
 		/// The latitude of the accommodation's location.
 		/// </summary>
-		public Decimal? Latitude { get; set; }
+		public string Latitude { get; set; }
 
 		/// <summary>
 		/// The longitude of the accommodation's location.
 		/// </summary>
-		public Decimal? Longitude { get; set; }
+		public string Longitude { get; set; }
 
 		/// <summary>
 		/// Optional: The amount of rooms available during the holiday
