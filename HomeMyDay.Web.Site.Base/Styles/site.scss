@@ -129,7 +129,9 @@ textarea {
 
 
 .row.search-bar {
-    padding-top: 20px;
+    @include for-desktop-up {
+        padding-top: 275px;
+    }
 }
 
 #theprocess > .process-visual > div {
@@ -335,4 +337,3 @@ div#rss-feeds > ul > div {
 #map {
     height: 600px;
 }
-
