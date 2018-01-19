@@ -53,6 +53,7 @@
                 jQuery(function($) {
                   $("#rss-feeds").rss("https://www.nu.nl/rss/Algemeen",
                   {
+                      ssl: true,
                       entryTemplate:'<div><a href="{url}">{title}</a><p>{shortBodyPlain}<p><span>{date}</span></div>'
                   })
                 })
