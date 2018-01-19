@@ -1,4 +1,10 @@
-﻿<nav id="navbar-navigation" class="navbar navbar-inverse navbar-fixed-top">
+﻿@using Microsoft.Extensions.Options;
+@using HomeMyDay.Web.Base.Extensions;
+
+@inject IOptions<RedirectExtension> OptionsApplicationConfiguration
+
+
+<nav id="navbar-navigation" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -8,7 +14,7 @@
                 <span class="icon-bar"></span>
             </button>
 			<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-				<img alt="Brand" class="img-responsive pull-left" src="~/images/logo/logo.png"/>
+				<img alt="Brand" class="img-responsive pull-left" src="~/images/logo/white.png"/>
 				<span class="navbar-text">
 					HomeMyDay
 				</span>
@@ -34,7 +40,6 @@
                         <li><a asp-area="" asp-controller="Press" asp-action="Index">Pers</a></li>
                     </ul>
                 </li>
-
                 @if ((await AuthorizationService.AuthorizeAsync(User, Policies.Administrator)).Succeeded)
                 {
                     <li class="dropdown">
@@ -44,7 +49,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a asp-area="CMS" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><a asp-area="CMS" asp-controller="Accommodation" asp-action="Index">Accommodaties</a></li>
+                            <li><a href="@OptionsApplicationConfiguration.Value.SpaIp" _blank>Accommodaties</a></li>
                             <li>
                                 <a asp-area="CMS"
                                    asp-action="Index"

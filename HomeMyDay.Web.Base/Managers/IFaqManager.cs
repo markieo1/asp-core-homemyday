@@ -15,6 +15,8 @@ namespace HomeMyDay.Web.Base.Managers
 
 		Task<FaqQuestionsViewModel> GetFaqQuestionsViewModel(long id, int? page, int? pageSize);
 
+		FaqQuestionEditViewModel GetFaqQuestionEditViewModel(long categoryId, long id);
+
 		FaqCategory GetFaqCategory(long id);
 
 		Task SaveCategory(FaqCategory category);

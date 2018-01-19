@@ -15,7 +15,7 @@ namespace HomeMyDay.Infrastructure.Database
 
             context.Reviews.Add(new Review()
             {
-                Accommodation = context.Accommodations.First(),
+                //Accommodation = context.Accommodations.First(),
                 Title = "Review 1",                
                 Name = "Pieter B.",
                 Date = new DateTime(2017, 9, 23),
@@ -24,7 +24,7 @@ namespace HomeMyDay.Infrastructure.Database
 
             context.Reviews.Add(new Review()
             {
-                Accommodation = context.Accommodations.First(),
+                //Accommodation = context.Accommodations.First(),
                 Title = "Review 2",
                 Name = "Ingrid Andriesse",
                 Date = new DateTime(2017, 9, 24),
@@ -33,7 +33,7 @@ namespace HomeMyDay.Infrastructure.Database
 
             context.Reviews.Add(new Review()
             {
-                Accommodation = context.Accommodations.First(),
+                //Accommodation = context.Accommodations.First(),
                 Title = "Review 3",
                 Name = "Lennart achternaam",
                 Date = new DateTime(2017, 9, 25),
@@ -42,7 +42,7 @@ namespace HomeMyDay.Infrastructure.Database
 
             context.Reviews.Add(new Review()
             {
-                Accommodation = context.Accommodations.First(),
+                //Accommodation = context.Accommodations.First(),
                 Title = "Review 4",
                 Name = "Pieter paulus",
                 Date = new DateTime(2017, 9, 26),
@@ -51,7 +51,7 @@ namespace HomeMyDay.Infrastructure.Database
 
             context.Reviews.Add(new Review()
             {
-                Accommodation = context.Accommodations.First(),
+                //Accommodation = context.Accommodations.First(),
                 Title = "Review 5",
                 Name = "Marco Havermans",
                 Date = new DateTime(2017, 9, 27),

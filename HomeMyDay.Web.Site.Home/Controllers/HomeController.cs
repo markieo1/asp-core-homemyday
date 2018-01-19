@@ -6,7 +6,7 @@ namespace HomeMyDay.Web.Site.Home.Controllers
     {
         public IActionResult Index()
         {
-			return View();
+            return View();
         }
     }
 }

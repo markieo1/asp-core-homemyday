@@ -58,6 +58,9 @@
                             <th>
                                 Antwoord
                             </th>
+                            <th>
+                                Actions
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,11 +71,36 @@
                                     @Html.DisplayFor(x => question.Question)
                                 </td>
                                 <td>
-                                    @question.Answer.Truncate(250)
+                                    @question.Answer
                                 </td>
+                                <td>
+                                    <a asp-area="CMS"
+                                       asp-controller="Faq"
+                                       asp-action="EditQuestion"
+                                       asp-route-id="@question.Category.Id"
+                                       asp-route-questionId="@question.Id"
+                                       class="btn btn-block btn-default">
+                                        <i class="fa fa-pencil-square-o"></i> Edit
+                                    </a>
+                                    <a data-toggle="modal"
+                                       data-target="#ConfirmQuestionDelete@(question.Id)"
+                                       class="btn btn-block btn-warning">
+                                        <i class="fa fa-trash-o"></i> Delete
+                                    </a>
+                                </td>
+                                @Html.Partial("~/Views/Shared/Partials/ConfirmQuestionDelete.cshtml", question)
                             </tr>}
                     </tbody>
                 </table>
+                <div class="pull-right">
+                    <a asp-area="CMS"
+                       asp-controller="Faq"
+                       asp-action="EditQuestion"
+                       asp-route-id="@Model.Category.Id"
+                       class="btn btn-block btn-default">
+                        <i class="fa fa-plus-square-o"></i> New question
+                    </a>
+                </div>
             </div>
 
             @{  var prevDisabled = !Model.Questions.HasPreviousPage ? "disabled" : "";

@@ -17,7 +17,7 @@ namespace HomeMyDay.Core.Repository
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		IEnumerable<Review> GetAccomodationReviews(long accommodationId);
+		IEnumerable<Review> GetAccomodationReviews(string accommodationId);
 
 		/// <summary>
 		/// Adds a review to an accommodation
@@ -27,7 +27,7 @@ namespace HomeMyDay.Core.Repository
 		/// <param name="name">The name of the user</param>
 		/// <param name="text">The text of the review</param>
 		/// <returns></returns>
-	    bool AddReview(long accommodationId, string title, string name, string text);
+	    bool AddReview(string accommodationId, string title, string name, string text);
 
         /// <summary>
 		/// Lists the reviews which not accepted.

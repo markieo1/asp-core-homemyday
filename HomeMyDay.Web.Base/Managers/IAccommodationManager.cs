@@ -12,11 +12,11 @@ namespace HomeMyDay.Web.Base.Managers
 
 		IEnumerable<Accommodation> GetAccommodations();
 
-		Task Delete(long id);
+		Task Delete(string id);
 
-		Accommodation GetAccommodation(long id);
+		Accommodation GetAccommodation(string id);
 
-		AccommodationViewModel GetAccommodationViewModel(long id);
+		AccommodationViewModel GetAccommodationViewModel(string id);
 
 		IEnumerable<Accommodation> GetRecommendedAccommodations();
 

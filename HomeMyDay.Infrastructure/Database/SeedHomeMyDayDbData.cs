@@ -13,10 +13,10 @@ namespace HomeMyDay.Infrastructure.Database
 		public static void Seed(HomeMyDayDbContext context)
 		{
 			//Seed accommodations
-			if (!context.Accommodations.Any())
-			{
-				SeedAccommodations(context);
-			}
+			//if (!context.Accommodations.Any())
+			//{
+			//	SeedAccommodations(context);
+			//}
 
 			//Seed countries
 			if (!context.Countries.Any())
@@ -63,8 +63,8 @@ namespace HomeMyDay.Infrastructure.Database
 				Continent = "Europe",
 				Country = "Spain",
 				Location = "Barcelona",
-				Latitude = 51.5891178m,
-				Longitude = 4.7730457m,
+				Latitude = "51.5891178m",
+				Longitude = "4.7730457m",
 				Beds = 2,
 				MaxPersons = 2,
 				Rooms = 4,
@@ -102,8 +102,8 @@ namespace HomeMyDay.Infrastructure.Database
 				Continent = "Europe",
 				Country = "Greece",
 				Location = "Athens",
-				Latitude = 51.5891178m,
-				Longitude = 4.7730457m,
+				Latitude = "51.5891178m",
+				Longitude = "4.7730457m",
 				Beds = 1,
 				MaxPersons = 2,
 				Rooms = 3,
@@ -141,8 +141,8 @@ namespace HomeMyDay.Infrastructure.Database
 				Continent = "Europe",
 				Country = "Germany",
 				Location = "Frankfurt",
-				Latitude = 51.5891178m,
-				Longitude = 4.7730457m,
+				Latitude = "51.5891178m",
+				Longitude = "4.7730457m",
 				Beds = 4,
 				MaxPersons = 6,
 				Rooms = 7,

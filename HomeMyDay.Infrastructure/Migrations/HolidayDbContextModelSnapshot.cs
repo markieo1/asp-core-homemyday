@@ -21,60 +21,10 @@ namespace HomeMyDay.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HomeMyDay.Core.Models.Accommodation", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("Beds")
-                        .IsRequired();
-
-                    b.Property<string>("CancellationText");
-
-                    b.Property<string>("Continent");
-
-                    b.Property<string>("Country");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<decimal>("Latitude");
-
-                    b.Property<string>("Location");
-
-                    b.Property<decimal>("Longitude");
-
-                    b.Property<int>("MaxPersons");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<string>("PricesText");
-
-                    b.Property<bool>("Recommended");
-
-                    b.Property<int?>("Rooms")
-                        .IsRequired();
-
-                    b.Property<string>("RulesText");
-
-                    b.Property<string>("ServicesText");
-
-                    b.Property<string>("SpaceText");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Accommodations");
-                });
-
             modelBuilder.Entity("HomeMyDay.Core.Models.Booking", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<long?>("AccommodationId");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -95,8 +45,6 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.Property<bool>("TransferToAirport");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
 
                     b.ToTable("Bookings");
                 });
@@ -180,13 +128,9 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
-
                     b.Property<DateTime>("Date");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
 
                     b.ToTable("DateEntity");
                 });
@@ -226,8 +170,6 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
-
                     b.Property<string>("Description");
 
                     b.Property<bool>("Primary");
@@ -239,8 +181,6 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
 
                     b.ToTable("MediaObjects");
                 });
@@ -282,8 +222,6 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<long?>("AccommodationId");
-
                     b.Property<bool>("Approved");
 
                     b.Property<DateTime>("Date");
@@ -295,8 +233,6 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AccommodationId");
 
                     b.ToTable("Reviews");
                 });
@@ -325,13 +261,6 @@ namespace HomeMyDay.Infrastructure.Migrations
                     b.ToTable("Vacancies");
                 });
 
-            modelBuilder.Entity("HomeMyDay.Core.Models.Booking", b =>
-                {
-                    b.HasOne("HomeMyDay.Core.Models.Accommodation", "Accommodation")
-                        .WithMany()
-                        .HasForeignKey("AccommodationId");
-                });
-
             modelBuilder.Entity("HomeMyDay.Core.Models.BookingPerson", b =>
                 {
                     b.HasOne("HomeMyDay.Core.Models.Booking")
@@ -349,32 +278,11 @@ namespace HomeMyDay.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("HomeMyDay.Core.Models.DateEntity", b =>
-                {
-                    b.HasOne("HomeMyDay.Core.Models.Accommodation")
-                        .WithMany("NotAvailableDates")
-                        .HasForeignKey("AccommodationId");
-                });
-
             modelBuilder.Entity("HomeMyDay.Core.Models.FaqQuestion", b =>
                 {
                     b.HasOne("HomeMyDay.Core.Models.FaqCategory", "Category")
                         .WithMany("Questions")
                         .HasForeignKey("CategoryId");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Core.Models.MediaObject", b =>
-                {
-                    b.HasOne("HomeMyDay.Core.Models.Accommodation")
-                        .WithMany("MediaObjects")
-                        .HasForeignKey("AccommodationId");
-                });
-
-            modelBuilder.Entity("HomeMyDay.Core.Models.Review", b =>
-                {
-                    b.HasOne("HomeMyDay.Core.Models.Accommodation", "Accommodation")
-                        .WithMany("Reviews")
-                        .HasForeignKey("AccommodationId");
                 });
 #pragma warning restore 612, 618
         }

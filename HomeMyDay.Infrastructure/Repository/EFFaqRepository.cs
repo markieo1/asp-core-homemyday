@@ -46,6 +46,7 @@ namespace HomeMyDay.Infrastructure.Repository
 			}
 
 			FaqQuestion question = _context.FaqQuestions
+				.Include(x => x.Category)
 				.FirstOrDefault(a => a.Id == id);
 
 			if (question == null)
@@ -190,11 +191,13 @@ namespace HomeMyDay.Infrastructure.Repository
 
 			var faqQuestions = _context.FaqCategory
 				.Where(x => x.Id == categoryId)
+				.Include(x => x.Questions)
 				.First()
-				.Questions
-				.AsQueryable();
+				.Questions;
 
-			return PaginatedList<FaqQuestion>.CreateAsync(faqQuestions, page, pageSize);
+			IQueryable<FaqQuestion> queryableQuestions = faqQuestions?.AsQueryable() ?? Enumerable.Empty<FaqQuestion>().AsQueryable();
+
+			return PaginatedList<FaqQuestion>.CreateAsync(queryableQuestions, page, pageSize);
 		}
 	}
 }

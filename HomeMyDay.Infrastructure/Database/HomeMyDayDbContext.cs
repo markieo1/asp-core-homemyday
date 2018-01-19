@@ -1,5 +1,6 @@
 ﻿using HomeMyDay.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HomeMyDay.Infrastructure.Database
 {
@@ -66,6 +67,20 @@ namespace HomeMyDay.Infrastructure.Database
 
         protected override void OnModelCreating(ModelBuilder builder)
 		{
+			builder.Entity<Booking>()		  
+				.HasOne(x => x.Accommodation)	  				
+				.WithMany()   
+				.IsRequired(false)	  
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Entity<Review>()
+				.HasOne(x => x.Accommodation)
+				.WithMany()
+				.IsRequired(false)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			builder.Ignore<Accommodation>(); 
+
 			builder.Entity<Newspaper>()
 				.HasAlternateKey(x => x.Email)
 				.HasName("Alt_Email");
