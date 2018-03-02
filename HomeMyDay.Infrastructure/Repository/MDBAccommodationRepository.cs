@@ -17,6 +17,7 @@ namespace HomeMyDay.Infrastructure.Repository
 	{
 		private readonly IConfiguration _configuration;
 		private readonly X509Certificate remoteCertificate;
+		private readonly X509Certificate2 clientCertificate;
 
 		private string uri;
 
@@ -25,9 +26,12 @@ namespace HomeMyDay.Infrastructure.Repository
 			this._configuration = config;
 			this.uri = _configuration.GetSection("ExternalAddresses").GetSection("NodeIp").Value + "/api/v1/accommodations";
 
-			string certLocation = _configuration.GetSection("CertificateLocation").GetSection("Location").Value;
+			string remoteCertLocation = _configuration.GetSection("Certificate").GetSection("Remote").GetSection("Location").Value;
+			remoteCertificate = X509Certificate.CreateFromCertFile(remoteCertLocation);
 
-			remoteCertificate = X509Certificate.CreateFromCertFile(certLocation);
+			string clientCertLocation = _configuration.GetSection("Certificate").GetSection("Client").GetSection("Location").Value;
+			string clientCertPassword = _configuration.GetSection("Certificate").GetSection("Client").GetSection("Password").Value;
+			clientCertificate = new X509Certificate2(clientCertLocation, clientCertPassword);
 		}
 
 		public IEnumerable<Accommodation> Accommodations => this.GetAccommodations();
@@ -42,6 +46,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				request.Method = WebRequestMethods.Http.Get;
 
 				request.ServerCertificateValidationCallback = CertificateCheck;
+				request.ClientCertificates.Add(clientCertificate);
 
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				Stream dataStream = response.GetResponseStream();
@@ -71,6 +76,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri + "/" + id);
 				request.Method = WebRequestMethods.Http.Get;
 				request.ServerCertificateValidationCallback = CertificateCheck;
+				request.ClientCertificates.Add(clientCertificate);
 
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				Stream dataStream = response.GetResponseStream();
@@ -100,6 +106,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
 				request.Method = WebRequestMethods.Http.Get;
 				request.ServerCertificateValidationCallback = CertificateCheck;
+				request.ClientCertificates.Add(clientCertificate);
 
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				Stream dataStream = response.GetResponseStream();
@@ -150,6 +157,7 @@ namespace HomeMyDay.Infrastructure.Repository
 				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 				request.Method = WebRequestMethods.Http.Get;
 				request.ServerCertificateValidationCallback = CertificateCheck;
+				request.ClientCertificates.Add(clientCertificate);
 
 				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 				Stream dataStream = response.GetResponseStream();
