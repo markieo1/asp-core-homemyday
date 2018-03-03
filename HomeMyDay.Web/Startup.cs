@@ -17,6 +17,9 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Halcyon.Web.HAL.Json;
 using System.Buffers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
+using System.Net;
 
 namespace HomeMyDay.Web
 {
@@ -33,9 +36,9 @@ namespace HomeMyDay.Web
 		public void ConfigureServices(IServiceCollection services)
 		{
 
-            services.Configure<RedirectExtension>(Configuration.GetSection("ExternalAddresses"));
+			services.Configure<RedirectExtension>(Configuration.GetSection("ExternalAddresses"));
 
-            IdentityBuilder identityBuilder = services.AddIdentity<User, IdentityRole>(config =>
+			IdentityBuilder identityBuilder = services.AddIdentity<User, IdentityRole>(config =>
 			{
 				//Require confirmed email to login
 				config.SignIn.RequireConfirmedEmail = true;
@@ -83,12 +86,17 @@ namespace HomeMyDay.Web
 				options.AddCmsViews();
 			});
 
-			services.AddMvc()
-			.AddJsonOptions(options => {
+			services.AddMvc(options =>
+			{
+				options.Filters.Add(new RequireHttpsAttribute());
+			})
+			.AddJsonOptions(options =>
+			{
 				options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
 				options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 			})
-			.AddMvcOptions(c => {
+			.AddMvcOptions(c =>
+			{
 				var jsonOutputFormatter = new JsonOutputFormatter(JsonSerializerSettingsProvider.CreateSerializerSettings(), ArrayPool<Char>.Shared);
 				c.OutputFormatters.Add(new JsonHalOutputFormatter(new string[] { "application/hal+json", "application/vnd.example.hal+json", "application/vnd.example.hal.v1+json" }));
 			});
@@ -97,6 +105,10 @@ namespace HomeMyDay.Web
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, HomeMyDayDbContext homeMyDayDbContext, AppIdentityDbContext appIdentityDbContext)
 		{
+			var options = new RewriteOptions();
+			options.AddRedirectToHttps();
+			app.UseRewriter(options);
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
